@@ -13,12 +13,12 @@ header {
     position: fixed;
     display: flex;
     justify-content: center;
-    height: 110px;
+    height: 96px;
 }
 
 header nav {
     max-width: 1920px;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,12 +27,14 @@ header nav {
 header nav h2 {
     font-size: 20px;
     font-weight: 400;
+    margin-left: 348px;
 }
 
 header nav div {
     display: flex;
     align-items: center;
     gap: 16px;
+    margin-right: 40px;
 }
 
 header nav img {
@@ -45,10 +47,79 @@ header nav button {
     border-radius: 50%;
     width: 56px;
     height: 56px;
+    padding: 0;
     border-width: 3px;
     border-color: rgba(42, 54, 71, 1);
     border-style: solid;
     font-size: 20px;
     color: rgba(41, 171, 226, 1);
     font-weight: bolder;
+}
+
+main {
+    max-width: 1920px;
+    width: 100%;
+    align-self: center;
+}
+
+.menu {
+    background-color: rgba(42, 54, 71, 1);
+    width: 232px;
+    height: 100vh;
+    position: fixed;
+    gap: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.menu img {
+    width: 100px;
+    margin-top: 64px;
+}
+
+.menu nav {
+    display: flex;
+    flex-direction: column;
+    color: rgba(205, 205, 205, 1);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 64px;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.menu nav ul {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu nav a {
+    text-decoration: none;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: inherit;
+    display: flex;
+    align-items: center;
+}
+
+.menu nav a:hover {
+    background-color: rgba(9, 25, 49, 1);
+    color: white;
+}
+
+.menu nav a img {
+    width: 25px;
+    margin-right: 20px;
+    margin-top: 0;
+    margin-left: 56px;
+}
+
+.menu-bottom {
+    padding-left: 56px;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
