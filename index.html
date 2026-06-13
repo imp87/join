@@ -21,14 +21,21 @@
   <main id="mainContent">
 
     <div class="loginFormWrapper">
-      <form id="loginForm">
+      <form id="loginForm" novalidate>
         <h2>Log in</h2>
-        <input type="email" id="email" placeholder="E-Mail">
-        <input type="password" id="password" placeholder="Password">
-        <div class="loginButtons"><button type="submit" id="userLogin">Log in</button>
+        <div class="inputWrapper">
+          <input type="email" id="email" placeholder="E-Mail">
+          <img src="./assets/icons/email.svg" alt="E-Mail Icon" class="iconMail">
+          <input type="password" id="password" placeholder="Password" >
+          <img src="./assets/icons/password.svg" alt="Password Icon" class="iconPassword">
+        </div>
+
+        <div class="loginButtons">
+          <button type="submit" id="userLogin">Log in</button>
           <button type="button" id="guestLogin">Guest Login</button>
         </div>
       </form>
+    </div>
     </div>
 
   </main>

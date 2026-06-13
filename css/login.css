@@ -93,12 +93,42 @@ footer {
 	gap: 32px;
 }
 
-#loginForm input {
-	width: 422px;
-	padding: 10px;
-	margin: 10px 0;
+.inputWrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.inputWrapper input {
+	width: 450px;
+	margin: 6px;
+	padding: 12px 48px 12px 20px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+}
+
+.inputWrapper img {
+	position: absolute !important;
+	width: 18px;
+	height: 18px;
+	min-height: 0px;
+	min-width: 0px;
+	z-index: 5000;
+	box-sizing: content-box;
+	background: none;
+	padding: 0px;
+	cursor: pointer;
+	outline: none;
+}
+
+.inputWrapper .iconMail {
+	margin-top: 17.5px;
+	margin-left: 434px;
+}
+
+.inputWrapper .iconPassword {
+	margin-top: 70.5px;
+	margin-left: 434px;
 }
 
 .loginButtons {
