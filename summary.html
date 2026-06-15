@@ -5,15 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/summary.css">
+    <script src="./scripts/summary.js"></script>
+    <link rel="shortcut icon" href="./assets/img/Capa 1.png" type="image/x-icon">
     <title>Join - Summary</title>
 </head>
 
-<body>
+<body id="body" onload="greeting();" onclick="submenuClose()">
     <header>
         <nav>
             <h2>Kanban Project Management Tool</h2>
-            <div><img src="./assets/img/help.png" alt="help"><button>G</button></div>
+            <div><img src="./assets/img/help.png" alt="help"><button
+                    onclick="submenuOpen(); logDownWBubblingProtection(event);">G</button></div>
+
         </nav>
+        <dialog onload="logDownWBubblingProtection(event);" id="submenu" class="submenu">
+            <a href="./index.html">Legal Notice</a>
+            <a href="">Privacy Policy</a>
+            <a href="">Log out</a>
+        </dialog>
     </header>
 
     <main>
@@ -103,8 +112,7 @@
                         </button>
                     </figure>
                 </div>
-                <div>
-                    <h5>Good morning!</h5>
+                <div id="greeting">
                 </div>
             </article>
         </section>
