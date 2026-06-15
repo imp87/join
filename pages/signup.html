@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+
+<body class="signupBody">
+
+    <div class="signupHeader">
+        <img src="../assets/icons/logo.svg" alt="Logo">
+    </div>
+
+    <main id="mainContent">
+
+        <div class="signupFormWrapper">
+            <form id="signupForm" novalidate>
+                <h2>Sign up</h2>
+                <div class="signupInputWrapper">
+                    <input type="text" id="name" placeholder="Name">
+                    <img src="/assets/icons/person.svg" alt="Person Icon" class="iconPerson">
+                    <input type="email" id="email" placeholder="E-Mail">
+                    <img src="/assets/icons/mail.svg" alt="E-Mail Icon" class="iconMail">
+                    <input type="password" id="password" placeholder="Password">
+                    <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="iconPassword">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                    <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="iconPasswordConfirm">
+                </div>
+
+                <label>
+                    <input type="checkbox" class="checkbox" id="checkboxPrivacy">
+                    <span class="checkboxIcon"></span>
+                    I agree to the <a href=" privacy.html" target="_blank">Privacy Policy</a>
+                </label>
+                <!--/////////////////////////////////////////// SIGN UP FUNCTION ///////////////////////////////////////////////////////////// -->
+                <button type="submit" id="signupButton">Sign up</button> 
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footerLinks">
+            <a href="../pages/privacy.html" target="_blank">Privacy Policy</a>
+            <a href="../pages/legals.html" target="_blank">Legal notice</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
