@@ -119,6 +119,11 @@ footer {
 	color: #000000;
 }
 
+.loginInputWrapper input:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
 .loginInputWrapper img {
 	position: absolute !important;
 	width: 24px;

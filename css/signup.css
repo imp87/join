@@ -102,6 +102,11 @@ h2 {
 	color: #000000;
 }
 
+.signupInputWrapper input:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
 .signupInputWrapper img {
 	position: absolute !important;
 	width: 24px;
@@ -141,12 +146,12 @@ input[type="checkbox"] {
 }
 
 .checkboxIcon {
-    display: inline-block;
+	display: inline-block;
 	width: 16px;
 	height: 16px;
 	background-image: url("../assets/icons/checkbox_empty.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 
 input:checked + .checkboxIcon {
