@@ -73,6 +73,7 @@ main {
     max-width: 1920px;
     width: 100%;
     align-self: center;
+    display: flex;
 }
 
 .menu {
@@ -107,21 +108,26 @@ main {
     padding: 0;
     margin: 0;
     display: flex;
+    gap: 15px;
     flex-direction: column;
 }
 
 .menu nav a {
     text-decoration: none;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     color: inherit;
     display: flex;
     align-items: center;
 }
 
-.menu nav a:hover {
+.menu-top:hover {
+    background-color: rgba(42, 61, 89, 1);
+}
+
+.current-page {
+    color: white !important;
     background-color: rgba(9, 25, 49, 1);
-    color: white;
 }
 
 .menu nav a img {
@@ -137,6 +143,10 @@ main {
     padding-bottom: 10px !important;
 }
 
+.menu-bottom:hover {
+    color: rgba(41, 171, 226, 1);
+    font-weight: bold;
+}
 
 section {
     margin-top: 130px;
@@ -176,7 +186,7 @@ section article div {
     max-width: 560px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     justify-content: center;
 }
 
@@ -184,7 +194,7 @@ section article figure {
     display: flex;
     width: 100%;
     margin: 0;
-    gap: 20px;
+    gap: 30px;
 }
 
 section article button {
@@ -202,6 +212,26 @@ section article button {
     border-radius: 30px;
     width: 100%;
     gap: 20px;
+    transition: all 0.1s;
+}
+
+section article button:hover {
+    background-color: rgba(42, 54, 71, 1);
+    cursor: pointer;
+    color: white !important;
+    scale: calc(1.1);
+}
+
+section article button:hover h4 {
+    color: white;
+}
+
+section article button:hover .button-icon-hover {
+    display: block;
+}
+
+section article button:hover .button-icon {
+    display: none;
 }
 
 section article button span {
@@ -212,6 +242,10 @@ h4 {
     font-size: 64px;
     margin: 0;
     color: black;
+}
+
+.button-icon-hover {
+    display: none;
 }
 
 section article img {
