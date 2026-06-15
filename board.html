@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/img/Capa 1.png" type="image/x-icon">
+    <script src="./scripts/board.js"></script>
     <link rel="stylesheet" href="./css/board.css">
     <title>Join - Board</title>
 </head>
 
-<body>
+<body onclick="submenuClose()">
     <header>
         <nav>
             <h2>Kanban Project Management Tool</h2>
@@ -54,10 +55,32 @@
                         <button class="search-btn"><img src="./assets/img/search.png" alt="search png"></button>
                     </div>
 
-                    <button class="add-task-btn">Add task +</button>
+                    <button class="add-task-btn">Add task <img src="./assets/img/add.png" alt="add png"></button>
                 </span>
 
             </div>
+            <article>
+                <div class="category">
+                    <h3>To do</h3>
+                    <button><img src="./assets/img/add2.png" alt="add png"></button>
+                </div>
+
+                <div class="category">
+                    <h3>In progress</h3>
+                    <button><img src="./assets/img/add2.png" alt="add png"></button>
+                </div>
+
+                <div class="category">
+                    <h3>Await feedback</h3>
+                    <button><img src="./assets/img/add2.png" alt="add png"></button>
+                </div>
+
+                <div class="category">
+                    <h3>Done</h3>
+                </div>
+
+
+            </article>
         </section>
     </main>
 </body>

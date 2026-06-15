@@ -226,6 +226,9 @@ h1 {
     background: none;
     border: none;
     font-size: 20px;
+    padding-block: 0;
+    padding-inline: 0;
+    padding: 0;
 }
 
 input:focus-visible {
@@ -249,12 +252,16 @@ input:focus-visible {
     align-items: center;
     border: none;
     margin: 0;
-    padding-right: 15px;
-    padding-left: 15px;
+    margin-right: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+    transition: all 0.1s;
 }
 
 .search-btn:hover {
     cursor: pointer;
+    background-color: rgba(217, 217, 217, 1);
+    scale: 1.05;
 }
 
 .title span button img {
@@ -268,9 +275,54 @@ input:focus-visible {
     border-radius: 10px;
     font-size: 21px;
     font-weight: bold;
-    padding: 15px;
+    padding: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    width: max-content;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
+
 
 .add-task-btn:hover {
     cursor: pointer;
+    background-color: rgba(41, 171, 226, 1);
+    -webkit-box-shadow: 0 6px 6px -6px #222;
+    -moz-box-shadow: 0 6px 6px -6px #222;
+    box-shadow: 0 6px 6px -6px #222;
+}
+
+article {
+    width: 100%;
+    display: flex;
+    gap: 50px;
+}
+
+.category {
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.category button {
+    background: none;
+    border: none;
+}
+
+.category button:hover {
+    cursor: pointer;
+    filter: brightness(3);
+}
+
+h3 {
+    font-size: 20px;
+    color: rgba(66, 82, 110, 1);
+}
+
+.category img {
+    width: 24px;
+    height: 24px;
 }
