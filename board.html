@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/Capa 1.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/board.css">
+    <title>Join - Board</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h2>Kanban Project Management Tool</h2>
+            <div><img src="./assets/img/help.png" alt="help"><button
+                    onclick="submenuOpen(); logDownWBubblingProtection(event);">G</button></div>
+
+        </nav>
+        <dialog onload="logDownWBubblingProtection(event);" id="submenu" class="submenu">
+            <a href="./index.html">Legal Notice</a>
+            <a href="">Privacy Policy</a>
+            <a href="">Log out</a>
+        </dialog>
+    </header>
+    <main>
+        <div class="menu">
+            <img src="./assets/img/Join logo vector.png" alt="join logo">
+            <nav>
+                <ul>
+                    <a class="menu-top" href="./summary.html"><img src="./assets/img/Vectorhover.png"
+                            alt="vectorhover.png">Summary</a>
+                    <a class="menu-top" href=""><img src="./assets/img/edit_square.png" alt="edit square png">Add
+                        Task</a>
+                    <a class="current-page" href=""><img src="./assets/img/Iconshover.png" alt="board icon">Board</a>
+                    <a class="menu-top" href=""><img src="./assets/img/perm_contact_calendar.png"
+                            alt="perm contact calendar.png">Contacts</a>
+                </ul>
+
+                <ul>
+                    <a class="menu-bottom" href="">Privacy Policy</a>
+                    <a class="menu-bottom" href="">Legal notice</a>
+                </ul>
+            </nav>
+        </div>
+
+        <section>
+            <div class="title">
+                <h1>Board</h1>
+
+                <span>
+                    <div class="searchbar"><input type="text" id="search-bar" placeholder="Find Task">
+                        <div></div>
+                        <button class="search-btn"><img src="./assets/img/search.png" alt="search png"></button>
+                    </div>
+
+                    <button class="add-task-btn">Add task +</button>
+                </span>
+
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
