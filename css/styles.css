@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "Inter";
+	src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf")
+		format("truetype");
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+body {
+	font-family: "Inter", sans-serif;
+	background-color: #f5f5f5;
+	color: #333;
+	font-size: 16px;
+	max-width: 1440px;
+	margin: 0 auto;
+}
+
+a {
+	color: #a8a8a8;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+header {
+	background-color: #f6f7f8;
+	padding: 20px;
+	text-align: center;
+}
+
+footer {
+	background-color: #f6f7f8;
+	padding: 20px;
+	text-align: center;
+}

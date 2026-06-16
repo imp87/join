@@ -1,10 +1,10 @@
-.signupBody {
+.loginBody {
 	width: 100%;
 	height: 100dvh;
 	margin: 0;
 }
 
-.signupHeader {
+.loginHeader {
 	background-color: #f6f7f8;
 	padding: 20px;
 	text-align: center;
@@ -18,10 +18,33 @@
 	justify-content: space-between;
 }
 
-.signupHeader img {
+.loginHeader img {
 	width: 100px;
 	height: 120px;
 	object-fit: cover;
+}
+
+.loginHeader p {
+	font-size: 20px;
+	font-weight: 400;
+	color: #2a3647;
+	gap: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.loginHeader button {
+	width: 90px;
+	height: 50px;
+	background-color: #2a3647;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: 700;
+	font-style: bold;
 }
 
 footer {
@@ -41,12 +64,6 @@ footer {
 	font-weight: 400;
 }
 
-h2 {
-	font-size: 60px;
-	font-weight: 700;
-	color: #000000;
-}
-
 #mainContent {
 	width: 100vw;
 	height: 100%;
@@ -55,9 +72,9 @@ h2 {
 	justify-content: center;
 }
 
-.signupFormWrapper {
+.loginFormWrapper {
 	width: 650px;
-	height: 600px;
+	height: 450px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -66,16 +83,14 @@ h2 {
 	padding: 30px;
 }
 
-
-.signupFormWrapper h2 {
+.loginFormWrapper h2 {
 	font-size: 61px;
 	font-weight: 700;
 }
 
-
-#signupForm {
+#loginForm {
 	width: 652px;
-	height: 600px;
+	height: 449px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -83,7 +98,7 @@ h2 {
 	gap: 32px;
 }
 
-.signupInputWrapper {
+.loginInputWrapper {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -93,7 +108,7 @@ h2 {
 	font-size: 20px;
 }
 
-.signupInputWrapper input {
+.loginInputWrapper input {
 	width: 450px;
 	margin: 6px;
 	padding: 12px 48px 12px 20px;
@@ -104,12 +119,12 @@ h2 {
 	color: #000000;
 }
 
-.signupInputWrapper input:focus {
+.loginInputWrapper input:focus {
     border: 1px solid #29ABE2;
     outline: none;
 }
 
-.signupInputWrapper img {
+.loginInputWrapper img {
 	position: absolute !important;
 	width: 24px;
 	height: 24px;
@@ -123,54 +138,41 @@ h2 {
 	outline: none;
 }
 
-.signupInputWrapper .iconPerson {
+.loginInputWrapper .iconMail {
 	margin-top: 20px;
 	margin-left: 425px;
 }
 
-.signupInputWrapper .iconMail {
+.loginInputWrapper .iconPassword {
 	margin-top: 100px;
 	margin-left: 425px;
 }
 
-.signupInputWrapper .iconPassword {
-	margin-top: 185px;
-	margin-left: 425px;
+.loginButtons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 35px;
 }
 
-.signupInputWrapper .iconPasswordConfirm {
-	margin-top: 265px;
-	margin-left: 425px;
-}
-
-input[type="checkbox"] {
-	display: none;
-}
-
-.checkboxIcon {
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-	background-image: url("../assets/icons/checkbox_empty.svg");
-	background-size: contain;
-	background-repeat: no-repeat;
-}
-
-input:checked + .checkboxIcon {
-	background-image: url("../assets/icons/checkbox_checked.svg");
-}
-
-#signupForm label a {
-	margin-right: 8px;
-	color: #29abe2;
-}
-
-#signupButton {
+#userLogin {
 	width: 110px;
 	height: 48px;
 	background-color: #2a3647;
 	color: white;
 	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 21px;
+	font-weight: 500;
+}
+
+#guestLogin {
+	width: 177px;
+	height: 48px;
+	background-color: #ffffff;
+	color: #2a3647;
+	border: solid 1px #2a3647;
 	border-radius: 8px;
 	cursor: pointer;
 	font-size: 21px;
