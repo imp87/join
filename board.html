@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/img/Capa 1.png" type="image/x-icon">
+    <script src="./scripts/board.js"></script>
+    <link rel="stylesheet" href="./css/board.css">
+    <title>Join - Board</title>
+</head>
+
+<body onclick="submenuClose(); addTaskClose();">
+    <header>
+        <nav>
+            <h2>Kanban Project Management Tool</h2>
+            <div><img src="./assets/img/help.png" alt="help"><button
+                    onclick="submenuOpen(); logDownWBubblingProtection(event);">G</button></div>
+
+        </nav>
+        <dialog onload="logDownWBubblingProtection(event);" id="submenu" class="submenu">
+            <a href="./index.html">Legal Notice</a>
+            <a href="">Privacy Policy</a>
+            <a href="">Log out</a>
+        </dialog>
+    </header>
+    <main>
+        <div class="menu">
+            <img src="./assets/img/Join logo vector.png" alt="join logo">
+            <nav>
+                <ul>
+                    <a class="menu-top" href="./summary.html"><img src="./assets/img/Vectorhover.png"
+                            alt="vectorhover.png">Summary</a>
+                    <a class="menu-top" href=""><img src="./assets/img/edit_square.png" alt="edit square png">Add
+                        Task</a>
+                    <a class="current-page" href=""><img src="./assets/img/Iconshover.png" alt="board icon">Board</a>
+                    <a class="menu-top" href=""><img src="./assets/img/perm_contact_calendar.png"
+                            alt="perm contact calendar.png">Contacts</a>
+                </ul>
+
+                <ul>
+                    <a class="menu-bottom" href="">Privacy Policy</a>
+                    <a class="menu-bottom" href="">Legal notice</a>
+                </ul>
+            </nav>
+        </div>
+
+        <section>
+            <div class="title">
+                <h1>Board</h1>
+
+                <span>
+                    <div class="searchbar"><input type="text" id="search-bar" placeholder="Find Task">
+                        <div></div>
+                        <button class="search-btn"><img src="./assets/img/search.png" alt="search png"></button>
+                    </div>
+
+                    <button class="add-task-btn" onclick="addtaskOpen(); logDownWBubblingProtection(event);">Add task
+                        <img src="./assets/img/add.png" alt="add png"></button>
+                </span>
+
+            </div>
+            <article>
+                <figure>
+                    <div class="category">
+                        <h3>To do</h3>
+                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                    </div>
+                    <div class="no-task">
+                        No tasks To do
+                    </div>
+                </figure>
+
+                <figure>
+                    <div class="category">
+                        <h3>In progress</h3>
+                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                    </div>
+                    <button class="task-card">
+                        <h4>User Story</h4>
+                        <p>
+                            <strong>Kochwelt Page & Recipe Recommender</strong>
+                            Build start page with recipe recommendation...
+                        </p>
+                        <div class="progress-bar">
+                            <progress id="subtasks" value="1" max="2"></progress>
+                            <label for="subtasks">1/2 Subtasks</label>
+                        </div>
+                        <div class="user-prio">
+                            <span>
+                                <div>AA</div>
+                                <div class="margin-left">EJ</div>
+                                <div class="margin-left">MA</div>
+                            </span>
+                            <img src="./assets/img/Prio media.png" alt="medium">
+                        </div>
+                    </button>
+                </figure>
+
+                <figure>
+                    <div class="category">
+                        <h3>Await feedback</h3>
+                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                    </div>
+                </figure>
+
+                <figure>
+                    <div class="category">
+                        <h3>Done</h3>
+                    </div>
+                </figure>
+            </article>
+            <dialog onload="logDownWBubblingProtection(event);" id="add-task" class="add-task">
+                <div class="add-task-content" onclick="logDownWBubblingProtection(event);">
+                    <h1>Add Task</h1>
+
+                    <form action="">
+                        <div>
+                            <label for="title">Title<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <input id="title" type="text" placeholder="Enter a title"><br><br>
+
+                            <label for="description">Description</label>
+                            <textarea placeholder="Enter a Description" id="description" name="w3review" rows="4"
+                                cols="50">
+                        </textarea><br><br>
+
+                            <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <input type="date" id="due-date" name="due-date">
+                        </div>
+
+                        <div>
+                            <input type="radio" id="urgent" name="priority" value="urgent">
+                            <label for="opt1">Urgent</label>
+
+                            <input type="radio" id="medium" name="priority" value="medium">
+                            <label for="opt2">Medium</label>
+
+                            <input type="radio" id="low" name="priority" value="low">
+                            <label for="opt3">Low</label>
+
+                            <br>
+
+                            <label for="contacts">Assigned to</label>
+                            <select name="contacts" id="cars">
+                                <option value="Eren Jäger">Eren Jäger</option>
+                                <option value="Mikasa Ackermann">Mikasa Ackermann</option>
+                                <option value="Armin Alert">Armin Alert</option>
+                            </select>
+
+                            <br>
+
+                            <label for="category">Category<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <select name="category" id="select-category">
+                                <option value="Technical Task">Technical Task</option>
+                                <option value="User Story">User Story</option>
+                            </select>
+
+                            <br>
+
+                            <label for="subtask">Subtasks<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <input id="subtask" type="text" placeholder="Add new subtask">
+                        </div>
+
+                    </form>
+                </div>
+            </dialog>
+        </section>
+    </main>
+</body>
+
+</html>

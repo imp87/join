@@ -18,16 +18,25 @@
     <main id="mainContent">
 
         <div class="signupFormWrapper">
-            <form id="signupForm">
+            <form id="signupForm" novalidate>
                 <h2>Sign up</h2>
-                <input type="text" id="name" placeholder="Name">
-                <input type="email" id="email" placeholder="E-Mail">
-                <input type="password" id="password" placeholder="Password">
-                <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                <div class="signupInputWrapper">
+                    <input type="text" id="name" placeholder="Name" required>
+                    <img src="/assets/icons/person.svg" alt="Person Icon" class="iconPerson">
+                    <input type="email" id="email" placeholder="E-Mail" required>
+                    <img src="/assets/icons/mail.svg" alt="E-Mail Icon" class="iconMail">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="iconPassword">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="iconPasswordConfirm">
+                </div>
+
                 <label>
-                    <input type="checkbox" class="checkbox" id="checkboxPrivacy">
-                    I agree to the <a href="../pages/privacy.html" target="_blank">Privacy Policy</a>
+                    <input type="checkbox" class="checkbox" id="checkboxPrivacy" required>
+                    <span class="checkboxIcon"></span>
+                    I agree to the <a href=" privacy.html" target="_blank">Privacy Policy</a>
                 </label>
+                <!--/////////////////////////////////////////// SIGN UP FUNCTION ///////////////////////////////////////////////////////////// -->
                 <button type="submit" id="signupButton">Sign up</button>
             </form>
         </div>

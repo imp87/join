@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Join</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/login.css">
 </head>
-<body>
+
+<body class="loginBody">
+
+  <div class="loginHeader">
+    <img src="/assets/icons/logo.svg" alt="Logo">
+    <p>Not a Join user?
+      <button type="button">Sign up</button>
+    </p>
+  </div>
+
+  <main id="mainContent">
+
+    <div class="loginFormWrapper">
+      <form id="loginForm" novalidate>
+        <h2>Log in</h2>
+        <div class="loginInputWrapper">
+          <input type="email" id="email" placeholder="E-Mail" required>
+          <img src="/assets/icons/mail.svg" alt="E-Mail Icon" class="iconMail">
+          <input type="password" id="password" placeholder="Password" required>
+          <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="iconPassword">
+        </div>
+
+        <!--/////////////////////////////////////////// LOG IN FUNCTIONS ///////////////////////////////////////////////////////////// -->
+        <div class="loginButtons">
+          <button type="submit" id="userLogin">Log in</button>
+          <button type="button" id="guestLogin">Guest Login</button>
+        </div>
+      </form>
+    </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footerLinks">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Legal notice</a>
+    </div>
+  </footer>
 
 </body>
 <script type="module">
@@ -14,18 +55,4 @@
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDYs15sK52OqKc4zJzSbdM_q_p9kAp9i4k",
-    authDomain: "join-4ac70.firebaseapp.com",
-    databaseURL: "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "join-4ac70",
-    storageBucket: "join-4ac70.firebasestorage.app",
-    messagingSenderId: "214911005553",
-    appId: "1:214911005553:web:237dba08fb198a8e8bfcd0"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
 </html>
