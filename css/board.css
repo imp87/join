@@ -300,6 +300,11 @@ article {
     gap: 50px;
 }
 
+figure {
+    margin: 0;
+    max-width: 300px;
+}
+
 .category {
     display: flex;
     width: 300px;
@@ -310,6 +315,7 @@ article {
 .category button {
     background: none;
     border: none;
+    padding: 0;
 }
 
 .category button:hover {
@@ -325,4 +331,119 @@ h3 {
 .category img {
     width: 24px;
     height: 24px;
+}
+
+.no-task {
+    color: rgba(168, 168, 168, 1);
+    background-color: rgba(231, 231, 231, 1);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    border-radius: 10px;
+    border-style: dashed;
+    border-width: 1px;
+}
+
+
+.task-card {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    background-color: white;
+    border: none;
+    -moz-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    padding: 20px;
+    gap: 24px;
+}
+
+h4 {
+    font-size: 16px;
+    color: white;
+    font-weight: 400;
+    background-color: rgba(0, 56, 255, 1);
+    width: 115px;
+    margin: 0;
+    padding-bottom: 4px;
+    padding-top: 5px;
+    border-radius: 8px;
+}
+
+.task-card strong {
+    font-size: 16px;
+    text-align: start;
+    color: black;
+}
+
+.task-card p {
+    margin: 0;
+    font-size: 16px;
+    color: rgba(168, 168, 168, 1);
+    text-align: start;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.progress-bar {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-bar progress {
+    border: none;
+    height: 8px;
+    width: 60%;
+}
+
+.progress-bar progress::-webkit-progress-bar {
+    background-color: rgba(244, 244, 244, 1);
+    border-radius: 8px;
+}
+
+.progress-bar progress::-webkit-progress-value {
+    background-color: rgba(69, 137, 255, 1);
+    border-radius: 8px;
+}
+
+.user-prio {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-prio span {
+    display: flex;
+}
+
+.user-prio span div {
+    font-size: 16px;
+    background-color: rgba(255, 122, 0, 1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border: solid;
+    border-width: 1px;
+}
+
+.margin-left {
+    margin-left: -10px;
+    background-color: rgba(31, 215, 193, 1) !important;
+}
+
+.task-card img {
+    block-size: 8px;
+}
+
+.task-card:hover {
+    cursor: pointer;
 }

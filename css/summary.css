@@ -235,7 +235,7 @@ section article figure {
     gap: 30px;
 }
 
-section article button {
+section article a {
     display: flex;
     background-color: white;
     color: rgba(42, 54, 71, 1);
@@ -251,34 +251,40 @@ section article button {
     width: 100%;
     gap: 20px;
     transition: all 0.1s;
+    text-decoration: none;
 }
 
-section article button:hover {
+section article a:hover {
     background-color: rgba(42, 54, 71, 1);
     cursor: pointer;
     color: white !important;
     scale: calc(1.1);
 }
 
-section article button:hover h4 {
+section article a:hover h4 {
     color: white;
 }
 
-section article button:hover .button-icon-hover {
+section article a:hover .button-icon-hover {
     display: block;
 }
 
-section article button:hover .button-icon {
+section article a:hover .button-icon {
     display: none;
 }
 
-section article button span {
+section article a span {
     max-width: 83px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 h4 {
     font-size: 64px;
     margin: 0;
+    text-align: center;
     color: black;
 }
 
@@ -290,7 +296,7 @@ section article img {
     block-size: 69px;
 }
 
-section article button div {
+section article a div {
     width: 2px;
     height: 100px;
     background-color: rgba(209, 209, 209, 1);
@@ -298,7 +304,7 @@ section article button div {
     margin-right: 30px;
 }
 
-section article button p {
+section article a p {
     display: flex;
     flex-direction: column;
     gap: 15px;
