@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="left-bar">
+
+      <div class="logo">
+        <img class="logo-img" src="../assets/img/logo_light.png" alt="Join Logo">
+      </div>
+
+      <div class="navbar-links">
+        <a class="nav-link active" href="#">
+          <img src="../assets/icons/summary.svg" alt="">
+          <span>Summary</span>
+        </a>
+
+        <a class="nav-link" href="#">
+          <img src="../assets/icons/add_task.svg" alt="">
+          <span>Add Task</span>
+        </a>
+
+        <a class="nav-link" href="#">
+          <img src="../assets/icons/board.svg" alt="">
+          <span>Board</span>
+        </a>
+
+        <a class="nav-link" href="#">
+          <img src="../assets/icons/contacts.svg" alt="">
+          <span>Contacts</span>
+        </a>
+      </div>
+
+      <div class="navbar-footer">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal notice</a>
+      </div>
+
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <header class="top-bar">
+      <p>Kanban Project Management Tool</p>
+
+      <div class="top-bar-right">
+        <img class="help-icon" src="../assets/icons/help.svg" alt="Help">
+        <div class="user-circle">SM</div>
+      </div>
+    </header>
+  </main>
+
+</body>
+<script>
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.forEach((item) => item.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+</script>
+</html>
