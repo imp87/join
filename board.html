@@ -10,7 +10,7 @@
     <title>Join - Board</title>
 </head>
 
-<body onclick="submenuClose()">
+<body onclick="submenuClose(); addTaskClose();">
     <header>
         <nav>
             <h2>Kanban Project Management Tool</h2>
@@ -55,7 +55,8 @@
                         <button class="search-btn"><img src="./assets/img/search.png" alt="search png"></button>
                     </div>
 
-                    <button class="add-task-btn">Add task <img src="./assets/img/add.png" alt="add png"></button>
+                    <button class="add-task-btn" onclick="addtaskOpen(); logDownWBubblingProtection(event);">Add task
+                        <img src="./assets/img/add.png" alt="add png"></button>
                 </span>
 
             </div>
@@ -108,8 +109,61 @@
                         <h3>Done</h3>
                     </div>
                 </figure>
-
             </article>
+            <dialog onload="logDownWBubblingProtection(event);" id="add-task" class="add-task">
+                <div class="add-task-content" onclick="logDownWBubblingProtection(event);">
+                    <h1>Add Task</h1>
+
+                    <form action="">
+                        <div>
+                            <label for="title">Title<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <input id="title" type="text" placeholder="Enter a title"><br><br>
+
+                            <label for="description">Description</label>
+                            <textarea placeholder="Enter a Description" id="description" name="w3review" rows="4"
+                                cols="50">
+                        </textarea><br><br>
+
+                            <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <input type="date" id="due-date" name="due-date">
+                        </div>
+
+                        <div>
+                            <input type="radio" id="urgent" name="priority" value="urgent">
+                            <label for="opt1">Urgent</label>
+
+                            <input type="radio" id="medium" name="priority" value="medium">
+                            <label for="opt2">Medium</label>
+
+                            <input type="radio" id="low" name="priority" value="low">
+                            <label for="opt3">Low</label>
+
+                            <br>
+
+                            <label for="contacts">Assigned to</label>
+                            <select name="contacts" id="cars">
+                                <option value="Eren Jäger">Eren Jäger</option>
+                                <option value="Mikasa Ackermann">Mikasa Ackermann</option>
+                                <option value="Armin Alert">Armin Alert</option>
+                            </select>
+
+                            <br>
+
+                            <label for="category">Category<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <select name="category" id="select-category">
+                                <option value="Technical Task">Technical Task</option>
+                                <option value="User Story">User Story</option>
+                            </select>
+
+                            <br>
+
+                            <label for="subtask">Subtasks<span style="color: rgba(255, 129, 144, 1);">*</span></label>
+                            <input id="subtask" type="text" placeholder="Add new subtask">
+                        </div>
+
+                    </form>
+                </div>
+            </dialog>
         </section>
     </main>
 </body>

@@ -11,3 +11,13 @@ function submenuClose() {
 function logDownWBubblingProtection(event) {
     event.stopPropagation();
 }
+
+function addtaskOpen() {
+    let dialogRef = document.getElementById("add-task");
+    dialogRef.showModal();
+}
+
+function addTaskClose() {
+    let dialogRef = document.getElementById("add-task");
+    dialogRef.close();
+}
