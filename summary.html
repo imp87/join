@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/summary.css">
+    <script src="./scripts/summary.js"></script>
+    <link rel="shortcut icon" href="./assets/img/Capa 1.png" type="image/x-icon">
+    <title>Join - Summary</title>
+</head>
+
+<body id="body" onload="greeting();" onclick="submenuClose()">
+    <header>
+        <nav>
+            <h2>Kanban Project Management Tool</h2>
+            <div><img src="./assets/img/help.png" alt="help"><button
+                    onclick="submenuOpen(); logDownWBubblingProtection(event);">G</button></div>
+
+        </nav>
+        <dialog onload="logDownWBubblingProtection(event);" id="submenu" class="submenu">
+            <a href="./index.html">Legal Notice</a>
+            <a href="">Privacy Policy</a>
+            <a href="">Log out</a>
+        </dialog>
+    </header>
+
+    <main>
+        <div class="menu">
+            <img src="./assets/img/Join logo vector.png" alt="join logo">
+            <nav>
+                <ul>
+                    <a class="current-page" href=""><img src="./assets/img/Vectorhover.png"
+                            alt="vectorhover.png">Summary</a>
+                    <a class="menu-top" href=""><img src="./assets/img/edit_square.png" alt="edit square png">Add
+                        Task</a>
+                    <a class="menu-top" href="./board.html"><img src="./assets/img/Icons.png" alt="board icon">Board</a>
+                    <a class="menu-top" href=""><img src="./assets/img/perm_contact_calendar.png"
+                            alt="perm contact calendar.png">Contacts</a>
+                </ul>
+
+                <ul>
+                    <a class="menu-bottom" href="">Privacy Policy</a>
+                    <a class="menu-bottom" href="">Legal notice</a>
+                </ul>
+            </nav>
+        </div>
+
+        <section>
+            <div class="title">
+                <h1>Join 360</h1>
+                <div></div>
+                <h3>Key Metrics at a Glance</h3>
+            </div>
+            <article>
+                <div>
+                    <figure>
+                        <a href="./board.html">
+                            <img class="button-icon" src="./assets/img/Frame 59.png" alt="ellipse">
+                            <img class="button-icon-hover" src="./assets/img/ellipsehover.png" alt="ellipse hover">
+                            <span>
+                                <h4>1</h4>
+                                To-do
+                            </span>
+                        </a>
+
+                        <a href="./board.html">
+                            <img class="button-icon" src="./assets/img/Group 7.png" alt="done png">
+                            <img class="button-icon-hover" src="./assets/img/donehover.png" alt="donehover png">
+                            <span>
+                                <h4>1</h4>
+                                Done
+                            </span>
+                        </a>
+                    </figure>
+
+                    <a href="./board.html">
+                        <img src="./assets/img/urgent.png" alt="urgent png">
+                        <span>
+                            <h4>1</h4>
+                            Urgent
+                        </span>
+                        <div>
+
+                        </div>
+                        <p>
+                            <strong>October 16, 2022</strong>
+                            Upcoming Deadline
+                        </p>
+                    </a>
+
+                    <figure>
+                        <a href="./board.html">
+                            <span>
+                                <h4>5</h4>
+                                Tasks in Board
+                            </span>
+                        </a>
+
+                        <a href="./board.html">
+                            <span>
+                                <h4>2</h4>
+                                Tasks in Progress
+                            </span>
+                        </a>
+
+                        <a href="./board.html">
+                            <span>
+                                <h4>2</h4>
+                                Awaiting Feedback
+                            </span>
+                        </a>
+                    </figure>
+                </div>
+                <div id="greeting">
+                </div>
+            </article>
+        </section>
+
+    </main>
+</body>
+
+</html>
