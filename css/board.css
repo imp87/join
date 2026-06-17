@@ -462,23 +462,63 @@ h4 {
 
 .add-task h1 {
     margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-task h1 button {
+    background: none;
+    padding: 0;
+    margin: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.add-task h1 button:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.add-task h1 img {
+    width: 15px;
+    align-self: center;
+    justify-self: center;
 }
 
 .add-task-content {
-    width: 1000px;
-    height: 600px;
     padding: 60px;
     display: flex;
     gap: 40px;
     flex-direction: column;
 }
 
-.add-task form {
+.formular {
     display: flex;
+    justify-content: space-between;
+    gap: 40px;
 }
 
 .form-area {
-    width: 50%;
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-line {
+    width: 1px;
+    height: 440px;
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.form-area-fields {
     display: flex;
     flex-direction: column;
 }
@@ -486,11 +526,11 @@ h4 {
 .add-task label {
     font-size: 20px;
     color: rgba(42, 54, 71, 1);
+    margin-bottom: 8px;
 }
 
 .add-task input {
     border-radius: 10px;
-    width: 430px;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 10px;
@@ -508,7 +548,6 @@ h4 {
     padding-right: 15px;
     padding-bottom: 10px;
     padding-top: 10px;
-    width: 430px;
     font-size: 20px;
     border: solid;
     border-color: rgba(209, 209, 209, 1);
@@ -518,6 +557,7 @@ h4 {
 .add-task input[type="date"] {
     font-family: inherit;
     color: rgba(209, 209, 209, 1);
+    cursor: pointer;
 }
 
 .add-task input[type="date"]:valid {
@@ -530,9 +570,9 @@ h4 {
 
 .priority {
     display: inline-flex;
-    padding: 8px;
     justify-content: space-between;
     gap: 8px;
+    padding: 4px;
     overflow: hidden;
 }
 
@@ -587,4 +627,86 @@ h4 {
 
 .radio__input:checked+.radio__label-low img {
     filter: brightness(0) invert(1);
+}
+
+.add-task select {
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.cancel {
+    font-size: 20px;
+    color: rgba(42, 54, 71, 1);
+    border: solid;
+    background: none;
+    border-radius: 10px;
+    border-color: rgba(42, 54, 71, 1);
+    gap: 8px;
+    border-width: 2px;
+    padding: 12px;
+    display: flex;
+    cursor: pointer;
+}
+
+.cancel img {
+    width: 12px;
+}
+
+.cancel:hover {
+    color: rgba(41, 171, 226, 1);
+    border-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.cancel:hover .button-icon {
+    display: none;
+}
+
+.cancel:hover .button-icon-hover {
+    display: unset;
+}
+
+.create-task {
+    background-color: rgba(42, 54, 71, 1);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    margin-left: 25px;
+}
+
+.create-task img {
+    width: 16px;
+}
+
+.create-task:hover {
+    background-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.form-footer div {
+    display: flex;
+}
+
+.form-footer input {
+    background: none;
+    border: none;
+    color: white;
+    padding: 0;
+    cursor: pointer;
+}
+
+.button-icon-hover {
+    display: none;
 }
