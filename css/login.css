@@ -63,6 +63,12 @@ footer {
 	font-weight: 400;
 }
 
+.footerLinks a {
+	text-decoration: none;
+	color: #a8a8a8;
+	cursor: pointer;
+}
+
 #mainContent {
 	width: 100%;
 	height: 100%;
@@ -95,7 +101,6 @@ footer {
 	align-items: center;
 	justify-content: center;
 	gap: 20px;
-	
 }
 
 .loginInputWrapper {

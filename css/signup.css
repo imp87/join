@@ -40,6 +40,12 @@ footer {
 	font-weight: 400;
 }
 
+.footerLinks a {
+	text-decoration: none;
+	color: #a8a8a8;
+	cursor: pointer;
+}
+
 h2 {
 	font-size: 60px;
 	font-weight: 700;
