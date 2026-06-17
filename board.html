@@ -64,7 +64,8 @@
                 <figure>
                     <div class="category">
                         <h3>To do</h3>
-                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                        <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
+                                src="./assets/img/add2.png" alt="add png"></button>
                     </div>
                     <div class="no-task">
                         No tasks To do
@@ -74,7 +75,8 @@
                 <figure>
                     <div class="category">
                         <h3>In progress</h3>
-                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                        <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
+                                src="./assets/img/add2.png" alt="add png"></button>
                     </div>
                     <button class="task-card">
                         <h4>User Story</h4>
@@ -100,7 +102,8 @@
                 <figure>
                     <div class="category">
                         <h3>Await feedback</h3>
-                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                        <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
+                                src="./assets/img/add2.png" alt="add png"></button>
                     </div>
                 </figure>
 
@@ -115,28 +118,35 @@
                     <h1>Add Task</h1>
 
                     <form action="">
-                        <div>
+                        <div class="form-area">
                             <label for="title">Title<span style="color: rgba(255, 129, 144, 1);">*</span></label>
                             <input id="title" type="text" placeholder="Enter a title"><br><br>
 
                             <label for="description">Description</label>
-                            <textarea placeholder="Enter a Description" id="description" name="w3review" rows="4"
-                                cols="50">
-                        </textarea><br><br>
+                            <textarea id="description" name="description" rows="4" cols="20"
+                                placeholder="Enter a Description"></textarea>
+                            <br><br>
 
                             <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1);">*</span></label>
-                            <input type="date" id="due-date" name="due-date">
+                            <input type="date" id="due-date" name="due-date" required>
                         </div>
 
-                        <div>
-                            <input type="radio" id="urgent" name="priority" value="urgent">
-                            <label for="opt1">Urgent</label>
+                        <div class="form-area">
 
-                            <input type="radio" id="medium" name="priority" value="medium">
-                            <label for="opt2">Medium</label>
+                            <legend>Priority</legend><br>
+                            <div class="priority">
+                                <input class="radio__input" type="radio" id="urgent" name="priority" value="urgent">
+                                <label class="radio__label-urgent" for="urgent">Urgent <img
+                                        src="./assets/img/urgent.svg" alt="urgent"></label>
 
-                            <input type="radio" id="low" name="priority" value="low">
-                            <label for="opt3">Low</label>
+                                <input class="radio__input" type="radio" id="medium" name="priority" value="medium">
+                                <label class="radio__label-medium" for="medium">Medium <img
+                                        src="./assets/img/medium.svg" alt="medium"></label>
+
+                                <input class="radio__input" type="radio" id="low" name="priority" value="low">
+                                <label class="radio__label-low" for="low">Low <img src="./assets/img/low.svg"
+                                        alt="low"></label>
+                            </div>
 
                             <br>
 
