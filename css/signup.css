@@ -6,7 +6,6 @@
 
 .signupHeader {
 	background-color: #f6f7f8;
-	padding: 20px;
 	text-align: center;
 	position: fixed;
 	top: 0;
@@ -48,8 +47,9 @@ h2 {
 }
 
 #mainContent {
-	width: 100vw;
+	width: 100%;
 	height: 100%;
+	background-color: #f6f7f8;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -63,31 +63,38 @@ h2 {
 	justify-content: center;
 	background-color: #ffffff;
 	border-radius: 30px;
-	padding: 30px;
+	padding: 48px 88px;
 }
 
+.backToLogin {
+	position: absolute;
+	top: 265px;
+	left: 350px
+}
 
 .signupFormWrapper h2 {
 	font-size: 61px;
 	font-weight: 700;
+	margin: 0 0 16px 0;
 }
 
 
 #signupForm {
-	width: 652px;
-	height: 600px;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	gap: 32px;
+	justify-content: space-between;
+
+	
 }
 
 .signupInputWrapper {
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 16px;
 	color: #d1d1d1;
 	font-family: "Inter", sans-serif;
 	font-size: 20px;
@@ -95,13 +102,14 @@ h2 {
 
 .signupInputWrapper input {
 	width: 450px;
-	margin: 6px;
-	padding: 12px 48px 12px 20px;
+	height: 48px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	font-family: "Inter", sans-serif;
 	font-size: 20px;
 	color: #000000;
+	padding: 12px;
+	
 }
 
 .signupInputWrapper input:focus {
@@ -124,23 +132,30 @@ h2 {
 }
 
 .signupInputWrapper .iconPerson {
-	margin-top: 20px;
-	margin-left: 425px;
+	margin-top: 10px;
+	margin-left: 415px;
 }
 
 .signupInputWrapper .iconMail {
-	margin-top: 100px;
-	margin-left: 425px;
+	margin-top: 75px;
+	margin-left: 415px;
 }
 
 .signupInputWrapper .iconPassword {
-	margin-top: 185px;
-	margin-left: 425px;
+	margin-top: 140px;
+	margin-left: 415px;
 }
 
 .signupInputWrapper .iconPasswordConfirm {
-	margin-top: 265px;
-	margin-left: 425px;
+	margin-top: 205px;
+	margin-left: 415px;
+}
+
+.passwordDismatchInfo {
+	display: none;
+	color: #E60026;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 input[type="checkbox"] {
@@ -165,6 +180,10 @@ input:checked + .checkboxIcon {
 	color: #29abe2;
 }
 
+#signupForm label {
+	margin-top: 16px;
+}
+
 #signupButton {
 	width: 110px;
 	height: 48px;
@@ -175,4 +194,5 @@ input:checked + .checkboxIcon {
 	cursor: pointer;
 	font-size: 21px;
 	font-weight: 500;
+	margin-top: 16px;
 }
