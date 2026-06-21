@@ -126,6 +126,15 @@ footer {
 	gap: 32px;
 }
 
+#loginForm .loginDismatchInfo {
+	display: none;
+	color: #E60026;
+	font-size: 16px;
+	font-weight: 400;
+	
+	
+}
+
 .loginInputWrapper {
 	width: 100%;
 	max-width: 420px;
@@ -171,6 +180,9 @@ footer {
 	justify-content: space-between;
 	gap: 35px;
 }
+
+
+
 
 #userLogin {
 	width: 110px;
