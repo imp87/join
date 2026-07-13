@@ -168,14 +168,14 @@
                                 <div class="form-area-fields">
                                     <label for="contacts">Assigned to</label>
                                     <div class="assigned-to">
-                                        <div class="select-contacts">
+                                        <div class="select-contacts" onclick="toggleContactList()">
                                             <input type="search" id="contacts" name="contacts"
                                                 placeholder="Select contacts to assign">
                                             <button class="arrow"><img src="./assets/img/arrow_drop_down.svg"
                                                     alt="arrow_drop_down"></button>
                                         </div>
 
-                                        <div class="contact-list">
+                                        <div class="contact-list display-none" id="contact-list">
 
                                             <input class="checkbox-input" type="checkbox" id="assign-contact1"
                                                 name="assign-contact1">

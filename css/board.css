@@ -685,11 +685,16 @@ h4 {
 }
 
 .contact-list {
+    position: absolute;
     display: flex;
     flex-direction: column;
     padding: 0;
     margin: 0;
     gap: 2px;
+    overflow-y: auto;
+    background-color: white;
+    width: 440px;
+    max-height: 250px;
 }
 
 .contact-list label {
@@ -697,6 +702,7 @@ h4 {
     padding-left: 15px;
     padding-right: 15px;
     height: 50px;
+    min-height: 50px;
     border-radius: 10px;
     cursor: pointer;
     margin: 0;
@@ -860,5 +866,9 @@ input[type="checkbox" i] {
 }
 
 .button-icon-hover {
+    display: none;
+}
+
+.display-none {
     display: none;
 }
