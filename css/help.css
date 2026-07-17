@@ -1,0 +1,58 @@
+body {
+	background-color: #f6f7f8;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: 61px;
+	font-weight: 700;
+	margin-bottom: 21px;
+}
+
+h2 {
+	font-size: 27px;
+	font-weight: 700;
+	margin: 0;
+}
+
+p {
+	font-size: 16px;
+	font-weight: 400;
+	text-wrap: wrap;
+	margin-bottom: 24px;
+}
+
+.textWrapper {
+	margin-left: 160px;
+	margin-top: 120px;
+	margin-right: 86px;
+	margin-bottom: 48px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.guideWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.guideStep {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: flex-start;
+	gap: 32px;
+}
+
+.guideStepDescription {
+	margin-top: 0;
+}
+.guideStepNumber {
+	font-size: 27px;
+	font-weight: 400;
+}
+
+.brandName {
+	color: #29abe2;
+}

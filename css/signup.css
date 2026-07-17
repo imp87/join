@@ -6,7 +6,6 @@
 
 .signupHeader {
 	background-color: #f6f7f8;
-	padding: 20px;
 	text-align: center;
 	position: fixed;
 	top: 0;
@@ -41,6 +40,12 @@ footer {
 	font-weight: 400;
 }
 
+.footerLinks a {
+	text-decoration: none;
+	color: #a8a8a8;
+	cursor: pointer;
+}
+
 h2 {
 	font-size: 60px;
 	font-weight: 700;
@@ -48,99 +53,90 @@ h2 {
 }
 
 #mainContent {
-	width: 100vw;
+	width: 100%;
 	height: 100%;
+	background-color: #f6f7f8;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .signupFormWrapper {
-	width: 650px;
+	position: relative;
+
 	height: 600px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: #ffffff;
 	border-radius: 30px;
-	padding: 30px;
+	padding: 48px 88px;
 }
 
+.backLink {
+    position: absolute;
+    top: 70px;
+    left: 60px;
+}
 
 .signupFormWrapper h2 {
 	font-size: 61px;
 	font-weight: 700;
+	margin: 0 0 16px 0;
 }
 
 
 #signupForm {
-	width: 652px;
-	height: 600px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
-	gap: 32px;
 }
 
 .signupInputWrapper {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	color: #d1d1d1;
-	font-family: "Inter", sans-serif;
-	font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.signupInputWrapper input {
-	width: 450px;
-	margin: 6px;
-	padding: 12px 48px 12px 20px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-family: "Inter", sans-serif;
-	font-size: 20px;
-	color: #000000;
+.inputWithIcon {
+    position: relative;
+    width: 450px;
 }
 
-.signupInputWrapper input:focus {
+.inputWithIcon input {
+    width: 100%;
+    padding: 12px 48px 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    color: #000000;
+    box-sizing: border-box;
+}
+
+.inputWithIcon input:focus {
     border: 1px solid #29ABE2;
     outline: none;
 }
 
-.signupInputWrapper img {
-	position: absolute !important;
-	width: 24px;
-	height: 24px;
-	min-height: 0px;
-	min-width: 0px;
-	z-index: 5000;
-	box-sizing: content-box;
-	background: none;
-	padding: 0px;
-	cursor: pointer;
-	outline: none;
+.inputIcon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 24px;
+    height: 24px;
+
+    pointer-events: none;
 }
 
-.signupInputWrapper .iconPerson {
-	margin-top: 20px;
-	margin-left: 425px;
-}
-
-.signupInputWrapper .iconMail {
-	margin-top: 100px;
-	margin-left: 425px;
-}
-
-.signupInputWrapper .iconPassword {
-	margin-top: 185px;
-	margin-left: 425px;
-}
-
-.signupInputWrapper .iconPasswordConfirm {
-	margin-top: 265px;
-	margin-left: 425px;
+.passwordDismatchInfo {
+	display: none;
+	color: #E60026;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 input[type="checkbox"] {
@@ -154,6 +150,7 @@ input[type="checkbox"] {
 	background-image: url("../assets/icons/checkbox_empty.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
+	margin-right: 10px;
 }
 
 input:checked + .checkboxIcon {
@@ -163,6 +160,12 @@ input:checked + .checkboxIcon {
 #signupForm label a {
 	margin-right: 8px;
 	color: #29abe2;
+}
+
+#signupForm label {
+	display: flex;
+	justify-content: center;
+	margin-top: 24px;
 }
 
 #signupButton {
@@ -175,4 +178,5 @@ input:checked + .checkboxIcon {
 	cursor: pointer;
 	font-size: 21px;
 	font-weight: 500;
+	margin-top: 24px;
 }
