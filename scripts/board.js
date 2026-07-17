@@ -24,8 +24,10 @@ function addTaskClose() {
 
 function toggleContactList() {
     document.getElementById("contact-list").classList.toggle("display-none");
+    document.getElementById("contacts-arrow").classList.toggle("upside");
 }
 
 function toggleCategoryOptions() {
     document.getElementById("category-options").classList.toggle("display-none");
+    document.getElementById("category-arrow").classList.toggle("upside");
 }

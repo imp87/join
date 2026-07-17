@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon">
     <script src="./scripts/board.js"></script>
     <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Join - Board</title>
 </head>
 
@@ -168,11 +169,11 @@
                                 <div class="form-area-fields">
                                     <label for="contacts">Assigned to</label>
                                     <div class="assigned-to">
-                                        <div class="select-contacts" onclick="toggleContactList()">
+                                        <div class="custom-selectbox" onclick="toggleContactList()">
                                             <input type="search" id="contacts" name="contacts"
                                                 placeholder="Select contacts to assign">
-                                            <div class="arrow"><img src="./assets/img/arrow_drop_down.svg"
-                                                    alt="arrow_drop_down"></div>
+                                            <div id="contacts-arrow" class="arrow"><img
+                                                    src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down"></div>
                                         </div>
 
                                         <div class="contact-list display-none" id="contact-list">
@@ -218,9 +219,10 @@
                                             style="color: rgba(255, 129, 144, 1);">*</span></label>
 
                                     <div class="custom-select">
-                                        <div class="select-category" onclick="toggleCategoryOptions()">Select task
+                                        <div class="custom-selectbox" style="padding-left: 15px;"
+                                            onclick="toggleCategoryOptions()">Select task
                                             category
-                                            <div class="arrow">
+                                            <div class="arrow" id="category-arrow">
                                                 <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down">
                                             </div>
                                         </div>

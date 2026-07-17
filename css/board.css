@@ -8,183 +8,6 @@ body {
     background-color: rgba(246, 247, 248, 1);
 }
 
-header {
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    height: 96px;
-    background-color: rgba(255, 255, 255, 1);
-}
-
-header nav {
-    max-width: 1920px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header nav h2 {
-    font-size: 20px;
-    font-weight: 400;
-    margin-left: 348px;
-}
-
-header nav div {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-right: 40px;
-}
-
-header nav img {
-    width: 20px;
-    height: 20px;
-    transition: all 0.3s;
-}
-
-header nav img:hover {
-    cursor: pointer;
-    scale: calc(1.2);
-}
-
-header nav button {
-    background-color: unset;
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    border-width: 3px;
-    border-color: rgba(42, 54, 71, 1);
-    border-style: solid;
-    font-size: 24px;
-    color: rgba(41, 171, 226, 1);
-    font-weight: bolder;
-}
-
-header nav button:hover {
-    cursor: pointer;
-    background-color: rgba(12, 46, 98, 0.12);
-}
-
-.submenu[open] {
-    background-color: rgba(42, 54, 71, 1);
-    display: flex;
-    position: fixed;
-    justify-self: flex-end;
-    border: none;
-    top: 96px;
-    right: 20px;
-    flex-direction: column;
-    padding: 10px;
-    border-radius: 20px;
-    border-top-right-radius: 0;
-    margin: 0;
-}
-
-.submenu a {
-    color: rgba(205, 205, 205, 1);
-    text-decoration: none;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-.submenu a:hover {
-    background-color: rgba(42, 61, 89, 1);
-}
-
-.submenu::backdrop {
-    background-color: unset;
-}
-
-main {
-    max-width: 1920px;
-    width: 100%;
-    align-self: center;
-    display: flex;
-}
-
-.menu {
-    background-color: rgba(42, 54, 71, 1);
-    width: 232px;
-    height: 100vh;
-    position: fixed;
-    gap: 100px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.menu img {
-    width: 100px;
-    margin-top: 64px;
-}
-
-.menu nav {
-    display: flex;
-    flex-direction: column;
-    color: rgba(205, 205, 205, 1);
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 64px;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.menu nav ul {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 15px;
-    flex-direction: column;
-}
-
-.menu nav a {
-    text-decoration: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color: inherit;
-    display: flex;
-    align-items: center;
-}
-
-.menu-top:hover {
-    background-color: rgba(42, 61, 89, 1);
-}
-
-.current-page {
-    color: white !important;
-    background-color: rgba(9, 25, 49, 1);
-}
-
-.current-page:hover {
-    cursor: default;
-}
-
-.menu nav a img {
-    width: 25px;
-    margin-right: 20px;
-    margin-top: 0;
-    margin-left: 56px;
-}
-
-.menu-bottom {
-    padding-left: 56px;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-}
-
-.menu-bottom:hover {
-    color: rgba(41, 171, 226, 1);
-    font-weight: bold;
-}
-
-
 
 
 
@@ -642,14 +465,16 @@ h4 {
 }
 
 
-.select-contacts {
+.custom-selectbox {
     border: solid;
     border-color: rgba(209, 209, 209, 1);
     border-width: 1px;
     border-radius: 10px;
     padding-right: 15px;
+    height: 45px;
     display: flex;
     align-items: center;
+    z-index: 5;
     justify-content: space-between;
 }
 
@@ -795,22 +620,6 @@ input[type="checkbox" i] {
     cursor: pointer;
 }
 
-
-.select-category {
-    display: flex;
-    align-items: center;
-    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
-    border: solid;
-    border-color: rgba(209, 209, 209, 1);
-    border-width: 1px;
-    border-radius: 10px;
-    justify-content: space-between;
-    padding-right: 15px;
-    padding-left: 15px;
-    height: 45px;
-    z-index: 5;
-}
-
 .category-options {
     background-color: white;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
@@ -911,4 +720,8 @@ input[type="checkbox" i] {
 
 .display-none {
     display: none;
+}
+
+.upside {
+    transform: rotate(180deg);
 }
