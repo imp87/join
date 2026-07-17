@@ -118,7 +118,7 @@
                     <h1>Add Task <button onclick="addTaskClose();"><img src="./assets/img/cancel.svg"
                                 alt="cancel"></button></h1>
 
-                    <form action="">
+                    <form action="mailto:zamirsakhiezada@gmail.com">
 
                         <div class="formular">
                             <div class="form-area">
@@ -216,10 +216,22 @@
                                 <div class="form-area-fields">
                                     <label for="category">Category<span
                                             style="color: rgba(255, 129, 144, 1);">*</span></label>
-                                    <select name="category" id="select-category" required>
-                                        <option value="Technical Task">Technical Task</option>
-                                        <option value="User Story">User Story</option>
-                                    </select>
+
+                                    <div class="custom-select">
+                                        <div class="select-category" onclick="toggleCategoryOptions()">Select task
+                                            category
+                                            <div class="arrow">
+                                                <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="category-options display-none" id="category-options">
+                                            <div value="Technical Task">Technical Task</div>
+                                            <div value="User Story">User Story</div>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                                 <div class="form-area-fields">

@@ -25,3 +25,7 @@ function addTaskClose() {
 function toggleContactList() {
     document.getElementById("contact-list").classList.toggle("display-none");
 }
+
+function toggleCategoryOptions() {
+    document.getElementById("category-options").classList.toggle("display-none");
+}
