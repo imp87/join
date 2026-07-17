@@ -21,3 +21,7 @@ function addTaskClose() {
     let dialogRef = document.getElementById("add-task");
     dialogRef.close();
 }
+
+function toggleContactList() {
+    document.getElementById("contact-list").classList.toggle("display-none");
+}
