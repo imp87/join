@@ -8,7 +8,12 @@ body {
     background-color: rgba(246, 247, 248, 1);
 }
 
-
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../assets/fonts/Open_Sans/static/OpenSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
 
 
 
@@ -291,15 +296,46 @@ h4 {
 
 .task-content {
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    width: 480px;
-    padding: 30px;
+    width: 440px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 48px;
+    padding-bottom: 48px;
     gap: 24px;
+    font-size: 18px;
+}
+
+.task-content-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-content-top button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.task-content-top button:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.task-content-top img {
+    width: 14px;
 }
 
 
 .task-content h4 {
-    font-size: 23px;
+    font-size: 20px;
     padding-right: 24px;
     padding-left: 24px;
 }
@@ -310,6 +346,72 @@ h4 {
 
 .task-content p {
     margin: 0;
+}
+
+.task-info-title {
+    color: rgba(42, 54, 71, 1);
+}
+
+.dateandprio {
+    display: flex;
+}
+
+.dateandprio span {
+    width: 115px;
+}
+
+.dateandprio div {
+    display: flex;
+    gap: 10px;
+}
+
+.dateandprio div img {
+    width: 17px;
+}
+
+.task-assigned-to {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.person {
+    display: flex;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    align-items: center;
+    font-size: 19px;
+    gap: 16px;
+}
+
+.person div {
+    background-color: rgba(255, 122, 0, 1);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    display: flex;
+    font-size: 18px;
+}
+
+.person span {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.task-subtasks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-subtasks div {
+    font-size: 16px;
+    display: flex;
+    gap: 16px;
 }
 
 .task-content label span {
@@ -332,4 +434,33 @@ h4 {
 
 .subtask-input:checked+.subtask-checkbox img {
     display: unset;
+}
+
+
+.task-bottom {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.task-bottom div {
+    background-color: rgba(209, 209, 209, 1);
+    width: 1px;
+    height: 24px;
+}
+
+.task-bottom button {
+    background: none;
+    border: none;
+    color: rgba(42, 54, 71, 1);
+    font-size: 16px;
+    padding: 0;
+    gap: 8px;
+    display: flex;
+    cursor: pointer;
+}
+
+.task-bottom button:hover {
+    font-weight: bold;
 }
