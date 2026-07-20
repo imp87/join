@@ -192,6 +192,7 @@ h4 {
     padding-bottom: 4px;
     padding-top: 5px;
     border-radius: 8px;
+    text-align: center;
 }
 
 .task-card strong {
@@ -269,4 +270,66 @@ h4 {
 
 .task-card:hover {
     cursor: pointer;
+}
+
+
+
+
+
+
+
+
+.task {
+    padding: 0;
+    border: none;
+}
+
+.task[open] {
+    display: flex;
+    border-radius: 30px;
+}
+
+.task-content {
+    display: flex;
+    flex-direction: column;
+    width: 480px;
+    padding: 30px;
+    gap: 24px;
+}
+
+
+.task-content h4 {
+    font-size: 23px;
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+.task-content h1 {
+    margin: 0;
+}
+
+.task-content p {
+    margin: 0;
+}
+
+.task-content label span {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(42, 54, 71, 1);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.task-content label img {
+    display: none;
+}
+
+.subtask-input:checked+.subtask-checkbox span {
+    display: none;
+}
+
+.subtask-input:checked+.subtask-checkbox img {
+    display: unset;
 }
