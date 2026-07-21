@@ -1,0 +1,455 @@
+.add-task {
+    padding: 0;
+    border: none;
+}
+
+.add-task[open] {
+    display: flex;
+    border-radius: 60px;
+}
+
+.add-task-content h1 {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-task-content h1 button {
+    background: none;
+    padding: 0;
+    margin: 0;
+    padding-block: 0;
+    padding-inline: 0;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.add-task-content h1 button:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.add-task-content h1 img {
+    width: 15px;
+    align-self: center;
+    justify-self: center;
+}
+
+.add-task-content {
+    padding: 60px;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.formular {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.form-area {
+    width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-line {
+    width: 1px;
+    height: 440px;
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.form-area-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-area-fields label {
+    font-size: 20px;
+    color: rgba(42, 54, 71, 1);
+    margin-bottom: 8px;
+}
+
+.form-area-fields input {
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    border: solid;
+    border-color: rgba(209, 209, 209, 1);
+    border-width: 1px;
+}
+
+.form-area-fields textarea {
+    font-family: inherit;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    border: solid;
+    border-color: rgba(209, 209, 209, 1);
+    border-width: 1px;
+}
+
+.form-area-fields input[type="date"] {
+    font-family: inherit;
+    color: rgba(209, 209, 209, 1);
+    cursor: pointer;
+}
+
+.form-area-fields input[type="date"]:valid {
+    color: black;
+}
+
+.form-area-fields legend {
+    font-size: 20px;
+}
+
+.priority {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 4px;
+    overflow: hidden;
+}
+
+.radio__input {
+    display: none;
+}
+
+.priority label {
+    width: 140px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    color: black;
+    font-size: 21px;
+    transition: all 0.1s;
+    background-color: white;
+}
+
+.priority label:hover {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.radio__input:checked+.radio__label-urgent {
+    background-color: rgba(255, 61, 0, 1);
+    color: white;
+    font-weight: bold;
+}
+
+.radio__input:checked+.radio__label-urgent img {
+    filter: brightness(0) invert(1);
+}
+
+.radio__input:checked+.radio__label-medium {
+    background-color: rgba(255, 168, 0, 1);
+    color: white;
+    font-weight: bold;
+}
+
+.radio__input:checked+.radio__label-medium img {
+    filter: brightness(0) invert(1);
+}
+
+.radio__input:checked+.radio__label-low {
+    background-color: rgba(122, 226, 41, 1);
+    color: white;
+    font-weight: bold;
+}
+
+.radio__input:checked+.radio__label-low img {
+    filter: brightness(0) invert(1);
+}
+
+
+
+
+
+
+
+
+.assigned-to {
+    border-radius: 10px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+
+.custom-selectbox {
+    border: solid;
+    border-color: rgba(209, 209, 209, 1);
+    background-color: white;
+    border-width: 1px;
+    border-radius: 10px;
+    padding-right: 15px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+    justify-content: space-between;
+}
+
+.assigned-to input {
+    border: none;
+}
+
+.assigned-to input::placeholder {
+    color: black;
+}
+
+.assigned-to input:focus::placeholder {
+    color: transparent;
+}
+
+.arrow {
+    padding-inline: 0;
+    margin: 0;
+    padding-block: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background-color: unset;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.contact-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    gap: 2px;
+    overflow-y: auto;
+    background-color: white;
+    width: 440px;
+    max-height: 250px;
+    z-index: 10;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+}
+
+.contact-list label {
+    font-size: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 50px;
+    min-height: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    color: black;
+}
+
+.contact-list label:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+input[type="checkbox" i] {
+    appearance: none;
+    display: none;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.custom-checkbox span {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(42, 54, 71, 1);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-checkbox img {
+    display: none;
+}
+
+.checkbox-input:checked+.custom-checkbox {
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+}
+
+.checkbox-input:checked+.custom-checkbox span {
+    display: none;
+}
+
+.checkbox-input:checked+.custom-checkbox img {
+    display: unset;
+}
+
+.checkbox-input:checked+.custom-checkbox:hover {
+    background-color: rgba(9, 25, 49, 1);
+}
+
+.contact-name {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.initials {
+    font-size: 16px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 122, 0, 1);
+    border-radius: 50%;
+    color: white;
+    border: solid;
+    border-width: 2px
+}
+
+
+
+
+
+
+
+
+.custom-select {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.category-options {
+    background-color: white;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    position: absolute;
+    width: 440px;
+    margin-top: 45px;
+}
+
+.category-options div {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    border-radius: 10px;
+}
+
+.category-options div:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.cancel {
+    font-size: 20px;
+    color: rgba(42, 54, 71, 1);
+    border: solid;
+    background: none;
+    border-radius: 10px;
+    border-color: rgba(42, 54, 71, 1);
+    gap: 8px;
+    border-width: 2px;
+    padding: 12px;
+    display: flex;
+    cursor: pointer;
+}
+
+.cancel img {
+    width: 12px;
+}
+
+.cancel:hover {
+    color: rgba(41, 171, 226, 1);
+    border-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.cancel:hover .button-icon {
+    display: none;
+}
+
+.cancel:hover .button-icon-hover {
+    display: unset;
+}
+
+.create-task {
+    background-color: rgba(42, 54, 71, 1);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    margin-left: 25px;
+}
+
+.create-task img {
+    width: 16px;
+}
+
+.create-task:hover {
+    background-color: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.form-footer div {
+    display: flex;
+}
+
+.form-footer input {
+    background: none;
+    border: none;
+    color: white;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.button-icon-hover {
+    display: none;
+}
+
+.display-none {
+    display: none;
+}
+
+.upside {
+    transform: rotate(180deg);
+}

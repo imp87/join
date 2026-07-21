@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon">
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/task.js"></script>
+    <link rel="stylesheet" href="./css/task.css">
     <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Join - Board</title>
 </head>
 
-<body onclick="submenuClose(); addTaskClose();">
+<body onclick="submenuClose(); addTaskClose(); taskClose();">
     <header>
         <nav>
             <h2>Kanban Project Management Tool</h2>
@@ -31,7 +34,8 @@
                 <ul>
                     <a class="menu-top" href="./summary.html"><img src="./assets/img/Vector.svg"
                             alt="vector.svg">Summary</a>
-                    <a class="menu-top" href=""><img src="./assets/img/edit_square.svg" alt="edit square png">Add
+                    <a class="menu-top" href="./task.html"><img src="./assets/img/edit_square.svg"
+                            alt="edit square png">Add
                         Task</a>
                     <a class="current-page" href=""><img src="./assets/img/Iconshover.svg" alt="board icon">Board</a>
                     <a class="menu-top" href=""><img src="./assets/img/perm_contact_calendar.svg"
@@ -72,7 +76,7 @@
                     </div>
                 </figure>
 
-                <figure>
+                <figure onclick="taskOpen(); logDownWBubblingProtection(event);">
                     <div class="category">
                         <h3>In progress</h3>
                         <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
@@ -118,7 +122,7 @@
                     <h1>Add Task <button onclick="addTaskClose();"><img src="./assets/img/cancel.svg"
                                 alt="cancel"></button></h1>
 
-                    <form action="">
+                    <form action="mailto:zamirsakhiezada@gmail.com">
 
                         <div class="formular">
                             <div class="form-area">
@@ -168,46 +172,15 @@
                                 <div class="form-area-fields">
                                     <label for="contacts">Assigned to</label>
                                     <div class="assigned-to">
-                                        <div class="select-contacts" onclick="toggleContactList()">
+                                        <div class="custom-selectbox" onclick="toggleContactList()">
                                             <input type="search" id="contacts" name="contacts"
                                                 placeholder="Select contacts to assign">
-                                            <button class="arrow"><img src="./assets/img/arrow_drop_down.svg"
-                                                    alt="arrow_drop_down"></button>
+                                            <div id="contacts-arrow" class="arrow"><img
+                                                    src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down"></div>
                                         </div>
 
                                         <div class="contact-list display-none" id="contact-list">
 
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact1"
-                                                name="assign-contact1">
-                                            <label class="custom-checkbox" for="assign-contact1">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div>AA</div>Armin Alert
-                                                </div>
-                                            </label>
-
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact2"
-                                                name="assign-contact2">
-                                            <label class="custom-checkbox" for="assign-contact2">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div style="background-color: rgba(0, 190, 232, 1);">EJ</div>Eren
-                                                    Jäger
-                                                </div>
-                                            </label>
-
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact3"
-                                                name="assign-contact3">
-                                            <label class="custom-checkbox" for="assign-contact3">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div style="background-color: rgba(0, 190, 232, 1);">AA</div>Mikasa
-                                                    Ackermann
-                                                </div>
-                                            </label>
 
                                         </div>
                                     </div>
@@ -216,10 +189,23 @@
                                 <div class="form-area-fields">
                                     <label for="category">Category<span
                                             style="color: rgba(255, 129, 144, 1);">*</span></label>
-                                    <select name="category" id="select-category" required>
-                                        <option value="Technical Task">Technical Task</option>
-                                        <option value="User Story">User Story</option>
-                                    </select>
+
+                                    <div class="custom-select">
+                                        <div class="custom-selectbox" style="padding-left: 15px;"
+                                            onclick="toggleCategoryOptions()">Select task
+                                            category
+                                            <div class="arrow" id="category-arrow">
+                                                <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="category-options display-none" id="category-options">
+                                            <div value="Technical Task">Technical Task</div>
+                                            <div value="User Story">User Story</div>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                                 <div class="form-area-fields">
@@ -247,6 +233,69 @@
                     </form>
                 </div>
             </dialog>
+
+            <dialog class="task" onload="logDownWBubblingProtection(event);" id="task">
+                <div class="task-content" onclick="logDownWBubblingProtection(event);" id="task-content">
+                    <div class="task-content-top">
+                        <h4>User Story</h4><button onclick="taskClose()"><img src="./assets/img/cancel.svg"
+                                alt="close"></button>
+                    </div>
+                    <h1>Kochwelt Page & Recipe Recommender</h1>
+                    <p>
+                        Build start page with recipe recommendation.
+                    </p>
+
+                    <div class="dateandprio"><span class="task-info-title">Due date:</span>10/05/2023</div>
+                    <div class="dateandprio"><span class="task-info-title">Priority:</span>
+                        <div>Medium<img src="./assets/img/Prio media.svg" alt="medium"></div>
+                    </div>
+
+                    <div class="task-assigned-to"><span class="task-info-title">Assigned To:</span>
+                        <div class="person">
+                            <div>AA</div>
+                            <span>Armin Alert</span>
+                        </div>
+                        <div class="person">
+                            <div style="background-color: rgba(31, 215, 193, 1)">EJ</div>
+                            <span>Eren Jäger</span>
+                        </div>
+                        <div class="person">
+                            <div style="background-color: rgba(31, 215, 193, 1)">MA</div>
+                            <span>Mikasa Ackermann</span>
+                        </div>
+                    </div>
+
+                    <div class="task-subtasks">
+                        <span class="task-info-title">Subtasks</span>
+
+                        <div>
+                            <input type="checkbox" id="subtask1" name="subtask1" class="subtask-input">
+                            <label for="subtask1" class="subtask-checkbox">
+                                <span></span>
+                                <img src="./assets/img/checked2.svg" alt="checked">
+                            </label>
+                            Implement Recipe Recommendation
+                        </div>
+
+                        <div>
+                            <input type="checkbox" id="subtask2" name="subtask2" class="subtask-input">
+                            <label for="subtask2" class="subtask-checkbox">
+                                <span></span>
+                                <img src="./assets/img/checked2.svg" alt="checked">
+                            </label>
+                            Start Page Layout
+                        </div>
+                    </div>
+                    <div class="task-bottom">
+                        <button><img src="./assets/img/delete.svg" alt="delete">Delete</button>
+                        <div class="line"></div>
+                        <button onclick="editTask();"><img src="./assets/img/edit.svg" alt="edit">Edit</button>
+                    </div>
+                </div>
+            </dialog>
+
+
+
         </section>
     </main>
 </body>
