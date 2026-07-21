@@ -307,6 +307,35 @@ h4 {
     font-size: 18px;
 }
 
+.task-content form {
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Ok {
+    background-color: rgba(42, 54, 71, 1);
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+    border-radius: 10px;
+    width: 90px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.Ok input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.Ok:hover {
+    filter: brightness(1.5);
+}
+
 .task-content-top {
     display: flex;
     justify-content: space-between;
@@ -414,7 +443,7 @@ h4 {
     gap: 16px;
 }
 
-.task-content label span {
+.subtask-input label span {
     display: inline-block;
     width: 14px;
     height: 14px;
@@ -424,7 +453,7 @@ h4 {
     position: relative;
 }
 
-.task-content label img {
+.subtask-input label img {
     display: none;
 }
 

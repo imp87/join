@@ -71,13 +71,13 @@
     flex-direction: column;
 }
 
-.add-task-content label {
+.form-area-fields label {
     font-size: 20px;
     color: rgba(42, 54, 71, 1);
     margin-bottom: 8px;
 }
 
-.add-task-content input {
+.form-area-fields input {
     border-radius: 10px;
     padding-left: 15px;
     padding-right: 15px;
@@ -89,7 +89,7 @@
     border-width: 1px;
 }
 
-.add-task-content textarea {
+.form-area-fields textarea {
     font-family: inherit;
     border-radius: 10px;
     padding-left: 15px;
@@ -102,17 +102,17 @@
     border-width: 1px;
 }
 
-.add-task-content input[type="date"] {
+.form-area-fields input[type="date"] {
     font-family: inherit;
     color: rgba(209, 209, 209, 1);
     cursor: pointer;
 }
 
-.add-task-content input[type="date"]:valid {
+.form-area-fields input[type="date"]:valid {
     color: black;
 }
 
-.add-task-content legend {
+.form-area-fields legend {
     font-size: 20px;
 }
 

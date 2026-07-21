@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon">
     <script src="./scripts/board.js"></script>
-    <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/task.css">
+    <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/style.css">
     <title>Join - Board</title>
 </head>
@@ -265,7 +265,7 @@
             </dialog>
 
             <dialog class="task" onload="logDownWBubblingProtection(event);" id="task">
-                <div class="task-content" onclick="logDownWBubblingProtection(event);">
+                <div class="task-content" onclick="logDownWBubblingProtection(event);" id="task-content">
                     <div class="task-content-top">
                         <h4>User Story</h4><button onclick="taskClose()"><img src="./assets/img/cancel.svg"
                                 alt="close"></button>
@@ -319,10 +319,11 @@
                     <div class="task-bottom">
                         <button><img src="./assets/img/delete.svg" alt="delete">Delete</button>
                         <div class="line"></div>
-                        <button><img src="./assets/img/edit.svg" alt="edit">Edit</button>
+                        <button onclick="editTask();"><img src="./assets/img/edit.svg" alt="edit">Edit</button>
                     </div>
                 </div>
             </dialog>
+
 
 
         </section>
