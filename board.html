@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/img/Capa 1.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon">
     <script src="./scripts/board.js"></script>
     <link rel="stylesheet" href="./css/board.css">
     <title>Join - Board</title>
@@ -14,7 +14,7 @@
     <header>
         <nav>
             <h2>Kanban Project Management Tool</h2>
-            <div><img src="./assets/img/help.png" alt="help"><button
+            <div><img src="./assets/img/help.svg" alt="help"><button
                     onclick="submenuOpen(); logDownWBubblingProtection(event);">G</button></div>
 
         </nav>
@@ -26,16 +26,16 @@
     </header>
     <main>
         <div class="menu">
-            <img src="./assets/img/Join logo vector.png" alt="join logo">
+            <img src="./assets/img/Join logo vector.svg" alt="join logo">
             <nav>
                 <ul>
-                    <a class="menu-top" href="./summary.html"><img src="./assets/img/Vectorhover.png"
-                            alt="vectorhover.png">Summary</a>
-                    <a class="menu-top" href=""><img src="./assets/img/edit_square.png" alt="edit square png">Add
+                    <a class="menu-top" href="./summary.html"><img src="./assets/img/Vector.svg"
+                            alt="vector.svg">Summary</a>
+                    <a class="menu-top" href=""><img src="./assets/img/edit_square.svg" alt="edit square png">Add
                         Task</a>
-                    <a class="current-page" href=""><img src="./assets/img/Iconshover.png" alt="board icon">Board</a>
-                    <a class="menu-top" href=""><img src="./assets/img/perm_contact_calendar.png"
-                            alt="perm contact calendar.png">Contacts</a>
+                    <a class="current-page" href=""><img src="./assets/img/Iconshover.svg" alt="board icon">Board</a>
+                    <a class="menu-top" href=""><img src="./assets/img/perm_contact_calendar.svg"
+                            alt="perm contact calendar.svg">Contacts</a>
                 </ul>
 
                 <ul>
@@ -52,11 +52,11 @@
                 <span>
                     <div class="searchbar"><input type="text" id="search-bar" placeholder="Find Task">
                         <div></div>
-                        <button class="search-btn"><img src="./assets/img/search.png" alt="search png"></button>
+                        <button class="search-btn"><img src="./assets/img/search.svg" alt="search svg"></button>
                     </div>
 
                     <button class="add-task-btn" onclick="addtaskOpen(); logDownWBubblingProtection(event);">Add task
-                        <img src="./assets/img/add.png" alt="add png"></button>
+                        <img src="./assets/img/add.svg" alt="add svg"></button>
                 </span>
 
             </div>
@@ -64,7 +64,8 @@
                 <figure>
                     <div class="category">
                         <h3>To do</h3>
-                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                        <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
+                                src="./assets/img/plus button.svg" alt="add svg"></button>
                     </div>
                     <div class="no-task">
                         No tasks To do
@@ -74,7 +75,8 @@
                 <figure>
                     <div class="category">
                         <h3>In progress</h3>
-                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                        <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
+                                src="./assets/img/plus button.svg" alt="add svg"></button>
                     </div>
                     <button class="task-card">
                         <h4>User Story</h4>
@@ -92,7 +94,7 @@
                                 <div class="margin-left">EJ</div>
                                 <div class="margin-left">MA</div>
                             </span>
-                            <img src="./assets/img/Prio media.png" alt="medium">
+                            <img src="./assets/img/Prio media.svg" alt="medium">
                         </div>
                     </button>
                 </figure>
@@ -100,7 +102,8 @@
                 <figure>
                     <div class="category">
                         <h3>Await feedback</h3>
-                        <button><img src="./assets/img/add2.png" alt="add png"></button>
+                        <button onclick="addtaskOpen(); logDownWBubblingProtection(event);"><img
+                                src="./assets/img/plus button.svg" alt="add svg"></button>
                     </div>
                 </figure>
 
@@ -112,53 +115,133 @@
             </article>
             <dialog onload="logDownWBubblingProtection(event);" id="add-task" class="add-task">
                 <div class="add-task-content" onclick="logDownWBubblingProtection(event);">
-                    <h1>Add Task</h1>
+                    <h1>Add Task <button onclick="addTaskClose();"><img src="./assets/img/cancel.svg"
+                                alt="cancel"></button></h1>
 
                     <form action="">
-                        <div>
-                            <label for="title">Title<span style="color: rgba(255, 129, 144, 1);">*</span></label>
-                            <input id="title" type="text" placeholder="Enter a title"><br><br>
 
-                            <label for="description">Description</label>
-                            <textarea placeholder="Enter a Description" id="description" name="w3review" rows="4"
-                                cols="50">
-                        </textarea><br><br>
+                        <div class="formular">
+                            <div class="form-area">
+                                <div class="form-area-fields">
+                                    <label for="title">Title<span
+                                            style="color: rgba(255, 129, 144, 1);">*</span></label>
+                                    <input id="title" type="text" placeholder="Enter a title" required>
+                                </div>
 
-                            <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1);">*</span></label>
-                            <input type="date" id="due-date" name="due-date">
+                                <div class="form-area-fields">
+                                    <label for="description">Description</label>
+                                    <textarea id="description" name="description" rows="4" cols="20"
+                                        placeholder="Enter a Description"></textarea>
+                                </div>
+
+                                <div class="form-area-fields">
+                                    <label for="due-date">Due date<span
+                                            style="color: rgba(255, 129, 144, 1);">*</span></label>
+                                    <input type="date" id="due-date" name="due-date" required>
+                                </div>
+                            </div>
+
+                            <div class="form-line"></div>
+
+                            <div class="form-area">
+
+                                <div class="form-area-fields">
+                                    <legend>Priority</legend>
+                                    <div class="priority">
+                                        <input class="radio__input" type="radio" id="urgent" name="priority"
+                                            value="urgent">
+                                        <label class="radio__label-urgent" for="urgent">Urgent <img
+                                                src="./assets/img/urgent.svg" alt="urgent"></label>
+
+                                        <input class="radio__input" type="radio" id="medium" name="priority"
+                                            value="medium">
+                                        <label class="radio__label-medium" for="medium">Medium <img
+                                                src="./assets/img/medium.svg" alt="medium"></label>
+
+                                        <input class="radio__input" type="radio" id="low" name="priority" value="low">
+                                        <label class="radio__label-low" for="low">Low <img src="./assets/img/low.svg"
+                                                alt="low"></label>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-area-fields">
+                                    <label for="contacts">Assigned to</label>
+                                    <div class="assigned-to">
+                                        <div class="select-contacts" onclick="toggleContactList()">
+                                            <input type="search" id="contacts" name="contacts"
+                                                placeholder="Select contacts to assign">
+                                            <button class="arrow"><img src="./assets/img/arrow_drop_down.svg"
+                                                    alt="arrow_drop_down"></button>
+                                        </div>
+
+                                        <div class="contact-list display-none" id="contact-list">
+
+                                            <input class="checkbox-input" type="checkbox" id="assign-contact1"
+                                                name="assign-contact1">
+                                            <label class="custom-checkbox" for="assign-contact1">
+                                                <span></span>
+                                                <img src="./assets/img/checked.svg" alt="checked">
+                                                <div class="contact-name">
+                                                    <div>AA</div>Armin Alert
+                                                </div>
+                                            </label>
+
+                                            <input class="checkbox-input" type="checkbox" id="assign-contact2"
+                                                name="assign-contact2">
+                                            <label class="custom-checkbox" for="assign-contact2">
+                                                <span></span>
+                                                <img src="./assets/img/checked.svg" alt="checked">
+                                                <div class="contact-name">
+                                                    <div style="background-color: rgba(0, 190, 232, 1);">EJ</div>Eren
+                                                    Jäger
+                                                </div>
+                                            </label>
+
+                                            <input class="checkbox-input" type="checkbox" id="assign-contact3"
+                                                name="assign-contact3">
+                                            <label class="custom-checkbox" for="assign-contact3">
+                                                <span></span>
+                                                <img src="./assets/img/checked.svg" alt="checked">
+                                                <div class="contact-name">
+                                                    <div style="background-color: rgba(0, 190, 232, 1);">AA</div>Mikasa
+                                                    Ackermann
+                                                </div>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-area-fields">
+                                    <label for="category">Category<span
+                                            style="color: rgba(255, 129, 144, 1);">*</span></label>
+                                    <select name="category" id="select-category" required>
+                                        <option value="Technical Task">Technical Task</option>
+                                        <option value="User Story">User Story</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-area-fields">
+                                    <label for="subtask">Subtasks</label>
+                                    <input id="subtask" type="text" placeholder="Add new subtask">
+                                </div>
+                            </div>
                         </div>
 
-                        <div>
-                            <input type="radio" id="urgent" name="priority" value="urgent">
-                            <label for="opt1">Urgent</label>
+                        <div class="form-footer">
+                            <div>
+                                <span style="color: rgba(255, 129, 144, 1); font-size: 20px;">*</span>This field is
+                                required
+                            </div>
 
-                            <input type="radio" id="medium" name="priority" value="medium">
-                            <label for="opt2">Medium</label>
-
-                            <input type="radio" id="low" name="priority" value="low">
-                            <label for="opt3">Low</label>
-
-                            <br>
-
-                            <label for="contacts">Assigned to</label>
-                            <select name="contacts" id="cars">
-                                <option value="Eren Jäger">Eren Jäger</option>
-                                <option value="Mikasa Ackermann">Mikasa Ackermann</option>
-                                <option value="Armin Alert">Armin Alert</option>
-                            </select>
-
-                            <br>
-
-                            <label for="category">Category<span style="color: rgba(255, 129, 144, 1);">*</span></label>
-                            <select name="category" id="select-category">
-                                <option value="Technical Task">Technical Task</option>
-                                <option value="User Story">User Story</option>
-                            </select>
-
-                            <br>
-
-                            <label for="subtask">Subtasks<span style="color: rgba(255, 129, 144, 1);">*</span></label>
-                            <input id="subtask" type="text" placeholder="Add new subtask">
+                            <div>
+                                <button onclick="addTaskClose();" class="cancel">Cancel<img class="button-icon"
+                                        src="./assets/img/cancel.svg" alt="cancel"><img class="button-icon-hover"
+                                        src="./assets/img/cancelhover.svg" alt="cancelhover"></button>
+                                <button class="create-task"><input type="submit" value="Create Task"><img
+                                        src="./assets/img/check.svg" alt="check"></button>
+                            </div>
                         </div>
 
                     </form>
