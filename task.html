@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/task.js"></script>
     <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/task.css">
     <link rel="stylesheet" href="./css/style.css">
@@ -50,7 +51,7 @@
             <div class="add-task-content">
                 <h1>Add Task</h1>
 
-                <form action="mailto:zamirsakhiezada@gmail.com">
+                <div>
 
                     <div class="formular">
                         <div class="form-area">
@@ -68,7 +69,7 @@
                             <div class="form-area-fields">
                                 <label for="due-date">Due date<span
                                         style="color: rgba(255, 129, 144, 1);">*</span></label>
-                                <input type="date" id="due-date" name="due-date" required>
+                                <input type="date" id="due-date" name="due-date">
                             </div>
                         </div>
 
@@ -143,8 +144,7 @@
                             </div>
 
                             <div class="form-area-fields">
-                                <label for="category">Category<span
-                                        style="color: rgba(255, 129, 144, 1);">*</span></label>
+                                <label>Category<span style="color: rgba(255, 129, 144, 1);">*</span></label>
 
                                 <div class="custom-select">
                                     <div class="custom-selectbox" style="padding-left: 15px;"
@@ -181,12 +181,12 @@
                             <button onclick="addTaskClose();" class="cancel">Clear<img class="button-icon"
                                     src="./assets/img/cancel.svg" alt="cancel"><img class="button-icon-hover"
                                     src="./assets/img/cancelhover.svg" alt="cancelhover"></button>
-                            <button class="create-task"><input type="submit" value="Create Task"><img
-                                    src="./assets/img/check.svg" alt="check"></button>
+                            <button class="create-task" onclick="addToTasks();"><input type="submit"
+                                    value="Create Task"><img src="./assets/img/check.svg" alt="check"></button>
                         </div>
                     </div>
 
-                </form>
+                </div>
             </div>
         </section>
     </main>

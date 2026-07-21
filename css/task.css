@@ -438,6 +438,7 @@ input[type="checkbox" i] {
     border: none;
     color: white;
     padding: 0;
+    font-size: 20px;
     cursor: pointer;
 }
 
