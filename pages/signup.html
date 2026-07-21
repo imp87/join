@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+
+<body class="signupBody">
+
+    <div class="signupHeader">
+        <img src="/assets/icons/logo.svg" alt="Logo">
+    </div>
+
+    <main id="mainContent">
+
+        <div class="signupFormWrapper">
+
+            <form id="signupForm" novalidate>
+                <a href="/index.html" class="backLink"><img src="/assets/icons/arrow_left.svg"></a>
+                <h2>Sign up</h2>
+
+                <div class="signupInputWrapper">
+
+                    <div class="inputWithIcon">
+                        <input type="text" id="name" placeholder="Name" required>
+                        <img src="/assets/icons/person.svg" alt="Person Icon" class="inputIcon">
+                    </div>
+
+                    <div class="inputWithIcon">
+                        <input type="email" id="email" placeholder="E-Mail" required>
+                        <img src="/assets/icons/mail.svg" alt="E-Mail Icon" class="inputIcon">
+                    </div>
+
+                    <div class="inputWithIcon">
+                        <input type="password" id="password" placeholder="Password" required>
+                        <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="inputIcon">
+                    </div>
+
+                    <div class="inputWithIcon">
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                        <img src="/assets/icons/pw_lock.svg" alt="Password Icon" class="inputIcon">
+                    </div>
+                    <span class="passwordDismatchInfo">
+                        Your passwords don't match. Please try again.
+                    </span>
+                    <label>
+                        <input type="checkbox" class="checkbox" id="checkboxPrivacy" required>
+                        <span class="checkboxIcon"></span>
+                        <span> I accept the <a href=" privacy.html" target="_blank">Privacy Policy</a></span>
+                    </label>
+            </div>
+
+                <!--/////////////////////////////////////////// SIGN UP FUNCTION ///////////////////////////////////////////////////////////// -->
+                <button type="submit" id="signupButton">Sign up</button>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footerLinks">
+            <a href="../pages/privacy.html" target="_blank">Privacy Policy</a>
+            <a href="../pages/legals.html" target="_blank">Legal notice</a>
+        </div>
+    </footer>
+
+</body>
+
+</html>
