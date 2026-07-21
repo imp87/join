@@ -443,7 +443,7 @@ h4 {
     gap: 16px;
 }
 
-.subtask-input label span {
+.task-subtasks div span {
     display: inline-block;
     width: 14px;
     height: 14px;
@@ -453,7 +453,7 @@ h4 {
     position: relative;
 }
 
-.subtask-input label img {
+.subtask-checkbox img {
     display: none;
 }
 

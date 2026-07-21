@@ -35,12 +35,14 @@ function toggleContactList() {
                                             <span></span>
                                             <img src="./assets/img/checked.svg" alt="checked">
                                             <div class="contact-name">
-                                                <div>${firstLetter}${firstLetterLastName}</div>${contacts[iContact].firstname} ${contacts[iContact].lastname}
+                                                <div class="initials">${firstLetter}${firstLetterLastName}</div>${contacts[iContact].firstname} ${contacts[iContact].lastname}
                                             </div>
                                         </label>`
 
     }
 }
+
+
 
 function toggleCategoryOptions() {
     document.getElementById("category-options").classList.toggle("display-none");
