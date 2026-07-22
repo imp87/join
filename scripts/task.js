@@ -38,6 +38,7 @@ let colors = [
 
 let tasks = [];
 
+let subtasks = []
 
 
 
@@ -105,6 +106,13 @@ function toggleCategoryOptions() {
     document.getElementById("category-arrow").classList.toggle("upside");
 }
 
+function selectCategory(category) {
+    document.getElementById("category-input").value = category;
+    document.getElementById("category-selected").innerHTML = category;
+
+    toggleCategoryOptions();
+}
+
 
 function addToTasks() {
     let title = document.getElementById("title");
@@ -113,15 +121,36 @@ function addToTasks() {
     let priority = document.querySelector('input[name="priority"]:checked');
     const selectedContacts = [...document.querySelectorAll('input[name="assign-contact"]:checked')]
         .map(box => box.value);
+    let category = document.getElementById("category-input");
 
     let task = {
         "title": title.value,
         "description": description.value,
         "date": date.value,
         "priority": priority.value,
-        "contacts": selectedContacts
+        "contacts": selectedContacts,
+        "category": category.value,
+        "subtasks": subtasks
     };
 
     tasks.push(task);
+    subtasks = [];
     console.log(tasks);
+}
+
+
+function clearSubtask() {
+    let subtaskInput = document.getElementById("subtask");
+    subtaskInput.value = "";
+}
+
+function addSubtask() {
+    let subtaskInput = document.getElementById("subtask");
+    let subtaskInteraction = document.getElementById("subtask-interaction");
+
+    subtasks.push(subtaskInput.value);
+    subtaskInteraction.innerHTML += `<li class="subtask"><div class="subtask-value"><span class="bullet"></span>${subtaskInput.value}</div><span class="delete-edit"><button><img src="./assets/img/edit.svg" alt="delete"></button><div></div><button><img src="./assets/img/delete.svg" alt="delete"></button></span></li>`
+    subtaskInput.value = "";
+
+    console.log(subtasks);
 }

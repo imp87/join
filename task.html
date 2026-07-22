@@ -112,22 +112,34 @@
 
                 <div class="custom-select">
                   <div class="custom-selectbox" style="padding-left: 15px" onclick="toggleCategoryOptions()">
-                    Select task category
+                    <span id="category-selected">Select task category</span>
                     <div class="arrow" id="category-arrow">
                       <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down" />
                     </div>
                   </div>
 
                   <div class="category-options display-none" id="category-options">
-                    <div value="Technical Task">Technical Task</div>
-                    <div value="User Story">User Story</div>
+                    <div onclick="selectCategory('Technical Task')">Technical Task</div>
+                    <div onclick="selectCategory('User Story')">User Story</div>
                   </div>
+
+                  <input type="hidden" name="category" id="category-input" required>
                 </div>
               </div>
 
               <div class="form-area-fields">
                 <label for="subtask">Subtasks</label>
-                <input id="subtask" type="text" placeholder="Add new subtask" />
+                <div class="subtask-input-container">
+                  <input id="subtask" type="text" placeholder="Add new subtask" />
+
+                  <div class="subtask-actions">
+                    <button onclick="clearSubtask()">✕</button>
+                    <button onclick="addSubtask()">✓</button>
+                  </div>
+                </div>
+
+                <ul class="subtask-interaction" id="subtask-interaction"></ul>
+
               </div>
             </div>
           </div>

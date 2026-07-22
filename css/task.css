@@ -375,6 +375,114 @@ input[type="checkbox" i] {
 
 
 
+.subtask-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subtask-input-container input {
+    width: 100%;
+}
+
+.subtask-actions {
+    display: none;
+    position: absolute;
+    right: 10px;
+}
+
+.subtask-actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+
+.subtask-input-container:focus-within .subtask-actions {
+    display: flex;
+}
+
+
+.subtask-interaction {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 8px;
+}
+
+.subtask {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: 20px;
+}
+
+.subtask-value {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.subtask:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.subtask:hover .delete-edit {
+    display: flex;
+}
+
+.delete-edit {
+    display: none;
+    align-items: center;
+    margin-right: 16px;
+    gap: 5px;
+}
+
+.delete-edit button {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-edit button:hover {
+    scale: calc(1.1);
+}
+
+.delete-edit div {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.bullet {
+    width: 6px;
+    height: 6px;
+    background-color: black;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .form-footer {
     display: flex;
