@@ -11,31 +11,58 @@ let contacts = [
         "firstname": "Mikasa",
         "lastname": "Ackermann"
     },
+    {
+        "firstname": "Levi",
+        "lastname": "Ackermann"
+    }
+]
+
+
+let colors = [
+    "rgba(255, 122, 0, 1)",
+    "rgba(255, 94, 179, 1)",
+    "rgba(110, 82, 255, 1)",
+    "rgba(147, 39, 255, 1)",
+    "rgba(0, 190, 232, 1)",
+    "rgba(31, 215, 193, 1)",
+    "rgba(255, 116, 94, 1)",
+    "rgba(255, 163, 94, 1)",
+    "rgba(252, 113, 255, 1)",
+    "rgba(255, 199, 1, 1)",
+    "rgba(0, 56, 255, 1)",
+    "rgba(195, 255, 43, 1)",
+    "rgba(255, 230, 43, 1)",
+    "rgba(255, 70, 70, 1)",
+    "rgba(255, 187, 43, 1)"
 ]
 
 let tasks = [];
 
 
+
+
 function toggleContactList() {
     let contactListRef = document.getElementById("contact-list");
+
     contactListRef.classList.toggle("display-none");
-    contactListRef.innerHTML = "";
     document.getElementById("contacts-arrow").classList.toggle("upside");
 
+    if (contactListRef.innerHTML !== "") return;
 
     for (let iContact = 0; iContact < contacts.length; iContact++) {
 
         let firstLetter = contacts[iContact].firstname[0];
         let firstLetterLastName = contacts[iContact].lastname[0];
+        let contactColor = getContactColor(contacts[iContact].firstname, contacts[iContact].lastname);
 
         contactListRef.innerHTML +=
             `<input class="checkbox-input" type="checkbox" id="assign-contact${iContact}"
-                                            name="assign-contact${iContact}">
+                                            name="assign-contact" value="${contacts[iContact].firstname} ${contacts[iContact].lastname}" onchange="updateSelectedContacts()">
                                         <label class="custom-checkbox" for="assign-contact${iContact}">
                                             <span></span>
                                             <img src="./assets/img/checked.svg" alt="checked">
                                             <div class="contact-name">
-                                                <div class="initials">${firstLetter}${firstLetterLastName}</div>${contacts[iContact].firstname} ${contacts[iContact].lastname}
+                                                <div class="initials" style="background-color: ${contactColor};">${firstLetter}${firstLetterLastName}</div>${contacts[iContact].firstname} ${contacts[iContact].lastname}
                                             </div>
                                         </label>`
 
@@ -43,6 +70,35 @@ function toggleContactList() {
 }
 
 
+function updateSelectedContacts() {
+    let contactLine = document.getElementById("contact-line");
+    contactLine.innerHTML = "";
+
+    const checkedBoxes = document.querySelectorAll('input[name="assign-contact"]:checked');
+
+    checkedBoxes.forEach((box, index) => {
+        if (index < 3) {
+            const contactIndex = box.id.replace("assign-contact", "");
+            const contact = contacts[contactIndex];
+
+            let contactColor = getContactColor(contact.firstname, contact.lastname);
+
+            contactLine.innerHTML += `
+                <div class="initials" style="background-color: ${contactColor}">
+                    ${contact.firstname[0]}${contact.lastname[0]}
+                </div>
+            `;
+        }
+    });
+}
+
+
+function getContactColor(firstname, lastname) {
+    let letters = (firstname[0] + lastname[0]).toUpperCase();
+    let sum = letters.charCodeAt(0) + letters.charCodeAt(1);
+
+    return colors[sum % colors.length];
+}
 
 function toggleCategoryOptions() {
     document.getElementById("category-options").classList.toggle("display-none");
@@ -55,12 +111,15 @@ function addToTasks() {
     let description = document.getElementById("description");
     let date = document.getElementById("due-date");
     let priority = document.querySelector('input[name="priority"]:checked');
+    const selectedContacts = [...document.querySelectorAll('input[name="assign-contact"]:checked')]
+        .map(box => box.value);
 
     let task = {
         "title": title.value,
         "description": description.value,
         "date": date.value,
         "priority": priority.value,
+        "contacts": selectedContacts
     };
 
     tasks.push(task);

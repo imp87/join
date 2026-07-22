@@ -333,7 +333,11 @@ input[type="checkbox" i] {
     border-width: 2px
 }
 
-
+.contact-line {
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
+}
 
 
 
@@ -368,6 +372,8 @@ input[type="checkbox" i] {
 .category-options div:hover {
     background-color: rgba(238, 238, 238, 1);
 }
+
+
 
 
 .form-footer {
@@ -449,6 +455,8 @@ input[type="checkbox" i] {
 .display-none {
     display: none;
 }
+
+
 
 .upside {
     transform: rotate(180deg);
