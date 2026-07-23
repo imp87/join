@@ -88,19 +88,40 @@ function toggleCategoryOptions() {
 
 function selectCategory(category) {
     document.getElementById("category-input").value = category;
-    document.getElementById("category-selected").innerHTML = category;
 
     toggleCategoryOptions();
 }
 
 
-async function addToTasks() {
+async function addToTasks(event) {
+    event.preventDefault();
+
+
     let title = document.getElementById("title");
     let description = document.getElementById("description");
     let date = document.getElementById("due-date");
     let priority = document.querySelector('input[name="priority"]:checked')?.value || "";
     const selectedContacts = [...document.querySelectorAll('input[name="assign-contact"]:checked')].map(box => box.value);
     let category = document.getElementById("category-input");
+
+    let validationMessage = document.querySelectorAll(".validation-message")
+
+    if (category.value === "" || title.value === "" || date.value === "") {
+        document.getElementById("custom-category-input").classList.add("input-error");
+        validationMessage.forEach(element => {
+            element.innerHTML = "This field is required"
+        });
+        title.classList.add("input-error");
+        date.classList.add("input-error");
+        return;
+    }
+    document.getElementById("custom-category-input").classList.remove("input-error");
+    validationMessage.forEach(element => {
+        element.innerHTML = ""
+    });
+    title.classList.remove("input-error");
+    date.classList.remove("input-error");
+
 
     getTaskValue(title, description, date, priority, selectedContacts, category, subtasks);
 

@@ -74,7 +74,7 @@
 .form-area-fields label {
     font-size: 20px;
     color: rgba(42, 54, 71, 1);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .form-area-fields input {
@@ -205,6 +205,17 @@
     align-items: center;
     z-index: 5;
     justify-content: space-between;
+}
+
+.category-input {
+    cursor: pointer;
+    pointer-events: none !important;
+    padding-left: 0 !important;
+    border: none !important;
+}
+
+.category-input::placeholder {
+    color: black;
 }
 
 .assigned-to input {
@@ -617,4 +628,17 @@ input[type="checkbox" i] {
 
 .upside {
     transform: rotate(180deg);
+}
+
+
+
+
+.input-error {
+    border: 1px solid rgba(230, 0, 38, 1) !important;
+}
+
+.validation-message {
+    font-size: 16px;
+    color: rgba(230, 0, 38, 1);
+    height: 0px;
 }

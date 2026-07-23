@@ -52,7 +52,7 @@
       </nav>
     </div>
     <section>
-      <form onsubmit="addToTasks()">
+      <form onsubmit="addToTasks(event)" novalidate>
         <div class="add-task-content">
           <h1>Add Task</h1>
 
@@ -61,7 +61,8 @@
               <div class="form-area">
                 <div class="form-area-fields">
                   <label for="title">Title<span style="color: rgba(255, 129, 144, 1)">*</span></label>
-                  <input id="title" type="text" placeholder="Enter a title" required />
+                  <input id="title" type="text" placeholder="Enter a title" />
+                  <div class="validation-message" id="validation-message"></div>
                 </div>
 
                 <div class="form-area-fields">
@@ -72,7 +73,8 @@
 
                 <div class="form-area-fields">
                   <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1)">*</span></label>
-                  <input type="date" id="due-date" name="due-date" required />
+                  <input type="date" id="due-date" name="due-date" />
+                  <div class="validation-message" id="validation-message"></div>
                 </div>
               </div>
 
@@ -114,19 +116,20 @@
                   <label>Category<span style="color: rgba(255, 129, 144, 1)">*</span></label>
 
                   <div class="custom-select">
-                    <div class="custom-selectbox" style="padding-left: 15px" onclick="toggleCategoryOptions()">
-                      <span id="category-selected">Select task category</span>
+                    <div class="custom-selectbox" style="padding-left: 15px" onclick="toggleCategoryOptions()"
+                      id="custom-category-input">
+                      <input type="text" name="category" id="category-input" placeholder="Select task category"
+                        class="category-input">
                       <div class="arrow" id="category-arrow">
                         <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down" />
                       </div>
                     </div>
-
+                    <div class="validation-message" id="validation-message"></div>
                     <div class="category-options display-none" id="category-options">
                       <div onclick="selectCategory('Technical Task')">Technical Task</div>
                       <div onclick="selectCategory('User Story')">User Story</div>
                     </div>
 
-                    <input type="hidden" name="category" id="category-input" required>
                   </div>
                 </div>
 
