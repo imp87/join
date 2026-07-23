@@ -100,6 +100,8 @@
     border: solid;
     border-color: rgba(209, 209, 209, 1);
     border-width: 1px;
+    resize: vertical;
+    max-height: 180px;
 }
 
 .form-area-fields input[type="date"] {

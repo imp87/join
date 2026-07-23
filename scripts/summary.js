@@ -2,6 +2,7 @@ function init() {
     greeting();
 }
 
+
 function greeting() {
     let greetingRef = document.getElementById("greeting");
     greetingRef.innerHTML = "";
@@ -23,10 +24,12 @@ function submenuOpen() {
     dialogRef.showModal();
 }
 
+
 function submenuClose() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.close();
 }
+
 
 function logDownWBubblingProtection(event) {
     event.stopPropagation();
