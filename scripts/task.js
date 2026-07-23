@@ -37,7 +37,6 @@ let colors = [
 ]
 
 let tasks = [];
-
 let subtasks = []
 
 
@@ -114,28 +113,46 @@ function selectCategory(category) {
 }
 
 
-function addToTasks() {
+async function addToTasks() {
     let title = document.getElementById("title");
     let description = document.getElementById("description");
     let date = document.getElementById("due-date");
-    let priority = document.querySelector('input[name="priority"]:checked');
+    let priority = document.querySelector('input[name="priority"]:checked')?.value || "";
     const selectedContacts = [...document.querySelectorAll('input[name="assign-contact"]:checked')]
         .map(box => box.value);
     let category = document.getElementById("category-input");
+
+
 
     let task = {
         "title": title.value,
         "description": description.value,
         "date": date.value,
-        "priority": priority.value,
+        "priority": priority,
         "contacts": selectedContacts,
         "category": category.value,
-        "subtasks": subtasks
+        "subtasks": subtasks,
+        "status": "To do"
     };
 
-    tasks.push(task);
+
     subtasks = [];
     console.log(tasks);
+
+    let response = await fetch(
+        "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        }
+    );
+
+    let result = await response.json();
+
+    console.log("Gespeicherte ID:", result.name);
 }
 
 
@@ -167,7 +184,7 @@ function renderSubtasks() {
     subtaskInteraction.innerHTML = "";
 
     for (let iSubtask = 0; iSubtask < subtasks.length; iSubtask++) {
-        subtaskInteraction.innerHTML += `<li class="subtask" id="subtask-${iSubtask}"><div class="subtask-value"><span class="bullet"></span>${subtasks[iSubtask]}</div><span class="delete-edit"><button onclick="editSubtasks(${iSubtask})"><img src="./assets/img/edit.svg" alt="edit"></button><div class="line"></div><button onclick="deleteSubtask(${iSubtask})"><img src="./assets/img/delete.svg" alt="delete"></button></span></li>`
+        subtaskInteraction.innerHTML += `<li class="subtask" id="subtask-${iSubtask}"><div class="subtask-value"><span class="bullet"></span>${subtasks[iSubtask]}</div><span class="delete-edit"><button onclick="editSubtasks(${iSubtask})" type="button"><img src="./assets/img/edit.svg" alt="edit"></button><div class="line"></div><button onclick="deleteSubtask(${iSubtask})" type="button"><img src="./assets/img/delete.svg" alt="delete"></button></span></li>`
     }
 }
 
@@ -179,6 +196,16 @@ function editSubtasks(iSubtask) {
             value="${subtasks[iSubtask]}">
             </input>
             
-            <span class="delete-check"><button onclick="deleteSubtask(${iSubtask})"><img src="./assets/img/delete.svg" alt="delete"></button><div class="line"></div><button onclick=""><img src="./assets/img/checkblue.svg" alt="check"></button></span>
+            <span class="delete-check"><button onclick="deleteSubtask(${iSubtask})" type="button"><img src="./assets/img/delete.svg" alt="delete"></button><div class="line"></div><button onclick="SubtaskEdited(${iSubtask})" type="button"><img src="./assets/img/checkblue.svg" alt="check"></button></span>
             </div>`
+}
+
+function SubtaskEdited(iSubtask) {
+    let editSubtaskInput = document.getElementById(`edit-subtask-${iSubtask}`)
+
+
+    subtasks[iSubtask] = editSubtaskInput.value;
+
+    renderSubtasks()
+    console.log(subtasks);
 }
