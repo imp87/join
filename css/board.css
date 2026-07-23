@@ -473,7 +473,7 @@ h4 {
     gap: 8px;
 }
 
-.task-bottom div {
+.line {
     background-color: rgba(209, 209, 209, 1);
     width: 1px;
     height: 24px;

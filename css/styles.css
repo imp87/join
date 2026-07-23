@@ -4,8 +4,7 @@
 
 @font-face {
 	font-family: "Inter";
-	src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf")
-		format("truetype");
+	src: url("../assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
 	font-weight: 100 900;
 }
 
@@ -19,7 +18,7 @@ body {
 	width: 232px;
 	height: 100dvh;
 	background-color: #2a3647;
-  position: fixed;
+	position: fixed;
 
 	display: flex;
 	flex-direction: column;
@@ -90,17 +89,17 @@ body {
 .main-content {
 	flex: 1;
 	min-height: 100dvh;
-  width: calc(100% - 232px);
+	width: calc(100% - 232px);
 	background-color: #f6f7f8;
 }
 
 .top-bar {
 	height: 96px;
-  width: calc(100% - 232px);
+	width: calc(100% - 232px);
 	background-color: white;
-  position: fixed;
+	position: fixed;
 	top: 0;
-  left: 232px;
+	left: 232px;
 
 	display: flex;
 	align-items: center;

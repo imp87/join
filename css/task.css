@@ -349,6 +349,7 @@ input[type="checkbox" i] {
     flex-direction: column;
     font-size: 20px;
     cursor: pointer;
+    z-index: 5;
 }
 
 .category-options {
@@ -459,11 +460,6 @@ input[type="checkbox" i] {
     scale: calc(1.1);
 }
 
-.delete-edit div {
-    width: 1px;
-    height: 24px;
-    background-color: rgba(209, 209, 209, 1);
-}
 
 .bullet {
     width: 6px;
@@ -474,6 +470,57 @@ input[type="checkbox" i] {
 }
 
 
+
+
+
+
+
+.edit-subtask {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: rgba(18, 70, 88, 1);
+}
+
+.edit-subtask input {
+    height: 32px;
+    padding: 0;
+    margin-left: 15px;
+    flex-grow: 1;
+    font-size: 16px;
+    border: none;
+    background: none;
+}
+
+.edit-subtask input:focus .edit-subtask {
+    border-color: rgba(0, 93, 255, 1);
+}
+
+
+.delete-check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 15px;
+}
+
+.delete-check button {
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.delete-check button img {
+    width: 16px;
+}
 
 
 

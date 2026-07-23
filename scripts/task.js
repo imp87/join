@@ -146,11 +146,39 @@ function clearSubtask() {
 
 function addSubtask() {
     let subtaskInput = document.getElementById("subtask");
-    let subtaskInteraction = document.getElementById("subtask-interaction");
 
     subtasks.push(subtaskInput.value);
-    subtaskInteraction.innerHTML += `<li class="subtask"><div class="subtask-value"><span class="bullet"></span>${subtaskInput.value}</div><span class="delete-edit"><button><img src="./assets/img/edit.svg" alt="delete"></button><div></div><button><img src="./assets/img/delete.svg" alt="delete"></button></span></li>`
     subtaskInput.value = "";
 
+    renderSubtasks()
     console.log(subtasks);
+}
+
+function deleteSubtask(iSubtask) {
+    subtasks.splice(iSubtask, 1);
+
+    renderSubtasks()
+    console.log(subtasks);
+}
+
+
+function renderSubtasks() {
+    let subtaskInteraction = document.getElementById("subtask-interaction");
+    subtaskInteraction.innerHTML = "";
+
+    for (let iSubtask = 0; iSubtask < subtasks.length; iSubtask++) {
+        subtaskInteraction.innerHTML += `<li class="subtask" id="subtask-${iSubtask}"><div class="subtask-value"><span class="bullet"></span>${subtasks[iSubtask]}</div><span class="delete-edit"><button onclick="editSubtasks(${iSubtask})"><img src="./assets/img/edit.svg" alt="edit"></button><div class="line"></div><button onclick="deleteSubtask(${iSubtask})"><img src="./assets/img/delete.svg" alt="delete"></button></span></li>`
+    }
+}
+
+function editSubtasks(iSubtask) {
+    let subtaskRef = document.getElementById(`subtask-${iSubtask}`)
+
+    subtaskRef.innerHTML = `<div class="edit-subtask"><input 
+            id="edit-subtask-${iSubtask}" 
+            value="${subtasks[iSubtask]}">
+            </input>
+            
+            <span class="delete-check"><button onclick="deleteSubtask(${iSubtask})"><img src="./assets/img/delete.svg" alt="delete"></button><div class="line"></div><button onclick=""><img src="./assets/img/checkblue.svg" alt="check"></button></span>
+            </div>`
 }
