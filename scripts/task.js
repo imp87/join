@@ -37,7 +37,6 @@ let colors = [
 ]
 
 
-let tasks = [];
 let subtasks = []
 
 
@@ -134,9 +133,9 @@ async function getTaskValue(title, description, date, priority, selectedContacts
         "description": description.value,
         "date": date.value,
         "priority": priority,
-        "contacts": selectedContacts,
+        "contacts": selectedContacts.length > 0 ? selectedContacts : "",
         "category": category.value,
-        "subtasks": subtasks,
+        "subtasks": subtasks.length > 0 ? subtasks : "",
         "status": "To do"
     };
     postToDatabase(task)
@@ -235,4 +234,16 @@ function showSuccessDialog() {
         dialog.close();
         window.location.href = "./board.html";
     }, 2000);
+}
+
+
+function setMinDate() {
+    let dateInput = document.getElementById("due-date");
+
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, "0");
+    let day = String(today.getDate()).padStart(2, "0");
+
+    dateInput.min = `${year}-${month}-${day}`;
 }

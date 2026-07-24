@@ -191,8 +191,9 @@ h4 {
     font-size: 16px;
     color: white;
     font-weight: 400;
-    background-color: rgba(0, 56, 255, 1);
-    width: 115px;
+    width: max-content;
+    padding-left: 16px;
+    padding-right: 16px;
     margin: 0;
     padding-bottom: 4px;
     padding-top: 5px;
@@ -492,4 +493,12 @@ h4 {
 
 .task-bottom button:hover {
     font-weight: bold;
+}
+
+.Technical {
+    background-color: rgba(31, 215, 193, 1);
+}
+
+.User {
+    background-color: rgba(0, 56, 255, 1);
 }

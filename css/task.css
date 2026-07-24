@@ -623,7 +623,7 @@ input[type="checkbox" i] {
 }
 
 .display-none {
-    display: none;
+    display: none!important;
 }
 
 

@@ -18,7 +18,8 @@
       submenuClose();
       addTaskClose();
       taskClose();
-    ">
+    "
+    onload="setMinDate(); updateHTML();">
   <header>
     <nav>
       <h2>Kanban Project Management Tool</h2>
@@ -89,7 +90,12 @@
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
           </div>
-          <div class="no-task">No tasks To do</div>
+          <div id="to-do">
+
+          </div>
+
+
+          <!-- <div class="no-task">No tasks To do</div>-->
         </figure>
 
         <figure onclick="

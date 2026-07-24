@@ -35,6 +35,72 @@ function taskClose() {
 }
 
 
+async function updateHTML() {
+    let response = await fetch(
+        "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
+    );
+
+    let data = await response.json();
+
+    let tasks = Object.values(data);
+
+    console.log(tasks);
+
+    let toDo = tasks.filter(t => t['status'] == "To do");
+    let toDoRef = document.getElementById("to-do");
+    toDoRef.innerHTML = "";
+
+    for (let iToDo = 0; iToDo < toDo.length; iToDo++) {
+        toDoRef.innerHTML += `          <button class="task-card">
+            <h4 class="${toDo[iToDo].category}">${toDo[iToDo].category}</h4>
+            <p>
+              <strong>${toDo[iToDo].title}</strong>
+              ${toDo[iToDo].description}
+            </p>
+            <div class="progress-bar" id=progress-bar${iToDo}>
+            </div>
+            <div class="user-prio">
+              <span id="task-card-contacts${iToDo}">
+                <div>AA</div>
+                <div class="margin-left">EJ</div>
+                <div class="margin-left">MA</div>
+              </span>
+              <img src="./assets/img/Prio media.svg" alt="medium" />
+            </div>
+          </button>`
+
+        subtasksProgressBar(toDo, iToDo);
+        taskCardContacts(toDo, iToDo);
+    }
+}
+
+function subtasksProgressBar(toDo, iToDo) {
+    if (toDo[iToDo].subtasks != "") {
+        document.getElementById(`progress-bar${iToDo}`).innerHTML = `              
+        <progress id="subtasks" value="1" max="2"></progress>
+              <label for="subtasks">1/2 Subtasks</label>`
+    } else {
+        document.getElementById(`progress-bar${iToDo}`).classList.add("display-none");
+    }
+
+}
+
+function taskCardContacts(toDo, iToDo) {
+    if (toDo[iToDo].contacts != "") {
+        let taskCardContactsRef = document.getElementById(`task-card-contacts${iToDo}`);
+        taskCardContactsRef.innerHTML = "";
+        for (let itaskCardContacts = 0; itaskCardContacts < toDo[iToDo].contacts.length; itaskCardContacts++) {
+            let firstLetter = toDo[iToDo].contacts[itaskCardContacts].firstname;
+            let firstLetterLastName = toDo[iToDo].contacts[itaskCardContacts].lastname;
+            taskCardContactsRef.innerHTML += `<div>${firstLetter}${firstLetterLastName}</div>`
+
+        }
+    } else {
+        document.getElementById(`task-card-contacts${iToDo}`).classList.add("display-none");
+    }
+}
+
+
 
 function editTask() {
     let taskRef = document.getElementById("task-content");
