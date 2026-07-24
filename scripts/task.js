@@ -124,7 +124,7 @@ async function addToTasks(event) {
 
 
     getTaskValue(title, description, date, priority, selectedContacts, category, subtasks);
-
+    showSuccessDialog();
 }
 
 
@@ -155,7 +155,6 @@ async function postToDatabase(task) {
         }
     );
     let result = await response.json();
-    subtasks = [];
 }
 
 
@@ -168,11 +167,12 @@ function clearSubtask() {
 function addSubtask() {
     let subtaskInput = document.getElementById("subtask");
 
-    subtasks.push(subtaskInput.value);
-    subtaskInput.value = "";
+    if (subtaskInput.value.length >= 3) {
+        subtasks.push(subtaskInput.value);
+        subtaskInput.value = "";
+        renderSubtasks()
+    }
 
-    renderSubtasks()
-    console.log(subtasks);
 }
 
 
@@ -206,4 +206,33 @@ function SubtaskEdited(iSubtask) {
     subtasks[iSubtask] = editSubtaskInput.value;
 
     renderSubtasks()
+}
+
+
+function clearTaskForm() {
+    let form = document.getElementById("task-form");
+    form.reset();
+
+    document.getElementById("category-input").value = "";
+
+    document.querySelectorAll('input[name="assign-contact"]:checked')
+        .forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+    document.getElementById("contact-line").innerHTML = "";
+
+    document.getElementById("subtask-interaction").innerHTML = "";
+    subtasks = [];
+}
+
+function showSuccessDialog() {
+    let dialog = document.getElementById("success-dialog");
+
+    dialog.showModal();
+
+    setTimeout(() => {
+        dialog.close();
+        window.location.href = "./board.html";
+    }, 2000);
 }

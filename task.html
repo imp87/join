@@ -52,7 +52,7 @@
       </nav>
     </div>
     <section>
-      <form onsubmit="addToTasks(event)" novalidate>
+      <form onsubmit="addToTasks(event)" id="task-form" novalidate>
         <div class="add-task-content">
           <h1>Add Task</h1>
 
@@ -73,7 +73,7 @@
 
                 <div class="form-area-fields">
                   <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1)">*</span></label>
-                  <input type="date" id="due-date" name="due-date" />
+                  <input type="date" id="due-date" name="due-date" required />
                   <div class="validation-message" id="validation-message"></div>
                 </div>
               </div>
@@ -159,7 +159,7 @@
               </div>
 
               <div>
-                <button onclick="addTaskClose()" class="cancel" type="button">
+                <button onclick="clearTaskForm();" class="cancel" type="button">
                   Clear<img class="button-icon" src="./assets/img/cancel.svg" alt="cancel" /><img
                     class="button-icon-hover" src="./assets/img/cancelhover.svg" alt="cancelhover" />
                 </button>
@@ -173,6 +173,8 @@
         </div>
       </form>
     </section>
+    <dialog id="success-dialog" class="success-dialog">Task added to board <img src="./assets/img/Iconshover.svg"
+        alt="success"></dialog>
   </main>
 </body>
 
