@@ -19,4 +19,18 @@ function startAnimation() {
 	}, 1300);
 }
 
+function goToSummary(event) {
+	event.preventDefault();
+	window.location.href = "./summary.html";
+}
+
+function activateLoginButtons() {
+	let loginForm = document.getElementById("loginForm");
+	let guestLoginButton = document.getElementById("guestLogin");
+
+	loginForm.addEventListener("submit", goToSummary);
+	guestLoginButton.addEventListener("click", goToSummary);
+}
+
 document.addEventListener("DOMContentLoaded", startAnimation);
+document.addEventListener("DOMContentLoaded", activateLoginButtons);
