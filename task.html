@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="com">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/contacts-data.js"></script>
     <script src="./scripts/task.js"></script>
     <link rel="stylesheet" href="./css/board.css" />
     <link rel="stylesheet" href="./css/task.css" />
@@ -16,7 +17,10 @@
       <nav>
         <h2>Kanban Project Management Tool</h2>
         <div>
-          <img src="./assets/img/help.svg" alt="help" /><button
+          <a href="./pages/help.html">
+            <img src="./assets/img/help.svg" alt="help" />
+          </a>
+          <button
             onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
@@ -31,9 +35,9 @@
         id="submenu"
         class="submenu"
       >
-        <a href="./index.html">Legal Notice</a>
-        <a href="">Privacy Policy</a>
-        <a href="">Log out</a>
+        <a href="./pages/legals.html">Legal Notice</a>
+        <a href="./pages/privacy.html">Privacy Policy</a>
+        <a href="./index.html">Log out</a>
       </dialog>
     </header>
     <main>
@@ -44,7 +48,7 @@
             <a class="menu-top" href="./summary.html"
               ><img src="./assets/img/Vector.svg" alt="vector.svg" />Summary</a
             >
-            <a class="current-page"
+            <a class="current-page" href="./task.html"
               ><img
                 src="./assets/img/edit_square.svg"
                 alt="edit square png"
@@ -65,8 +69,8 @@
           </ul>
 
           <ul>
-            <a class="menu-bottom" href="">Privacy Policy</a>
-            <a class="menu-bottom" href="">Legal notice</a>
+            <a class="menu-bottom" href="./pages/privacy.html">Privacy Policy</a>
+            <a class="menu-bottom" href="./pages/legals.html">Legal notice</a>
           </ul>
         </nav>
       </div>
