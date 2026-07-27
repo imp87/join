@@ -132,6 +132,8 @@ function taskClose() {
 
 let data = [];
 
+
+
 async function updateHTML() {
     let response = await fetch(
         "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
