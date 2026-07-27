@@ -283,7 +283,7 @@ h4 {
 }
 
 .task-card img {
-    block-size: 8px;
+    width: 17px;
 }
 
 .task-card:hover {
@@ -448,6 +448,12 @@ h4 {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.task-open-subtasks {
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
 }
 
 .task-subtasks div {

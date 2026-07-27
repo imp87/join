@@ -27,9 +27,102 @@ function addTaskClose() {
 
 
 
-function taskOpen() {
+function taskOpen(id) {
     let dialogRef = document.getElementById("task");
     dialogRef.showModal();
+    dialogRef.innerHTML = "";
+    let priority = data[id].priority;
+    let priorityFirstLetter = priority.charAt(0).toUpperCase() + priority.slice(1);
+
+    dialogRef.innerHTML = ` <div class="task-content" onclick="logDownWBubblingProtection(event)" id="task-content">
+          <div class="task-content-top">
+            <h4 class="${data[id].category}">${data[id].category}</h4>
+            <button onclick="taskClose()">
+              <img src="./assets/img/cancel.svg" alt="close" />
+            </button>
+          </div>
+          <h1>${data[id].title}</h1>
+          <p>${data[id].description}</p>
+
+          <div class="dateandprio">
+            <span class="task-info-title">Due date:</span>${data[id].date}
+          </div>
+          <div class="dateandprio">
+            <span class="task-info-title">Priority:</span>
+            <div>
+              ${priorityFirstLetter}<img src="./assets/img/${priority}.svg" alt="medium" />
+            </div>
+          </div>
+
+          <div class="task-assigned-to">
+            <span class="task-info-title">Assigned To:</span>
+            <div id="task-card-open-contact-list">
+            </div>
+          </div>
+
+          <div class="task-subtasks">
+            <span class="task-info-title">Subtasks</span>
+            <div class="task-open-subtasks" id="task-open-subtasks">
+            <div>
+              <input type="checkbox" id="subtask1" name="subtask1" class="subtask-input" />
+              <label for="subtask1" class="subtask-checkbox">
+                <span></span>
+                <img src="./assets/img/checked2.svg" alt="checked" />
+              </label>
+              Implement Recipe Recommendation
+            </div>
+
+            <div>
+              <input type="checkbox" id="subtask2" name="subtask2" class="subtask-input" />
+              <label for="subtask2" class="subtask-checkbox">
+                <span></span>
+                <img src="./assets/img/checked2.svg" alt="checked" />
+              </label>
+              Start Page Layout
+            </div>
+            </div>
+          </div>
+          <div class="task-bottom">
+            <button>
+              <img src="./assets/img/delete.svg" alt="delete" />Delete
+            </button>
+            <div class="line"></div>
+            <button onclick="editTask()">
+              <img src="./assets/img/edit.svg" alt="edit" />Edit
+            </button>
+          </div>
+        </div>`
+
+    taskOpenContactList(id);
+    taskOpenSubtasks(id);
+}
+
+
+function taskOpenContactList(id) {
+    let taskOpenContactListRef = document.getElementById("task-card-open-contact-list");
+    taskOpenContactListRef.innerHTML = "";
+
+    for (let index = 0; index < data[id].contacts.length; index++) {
+        let contactColor = getContactColor(data[id].contacts[index].firstname, data[id].contacts[index].lastname);
+        taskOpenContactListRef.innerHTML += `<div class="person"><div style="background-color: ${contactColor};">${data[id].contacts[index].firstname[0]}${data[id].contacts[index].lastname[0]}</div><span>${data[id].contacts[index].firstname} ${data[id].contacts[index].lastname}</span></div>`;
+    }
+}
+
+function taskOpenSubtasks(id) {
+    let taskOpenSubtasksRef = document.getElementById("task-open-subtasks");
+    taskOpenSubtasksRef.innerHTML = "";
+
+    for (let index = 0; index < data[id].subtasks.length; index++) {
+        taskOpenSubtasksRef.innerHTML += `<div>
+              <input type="checkbox" id="subtask${index}" name="subtask${index}" class="subtask-input" />
+              <label for="subtask${index}" class="subtask-checkbox">
+                <span></span>
+                <img src="./assets/img/checked2.svg" alt="checked"/>
+              </label>
+              ${data[id].subtasks[index]}
+            </div>`;
+
+    }
 }
 
 function taskClose() {
@@ -37,19 +130,20 @@ function taskClose() {
     dialogRef.close();
 }
 
+let data = [];
 
 async function updateHTML() {
     let response = await fetch(
         "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
     );
 
-    let data = await response.json();
+    data = await response.json();
 
     tasks = Object.entries(data).map(([id, task]) => {
         return { id: id, ...task };
     });
 
-    console.log(tasks);
+    console.log(data);
 
     renderTasksByStatus("To do", "to-do");
     renderTasksByStatus("In progress", "in-progress");
@@ -89,7 +183,7 @@ function startDragging(id) {
 }
 
 function generateTaskElement(filteredTasks, index, description) {
-    return `<button class="task-card" draggable="true" ondragstart="startDragging('${filteredTasks[index].id}')">
+    return `<button class="task-card" draggable="true" ondragstart="startDragging('${filteredTasks[index].id}')" onclick="taskOpen('${filteredTasks[index].id}'); logDownWBubblingProtection(event);">
             <h4 class="${filteredTasks[index].category}">${filteredTasks[index].category}</h4>
             <p>
               <strong>${filteredTasks[index].title}</strong>
