@@ -47,47 +47,30 @@ function taskOpen(id) {
           <div class="dateandprio">
             <span class="task-info-title">Due date:</span>${data[id].date}
           </div>
-          <div class="dateandprio">
+          <div class="dateandprio" id="task-open-priority'${id}'">
             <span class="task-info-title">Priority:</span>
             <div>
               ${priorityFirstLetter}<img src="./assets/img/${priority}.svg" alt="medium" />
             </div>
           </div>
 
-          <div class="task-assigned-to">
+          <div class="task-assigned-to" id="task-assigned-to'${id}'">
             <span class="task-info-title">Assigned To:</span>
             <div id="task-card-open-contact-list">
             </div>
           </div>
 
-          <div class="task-subtasks">
+          <div class="task-subtasks" id="task-subtasks'${id}'">
             <span class="task-info-title">Subtasks</span>
             <div class="task-open-subtasks" id="task-open-subtasks">
-            <div>
-              <input type="checkbox" id="subtask1" name="subtask1" class="subtask-input" />
-              <label for="subtask1" class="subtask-checkbox">
-                <span></span>
-                <img src="./assets/img/checked2.svg" alt="checked" />
-              </label>
-              Implement Recipe Recommendation
-            </div>
-
-            <div>
-              <input type="checkbox" id="subtask2" name="subtask2" class="subtask-input" />
-              <label for="subtask2" class="subtask-checkbox">
-                <span></span>
-                <img src="./assets/img/checked2.svg" alt="checked" />
-              </label>
-              Start Page Layout
-            </div>
             </div>
           </div>
           <div class="task-bottom">
-            <button>
+            <button onclick="deleteTask('${id}')">
               <img src="./assets/img/delete.svg" alt="delete" />Delete
             </button>
             <div class="line"></div>
-            <button onclick="editTask()">
+            <button onclick="editTask('${id}')">
               <img src="./assets/img/edit.svg" alt="edit" />Edit
             </button>
           </div>
@@ -95,8 +78,42 @@ function taskOpen(id) {
 
     taskOpenContactList(id);
     taskOpenSubtasks(id);
+    taskOpenPriority(id);
+    taskOpenAssignedTo(id);
+    taskOpenSubtasksDisplay(id);
+
 }
 
+function taskOpenSubtasksDisplay(id) {
+    if (!data[id].subtasks || data[id].subtasks.length === 0) {
+        document.getElementById(`task-subtasks'${id}'`).classList.add("display-none");
+    }
+}
+
+
+function taskOpenAssignedTo(id) {
+    if (data[id].contacts === "") {
+        document.getElementById(`task-assigned-to'${id}'`).classList.add("display-none");
+    }
+}
+
+function taskOpenPriority(id) {
+    if (data[id].priority === "") {
+        document.getElementById(`task-open-priority'${id}'`).classList.add("display-none");
+    }
+}
+
+async function deleteTask(id) {
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}.json`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    updateHTML();
+    taskClose();
+}
 
 function taskOpenContactList(id) {
     let taskOpenContactListRef = document.getElementById("task-card-open-contact-list");
@@ -292,7 +309,7 @@ function removeHighlight(id) {
 }
 
 
-function editTask() {
+function editTask(id) {
     let taskRef = document.getElementById("task-content");
     taskRef.innerHTML = "";
 
