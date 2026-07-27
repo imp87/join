@@ -89,8 +89,8 @@
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
           </div>
-          <div id="to-do" class="task-cards" ondrop="moveTo('In Progress')" ondragover="allowDrop(event)">
-
+          <div id="to-do" class="task-cards" ondrop="moveTo('To do'); removeHighlight('to-do');"
+            ondragleave="removeHighlight('to-do')" ondragover="allowDrop(event); highlight('to-do')">
           </div>
 
 
@@ -98,7 +98,6 @@
         </figure>
 
         <figure onclick="
-              taskOpen();
               logDownWBubblingProtection(event);
             ">
           <div class="category">
@@ -110,7 +109,9 @@
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
           </div>
-          <div id="in-progress" class="task-cards" ondrop="moveTo('To do')" ondragover="allowDrop(event)"></div>
+          <div id="in-progress" class="task-cards" ondrop="moveTo('In progress'); removeHighlight('in-progress');"
+            ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress');">
+          </div>
         </figure>
 
         <figure>
@@ -123,11 +124,18 @@
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
           </div>
+          <div id="await-feedback" class="task-cards"
+            ondrop="moveTo('Await feedback'); removeHighlight('await-feedback');"
+            ondragleave="removeHighlight('await-feedback')" ondragover="allowDrop(event); highlight('await-feedback');">
+          </div>
         </figure>
 
         <figure>
           <div class="category">
             <h3>Done</h3>
+          </div>
+          <div id="done" class="task-cards" ondrop="moveTo('Done'); removeHighlight('done');"
+            ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done');">
           </div>
         </figure>
       </article>
