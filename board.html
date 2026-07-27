@@ -18,8 +18,7 @@
       submenuClose();
       addTaskClose();
       taskClose();
-    "
-    onload="setMinDate(); updateHTML();">
+    " onload="setMinDate(); updateHTML();">
   <header>
     <nav>
       <h2>Kanban Project Management Tool</h2>
@@ -90,7 +89,7 @@
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
           </div>
-          <div id="to-do">
+          <div id="to-do" class="task-cards" ondrop="moveTo('In Progress')" ondragover="allowDrop(event)">
 
           </div>
 
@@ -111,25 +110,7 @@
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
           </div>
-          <button class="task-card">
-            <h4>User Story</h4>
-            <p>
-              <strong>Kochwelt Page & Recipe Recommender</strong>
-              Build start page with recipe recommendation...
-            </p>
-            <div class="progress-bar">
-              <progress id="subtasks" value="1" max="2"></progress>
-              <label for="subtasks">1/2 Subtasks</label>
-            </div>
-            <div class="user-prio">
-              <span>
-                <div>AA</div>
-                <div class="margin-left">EJ</div>
-                <div class="margin-left">MA</div>
-              </span>
-              <img src="./assets/img/Prio media.svg" alt="medium" />
-            </div>
-          </button>
+          <div id="in-progress" class="task-cards" ondrop="moveTo('To do')" ondragover="allowDrop(event)"></div>
         </figure>
 
         <figure>

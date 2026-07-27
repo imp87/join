@@ -38,6 +38,7 @@ let colors = [
 
 
 let subtasks = []
+let tasks = []
 
 
 function toggleContactList() {
@@ -99,9 +100,23 @@ async function addToTasks(event) {
     let title = document.getElementById("title");
     let description = document.getElementById("description");
     let date = document.getElementById("due-date");
-    let priority = document.querySelector('input[name="priority"]:checked')?.value || "";
-    const selectedContacts = [...document.querySelectorAll('input[name="assign-contact"]:checked')].map(box => box.value);
+    const priority = document.querySelector('input[name="priority"]:checked')?.value || "";
     let category = document.getElementById("category-input");
+
+
+    let assignedContacts = [];
+
+    let checkedBoxes = document.querySelectorAll('input[name="assign-contact"]:checked');
+
+    checkedBoxes.forEach(box => {
+        let contactIndex = box.id.replace("assign-contact", "");
+
+        assignedContacts.push({
+            firstname: contacts[contactIndex].firstname,
+            lastname: contacts[contactIndex].lastname
+        });
+    });
+
 
     let validationMessage = document.querySelectorAll(".validation-message")
 
@@ -122,18 +137,18 @@ async function addToTasks(event) {
     date.classList.remove("input-error");
 
 
-    getTaskValue(title, description, date, priority, selectedContacts, category, subtasks);
+    getTaskValue(title, description, date, priority, assignedContacts, category, subtasks);
     showSuccessDialog();
 }
 
 
-async function getTaskValue(title, description, date, priority, selectedContacts, category, subtasks) {
+async function getTaskValue(title, description, date, priority, assignedContacts, category, subtasks) {
     let task = {
         "title": title.value,
         "description": description.value,
         "date": date.value,
         "priority": priority,
-        "contacts": selectedContacts.length > 0 ? selectedContacts : "",
+        "contacts": assignedContacts.length > 0 ? assignedContacts : "",
         "category": category.value,
         "subtasks": subtasks.length > 0 ? subtasks : "",
         "status": "To do"

@@ -1,3 +1,6 @@
+let currentDraggedElement;
+
+
 function submenuOpen() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.showModal();
@@ -44,33 +47,92 @@ async function updateHTML() {
 
     let tasks = Object.values(data);
 
-    console.log(tasks);
 
     let toDo = tasks.filter(t => t['status'] == "To do");
     let toDoRef = document.getElementById("to-do");
     toDoRef.innerHTML = "";
 
     for (let iToDo = 0; iToDo < toDo.length; iToDo++) {
-        toDoRef.innerHTML += `          <button class="task-card">
+        toDoRef.innerHTML += generateTaskElement(toDo, iToDo);
+        subtasksProgressBar(toDo, iToDo);
+        taskCardContacts(toDo, iToDo);
+        taskCardPriority(toDo, iToDo);
+        taskCardUserPrio(toDo, iToDo);
+        taskCardDescription(toDo, iToDo);
+    }
+
+    let inProgress = tasks.filter(t => t['status'] == "In progress");
+    let inProgressRef = document.getElementById("in-progress");
+    inProgressRef.innerHTML = "";
+
+    for (let iInProgress = 0; iInProgress < inProgress.length; iInProgress++) {
+        const element = array[iInProgress];
+        inProgressRef.innerHTML += generateTaskElement(inProgress, iInProgress);
+        subtasksProgressBar(inProgress, iInProgress);
+        taskCardContacts(inProgress, iInProgress);
+        taskCardPriority(inProgress, iInProgress);
+        taskCardUserPrio(inProgress, iInProgress);
+        taskCardDescription(inProgress, iInProgress);
+    }
+
+}
+
+
+function startDragging(iToDo) {
+    currentDraggedElement = iToDo;
+}
+
+function generateTaskElement(toDo, iToDo) {
+    return `<button class="task-card" draggable="true" ondragstart="startDragging(${iToDo})">
             <h4 class="${toDo[iToDo].category}">${toDo[iToDo].category}</h4>
             <p>
               <strong>${toDo[iToDo].title}</strong>
-              ${toDo[iToDo].description}
+              <span id="description${iToDo}">${toDo[iToDo].description}</span>
             </p>
             <div class="progress-bar" id=progress-bar${iToDo}>
             </div>
-            <div class="user-prio">
-              <span id="task-card-contacts${iToDo}">
-                <div>AA</div>
-                <div class="margin-left">EJ</div>
-                <div class="margin-left">MA</div>
-              </span>
-              <img src="./assets/img/Prio media.svg" alt="medium" />
+            <div class="user-prio" id="user-prio${iToDo}">
+              <span id="task-card-contacts${iToDo}"></span>
+              <div id="task-card-priority${iToDo}"></div>
             </div>
           </button>`
+}
 
-        subtasksProgressBar(toDo, iToDo);
-        taskCardContacts(toDo, iToDo);
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(status) {
+    tasks[currentDraggedElement]['status'] = status;
+}
+
+function taskCardDescription(toDo, iToDo) {
+    let description = toDo[iToDo].description;
+    document.getElementById(`description${iToDo}`).textContent = description.length > 45 ? description.slice(0, 45) + "..." : description;
+
+    if (document.getElementById(`description${iToDo}`).innerHTML === "") {
+        document.getElementById(`description${iToDo}`).classList.add("display-none");
+    }
+}
+
+function taskCardUserPrio(toDo, iToDo) {
+    if (document.getElementById(`task-card-priority${iToDo}`).innerHTML === "" && document.getElementById(`task-card-contacts${iToDo}`).innerHTML === "") {
+        document.getElementById(`user-prio${iToDo}`).classList.add("display-none");
+    }
+}
+
+function taskCardPriority(toDo, iToDo) {
+    if (toDo[iToDo].priority === "urgent") {
+        document.getElementById(`task-card-priority${iToDo}`).innerHTML = `              
+        <img src="./assets/img/urgent.svg" alt="urgent" />`
+    } else if (toDo[iToDo].priority === "medium") {
+        document.getElementById(`task-card-priority${iToDo}`).innerHTML = `              
+        <img src="./assets/img/medium.svg" alt="medium" />`
+    } else if (toDo[iToDo].priority === "low") {
+        document.getElementById(`task-card-priority${iToDo}`).innerHTML = `              
+        <img src="./assets/img/low.svg" alt="low" />`
+    } else if (toDo[iToDo].priority === "") {
+        document.getElementById(`task-card-priority${iToDo}`).innerHTML = "";
     }
 }
 
@@ -90,9 +152,10 @@ function taskCardContacts(toDo, iToDo) {
         let taskCardContactsRef = document.getElementById(`task-card-contacts${iToDo}`);
         taskCardContactsRef.innerHTML = "";
         for (let itaskCardContacts = 0; itaskCardContacts < toDo[iToDo].contacts.length; itaskCardContacts++) {
-            let firstLetter = toDo[iToDo].contacts[itaskCardContacts].firstname;
-            let firstLetterLastName = toDo[iToDo].contacts[itaskCardContacts].lastname;
-            taskCardContactsRef.innerHTML += `<div>${firstLetter}${firstLetterLastName}</div>`
+            let firstLetter = toDo[iToDo].contacts[itaskCardContacts].firstname[0];
+            let firstLetterLastName = toDo[iToDo].contacts[itaskCardContacts].lastname[0];
+            let contactColor = getContactColor(toDo[iToDo].contacts[itaskCardContacts].firstname, toDo[iToDo].contacts[itaskCardContacts].lastname);
+            taskCardContactsRef.innerHTML += `<div style= "background-color: ${contactColor};">${firstLetter}${firstLetterLastName}</div>`
 
         }
     } else {
