@@ -472,6 +472,11 @@ h4 {
     position: relative;
 }
 
+.task-card-open-contact-list {
+    max-height: 170px;
+    overflow: auto;
+}
+
 .subtask-checkbox img {
     display: none;
 }
@@ -526,4 +531,8 @@ h4 {
 
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.edit-contact-list {
+    max-height: 160px;
 }

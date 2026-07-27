@@ -15,10 +15,10 @@ function getTaskContactTemplate(iContact, contactColor, firstLetter, firstLetter
             </label>`
 }
 
-function getSubtaskTemplate(iSubtask) {
+function getSubtaskTemplate(iSubtask, subtask) {
     return `<li class="subtask" id="subtask-${iSubtask}">
                 <div class="subtask-value">
-                    <span class="bullet"></span>${subtasks[iSubtask]}
+                    <span class="bullet"></span>${subtask}
                 </div>
                 <span class="delete-edit">
                     <button onclick="editSubtasks(${iSubtask})" type="button">

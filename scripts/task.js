@@ -203,7 +203,7 @@ function renderSubtasks() {
     subtaskInteraction.innerHTML = "";
 
     for (let iSubtask = 0; iSubtask < subtasks.length; iSubtask++) {
-        subtaskInteraction.innerHTML += getSubtaskTemplate(iSubtask);
+        subtaskInteraction.innerHTML += getSubtaskTemplate(iSubtask, subtask);
     }
 }
 

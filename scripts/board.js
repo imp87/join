@@ -56,7 +56,7 @@ function taskOpen(id) {
 
           <div class="task-assigned-to" id="task-assigned-to'${id}'">
             <span class="task-info-title">Assigned To:</span>
-            <div id="task-card-open-contact-list">
+            <div id="task-card-open-contact-list" class="task-card-open-contact-list">
             </div>
           </div>
 
@@ -309,112 +309,220 @@ function removeHighlight(id) {
 }
 
 
+
 function editTask(id) {
+    let task = tasks.find(task => task.id === id);
+
+    if (!task) return;
+
     let taskRef = document.getElementById("task-content");
     taskRef.innerHTML = "";
 
-    taskRef.innerHTML = `       
-                        <div class="task-content-top" style="justify-content: flex-end;">
-                    <button onclick="taskClose()"><img src="./assets/img/cancel.svg"
-                                alt="close"></button>
-                    </div>     
-            <form action="">
-           
-                <div class="form-area-fields">
-                    <label for="title">Title</label>
-                    <input id="title" type="text" placeholder="Enter a title" required>
+    taskRef.innerHTML = `
+        <div class="task-content-top" style="justify-content: flex-end;">
+            <button onclick="taskClose()">
+                <img src="./assets/img/cancel.svg" alt="close">
+            </button>
+        </div>
+
+        <form>
+            <div class="form-area-fields">
+                <label for="edit-title">Title</label>
+                <input 
+                    id="edit-title" 
+                    type="text" 
+                    placeholder="Enter a title" 
+                    value="${task.title}">
+            </div>
+
+
+            <div class="form-area-fields">
+                <label for="edit-description">Description</label>
+                <textarea 
+                    id="edit-description" 
+                    rows="4" 
+                    cols="20"
+                    placeholder="Enter a Description">${task.description}</textarea>
+            </div>
+
+
+            <div class="form-area-fields">
+                <label for="edit-date">Due date</label>
+                <input 
+                    type="date" 
+                    id="edit-date" 
+                    value="${task.date}" 
+                    required>
+            </div>
+
+
+            <div class="form-area-fields">
+                <legend>Priority</legend>
+
+                <div class="priority">
+
+                    <input 
+                        class="radio__input" 
+                        type="radio" 
+                        id="edit-urgent" 
+                        name="edit-priority"
+                        value="urgent"
+                        ${task.priority === "urgent" ? "checked" : ""}>
+
+                    <label class="radio__label-urgent" for="edit-urgent">
+                        Urgent 
+                        <img src="./assets/img/urgent.svg" alt="urgent">
+                    </label>
+
+
+
+                    <input 
+                        class="radio__input" 
+                        type="radio" 
+                        id="edit-medium" 
+                        name="edit-priority"
+                        value="medium"
+                        ${task.priority === "medium" ? "checked" : ""}>
+
+                    <label class="radio__label-medium" for="edit-medium">
+                        Medium 
+                        <img src="./assets/img/medium.svg" alt="medium">
+                    </label>
+
+
+
+                    <input 
+                        class="radio__input" 
+                        type="radio" 
+                        id="edit-low" 
+                        name="edit-priority"
+                        value="low"
+                        ${task.priority === "low" ? "checked" : ""}>
+
+                    <label class="radio__label-low" for="edit-low">
+                        Low 
+                        <img src="./assets/img/low.svg" alt="low">
+                    </label>
+
                 </div>
-
-                <div class="form-area-fields">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" cols="20"
-                        placeholder="Enter a Description"></textarea>
-                </div>
-
-                <div class="form-area-fields">
-                    <label for="due-date">Due date</label>
-                    <input type="date" id="due-date" name="due-date" required>
-                </div>
-
-                <div class="form-area-fields">
-                    <legend>Priority</legend>
-                        <div class="priority">
-                            <input class="radio__input" type="radio" id="urgent" name="priority"
-                                value="urgent">
-                                <label class="radio__label-urgent" for="urgent">Urgent <img
-                                    src="./assets/img/urgent.svg" alt="urgent"></label>
-
-                            <input class="radio__input" type="radio" id="medium" name="priority"
-                                value="medium">
-                                        <label class="radio__label-medium" for="medium">Medium <img
-                                                src="./assets/img/medium.svg" alt="medium"></label>
-
-                                        <input class="radio__input" type="radio" id="low" name="priority" value="low">
-                                        <label class="radio__label-low" for="low">Low <img src="./assets/img/low.svg"
-                                                alt="low"></label>
-                                    </div>
-                                   </div> 
+            </div>
 
 
+            <div class="form-area-fields">
+                <label for="edit-contacts">Assigned to</label>
 
-                                                                   <div class="form-area-fields">
-                                    <label for="contacts">Assigned to</label>
-                                    <div class="assigned-to">
-                                        <div class="custom-selectbox" onclick="toggleContactList()">
-                                            <input type="search" id="contacts" name="contacts"
-                                                placeholder="Select contacts to assign">
-                                            <div id="contacts-arrow" class="arrow"><img
-                                                    src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down"></div>
-                                        </div>
+                <div class="assigned-to">
 
-                                        <div class="contact-list display-none" id="contact-list">
+                    <div class="custom-selectbox" onclick="toggleEditContactList()">
+                        <input 
+                            type="search" 
+                            id="edit-contacts"
+                            placeholder="Select contacts to assign">
 
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact1"
-                                                name="assign-contact1">
-                                            <label class="custom-checkbox" for="assign-contact1">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div>AA</div>Armin Alert
-                                                </div>
-                                            </label>
+                        <div id="contacts-arrow" class="arrow">
+                            <img src="./assets/img/arrow_drop_down.svg" alt="arrow">
+                        </div>
+                    </div>
 
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact2"
-                                                name="assign-contact2">
-                                            <label class="custom-checkbox" for="assign-contact2">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div style="background-color: rgba(0, 190, 232, 1);">EJ</div>Eren
-                                                    Jäger
-                                                </div>
-                                            </label>
 
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact3"
-                                                name="assign-contact3">
-                                            <label class="custom-checkbox" for="assign-contact3">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div style="background-color: rgba(0, 190, 232, 1);">AA</div>Mikasa
-                                                    Ackermann
-                                                </div>
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                </div>
-           
-                                <div class="form-area-fields">
-                                    <label for="subtask">Subtasks</label>
-                                    <input id="subtask" type="text" placeholder="Add new subtask">
-                                </div>
+                    <div class="contact-list display-none edit-contact-list" id="edit-contact-list">
 
                        
-<button class="Ok" onclick="taskChanged();"><input type="submit" value="Ok"><img
-                                        src="./assets/img/check.svg" alt="check"></button>
 
-            </form>            `
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-area-fields">
+                <label for="edit-subtask">Subtasks</label>
+                  <div class="subtask-input-container">
+                    <input id="subtask" type="text" placeholder="Add new subtask" />
+
+                    <div class="subtask-actions">
+                      <button onclick="clearSubtask()" type="button"><img src="./assets/img/cancel.svg"
+                          alt="close"></button>
+                      <div class="line"></div>
+                      <button onclick="addSubtask()" type="button"><img src="./assets/img/checkblue.svg"
+                          alt="check"></button>
+                    </div>
+                    </div>
+                    <ul class="subtask-interaction" id="edit-subtask-interaction"></ul>
+                  </div>
+
+
+            <button class="Ok" onclick="taskChanged('${task.id}')">
+                <input type="submit" value="Ok">
+                <img src="./assets/img/check.svg" alt="check">
+            </button>
+
+        </form>
+    `;
+    generateEditContacts(task);
+    generateEditSubtasks(task);
+}
+
+function generateEditSubtasks(task) {
+    let subtaskRef = document.getElementById("edit-subtask-interaction");
+
+    subtaskRef.innerHTML = "";
+
+    if (!task.subtasks || task.subtasks.length === 0) {
+        return;
+    }
+
+    for (let iSubtask = 0; iSubtask < task.subtasks.length; iSubtask++) {
+        console.log(task.subtasks[iSubtask])
+        subtaskRef.innerHTML += getSubtaskTemplate(iSubtask, task.subtasks[iSubtask]);
+    }
+}
+
+
+function toggleEditContactList() {
+    document.getElementById("edit-contact-list").classList.toggle("display-none");
+}
+
+function generateEditContacts(task) {
+    let contactsHTML = document.getElementById("edit-contact-list");
+    contactsHTML.innerHTML = "";
+
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+
+        let isChecked = task.contacts?.some(taskContact =>
+            taskContact.firstname === contact.firstname &&
+            taskContact.lastname === contact.lastname
+        );
+
+        let firstLetter = contact.firstname[0];
+        let firstLetterLastName = contact.lastname[0];
+
+        let contactColor = getContactColor(
+            contact.firstname,
+            contact.lastname
+        );
+
+        contactsHTML.innerHTML += `
+            <input 
+                class="checkbox-input" 
+                type="checkbox"
+                id="edit-contact${i}"
+                ${isChecked ? "checked" : ""}>
+
+            <label class="custom-checkbox" for="edit-contact${i}">
+                <span></span>
+                <img src="./assets/img/checked.svg" alt="checked">
+
+                <div class="contact-name">
+                    <div class="initials" style="background-color: ${contactColor}">
+                        ${firstLetter}${firstLetterLastName}
+                    </div>
+                    ${contact.firstname} ${contact.lastname}
+                </div>
+            </label>
+        `;
+    }
+
 }
 
 
