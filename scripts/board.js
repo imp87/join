@@ -326,6 +326,7 @@ function editTask(id) {
         </div>
 
         <form>
+        <div class="edit-task">
             <div class="form-area-fields">
                 <label for="edit-title">Title</label>
                 <input 
@@ -431,6 +432,7 @@ function editTask(id) {
 
                     </div>
                 </div>
+                <div id="edit-contact-line" class="contact-line"></div>
             </div>
 
 
@@ -449,13 +451,12 @@ function editTask(id) {
                     </div>
                     <ul class="subtask-interaction" id="edit-subtask-interaction"></ul>
                   </div>
-
+        </div>
 
             <button class="Ok" onclick="taskChanged('${task.id}')">
                 <input type="submit" value="Ok">
                 <img src="./assets/img/check.svg" alt="check">
             </button>
-
         </form>
     `;
     generateEditContacts(task);
@@ -464,7 +465,6 @@ function editTask(id) {
 
 function generateEditSubtasks(task) {
     let subtaskRef = document.getElementById("edit-subtask-interaction");
-
     subtaskRef.innerHTML = "";
 
     if (!task.subtasks || task.subtasks.length === 0) {
@@ -472,9 +472,9 @@ function generateEditSubtasks(task) {
     }
 
     for (let iSubtask = 0; iSubtask < task.subtasks.length; iSubtask++) {
-        console.log(task.subtasks[iSubtask])
         subtaskRef.innerHTML += getSubtaskTemplate(iSubtask, task.subtasks[iSubtask]);
     }
+
 }
 
 
@@ -484,7 +484,9 @@ function toggleEditContactList() {
 
 function generateEditContacts(task) {
     let contactsHTML = document.getElementById("edit-contact-list");
+    let contactLine = document.getElementById("edit-contact-line");
     contactsHTML.innerHTML = "";
+    contactLine.innerHTML = "";
 
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
@@ -521,6 +523,11 @@ function generateEditContacts(task) {
                 </div>
             </label>
         `;
+
+        if (i < 3) {
+            let contactColor = getContactColor(contact.firstname, contact.lastname);
+            contactLine.innerHTML += `<div class="initials" style="background-color: ${contactColor}">${contact.firstname[0]}${contact.lastname[0]}</div>`;
+        }
     }
 
 }
