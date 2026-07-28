@@ -82,7 +82,7 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
 }
 
 
-function getOpenTaskTemplate(id, priorityFirstLetter, priority) {
+function getOpenTaskTemplate(id) {
     return `<div class="task-content" onclick="logDownWBubblingProtection(event)" id="task-content">
                 <div class="task-content-top">
                     <h4 class="${data[id].category}">${data[id].category}</h4>
@@ -98,8 +98,7 @@ function getOpenTaskTemplate(id, priorityFirstLetter, priority) {
                 </div>
                 <div class="dateandprio" id="task-open-priority'${id}'">
                     <span class="task-info-title">Priority:</span>
-                    <div>
-                        ${priorityFirstLetter}<img src="./assets/img/${priority}.svg" alt="medium" />
+                    <div id="open-task-priority-div'${id}'">
                     </div>
                 </div>
 

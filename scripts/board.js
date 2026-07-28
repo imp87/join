@@ -26,104 +26,6 @@ function addTaskClose() {
 }
 
 
-
-function taskOpen(id) {
-    let dialogRef = document.getElementById("task");
-    dialogRef.showModal();
-    dialogRef.innerHTML = "";
-    let priority = data[id].priority;
-    let priorityFirstLetter = priority.charAt(0).toUpperCase() + priority.slice(1);
-
-    dialogRef.innerHTML = getOpenTaskTemplate(id, priorityFirstLetter, priority);
-    taskOpenContactList(id);
-    taskOpenSubtasks(id);
-    taskOpenPriority(id);
-    taskOpenAssignedTo(id);
-    taskOpenSubtasksDisplay(id);
-
-}
-
-function taskOpenSubtasksDisplay(id) {
-    if (!data[id].subtasks || data[id].subtasks.length === 0) {
-        document.getElementById(`task-subtasks'${id}'`).classList.add("display-none");
-    }
-}
-
-
-function taskOpenAssignedTo(id) {
-    if (data[id].contacts === "") {
-        document.getElementById(`task-assigned-to'${id}'`).classList.add("display-none");
-    }
-}
-
-function taskOpenPriority(id) {
-    if (data[id].priority === "") {
-        document.getElementById(`task-open-priority'${id}'`).classList.add("display-none");
-    }
-}
-
-async function deleteTask(id) {
-    await fetch(
-        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}.json`,
-        {
-            method: "DELETE"
-        }
-    );
-
-    updateHTML();
-    taskClose();
-}
-
-function taskOpenContactList(id) {
-    let taskOpenContactListRef = document.getElementById("task-card-open-contact-list");
-    taskOpenContactListRef.innerHTML = "";
-
-    for (let index = 0; index < data[id].contacts.length; index++) {
-        let contactColor = getContactColor(data[id].contacts[index].firstname, data[id].contacts[index].lastname);
-        taskOpenContactListRef.innerHTML += `<div class="person"><div style="background-color: ${contactColor};">${data[id].contacts[index].firstname[0]}${data[id].contacts[index].lastname[0]}</div><span>${data[id].contacts[index].firstname} ${data[id].contacts[index].lastname}</span></div>`;
-    }
-}
-
-function taskOpenSubtasks(id) {
-    let taskOpenSubtasksRef = document.getElementById("task-open-subtasks");
-    taskOpenSubtasksRef.innerHTML = "";
-
-    let subtasks = data[id].subtasks;
-
-    if (!subtasks || subtasks.length === 0) {
-        return;
-    }
-
-    for (let index = 0; index < subtasks.length; index++) {
-        taskOpenSubtasksRef.innerHTML += getOpenTaskSubtaskTemplate(id, index, subtasks);
-    }
-}
-
-async function updateSubtaskProgress(taskId, subtaskIndex) {
-    let checkbox = document.getElementById(`subtask${subtaskIndex}`);
-
-    data[taskId].subtasks[subtaskIndex].done = checkbox.checked;
-
-    await fetch(
-        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${taskId}.json`,
-        {
-            method: "PATCH",
-            body: JSON.stringify({
-                subtasks: data[taskId].subtasks
-            })
-        }
-    );
-
-    updateHTML();
-}
-
-function taskClose() {
-    let dialogRef = document.getElementById("task");
-    dialogRef.close();
-    updateHTML();
-}
-
-
 async function updateHTML() {
     let response = await fetch(
         "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
@@ -135,13 +37,15 @@ async function updateHTML() {
         return { id: id, ...task };
     });
 
+    renderAllTasksByStatus()
+}
 
+function renderAllTasksByStatus() {
     renderTasksByStatus("To do", "to-do");
     renderTasksByStatus("In progress", "in-progress");
     renderTasksByStatus("Await feedback", "await-feedback");
     renderTasksByStatus("Done", "done");
 }
-
 
 function renderTasksByStatus(status, containerId, taskList = tasks) {
     let filteredTasks = taskList.filter(task => task.status === status);
@@ -173,6 +77,15 @@ function getTaskElements(filteredTasks, index) {
     taskCardUserPrio(filteredTasks, index);
     taskCardDescription(filteredTasks, index);
 }
+
+
+function taskClose() {
+    let dialogRef = document.getElementById("task");
+    dialogRef.close();
+    updateHTML();
+}
+
+
 
 
 function startDragging(id) {
@@ -254,26 +167,30 @@ function subtasksProgressBar(filteredTasks, index) {
 
 
 function taskCardContacts(filteredTasks, index) {
-    if (filteredTasks[index].contacts != "") {
-        let taskCardContactsRef = document.getElementById(`task-card-contacts-${filteredTasks[index].id}`);
-        taskCardContactsRef.innerHTML = "";
+    let contacts = filteredTasks[index].contacts;
+    let taskCardContactsRef = document.getElementById(`task-card-contacts-${filteredTasks[index].id}`);
 
-        for (let contactIndex = 0; contactIndex < filteredTasks[index].contacts.length; contactIndex++) {
-            let firstLetter = filteredTasks[index].contacts[contactIndex].firstname[0];
-            let firstLetterLastName = filteredTasks[index].contacts[contactIndex].lastname[0];
+    if (!contacts || contacts.length === 0) {
+        taskCardContactsRef.classList.add("display-none");
+        return;
+    }
 
-            let contactColor = getContactColor(
-                filteredTasks[index].contacts[contactIndex].firstname,
-                filteredTasks[index].contacts[contactIndex].lastname
-            );
+    taskCardContactsRef.classList.remove("display-none");
+    taskCardContactsRef.innerHTML = "";
 
-            taskCardContactsRef.innerHTML += `
+    for (let contactIndex = 0; contactIndex < contacts.length; contactIndex++) {
+        let firstLetter = contacts[contactIndex].firstname[0];
+        let firstLetterLastName = contacts[contactIndex].lastname[0];
+
+        let contactColor = getContactColor(
+            contacts[contactIndex].firstname,
+            contacts[contactIndex].lastname
+        );
+
+        taskCardContactsRef.innerHTML += `
             <div style="background-color: ${contactColor};">
                 ${firstLetter}${firstLetterLastName}
             </div>`;
-        }
-    } else {
-        document.getElementById(`task-card-contacts-${filteredTasks[index].id}`).classList.add("display-none");
     }
 }
 
@@ -285,6 +202,122 @@ function highlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight')
 }
+
+
+
+function taskOpen(id) {
+    let dialogRef = document.getElementById("task");
+    dialogRef.showModal();
+    dialogRef.innerHTML = "";
+    let priority = data[id].priority;
+    let priorityFirstLetter = priority.charAt(0).toUpperCase() + priority.slice(1);
+
+    dialogRef.innerHTML = getOpenTaskTemplate(id);
+    taskOpenContactList(id);
+    taskOpenSubtasks(id);
+    taskOpenPriority(id, priority, priorityFirstLetter);
+    taskOpenAssignedTo(id);
+    taskOpenSubtasksDisplay(id);
+
+}
+
+function taskOpenPriority(id, priority, priorityFirstLetter) {
+    if (data[id].priority === "") {
+        document.getElementById(`task-open-priority'${id}'`).classList.add("display-none");
+        document.getElementById(`open-task-priority-div'${id}'`).innerHTML = "";
+    } else if (data[id].priority === `urgent` || data[id].priority === `medium` || data[id].priority === `low`) {
+        document.getElementById(`task-open-priority'${id}'`).classList.remove("display-none");
+        document.getElementById(`open-task-priority-div'${id}'`).innerHTML = `${priorityFirstLetter}<img src="./assets/img/${priority}.svg" alt="medium" />`
+    }
+}
+
+function taskOpenAssignedTo(id) {
+    if (data[id].contacts === "") {
+        document.getElementById(`task-assigned-to'${id}'`).classList.add("display-none");
+    }
+}
+
+function taskOpenSubtasksDisplay(id) {
+    if (!data[id].subtasks || data[id].subtasks.length === 0) {
+        document.getElementById(`task-subtasks'${id}'`).classList.add("display-none");
+    }
+}
+
+async function deleteTask(id) {
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}.json`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    updateHTML();
+    taskClose();
+}
+
+function taskOpenContactList(id) {
+    let taskOpenContactListRef = document.getElementById("task-card-open-contact-list");
+    taskOpenContactListRef.innerHTML = "";
+
+    let contacts = data[id].contacts;
+
+    if (!contacts || contacts.length === 0) {
+        return;
+    }
+
+    for (let index = 0; index < contacts.length; index++) {
+        let contact = contacts[index];
+
+        let contactColor = getContactColor(
+            contact.firstname,
+            contact.lastname
+        );
+
+        taskOpenContactListRef.innerHTML += `
+            <div class="person">
+                <div style="background-color: ${contactColor};">
+                    ${contact.firstname[0]}${contact.lastname[0]}
+                </div>
+                <span>
+                    ${contact.firstname} ${contact.lastname}
+                </span>
+            </div>`;
+    }
+}
+
+function taskOpenSubtasks(id) {
+    let taskOpenSubtasksRef = document.getElementById("task-open-subtasks");
+    taskOpenSubtasksRef.innerHTML = "";
+
+    let subtasks = data[id].subtasks;
+
+    if (!subtasks || subtasks.length === 0) {
+        return;
+    }
+
+    for (let index = 0; index < subtasks.length; index++) {
+        taskOpenSubtasksRef.innerHTML += getOpenTaskSubtaskTemplate(id, index, subtasks);
+    }
+}
+
+async function updateSubtaskProgress(taskId, subtaskIndex) {
+    let checkbox = document.getElementById(`subtask${subtaskIndex}`);
+
+    data[taskId].subtasks[subtaskIndex].done = checkbox.checked;
+
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${taskId}.json`,
+        {
+            method: "PATCH",
+            body: JSON.stringify({
+                subtasks: data[taskId].subtasks
+            })
+        }
+    );
+
+    updateHTML();
+}
+
 
 
 let currentTaskIndex;
@@ -390,9 +423,14 @@ function toggleEditContactList() {
 function generateEditContacts(task) {
     let contactsHTML = document.getElementById("edit-contact-list");
     let contactLine = document.getElementById("edit-contact-line");
-
     contactsHTML.innerHTML = "";
     contactLine.innerHTML = "";
+
+
+    if (!task.contacts || task.contacts.length === 0) {
+        return;
+    }
+
 
     let renderedContacts = 0;
 
