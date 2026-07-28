@@ -309,10 +309,13 @@ function removeHighlight(id) {
 }
 
 
+let currentTaskIndex;
+let currentEditTaskId;
 
 function editTask(id) {
+    currentEditTaskId = id;
     let task = tasks.find(task => task.id === id);
-
+    currentTaskIndex = tasks.findIndex(task => task.id === id);
     if (!task) return;
 
     let taskRef = document.getElementById("task-content");
@@ -325,7 +328,7 @@ function editTask(id) {
             </button>
         </div>
 
-        <form>
+        <form onsubmit="EditTaskChanged(event)">
         <div class="edit-task">
             <div class="form-area-fields">
                 <label for="edit-title">Title</label>
@@ -334,6 +337,7 @@ function editTask(id) {
                     type="text" 
                     placeholder="Enter a title" 
                     value="${task.title}">
+                    <div class="edit-validation-message" id="edit-title-error"></div>
             </div>
 
 
@@ -354,6 +358,7 @@ function editTask(id) {
                     id="edit-date" 
                     value="${task.date}" 
                     required>
+                    <div class="edit-validation-message" id="edit-date-error"></div>
             </div>
 
 
@@ -439,13 +444,13 @@ function editTask(id) {
             <div class="form-area-fields">
                 <label for="edit-subtask">Subtasks</label>
                   <div class="subtask-input-container">
-                    <input id="subtask" type="text" placeholder="Add new subtask" />
+                    <input id="edit-subtask" type="text" placeholder="Add new subtask" />
 
                     <div class="subtask-actions">
-                      <button onclick="clearSubtask()" type="button"><img src="./assets/img/cancel.svg"
+                      <button onclick="editClearSubtask()" type="button"><img src="./assets/img/cancel.svg"
                           alt="close"></button>
                       <div class="line"></div>
-                      <button onclick="addSubtask()" type="button"><img src="./assets/img/checkblue.svg"
+                      <button onclick="editAddSubtask()" type="button"><img src="./assets/img/checkblue.svg"
                           alt="check"></button>
                     </div>
                     </div>
@@ -453,13 +458,38 @@ function editTask(id) {
                   </div>
         </div>
 
-            <button class="Ok" onclick="taskChanged('${task.id}')">
+            <button class="Ok">
                 <input type="submit" value="Ok">
                 <img src="./assets/img/check.svg" alt="check">
             </button>
         </form>
     `;
     generateEditContacts(task);
+    generateEditSubtasks(task);
+}
+
+function editClearSubtask() {
+    document.getElementById("edit-subtask").value = "";
+}
+
+function editAddSubtask() {
+    let input = document.getElementById("edit-subtask");
+    let value = input.value.trim();
+
+    if (value === "") {
+        return;
+    }
+
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    if (!task.subtasks) {
+        task.subtasks = [];
+    }
+
+    task.subtasks.push(value);
+
+    input.value = "";
+
     generateEditSubtasks(task);
 }
 
@@ -472,11 +502,81 @@ function generateEditSubtasks(task) {
     }
 
     for (let iSubtask = 0; iSubtask < task.subtasks.length; iSubtask++) {
-        subtaskRef.innerHTML += getSubtaskTemplate(iSubtask, task.subtasks[iSubtask]);
-    }
 
+        subtaskRef.innerHTML += `
+            <li class="subtask" id="subtask-${iSubtask}">
+                <div class="subtask-value">
+                    <span class="bullet"></span>
+                    ${task.subtasks[iSubtask]}
+                </div>
+
+                <span class="delete-edit">
+                    <button onclick="editEditSubtasks(${iSubtask})" type="button">
+                        <img src="./assets/img/edit.svg">
+                    </button>
+
+                    <div class="line"></div>
+
+                    <button onclick="editDeleteSubtask(${iSubtask})" type="button">
+                        <img src="./assets/img/delete.svg">
+                    </button>
+                </span>
+            </li>
+        `;
+    }
 }
 
+function editEditSubtasks(iSubtask) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    let subtaskRef = document.getElementById(`subtask-${iSubtask}`);
+
+    subtaskRef.innerHTML = `
+        <div class="edit-subtask">
+
+            <input 
+                id="edit-edit-subtask-${iSubtask}" 
+                value="${task.subtasks[iSubtask]}">
+
+            <span class="delete-check">
+
+                <button onclick="editDeleteSubtask(${iSubtask})" type="button">
+                    <img src="./assets/img/delete.svg">
+                </button>
+
+                <div class="line"></div>
+
+                <button onclick="saveEditedSubtask(${iSubtask})" type="button">
+                    <img src="./assets/img/checkblue.svg">
+                </button>
+
+            </span>
+
+        </div>
+    `;
+}
+
+function saveEditedSubtask(iSubtask) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    let input = document.getElementById(`edit-edit-subtask-${iSubtask}`);
+
+    let newValue = input.value.trim();
+
+    if (newValue === "") return;
+
+    task.subtasks[iSubtask] = newValue;
+
+    generateEditSubtasks(task);
+}
+
+function editDeleteSubtask(iSubtask) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    task.subtasks.splice(iSubtask, 1);
+
+    generateEditSubtasks(task);
+}
 
 function toggleEditContactList() {
     document.getElementById("edit-contact-list").classList.toggle("display-none");
@@ -485,8 +585,11 @@ function toggleEditContactList() {
 function generateEditContacts(task) {
     let contactsHTML = document.getElementById("edit-contact-list");
     let contactLine = document.getElementById("edit-contact-line");
+
     contactsHTML.innerHTML = "";
     contactLine.innerHTML = "";
+
+    let renderedContacts = 0;
 
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
@@ -509,6 +612,7 @@ function generateEditContacts(task) {
                 class="checkbox-input" 
                 type="checkbox"
                 id="edit-contact${i}"
+                onchange="updateEditContactLine()"
                 ${isChecked ? "checked" : ""}>
 
             <label class="custom-checkbox" for="edit-contact${i}">
@@ -524,12 +628,134 @@ function generateEditContacts(task) {
             </label>
         `;
 
-        if (i < 3) {
-            let contactColor = getContactColor(contact.firstname, contact.lastname);
-            contactLine.innerHTML += `<div class="initials" style="background-color: ${contactColor}">${contact.firstname[0]}${contact.lastname[0]}</div>`;
+
+        if (isChecked && renderedContacts < 3) {
+            contactLine.innerHTML += `
+                <div class="initials" style="background-color: ${contactColor}">
+                    ${firstLetter}${firstLetterLastName}
+                </div>
+            `;
+
+            renderedContacts++;
+        }
+    }
+}
+
+function updateEditContactLine() {
+    let contactLine = document.getElementById("edit-contact-line");
+    contactLine.innerHTML = "";
+
+    let renderedContacts = 0;
+
+    for (let i = 0; i < contacts.length; i++) {
+        let checkbox = document.getElementById(`edit-contact${i}`);
+
+        if (checkbox && checkbox.checked && renderedContacts < 3) {
+            let contact = contacts[i];
+
+            let contactColor = getContactColor(
+                contact.firstname,
+                contact.lastname
+            );
+
+            contactLine.innerHTML += `
+                <div class="initials" style="background-color: ${contactColor}">
+                    ${contact.firstname[0]}${contact.lastname[0]}
+                </div>
+            `;
+
+            renderedContacts++;
+        }
+    }
+}
+
+async function EditTaskChanged(event) {
+    event.preventDefault();
+
+    let titleInput = document.getElementById("edit-title");
+    let dateInput = document.getElementById("edit-date");
+
+    let title = titleInput.value.trim();
+    let description = document.getElementById("edit-description").value.trim();
+    let date = dateInput.value;
+
+    let titleError = document.getElementById("edit-title-error");
+    let dateError = document.getElementById("edit-date-error");
+
+    titleError.innerHTML = "";
+    dateError.innerHTML = "";
+    titleInput.classList.remove("input-error");
+    dateInput.classList.remove("input-error");
+
+    let hasError = false;
+
+
+    if (title === "") {
+        titleError.innerHTML = "*This field is required";
+        titleInput.classList.add("input-error");
+        hasError = true;
+    }
+
+
+    if (date === "") {
+        dateError.innerHTML = "*This field is required";
+        dateInput.classList.add("input-error");
+        hasError = true;
+    }
+
+
+    if (hasError) {
+        return;
+    }
+
+
+    let priority = document.querySelector('input[name="edit-priority"]:checked')?.value || "";
+
+
+    let selectedContacts = [];
+
+    for (let i = 0; i < contacts.length; i++) {
+        let checkbox = document.getElementById(`edit-contact${i}`);
+
+        if (checkbox && checkbox.checked) {
+            selectedContacts.push({
+                firstname: contacts[i].firstname,
+                lastname: contacts[i].lastname
+            });
         }
     }
 
+
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    if (!task) return;
+
+
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${currentEditTaskId}.json`,
+        {
+            method: "PATCH",
+            body: JSON.stringify({
+                title: title,
+                description: description,
+                date: date,
+                priority: priority,
+                contacts: selectedContacts,
+                subtasks: task.subtasks || []
+            })
+        }
+    );
+
+
+    task.title = title;
+    task.description = description;
+    task.date = date;
+    task.priority = priority;
+    task.contacts = selectedContacts;
+
+
+    taskClose();
+    updateHTML();
 }
 
 

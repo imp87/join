@@ -16,7 +16,6 @@ body {
 }
 
 
-
 section {
     margin-top: 130px;
     margin-left: 348px;
@@ -312,6 +311,7 @@ h4 {
     justify-content: center;
     flex-direction: column;
     width: 440px;
+    max-width: fit-content;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 48px;
@@ -331,7 +331,9 @@ h4 {
     flex-direction: column;
     gap: 16px;
     max-height: 600px;
-    overflow: auto;
+    overflow-y: auto;
+    width: fit-content;
+    position: relative;
 }
 
 .Ok {
@@ -482,7 +484,7 @@ h4 {
 
 .task-card-open-contact-list {
     max-height: 170px;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .subtask-checkbox img {
@@ -543,5 +545,12 @@ h4 {
 
 .edit-contact-list {
     max-height: 160px;
-    position: relative;
+    position: absolute;
+}
+
+.edit-validation-message {
+    font-size: 14px;
+    color: rgba(230, 0, 38, 1);
+    height: 0px;
+    margin-top: 1px;
 }
