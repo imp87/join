@@ -59,6 +59,10 @@ h1 {
     padding: 0;
 }
 
+.searchbar:focus-within {
+    border-color: rgba(18, 70, 88, 1);
+}
+
 input:focus-visible {
     outline: none;
 }
