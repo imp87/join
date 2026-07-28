@@ -1,5 +1,5 @@
 let currentDraggedElement;
-
+let data = [];
 
 function submenuOpen() {
     let dialogRef = document.getElementById("submenu");
@@ -129,26 +129,54 @@ function taskOpenSubtasks(id) {
     let taskOpenSubtasksRef = document.getElementById("task-open-subtasks");
     taskOpenSubtasksRef.innerHTML = "";
 
-    for (let index = 0; index < data[id].subtasks.length; index++) {
-        taskOpenSubtasksRef.innerHTML += `<div>
-              <input type="checkbox" id="subtask${index}" name="subtask${index}" class="subtask-input" />
-              <label for="subtask${index}" class="subtask-checkbox">
-                <span></span>
-                <img src="./assets/img/checked2.svg" alt="checked"/>
-              </label>
-              ${data[id].subtasks[index]}
-            </div>`;
+    let subtasks = data[id].subtasks;
 
+    if (!subtasks || subtasks.length === 0) {
+        return;
     }
+
+    for (let index = 0; index < subtasks.length; index++) {
+        taskOpenSubtasksRef.innerHTML += `
+            <div>
+                <input 
+                    type="checkbox" 
+                    id="subtask${index}" 
+                    class="subtask-input"
+                    onchange="updateSubtaskProgress('${id}', ${index})"
+                    ${subtasks[index].done ? "checked" : ""}>
+
+                <label for="subtask${index}" class="subtask-checkbox">
+                    <span></span>
+                    <img src="./assets/img/checked2.svg" alt="checked"/>
+                </label>
+
+                ${subtasks[index].text}
+            </div>`;
+    }
+}
+
+async function updateSubtaskProgress(taskId, subtaskIndex) {
+    let checkbox = document.getElementById(`subtask${subtaskIndex}`);
+
+    data[taskId].subtasks[subtaskIndex].done = checkbox.checked;
+
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${taskId}.json`,
+        {
+            method: "PATCH",
+            body: JSON.stringify({
+                subtasks: data[taskId].subtasks
+            })
+        }
+    );
+
+    updateHTML();
 }
 
 function taskClose() {
     let dialogRef = document.getElementById("task");
     dialogRef.close();
 }
-
-let data = [];
-
 
 
 async function updateHTML() {
@@ -162,7 +190,6 @@ async function updateHTML() {
         return { id: id, ...task };
     });
 
-    console.log(data);
 
     renderTasksByStatus("To do", "to-do");
     renderTasksByStatus("In progress", "in-progress");
@@ -202,19 +229,32 @@ function startDragging(id) {
 }
 
 function generateTaskElement(filteredTasks, index, description) {
-    return `<button class="task-card" draggable="true" ondragstart="startDragging('${filteredTasks[index].id}')" onclick="taskOpen('${filteredTasks[index].id}'); logDownWBubblingProtection(event);">
-            <h4 class="${filteredTasks[index].category}">${filteredTasks[index].category}</h4>
+    return `
+        <button class="task-card" draggable="true" 
+            ondragstart="startDragging('${filteredTasks[index].id}')"
+            onclick="taskOpen('${filteredTasks[index].id}'); logDownWBubblingProtection(event);">
+
+            <h4 class="${filteredTasks[index].category}">
+                ${filteredTasks[index].category}
+            </h4>
+
             <p>
-              <strong>${filteredTasks[index].title}</strong>
-              <span id="description'${filteredTasks[index].id}'">${description}</span>
+                <strong>${filteredTasks[index].title}</strong>
+                <span id="description-${filteredTasks[index].id}">
+                    ${description}
+                </span>
             </p>
-            <div class="progress-bar" id="progress-bar'${filteredTasks[index].id}'">
+
+            <div class="progress-bar" id="progress-bar-${filteredTasks[index].id}">
             </div>
-            <div class="user-prio" id="user-prio'${filteredTasks[index].id}'">
-              <span id="task-card-contacts'${filteredTasks[index].id}'"></span>
-              <div id="task-card-priority'${filteredTasks[index].id}'"></div>
+
+            <div class="user-prio" id="user-prio-${filteredTasks[index].id}">
+                <span id="task-card-contacts-${filteredTasks[index].id}"></span>
+                <div id="task-card-priority-${filteredTasks[index].id}"></div>
             </div>
-          </button>`;
+
+        </button>
+    `;
 }
 
 function allowDrop(ev) {
@@ -234,50 +274,65 @@ async function moveTo(status) {
 }
 
 function taskCardDescription(filteredTasks, index) {
-    if (document.getElementById(`description'${filteredTasks[index].id}'`).innerHTML === "") {
-        document.getElementById(`description'${filteredTasks[index].id}'`).classList.add("display-none");
+    if (document.getElementById(`description-${filteredTasks[index].id}`).innerHTML === "") {
+        document.getElementById(`description-${filteredTasks[index].id}`).classList.add("display-none");
     }
 }
 
 
 function taskCardUserPrio(filteredTasks, index) {
     if (
-        document.getElementById(`task-card-priority'${filteredTasks[index].id}'`).innerHTML === "" &&
-        document.getElementById(`task-card-contacts'${filteredTasks[index].id}'`).innerHTML === ""
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML === "" &&
+        document.getElementById(`task-card-contacts-${filteredTasks[index].id}`).innerHTML === ""
     ) {
-        document.getElementById(`user-prio'${filteredTasks[index].id}'`).classList.add("display-none");
+        document.getElementById(`user-prio-${filteredTasks[index].id}`).classList.add("display-none");
     }
 }
 
 function taskCardPriority(filteredTasks, index) {
     if (filteredTasks[index].priority === "urgent") {
-        document.getElementById(`task-card-priority'${filteredTasks[index].id}'`).innerHTML = `
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = `
         <img src="./assets/img/urgent.svg" alt="urgent" />`;
     } else if (filteredTasks[index].priority === "medium") {
-        document.getElementById(`task-card-priority'${filteredTasks[index].id}'`).innerHTML = `
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = `
         <img src="./assets/img/medium.svg" alt="medium" />`;
     } else if (filteredTasks[index].priority === "low") {
-        document.getElementById(`task-card-priority'${filteredTasks[index].id}'`).innerHTML = `
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = `
         <img src="./assets/img/low.svg" alt="low" />`;
     } else {
-        document.getElementById(`task-card-priority'${filteredTasks[index].id}'`).innerHTML = "";
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = "";
     }
 }
 
 function subtasksProgressBar(filteredTasks, index) {
-    if (filteredTasks[index].subtasks != "") {
-        document.getElementById(`progress-bar'${filteredTasks[index].id}'`).innerHTML = `
-        <progress id="subtasks" value="1" max="2"></progress>
-        <label for="subtasks">1/2 Subtasks</label>`;
-    } else {
-        document.getElementById(`progress-bar'${filteredTasks[index].id}'`).classList.add("display-none");
+    let task = filteredTasks[index];
+    let progressBar = document.getElementById(`progress-bar-${task.id}`);
+
+    if (!progressBar) return;
+
+    let subtasks = task.subtasks;
+
+    if (!subtasks || subtasks.length === 0) {
+        progressBar.innerHTML = "";
+        progressBar.classList.add("display-none");
+        return;
     }
+
+    let completed = subtasks.filter(subtask => subtask.done).length;
+    let total = subtasks.length;
+
+    progressBar.innerHTML = `
+        <progress value="${completed}" max="${total}"></progress>
+        <label>${completed}/${total} Subtasks</label>
+    `;
+
+    progressBar.classList.remove("display-none");
 }
 
 
 function taskCardContacts(filteredTasks, index) {
     if (filteredTasks[index].contacts != "") {
-        let taskCardContactsRef = document.getElementById(`task-card-contacts'${filteredTasks[index].id}'`);
+        let taskCardContactsRef = document.getElementById(`task-card-contacts-${filteredTasks[index].id}`);
         taskCardContactsRef.innerHTML = "";
 
         for (let contactIndex = 0; contactIndex < filteredTasks[index].contacts.length; contactIndex++) {
@@ -295,7 +350,7 @@ function taskCardContacts(filteredTasks, index) {
             </div>`;
         }
     } else {
-        document.getElementById(`task-card-contacts'${filteredTasks[index].id}'`).classList.add("display-none");
+        document.getElementById(`task-card-contacts-${filteredTasks[index].id}`).classList.add("display-none");
     }
 }
 
@@ -317,7 +372,10 @@ function editTask(id) {
     let task = tasks.find(task => task.id === id);
     currentTaskIndex = tasks.findIndex(task => task.id === id);
     if (!task) return;
+    renderEditTask(task, id);
+}
 
+function renderEditTask(task, id) {
     let taskRef = document.getElementById("task-content");
     taskRef.innerHTML = "";
 
@@ -328,7 +386,7 @@ function editTask(id) {
             </button>
         </div>
 
-        <form onsubmit="EditTaskChanged(event)">
+        <form onsubmit="EditTaskChanged(event, '${id}')">
         <div class="edit-task">
             <div class="form-area-fields">
                 <label for="edit-title">Title</label>
@@ -458,8 +516,8 @@ function editTask(id) {
                   </div>
         </div>
 
-            <button class="Ok">
-                <input type="submit" value="Ok">
+            <button type="submit" class="Ok">
+                Ok
                 <img src="./assets/img/check.svg" alt="check">
             </button>
         </form>
@@ -482,11 +540,18 @@ function editAddSubtask() {
 
     let task = tasks.find(task => task.id === currentEditTaskId);
 
+    if (!task) {
+        return;
+    }
+
     if (!task.subtasks) {
         task.subtasks = [];
     }
 
-    task.subtasks.push(value);
+    task.subtasks.push({
+        text: value,
+        done: false
+    });
 
     input.value = "";
 
@@ -507,7 +572,7 @@ function generateEditSubtasks(task) {
             <li class="subtask" id="subtask-${iSubtask}">
                 <div class="subtask-value">
                     <span class="bullet"></span>
-                    ${task.subtasks[iSubtask]}
+                    ${task.subtasks[iSubtask].text}
                 </div>
 
                 <span class="delete-edit">
@@ -669,7 +734,7 @@ function updateEditContactLine() {
     }
 }
 
-async function EditTaskChanged(event) {
+async function EditTaskChanged(event, id) {
     event.preventDefault();
 
     let titleInput = document.getElementById("edit-title");
@@ -753,69 +818,15 @@ async function EditTaskChanged(event) {
     task.priority = priority;
     task.contacts = selectedContacts;
 
+    data[id].title = title;
+    data[id].description = description;
+    data[id].date = date;
+    data[id].priority = priority;
+    data[id].contacts = selectedContacts;
+    data[id].subtasks = task.subtasks || [];
 
-    taskClose();
+
     updateHTML();
+    taskOpen(id)
 }
 
-
-function taskChanged() {
-    let taskRef = document.getElementById("task-content");
-    taskRef.innerHTML = "";
-
-    taskRef.innerHTML = `                    <div class="task-content-top">
-                        <h4>User Story</h4><button onclick="taskClose()"><img src="./assets/img/cancel.svg"
-                                alt="close"></button>
-                    </div>
-                    <h1>Kochwelt Page & Recipe Recommender</h1>
-                    <p>
-                        Build start page with recipe recommendation.
-                    </p>
-
-                    <div class="dateandprio"><span class="task-info-title">Due date:</span>10/05/2023</div>
-                    <div class="dateandprio"><span class="task-info-title">Priority:</span>
-                        <div>Medium<img src="./assets/img/Prio media.svg" alt="medium"></div>
-                    </div>
-
-                    <div class="task-assigned-to"><span class="task-info-title">Assigned To:</span>
-                        <div class="person">
-                            <div>AA</div>
-                            <span>Armin Alert</span>
-                        </div>
-                        <div class="person">
-                            <div style="background-color: rgba(31, 215, 193, 1)">EJ</div>
-                            <span>Eren Jäger</span>
-                        </div>
-                        <div class="person">
-                            <div style="background-color: rgba(31, 215, 193, 1)">MA</div>
-                            <span>Mikasa Ackermann</span>
-                        </div>
-                    </div>
-
-                    <div class="task-subtasks">
-                        <span class="task-info-title">Subtasks</span>
-
-                        <div>
-                            <input type="checkbox" id="subtask1" name="subtask1" class="subtask-input">
-                            <label for="subtask1" class="subtask-checkbox">
-                                <span></span>
-                                <img src="./assets/img/checked2.svg" alt="checked">
-                            </label>
-                            Implement Recipe Recommendation
-                        </div>
-
-                        <div>
-                            <input type="checkbox" id="subtask2" name="subtask2" class="subtask-input">
-                            <label for="subtask2" class="subtask-checkbox">
-                                <span></span>
-                                <img src="./assets/img/checked2.svg" alt="checked">
-                            </label>
-                            Start Page Layout
-                        </div>
-                    </div>
-                    <div class="task-bottom">
-                        <button><img src="./assets/img/delete.svg" alt="delete">Delete</button>
-                        <div class="line"></div>
-                        <button onclick="editTask();"><img src="./assets/img/edit.svg" alt="edit">Edit</button>
-                    </div>`
-}

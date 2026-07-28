@@ -182,11 +182,14 @@ function addSubtask() {
     let subtaskInput = document.getElementById("subtask");
 
     if (subtaskInput.value.length >= 3) {
-        subtasks.push(subtaskInput.value);
+        subtasks.push({
+            text: subtaskInput.value,
+            done: false
+        });
         subtaskInput.value = "";
         renderSubtasks()
     }
-
+    console.log(subtasks);
 }
 
 
@@ -203,7 +206,7 @@ function renderSubtasks() {
     subtaskInteraction.innerHTML = "";
 
     for (let iSubtask = 0; iSubtask < subtasks.length; iSubtask++) {
-        subtaskInteraction.innerHTML += getSubtaskTemplate(iSubtask, subtask);
+        subtaskInteraction.innerHTML += getSubtaskTemplate(iSubtask);
     }
 }
 
