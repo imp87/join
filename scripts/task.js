@@ -40,8 +40,10 @@ let colors = [
 let subtasks = []
 let tasks = []
 
-
 function toggleContactList() {
+    loadContacts();
+    sortTaskContactsByName();
+
     let contactListRef = document.getElementById("contact-list");
     contactListRef.classList.toggle("display-none");
     document.getElementById("contacts-arrow").classList.toggle("upside");

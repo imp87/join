@@ -1,0 +1,451 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: rgba(246, 247, 248, 1);
+    font-family: "Inter", sans-serif;
+}
+
+header nav button {
+    font-size: 16px;
+}
+
+.contacts-page {
+    margin-left: 232px;
+    margin-top: 96px;
+    width: calc(100% - 232px);
+    height: calc(100vh - 96px);
+    display: flex;
+}
+
+.contacts-list-panel {
+    width: 360px;
+    height: 100%;
+    background-color: white;
+    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.08);
+    padding: 24px 24px 0;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.add-contact-button {
+    width: 100%;
+    height: 56px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.add-contact-button:hover {
+    background-color: rgba(41, 171, 226, 1);
+}
+
+.add-contact-button img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+}
+
+.contacts-list {
+    height: calc(100% - 80px);
+    margin-top: 16px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.contacts-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.contacts-list::-webkit-scrollbar-thumb {
+    background-color: rgba(168, 168, 168, 1);
+    border-radius: 8px;
+}
+
+.contact-group-letter {
+    padding: 17px 36px;
+    font-size: 20px;
+}
+
+.contact-separator {
+    height: 1px;
+    margin: 0 0 8px;
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.contact-list-item {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    padding: 15px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.contact-list-item:hover {
+    background-color: rgba(246, 247, 248, 1);
+}
+
+.contact-list-item.active {
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+}
+
+.contact-list-item.active .contact-email {
+    color: rgba(41, 171, 226, 1);
+}
+
+.contact-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.contact-name {
+    margin: 0 0 4px;
+    font-size: 20px;
+    color: inherit;
+}
+
+.contact-email {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(0, 124, 238, 1);
+}
+
+.contacts-detail-panel {
+    padding: 100px 0 0 72px;
+    flex: 1;
+}
+
+.contacts-title {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.contacts-title h1 {
+    margin: 0;
+    font-size: 61px;
+    font-weight: 700;
+}
+
+.contacts-title div {
+    width: 3px;
+    height: 60px;
+    border-radius: 3px;
+    background-color: rgba(41, 171, 226, 1);
+}
+
+.contacts-title h2 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 400;
+    color: rgba(42, 54, 71, 1);
+}
+
+.contact-detail {
+    margin-top: 48px;
+}
+
+.contact-detail:empty {
+    display: none;
+}
+
+.contact-profile {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.contact-profile .contact-avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 47px;
+    border-width: 3px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.12);
+}
+
+.contact-profile h3 {
+    margin: 0 0 12px;
+    font-size: 47px;
+    font-weight: 500;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.contact-action {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(42, 54, 71, 1);
+    cursor: pointer;
+    padding: 0;
+}
+
+.contact-action:hover {
+    color: rgba(41, 171, 226, 1);
+    font-weight: 700;
+}
+
+.contact-action img {
+    width: 18px;
+    height: 18px;
+}
+
+.contact-info {
+    margin-top: 48px;
+}
+
+.contact-info h4 {
+    margin: 0 0 40px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.contact-info strong {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.contact-info a {
+    color: rgba(0, 124, 238, 1);
+    text-decoration: none;
+}
+
+.contact-info p {
+    margin: 0 0 24px;
+}
+
+.contact-overlay {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+}
+
+.contact-overlay[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-overlay::backdrop {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.contact-modal {
+    width: 1212px;
+    height: 592px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    background-color: white;
+}
+
+.contact-modal-sidebar {
+    width: 452px;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    padding: 154px 48px 0;
+}
+
+.contact-modal-sidebar img {
+    width: 56px;
+    margin-bottom: 20px;
+}
+
+.contact-modal-sidebar h2 {
+    margin: 0;
+    font-size: 61px;
+    line-height: 1;
+}
+
+.contact-modal-sidebar p {
+    margin: 12px 0 16px;
+    font-size: 27px;
+}
+
+.contact-modal-sidebar div {
+    width: 90px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: rgba(41, 171, 226, 1);
+}
+
+.contact-modal-content {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 72px;
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    border: none;
+    background-color: transparent;
+    color: rgba(42, 54, 71, 1);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.contact-modal-close img {
+    width: 14px;
+    height: 14px;
+}
+
+.contact-modal-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid white;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 47px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.16);
+    flex-shrink: 0;
+}
+
+.empty-avatar {
+    background-color: rgba(209, 209, 209, 1);
+}
+
+.empty-avatar img {
+    width: 48px;
+    height: 48px;
+    filter: brightness(0) invert(1);
+}
+
+.contact-modal-fields {
+    width: 422px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.contact-input {
+    height: 48px;
+    border: 1px solid rgba(209, 209, 209, 1);
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.contact-input:focus-within {
+    border-color: rgba(41, 171, 226, 1);
+}
+
+.contact-input input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 20px;
+}
+
+.contact-input img {
+    width: 20px;
+    height: 20px;
+}
+
+.contact-modal-actions {
+    display: flex;
+    gap: 24px;
+}
+
+.primary-contact-button,
+.secondary-contact-button {
+    min-height: 48px;
+    border-radius: 10px;
+    padding: 0 18px;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.primary-contact-button {
+    border: none;
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    font-weight: 700;
+}
+
+.primary-contact-button:hover {
+    background-color: rgba(41, 171, 226, 1);
+}
+
+.secondary-contact-button {
+    border: 1px solid rgba(42, 54, 71, 1);
+    background-color: white;
+    color: rgba(42, 54, 71, 1);
+}
+
+.secondary-contact-button:hover {
+    border-color: rgba(41, 171, 226, 1);
+    color: rgba(41, 171, 226, 1);
+}
+
+.primary-contact-button img {
+    width: 16px;
+    height: 16px;
+}
+
+.secondary-contact-button img {
+    width: 14px;
+    height: 14px;
+}
+
+.contact-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 48px;
+    transform: translateX(-50%) translateY(120px);
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
+    border-radius: 20px;
+    padding: 24px 32px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.16);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    z-index: 50;
+}
+
+.contact-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
