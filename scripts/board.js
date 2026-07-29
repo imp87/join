@@ -1,3 +1,6 @@
+let currentDraggedElement;
+let data = [];
+
 function submenuOpen() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.showModal();
@@ -23,185 +26,586 @@ function addTaskClose() {
 }
 
 
+async function updateHTML() {
+    let response = await fetch(
+        "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
+    );
 
-function taskOpen() {
-    let dialogRef = document.getElementById("task");
-    dialogRef.showModal();
+    data = await response.json();
+
+    tasks = Object.entries(data).map(([id, task]) => {
+        return { id: id, ...task };
+    });
+
+    renderAllTasksByStatus()
 }
+
+function renderAllTasksByStatus() {
+    renderTasksByStatus("To do", "to-do");
+    renderTasksByStatus("In progress", "in-progress");
+    renderTasksByStatus("Await feedback", "await-feedback");
+    renderTasksByStatus("Done", "done");
+}
+
+function renderTasksByStatus(status, containerId, taskList = tasks) {
+    let filteredTasks = taskList.filter(task => task.status === status);
+    let container = document.getElementById(containerId);
+
+    container.innerHTML = "";
+
+    if (filteredTasks.length === 0) {
+        container.innerHTML = `<div class="no-task">No tasks ${status}</div>`;
+        return;
+    }
+
+    for (let index = 0; index < filteredTasks.length; index++) {
+        let description = filteredTasks[index].description;
+
+        description = description.length > 45
+            ? description.slice(0, 45) + "..."
+            : description;
+
+        container.innerHTML += getFilteredTasksTemplate(filteredTasks, index, description);
+        getTaskElements(filteredTasks, index);
+    }
+}
+
+function getTaskElements(filteredTasks, index) {
+    subtasksProgressBar(filteredTasks, index);
+    taskCardContacts(filteredTasks, index);
+    taskCardPriority(filteredTasks, index);
+    taskCardUserPrio(filteredTasks, index);
+    taskCardDescription(filteredTasks, index);
+}
+
 
 function taskClose() {
     let dialogRef = document.getElementById("task");
     dialogRef.close();
+    updateHTML();
 }
 
 
 
-function editTask() {
-    let taskRef = document.getElementById("task-content");
-    taskRef.innerHTML = "";
 
-    taskRef.innerHTML = `       
-                        <div class="task-content-top" style="justify-content: flex-end;">
-                    <button onclick="taskClose()"><img src="./assets/img/cancel.svg"
-                                alt="close"></button>
-                    </div>     
-            <form action="">
-           
-                <div class="form-area-fields">
-                    <label for="title">Title</label>
-                    <input id="title" type="text" placeholder="Enter a title" required>
-                </div>
-
-                <div class="form-area-fields">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" cols="20"
-                        placeholder="Enter a Description"></textarea>
-                </div>
-
-                <div class="form-area-fields">
-                    <label for="due-date">Due date</label>
-                    <input type="date" id="due-date" name="due-date" required>
-                </div>
-
-                <div class="form-area-fields">
-                    <legend>Priority</legend>
-                        <div class="priority">
-                            <input class="radio__input" type="radio" id="urgent" name="priority"
-                                value="urgent">
-                                <label class="radio__label-urgent" for="urgent">Urgent <img
-                                    src="./assets/img/urgent.svg" alt="urgent"></label>
-
-                            <input class="radio__input" type="radio" id="medium" name="priority"
-                                value="medium">
-                                        <label class="radio__label-medium" for="medium">Medium <img
-                                                src="./assets/img/medium.svg" alt="medium"></label>
-
-                                        <input class="radio__input" type="radio" id="low" name="priority" value="low">
-                                        <label class="radio__label-low" for="low">Low <img src="./assets/img/low.svg"
-                                                alt="low"></label>
-                                    </div>
-                                   </div> 
-
-
-
-                                                                   <div class="form-area-fields">
-                                    <label for="contacts">Assigned to</label>
-                                    <div class="assigned-to">
-                                        <div class="custom-selectbox" onclick="toggleContactList()">
-                                            <input type="search" id="contacts" name="contacts"
-                                                placeholder="Select contacts to assign">
-                                            <div id="contacts-arrow" class="arrow"><img
-                                                    src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down"></div>
-                                        </div>
-
-                                        <div class="contact-list display-none" id="contact-list">
-
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact1"
-                                                name="assign-contact1">
-                                            <label class="custom-checkbox" for="assign-contact1">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div>AA</div>Armin Alert
-                                                </div>
-                                            </label>
-
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact2"
-                                                name="assign-contact2">
-                                            <label class="custom-checkbox" for="assign-contact2">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div style="background-color: rgba(0, 190, 232, 1);">EJ</div>Eren
-                                                    Jäger
-                                                </div>
-                                            </label>
-
-                                            <input class="checkbox-input" type="checkbox" id="assign-contact3"
-                                                name="assign-contact3">
-                                            <label class="custom-checkbox" for="assign-contact3">
-                                                <span></span>
-                                                <img src="./assets/img/checked.svg" alt="checked">
-                                                <div class="contact-name">
-                                                    <div style="background-color: rgba(0, 190, 232, 1);">AA</div>Mikasa
-                                                    Ackermann
-                                                </div>
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                </div>
-           
-                                <div class="form-area-fields">
-                                    <label for="subtask">Subtasks</label>
-                                    <input id="subtask" type="text" placeholder="Add new subtask">
-                                </div>
-
-                       
-<button class="Ok" onclick="taskChanged();"><input type="submit" value="Ok"><img
-                                        src="./assets/img/check.svg" alt="check"></button>
-
-            </form>            `
+function startDragging(id) {
+    currentDraggedElement = id;
 }
 
 
-function taskChanged() {
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+async function moveTo(status) {
+    await fetch(`https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${currentDraggedElement}.json`, {
+        method: "PATCH",
+        body: JSON.stringify({
+            status: status
+        })
+    });
+
+
+    updateHTML();
+}
+
+function taskCardDescription(filteredTasks, index) {
+    if (document.getElementById(`description-${filteredTasks[index].id}`).innerHTML === "") {
+        document.getElementById(`description-${filteredTasks[index].id}`).classList.add("display-none");
+    }
+}
+
+
+function taskCardUserPrio(filteredTasks, index) {
+    if (
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML === "" &&
+        document.getElementById(`task-card-contacts-${filteredTasks[index].id}`).innerHTML === ""
+    ) {
+        document.getElementById(`user-prio-${filteredTasks[index].id}`).classList.add("display-none");
+    }
+}
+
+function taskCardPriority(filteredTasks, index) {
+    if (filteredTasks[index].priority === "urgent") {
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = `
+        <img src="./assets/img/urgent.svg" alt="urgent" />`;
+    } else if (filteredTasks[index].priority === "medium") {
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = `
+        <img src="./assets/img/medium.svg" alt="medium" />`;
+    } else if (filteredTasks[index].priority === "low") {
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = `
+        <img src="./assets/img/low.svg" alt="low" />`;
+    } else {
+        document.getElementById(`task-card-priority-${filteredTasks[index].id}`).innerHTML = "";
+    }
+}
+
+function subtasksProgressBar(filteredTasks, index) {
+    let task = filteredTasks[index];
+    let progressBar = document.getElementById(`progress-bar-${task.id}`);
+
+    if (!progressBar) return;
+
+    let subtasks = task.subtasks;
+
+    if (!subtasks || subtasks.length === 0) {
+        progressBar.innerHTML = "";
+        progressBar.classList.add("display-none");
+        return;
+    }
+
+    let completed = subtasks.filter(subtask => subtask.done).length;
+    let total = subtasks.length;
+
+    progressBar.innerHTML = `
+        <progress value="${completed}" max="${total}"></progress>
+        <label>${completed}/${total} Subtasks</label>
+    `;
+
+    progressBar.classList.remove("display-none");
+}
+
+
+function taskCardContacts(filteredTasks, index) {
+    let contacts = filteredTasks[index].contacts;
+    let taskCardContactsRef = document.getElementById(`task-card-contacts-${filteredTasks[index].id}`);
+
+    if (!contacts || contacts.length === 0) {
+        taskCardContactsRef.classList.add("display-none");
+        return;
+    }
+
+    taskCardContactsRef.classList.remove("display-none");
+    taskCardContactsRef.innerHTML = "";
+
+    for (let contactIndex = 0; contactIndex < contacts.length; contactIndex++) {
+        let firstLetter = contacts[contactIndex].firstname[0];
+        let firstLetterLastName = contacts[contactIndex].lastname[0];
+
+        let contactColor = getContactColor(
+            contacts[contactIndex].firstname,
+            contacts[contactIndex].lastname
+        );
+
+        taskCardContactsRef.innerHTML += `
+            <div style="background-color: ${contactColor};">
+                ${firstLetter}${firstLetterLastName}
+            </div>`;
+    }
+}
+
+
+function highlight(id) {
+    document.getElementById(id).classList.add('drag-area-highlight')
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('drag-area-highlight')
+}
+
+
+
+function taskOpen(id) {
+    let dialogRef = document.getElementById("task");
+    dialogRef.showModal();
+    dialogRef.innerHTML = "";
+    let priority = data[id].priority;
+    let priorityFirstLetter = priority.charAt(0).toUpperCase() + priority.slice(1);
+
+    dialogRef.innerHTML = getOpenTaskTemplate(id);
+    taskOpenContactList(id);
+    taskOpenSubtasks(id);
+    taskOpenPriority(id, priority, priorityFirstLetter);
+    taskOpenAssignedTo(id);
+    taskOpenSubtasksDisplay(id);
+
+}
+
+function taskOpenPriority(id, priority, priorityFirstLetter) {
+    if (data[id].priority === "") {
+        document.getElementById(`task-open-priority'${id}'`).classList.add("display-none");
+        document.getElementById(`open-task-priority-div'${id}'`).innerHTML = "";
+    } else if (data[id].priority === `urgent` || data[id].priority === `medium` || data[id].priority === `low`) {
+        document.getElementById(`task-open-priority'${id}'`).classList.remove("display-none");
+        document.getElementById(`open-task-priority-div'${id}'`).innerHTML = `${priorityFirstLetter}<img src="./assets/img/${priority}.svg" alt="medium" />`
+    }
+}
+
+function taskOpenAssignedTo(id) {
+    if (data[id].contacts === "") {
+        document.getElementById(`task-assigned-to'${id}'`).classList.add("display-none");
+    }
+}
+
+function taskOpenSubtasksDisplay(id) {
+    if (!data[id].subtasks || data[id].subtasks.length === 0) {
+        document.getElementById(`task-subtasks'${id}'`).classList.add("display-none");
+    }
+}
+
+async function deleteTask(id) {
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${id}.json`,
+        {
+            method: "DELETE"
+        }
+    );
+
+    updateHTML();
+    taskClose();
+}
+
+function taskOpenContactList(id) {
+    let taskOpenContactListRef = document.getElementById("task-card-open-contact-list");
+    taskOpenContactListRef.innerHTML = "";
+
+    let contacts = data[id].contacts;
+
+    if (!contacts || contacts.length === 0) {
+        return;
+    }
+
+    for (let index = 0; index < contacts.length; index++) {
+        let contact = contacts[index];
+
+        let contactColor = getContactColor(
+            contact.firstname,
+            contact.lastname
+        );
+
+        taskOpenContactListRef.innerHTML += `
+            <div class="person">
+                <div style="background-color: ${contactColor};">
+                    ${contact.firstname[0]}${contact.lastname[0]}
+                </div>
+                <span>
+                    ${contact.firstname} ${contact.lastname}
+                </span>
+            </div>`;
+    }
+}
+
+function taskOpenSubtasks(id) {
+    let taskOpenSubtasksRef = document.getElementById("task-open-subtasks");
+    taskOpenSubtasksRef.innerHTML = "";
+
+    let subtasks = data[id].subtasks;
+
+    if (!subtasks || subtasks.length === 0) {
+        return;
+    }
+
+    for (let index = 0; index < subtasks.length; index++) {
+        taskOpenSubtasksRef.innerHTML += getOpenTaskSubtaskTemplate(id, index, subtasks);
+    }
+}
+
+async function updateSubtaskProgress(taskId, subtaskIndex) {
+    let checkbox = document.getElementById(`subtask${subtaskIndex}`);
+
+    data[taskId].subtasks[subtaskIndex].done = checkbox.checked;
+
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${taskId}.json`,
+        {
+            method: "PATCH",
+            body: JSON.stringify({
+                subtasks: data[taskId].subtasks
+            })
+        }
+    );
+
+    updateHTML();
+}
+
+
+
+let currentTaskIndex;
+let currentEditTaskId;
+
+function editTask(id) {
+    currentEditTaskId = id;
+    let task = tasks.find(task => task.id === id);
+    currentTaskIndex = tasks.findIndex(task => task.id === id);
+    if (!task) return;
+    renderEditTask(task, id);
+}
+
+function renderEditTask(task, id) {
     let taskRef = document.getElementById("task-content");
     taskRef.innerHTML = "";
 
-    taskRef.innerHTML = `                    <div class="task-content-top">
-                        <h4>User Story</h4><button onclick="taskClose()"><img src="./assets/img/cancel.svg"
-                                alt="close"></button>
-                    </div>
-                    <h1>Kochwelt Page & Recipe Recommender</h1>
-                    <p>
-                        Build start page with recipe recommendation.
-                    </p>
+    taskRef.innerHTML = getEditTaskTemplate(id, task);
+    generateEditContacts(task);
+    generateEditSubtasks(task);
+}
 
-                    <div class="dateandprio"><span class="task-info-title">Due date:</span>10/05/2023</div>
-                    <div class="dateandprio"><span class="task-info-title">Priority:</span>
-                        <div>Medium<img src="./assets/img/Prio media.svg" alt="medium"></div>
-                    </div>
+function editClearSubtask() {
+    document.getElementById("edit-subtask").value = "";
+}
 
-                    <div class="task-assigned-to"><span class="task-info-title">Assigned To:</span>
-                        <div class="person">
-                            <div>AA</div>
-                            <span>Armin Alert</span>
-                        </div>
-                        <div class="person">
-                            <div style="background-color: rgba(31, 215, 193, 1)">EJ</div>
-                            <span>Eren Jäger</span>
-                        </div>
-                        <div class="person">
-                            <div style="background-color: rgba(31, 215, 193, 1)">MA</div>
-                            <span>Mikasa Ackermann</span>
-                        </div>
-                    </div>
+function editAddSubtask() {
+    let input = document.getElementById("edit-subtask");
+    let value = input.value.trim();
 
-                    <div class="task-subtasks">
-                        <span class="task-info-title">Subtasks</span>
+    if (value === "") {
+        return;
+    }
 
-                        <div>
-                            <input type="checkbox" id="subtask1" name="subtask1" class="subtask-input">
-                            <label for="subtask1" class="subtask-checkbox">
-                                <span></span>
-                                <img src="./assets/img/checked2.svg" alt="checked">
-                            </label>
-                            Implement Recipe Recommendation
-                        </div>
+    let task = tasks.find(task => task.id === currentEditTaskId);
 
-                        <div>
-                            <input type="checkbox" id="subtask2" name="subtask2" class="subtask-input">
-                            <label for="subtask2" class="subtask-checkbox">
-                                <span></span>
-                                <img src="./assets/img/checked2.svg" alt="checked">
-                            </label>
-                            Start Page Layout
-                        </div>
-                    </div>
-                    <div class="task-bottom">
-                        <button><img src="./assets/img/delete.svg" alt="delete">Delete</button>
-                        <div class="line"></div>
-                        <button onclick="editTask();"><img src="./assets/img/edit.svg" alt="edit">Edit</button>
-                    </div>`
+    if (!task) {
+        return;
+    }
+
+    if (!task.subtasks) {
+        task.subtasks = [];
+    }
+
+    task.subtasks.push({
+        text: value,
+        done: false
+    });
+
+    input.value = "";
+
+    generateEditSubtasks(task);
+}
+
+function generateEditSubtasks(task) {
+    let subtaskRef = document.getElementById("edit-subtask-interaction");
+    subtaskRef.innerHTML = "";
+
+    if (!task.subtasks || task.subtasks.length === 0) {
+        return;
+    }
+
+    for (let iSubtask = 0; iSubtask < task.subtasks.length; iSubtask++) {
+
+        subtaskRef.innerHTML += getEditTaskSubtaskTemplate(iSubtask, task);
+    }
+}
+
+function editEditSubtasks(iSubtask) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    let subtaskRef = document.getElementById(`subtask-${iSubtask}`);
+
+    subtaskRef.innerHTML = getEditTaskEditSubtaskTemplate(iSubtask, task);;
+}
+
+function saveEditedSubtask(iSubtask) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    let input = document.getElementById(`edit-edit-subtask-${iSubtask}`);
+
+    let newValue = input.value.trim();
+
+    if (newValue === "") return;
+
+    task.subtasks[iSubtask].text = newValue;
+
+    generateEditSubtasks(task);
+}
+
+function editDeleteSubtask(iSubtask) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    task.subtasks.splice(iSubtask, 1);
+
+    generateEditSubtasks(task);
+}
+
+function toggleEditContactList() {
+    document.getElementById("edit-contact-list").classList.toggle("display-none");
+}
+
+function generateEditContacts(task) {
+    let contactsHTML = document.getElementById("edit-contact-list");
+    let contactLine = document.getElementById("edit-contact-line");
+    contactsHTML.innerHTML = "";
+    contactLine.innerHTML = "";
+
+
+    if (!task.contacts || task.contacts.length === 0) {
+        return;
+    }
+
+
+    let renderedContacts = 0;
+
+    for (let i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+
+        let isChecked = task.contacts?.some(taskContact =>
+            taskContact.firstname === contact.firstname &&
+            taskContact.lastname === contact.lastname
+        );
+
+        let firstLetter = contact.firstname[0];
+        let firstLetterLastName = contact.lastname[0];
+
+        let contactColor = getContactColor(
+            contact.firstname,
+            contact.lastname
+        );
+
+        contactsHTML.innerHTML += getEditTaskContactTemplate(i, isChecked, contactColor, contact, firstLetter, firstLetterLastName);
+
+
+        if (isChecked && renderedContacts < 3) {
+            contactLine.innerHTML += `
+                <div class="initials" style="background-color: ${contactColor}">
+                    ${firstLetter}${firstLetterLastName}
+                </div>
+            `;
+
+            renderedContacts++;
+        }
+    }
+}
+
+function updateEditContactLine() {
+    let contactLine = document.getElementById("edit-contact-line");
+    contactLine.innerHTML = "";
+
+    let renderedContacts = 0;
+
+    for (let i = 0; i < contacts.length; i++) {
+        let checkbox = document.getElementById(`edit-contact${i}`);
+
+        if (checkbox && checkbox.checked && renderedContacts < 3) {
+            let contact = contacts[i];
+
+            let contactColor = getContactColor(
+                contact.firstname,
+                contact.lastname
+            );
+
+            contactLine.innerHTML += `
+                <div class="initials" style="background-color: ${contactColor}">
+                    ${contact.firstname[0]}${contact.lastname[0]}
+                </div>
+            `;
+
+            renderedContacts++;
+        }
+    }
+}
+
+async function EditTaskChanged(event, id) {
+    event.preventDefault();
+
+    let titleInput = document.getElementById("edit-title");
+    let dateInput = document.getElementById("edit-date");
+
+    let title = titleInput.value.trim();
+    let description = document.getElementById("edit-description").value.trim();
+    let date = dateInput.value;
+
+    let titleError = document.getElementById("edit-title-error");
+    let dateError = document.getElementById("edit-date-error");
+
+    titleError.innerHTML = "";
+    dateError.innerHTML = "";
+    titleInput.classList.remove("input-error");
+    dateInput.classList.remove("input-error");
+
+    let hasError = false;
+
+
+    if (title === "") {
+        titleError.innerHTML = "*This field is required";
+        titleInput.classList.add("input-error");
+        hasError = true;
+    }
+
+
+    if (date === "") {
+        dateError.innerHTML = "*This field is required";
+        dateInput.classList.add("input-error");
+        hasError = true;
+    }
+
+
+    if (hasError) {
+        return;
+    }
+
+
+    let priority = document.querySelector('input[name="edit-priority"]:checked')?.value || "";
+
+
+    let selectedContacts = [];
+
+    for (let i = 0; i < contacts.length; i++) {
+        let checkbox = document.getElementById(`edit-contact${i}`);
+
+        if (checkbox && checkbox.checked) {
+            selectedContacts.push({
+                firstname: contacts[i].firstname,
+                lastname: contacts[i].lastname
+            });
+        }
+    }
+
+
+    let task = tasks.find(task => task.id === currentEditTaskId);
+
+    if (!task) return;
+
+
+    await fetch(
+        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${currentEditTaskId}.json`,
+        {
+            method: "PATCH",
+            body: JSON.stringify({
+                title: title,
+                description: description,
+                date: date,
+                priority: priority,
+                contacts: selectedContacts,
+                subtasks: task.subtasks || []
+            })
+        }
+    );
+
+
+    task.title = title;
+    task.description = description;
+    task.date = date;
+    task.priority = priority;
+    task.contacts = selectedContacts;
+
+    data[id].title = title;
+    data[id].description = description;
+    data[id].date = date;
+    data[id].priority = priority;
+    data[id].contacts = selectedContacts;
+    data[id].subtasks = task.subtasks || [];
+
+
+    updateHTML();
+    taskOpen(id)
+}
+
+
+function searchTasks() {
+    let searchValue = document.getElementById("search-bar").value.toLowerCase();
+
+    let filteredTasks = tasks.filter(task =>
+        task.title.toLowerCase().includes(searchValue) ||
+        task.description.toLowerCase().includes(searchValue) ||
+        task.category.toLowerCase().includes(searchValue)
+    );
+
+    renderSearchResults(filteredTasks);
+}
+
+
+function renderSearchResults(filteredTasks) {
+    renderTasksByStatus("To do", "to-do", filteredTasks);
+    renderTasksByStatus("In progress", "in-progress", filteredTasks);
+    renderTasksByStatus("Await feedback", "await-feedback", filteredTasks);
+    renderTasksByStatus("Done", "done", filteredTasks);
 }

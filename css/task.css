@@ -51,6 +51,7 @@
     display: flex;
     justify-content: space-between;
     gap: 40px;
+    height: 550px;
 }
 
 .form-area {
@@ -74,7 +75,7 @@
 .form-area-fields label {
     font-size: 20px;
     color: rgba(42, 54, 71, 1);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .form-area-fields input {
@@ -100,6 +101,8 @@
     border: solid;
     border-color: rgba(209, 209, 209, 1);
     border-width: 1px;
+    resize: vertical;
+    max-height: 180px;
 }
 
 .form-area-fields input[type="date"] {
@@ -203,6 +206,18 @@
     align-items: center;
     z-index: 5;
     justify-content: space-between;
+    position: relative;
+}
+
+.category-input {
+    cursor: pointer;
+    pointer-events: none !important;
+    padding-left: 0 !important;
+    border: none !important;
+}
+
+.category-input::placeholder {
+    color: black;
 }
 
 .assigned-to input {
@@ -333,7 +348,11 @@ input[type="checkbox" i] {
     border-width: 2px
 }
 
-
+.contact-line {
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
+}
 
 
 
@@ -345,6 +364,7 @@ input[type="checkbox" i] {
     flex-direction: column;
     font-size: 20px;
     cursor: pointer;
+    z-index: 5;
 }
 
 .category-options {
@@ -370,11 +390,169 @@ input[type="checkbox" i] {
 }
 
 
+
+.subtask-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subtask-input-container input {
+    width: 100%;
+}
+
+.subtask-actions {
+    display: none;
+    position: absolute;
+    right: 10px;
+}
+
+.subtask-actions button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+
+.subtask-input-container:focus-within .subtask-actions {
+    display: flex;
+}
+
+
+.subtask-interaction {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 35px;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.subtask {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+    border-radius: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    height: 20px;
+}
+
+.subtask-value {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.subtask:hover {
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.subtask:hover .delete-edit {
+    display: flex;
+}
+
+.delete-edit {
+    display: none;
+    align-items: center;
+    margin-right: 16px;
+    gap: 5px;
+}
+
+.delete-edit button {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-edit button:hover {
+    scale: calc(1.1);
+}
+
+
+.bullet {
+    width: 6px;
+    height: 6px;
+    background-color: black;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+
+
+
+
+
+
+.edit-subtask {
+    display: flex;
+    width: 100%;
+    background-color: white;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: rgba(18, 70, 88, 1);
+}
+
+.edit-subtask input {
+    height: 32px;
+    padding: 0;
+    margin-left: 15px;
+    flex-grow: 1;
+    font-size: 16px;
+    border: none;
+    background: none;
+}
+
+.edit-subtask input:focus .edit-subtask {
+    border-color: rgba(0, 93, 255, 1);
+}
+
+
+.delete-check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 15px;
+}
+
+.delete-check button {
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.delete-check button img {
+    width: 16px;
+}
+
+
+
+
+
+
+
+
+
+
 .form-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 100px;
+    width: inherit;
 }
 
 .cancel {
@@ -447,9 +625,80 @@ input[type="checkbox" i] {
 }
 
 .display-none {
-    display: none;
+    display: none !important;
 }
+
+
 
 .upside {
     transform: rotate(180deg);
+}
+
+
+
+
+.input-error {
+    border: 1px solid rgba(230, 0, 38, 1) !important;
+}
+
+.validation-message {
+    font-size: 16px;
+    color: rgba(230, 0, 38, 1);
+    height: 0px;
+    margin-top: 3px;
+}
+
+
+input:focus {
+    border-color: rgba(18, 70, 88, 1);
+}
+
+.custom-selectbox:focus-within {
+    border-color: rgba(18, 70, 88, 1);
+}
+
+textarea:focus-visible {
+    border-color: rgba(18, 70, 88, 1);
+    border-width: 1px;
+    outline: 0;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+}
+
+
+
+.success-dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-size: 20px;
+    background-color: rgba(42, 54, 71, 1);
+    border: none;
+    border-radius: 24px;
+    color: white;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    width: 280px;
+    height: 30px;
+    animation: slideUp 0.3s ease-out;
+}
+
+.success-dialog::backdrop {
+    background: none;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(800px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
