@@ -37,14 +37,14 @@ function getEditSubtaskTemplate(iSubtask) {
     return `<div class="edit-subtask">
                 <input 
                 id="edit-subtask-${iSubtask}" 
-                value="${subtasks[iSubtask]}">
+                value="${subtasks[iSubtask].text}">
                 </input>
                 <span class="delete-check">
                     <button onclick="deleteSubtask(${iSubtask})" type="button">
                         <img src="./assets/img/delete.svg" alt="delete">
                     </button>
                     <div class="line"></div>
-                    <button onclick="SubtaskEdited(${iSubtask})" type="button">
+                    <button onclick="subtaskEdited(${iSubtask})" type="button">
                         <img src="./assets/img/checkblue.svg" alt="check">
                     </button>
                 </span>

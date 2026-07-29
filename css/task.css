@@ -425,6 +425,7 @@ input[type="checkbox" i] {
     list-style: none;
     padding: 0;
     margin: 0;
+    height: 35px;
     max-height: 100px;
     overflow-y: auto;
 }
@@ -650,6 +651,16 @@ input[type="checkbox" i] {
 
 input:focus {
     border-color: rgba(18, 70, 88, 1);
+}
+
+.custom-selectbox:focus-within {
+    border-color: rgba(18, 70, 88, 1);
+}
+
+textarea:focus-visible {
+    border-color: rgba(18, 70, 88, 1);
+    border-width: 1px;
+    outline: 0;
 }
 
 input[type="search"]::-webkit-search-cancel-button {

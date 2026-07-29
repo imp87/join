@@ -3,13 +3,11 @@ header {
     width: 100%;
     position: fixed;
     display: flex;
-    justify-content: center;
     height: 96px;
     background-color: rgba(255, 255, 255, 1);
 }
 
 header nav {
-    max-width: 1920px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -94,7 +92,6 @@ header nav button:hover {
 main {
     max-width: 1920px;
     width: 100%;
-    align-self: center;
     display: flex;
 }
 
@@ -175,4 +172,9 @@ main {
 .menu-bottom:hover {
     color: rgba(41, 171, 226, 1);
     font-weight: bold;
+}
+
+button {
+    cursor: pointer;
+    border: unset;
 }

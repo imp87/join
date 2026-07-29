@@ -218,9 +218,9 @@ function editSubtasks(iSubtask) {
 }
 
 
-function SubtaskEdited(iSubtask) {
+function subtaskEdited(iSubtask) {
     let editSubtaskInput = document.getElementById(`edit-subtask-${iSubtask}`)
-    subtasks[iSubtask] = editSubtaskInput.value;
+    subtasks[iSubtask].text = editSubtaskInput.value;
 
     renderSubtasks()
 }
