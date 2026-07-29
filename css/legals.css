@@ -1,5 +1,8 @@
 body {
 	background-color: #f6f7f8;
+	font-family: "Inter", sans-serif;
+	margin: 0;
+	min-height: 100vh;
 	text-wrap: balance;
 }
 
@@ -27,9 +30,6 @@ ul {
 }
 
 .textWrapper {
-	margin-left: 232px;
-	margin-top: 96px;
-	margin-right: 32px;
 	padding: 26px 32px 26px 32px;
 	display: flex;
 	flex-direction: column;
@@ -38,4 +38,14 @@ ul {
 
 .brandName {
 	color: #29abe2;
+}
+
+.legal-content {
+	margin: 96px 32px 64px 348px;
+	max-width: 1200px;
+	width: calc(100% - 380px);
+}
+
+.legal-content section {
+	margin: 0;
 }
