@@ -425,8 +425,7 @@ input[type="checkbox" i] {
     list-style: none;
     padding: 0;
     margin: 0;
-    height: 35px;
-    max-height: 100px;
+    height: 60px;
     overflow-y: auto;
 }
 

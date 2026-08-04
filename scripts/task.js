@@ -1,40 +1,3 @@
-let contacts = [
-    {
-        "firstname": "Armin",
-        "lastname": "Alert"
-    },
-    {
-        "firstname": "Eren",
-        "lastname": "Jäger"
-    },
-    {
-        "firstname": "Mikasa",
-        "lastname": "Ackermann"
-    },
-    {
-        "firstname": "Levi",
-        "lastname": "Ackermann"
-    }
-]
-
-
-let colors = [
-    "rgba(255, 122, 0, 1)",
-    "rgba(255, 94, 179, 1)",
-    "rgba(110, 82, 255, 1)",
-    "rgba(147, 39, 255, 1)",
-    "rgba(0, 190, 232, 1)",
-    "rgba(31, 215, 193, 1)",
-    "rgba(255, 116, 94, 1)",
-    "rgba(255, 163, 94, 1)",
-    "rgba(252, 113, 255, 1)",
-    "rgba(255, 199, 1, 1)",
-    "rgba(0, 56, 255, 1)",
-    "rgba(195, 255, 43, 1)",
-    "rgba(255, 230, 43, 1)",
-    "rgba(255, 70, 70, 1)",
-    "rgba(255, 187, 43, 1)"
-]
 
 
 let subtasks = []
@@ -50,11 +13,15 @@ function toggleContactList() {
 
     if (contactListRef.innerHTML !== "") return;
     for (let iContact = 0; iContact < contacts.length; iContact++) {
-        let firstLetter = contacts[iContact].firstname[0];
-        let firstLetterLastName = contacts[iContact].lastname[0];
-        let contactColor = getContactColor(contacts[iContact].firstname, contacts[iContact].lastname);
-        contactListRef.innerHTML += getTaskContactTemplate(iContact, contactColor, firstLetter, firstLetterLastName);
+        contactListRef.innerHTML += getTaskContactTemplate(iContact);
     }
+}
+
+
+function sortTaskContactsByName() {
+    contacts.sort(function (contactA, contactB) {
+        return contactA.name.localeCompare(contactB.name);
+    });
 }
 
 
@@ -67,19 +34,12 @@ function updateSelectedContacts() {
         if (index < 3) {
             let contactIndex = box.id.replace("assign-contact", "");
             let contact = contacts[contactIndex];
-            let contactColor = getContactColor(contact.firstname, contact.lastname);
-            contactLine.innerHTML += `<div class="initials" style="background-color: ${contactColor}">${contact.firstname[0]}${contact.lastname[0]}</div>`;
+            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
         }
     });
 }
 
 
-function getContactColor(firstname, lastname) {
-    let letters = (firstname[0] + lastname[0]).toUpperCase();
-    let sum = letters.charCodeAt(0) + letters.charCodeAt(1);
-
-    return colors[sum % colors.length];
-}
 
 
 function toggleCategoryOptions() {
@@ -114,8 +74,9 @@ async function addToTasks(event) {
         let contactIndex = box.id.replace("assign-contact", "");
 
         assignedContacts.push({
-            firstname: contacts[contactIndex].firstname,
-            lastname: contacts[contactIndex].lastname
+            name: contacts[contactIndex].name,
+            initials: contacts[contactIndex].initials,
+            color: contacts[contactIndex].color,
         });
     });
 
