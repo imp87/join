@@ -2,8 +2,12 @@ let selectedContactIndex = -1;
 let editingContactIndex = -1;
 let isEditMode = false;
 
+async function initContacts() {
+    await loadContacts();
+    renderContacts();
+}
+
 function renderContacts() {
-    loadContacts();
     sortContactsByName();
 
     let contactsList = document.getElementById("contactsList");
@@ -145,7 +149,7 @@ function closeContactOverlay() {
     document.getElementById("contactOverlay").close();
 }
 
-function saveContact(event) {
+async function saveContact(event) {
     event.preventDefault();
 
     let name = document.getElementById("contactNameInput").value.trim();
@@ -154,25 +158,33 @@ function saveContact(event) {
     let initials = getInitials(name);
 
     if (isEditMode) {
-        updateContact(name, email, phone, initials);
+        await updateContact(name, email, phone, initials);
     } else {
-        createContact(name, email, phone, initials);
+        await createContact(name, email, phone, initials);
     }
 }
 
-function updateContact(name, email, phone, initials) {
-    contacts[editingContactIndex].name = name;
-    contacts[editingContactIndex].email = email;
-    contacts[editingContactIndex].phone = phone;
-    contacts[editingContactIndex].initials = initials;
+async function updateContact(name, email, phone, initials) {
+    let contact = contacts[editingContactIndex];
 
-    saveContacts();
+    contact.name = name;
+    contact.email = email;
+    contact.phone = phone;
+    contact.initials = initials;
+
+    await patchContactInDatabase(contact.id, {
+        name: name,
+        email: email,
+        phone: phone,
+        initials: initials,
+    });
+
     closeContactOverlay();
     renderContacts();
     selectContactByEmail(email);
 }
 
-function createContact(name, email, phone, initials) {
+async function createContact(name, email, phone, initials) {
     let newContact = {
         name: name,
         email: email,
@@ -181,25 +193,24 @@ function createContact(name, email, phone, initials) {
         color: getNextContactColor(),
     };
 
-    contacts.push(newContact);
-    selectedContactIndex = contacts.length - 1;
+    await postContactToDatabase(newContact);
 
-    saveContacts();
     closeContactOverlay();
     renderContacts();
     selectContactByEmail(email);
     showContactToast("Contact successfully created");
 }
 
-function deleteContact(index) {
+async function deleteContact(index) {
     if (index < 0) {
         return;
     }
 
+    await deleteContactFromDatabase(contacts[index].id);
+
     contacts.splice(index, 1);
     selectedContactIndex = -1;
 
-    saveContacts();
     closeContactOverlayIfOpen();
     renderContacts();
     document.getElementById("contactDetail").innerHTML = "";
