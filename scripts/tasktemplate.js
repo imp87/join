@@ -1,16 +1,16 @@
-function getTaskContactTemplate(iContact, contactColor, firstLetter, firstLetterLastName) {
+function getTaskContactTemplate(iContact) {
     return `<input class="checkbox-input" 
             type="checkbox" 
             id="assign-contact${iContact}"
             name="assign-contact" 
-            value="${contacts[iContact].firstname} ${contacts[iContact].lastname}" 
+            value="${contacts[iContact].name}" 
             onchange="updateSelectedContacts()">
             <label class="custom-checkbox" for="assign-contact${iContact}">
                 <span></span>
                 <img src="./assets/img/checked.svg" alt="checked">
                 <div class="contact-name">
-                    <div class="initials" style="background-color: ${contactColor};">${firstLetter}${firstLetterLastName}</div>
-                    ${contacts[iContact].firstname} ${contacts[iContact].lastname}
+                    <div class="initials" style="background-color: ${contacts[iContact].color};">${contacts[iContact].initials}</div>
+                    ${contacts[iContact].name}
                 </div>
             </label>`
 }
@@ -336,7 +336,7 @@ function getEditTaskEditSubtaskTemplate(iSubtask, task) {
 }
 
 
-function getEditTaskContactTemplate(i, isChecked, contactColor, contact, firstLetter, firstLetterLastName) {
+function getEditTaskContactTemplate(i, isChecked, contact) {
     return `<input 
                 class="checkbox-input" 
                 type="checkbox"
@@ -349,10 +349,10 @@ function getEditTaskContactTemplate(i, isChecked, contactColor, contact, firstLe
                 <img src="./assets/img/checked.svg" alt="checked">
 
                 <div class="contact-name">
-                    <div class="initials" style="background-color: ${contactColor}">
-                        ${firstLetter}${firstLetterLastName}
+                    <div class="initials" style="background-color: ${contact.color}">
+                        ${contact.initials}
                     </div>
-                    ${contact.firstname} ${contact.lastname}
+                    ${contact.name}
                 </div>
             </label>`
 }

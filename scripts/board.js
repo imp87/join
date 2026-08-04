@@ -33,11 +33,19 @@ async function updateHTML() {
 
     data = await response.json();
 
-    tasks = Object.entries(data).map(([id, task]) => {
-        return { id: id, ...task };
-    });
+    if (!data) {
+        data = {};
+        tasks = [];
+        renderAllTasksByStatus();
+        return;
+    }
 
-    renderAllTasksByStatus()
+    tasks = Object.entries(data).map(([id, task]) => ({
+        id,
+        ...task
+    }));
+
+    renderAllTasksByStatus();
 }
 
 function renderAllTasksByStatus() {
@@ -179,17 +187,9 @@ function taskCardContacts(filteredTasks, index) {
     taskCardContactsRef.innerHTML = "";
 
     for (let contactIndex = 0; contactIndex < contacts.length; contactIndex++) {
-        let firstLetter = contacts[contactIndex].firstname[0];
-        let firstLetterLastName = contacts[contactIndex].lastname[0];
-
-        let contactColor = getContactColor(
-            contacts[contactIndex].firstname,
-            contacts[contactIndex].lastname
-        );
-
         taskCardContactsRef.innerHTML += `
-            <div style="background-color: ${contactColor};">
-                ${firstLetter}${firstLetterLastName}
+            <div style="background-color: ${contacts[contactIndex].color};">
+                ${contacts[contactIndex].initials}
             </div>`;
     }
 }
@@ -267,19 +267,13 @@ function taskOpenContactList(id) {
 
     for (let index = 0; index < contacts.length; index++) {
         let contact = contacts[index];
-
-        let contactColor = getContactColor(
-            contact.firstname,
-            contact.lastname
-        );
-
         taskOpenContactListRef.innerHTML += `
             <div class="person">
-                <div style="background-color: ${contactColor};">
-                    ${contact.firstname[0]}${contact.lastname[0]}
+                <div style="background-color: ${contact.color};">
+                    ${contact.initials}
                 </div>
                 <span>
-                    ${contact.firstname} ${contact.lastname}
+                    ${contact.name}
                 </span>
             </div>`;
     }
@@ -427,9 +421,6 @@ function generateEditContacts(task) {
     contactLine.innerHTML = "";
 
 
-    if (!task.contacts || task.contacts.length === 0) {
-        return;
-    }
 
 
     let renderedContacts = 0;
@@ -438,25 +429,19 @@ function generateEditContacts(task) {
         let contact = contacts[i];
 
         let isChecked = task.contacts?.some(taskContact =>
-            taskContact.firstname === contact.firstname &&
-            taskContact.lastname === contact.lastname
+            taskContact.name === contact.name &&
+            taskContact.initials === contact.initials &&
+            taskContact.color === contact.color
         );
 
-        let firstLetter = contact.firstname[0];
-        let firstLetterLastName = contact.lastname[0];
 
-        let contactColor = getContactColor(
-            contact.firstname,
-            contact.lastname
-        );
-
-        contactsHTML.innerHTML += getEditTaskContactTemplate(i, isChecked, contactColor, contact, firstLetter, firstLetterLastName);
+        contactsHTML.innerHTML += getEditTaskContactTemplate(i, isChecked, contact);
 
 
         if (isChecked && renderedContacts < 3) {
             contactLine.innerHTML += `
-                <div class="initials" style="background-color: ${contactColor}">
-                    ${firstLetter}${firstLetterLastName}
+                <div class="initials" style="background-color: ${contact.color}">
+                    ${contact.initials}
                 </div>
             `;
 
@@ -476,15 +461,9 @@ function updateEditContactLine() {
 
         if (checkbox && checkbox.checked && renderedContacts < 3) {
             let contact = contacts[i];
-
-            let contactColor = getContactColor(
-                contact.firstname,
-                contact.lastname
-            );
-
             contactLine.innerHTML += `
-                <div class="initials" style="background-color: ${contactColor}">
-                    ${contact.firstname[0]}${contact.lastname[0]}
+                <div class="initials" style="background-color: ${contact.color}">
+                    ${contact.name}
                 </div>
             `;
 
@@ -543,8 +522,9 @@ async function EditTaskChanged(event, id) {
 
         if (checkbox && checkbox.checked) {
             selectedContacts.push({
-                firstname: contacts[i].firstname,
-                lastname: contacts[i].lastname
+                name: contacts[i].name,
+                initials: contacts[i].initials,
+                color: contacts[i].color
             });
         }
     }

@@ -90,19 +90,46 @@
     border-width: 1px;
 }
 
+.custom-textarea {
+    position: relative;
+    background-color: white;
+    border-radius: 10px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(209, 209, 209, 1);
+}
+
 .form-area-fields textarea {
     font-family: inherit;
-    border-radius: 10px;
     padding-left: 15px;
+    width: 90%;
     padding-right: 15px;
     padding-bottom: 10px;
     padding-top: 10px;
     font-size: 20px;
-    border: solid;
-    border-color: rgba(209, 209, 209, 1);
-    border-width: 1px;
-    resize: vertical;
+    border: none;
+    border-radius: inherit;
+    resize: none;
+    height: 120px;
+    min-height: 120px;
     max-height: 180px;
+    box-sizing: border-box;
+}
+
+.resize-handle {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    cursor: nwse-resize;
+    width: 18px;
+}
+
+textarea:focus-visible {
+    outline: none;
+}
+
+.custom-textarea:focus-within {
+    border-color: rgba(18, 70, 88, 1);
 }
 
 .form-area-fields input[type="date"] {
@@ -425,8 +452,7 @@ input[type="checkbox" i] {
     list-style: none;
     padding: 0;
     margin: 0;
-    height: 35px;
-    max-height: 100px;
+    height: 60px;
     overflow-y: auto;
 }
 
@@ -657,11 +683,6 @@ input:focus {
     border-color: rgba(18, 70, 88, 1);
 }
 
-textarea:focus-visible {
-    border-color: rgba(18, 70, 88, 1);
-    border-width: 1px;
-    outline: 0;
-}
 
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;

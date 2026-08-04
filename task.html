@@ -8,13 +8,15 @@
   <script src="./scripts/task.js"></script>
   <script src="./scripts/script.js"></script>
   <script src="./scripts/tasktemplate.js"></script>
+  <script src="./scripts/contacts-data.js"></script>
+  <script src="./scripts/contacts.js"></script>
   <link rel="stylesheet" href="./css/board.css" />
   <link rel="stylesheet" href="./css/task.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <title>Join - Task</title>
 </head>
 
-<body onload="setMinDate()">
+<body onload="setMinDate();" onclick="closeContactList(); closeCategoryOptions();">
   <header>
     <nav>
       <h2>Kanban Project Management Tool</h2>
@@ -67,8 +69,12 @@
 
                 <div class="form-area-fields">
                   <label for="description">Description</label>
-                  <textarea id="description" name="description" rows="4" cols="20"
-                    placeholder="Enter a Description"></textarea>
+                  <div class="custom-textarea">
+                    <textarea oninput="limitTextarea(this);" id="description" name="description"
+                      placeholder="Enter a Description"></textarea>
+                    <img src="./assets/img/Recurso.svg" alt="Recurso" class="resize-handle"
+                      onmousedown="startResize(event)" draggable="false">
+                  </div>
                 </div>
 
                 <div class="form-area-fields">
@@ -100,14 +106,15 @@
                 <div class="form-area-fields">
                   <label for="contacts">Assigned to</label>
                   <div class="assigned-to">
-                    <div class="custom-selectbox" onclick="toggleContactList()">
+                    <div class="custom-selectbox" onclick="toggleContactList(); logDownWBubblingProtection(event);">
                       <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign" />
                       <div id="contacts-arrow" class="arrow">
                         <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down" />
                       </div>
                     </div>
 
-                    <div class="contact-list display-none" id="contact-list"></div>
+                    <div class="contact-list display-none" id="contact-list"
+                      onclick="logDownWBubblingProtection(event);"></div>
                   </div>
                   <div id="contact-line" class="contact-line"></div>
                 </div>
@@ -116,8 +123,8 @@
                   <label>Category<span style="color: rgba(255, 129, 144, 1)">*</span></label>
 
                   <div class="custom-select">
-                    <div class="custom-selectbox" style="padding-left: 15px" onclick="toggleCategoryOptions()"
-                      id="custom-category-input">
+                    <div class="custom-selectbox" style="padding-left: 15px"
+                      onclick="toggleCategoryOptions(); logDownWBubblingProtection(event);" id="custom-category-input">
                       <input type="text" name="category" id="category-input" placeholder="Select task category"
                         class="category-input">
                       <div class="arrow" id="category-arrow">
@@ -125,7 +132,8 @@
                       </div>
                     </div>
                     <div class="validation-message" id="validation-message"></div>
-                    <div class="category-options display-none" id="category-options">
+                    <div class="category-options display-none" id="category-options"
+                      onclick="logDownWBubblingProtection(event);">
                       <div onclick="selectCategory('Technical Task')">Technical Task</div>
                       <div onclick="selectCategory('User Story')">User Story</div>
                     </div>
