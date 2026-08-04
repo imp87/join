@@ -17,6 +17,65 @@ function toggleContactList() {
     }
 }
 
+function closeContactList() {
+    let contactListRef = document.getElementById("contact-list");
+    contactListRef.classList.add("display-none");
+    document.getElementById("contacts-arrow").classList.remove("upside");
+}
+
+let resizing = false;
+let textarea;
+let startY;
+let startHeight;
+
+function startResize(event) {
+    event.preventDefault();
+
+    resizing = true;
+    textarea = document.getElementById("description");
+
+    startY = event.clientY;
+    startHeight = textarea.offsetHeight;
+
+    document.addEventListener("mousemove", resizeTextarea);
+    document.addEventListener("mouseup", stopResize);
+}
+
+
+function resizeTextarea(event) {
+    if (!resizing) return;
+
+    let heightChange = event.clientY - startY;
+    let newHeight = startHeight + heightChange;
+
+    newHeight = Math.max(120, Math.min(newHeight, 180));
+
+    textarea.style.height = `${newHeight}px`;
+}
+
+
+function stopResize() {
+    resizing = false;
+
+    document.removeEventListener("mousemove", resizeTextarea);
+    document.removeEventListener("mouseup", stopResize);
+}
+
+function limitTextarea(textarea) {
+    const maxHeight = 180;
+    const minHeight = 120;
+
+    textarea.style.height = `${minHeight}px`;
+
+    if (textarea.scrollHeight > maxHeight) {
+        textarea.value = textarea.value.slice(0, -1);
+        textarea.style.height = `${maxHeight}px`;
+        return;
+    }
+
+    textarea.style.height = `${textarea.scrollHeight}px`;
+}
+
 
 function sortTaskContactsByName() {
     contacts.sort(function (contactA, contactB) {
@@ -47,6 +106,10 @@ function toggleCategoryOptions() {
     document.getElementById("category-arrow").classList.toggle("upside");
 }
 
+function closeCategoryOptions() {
+    document.getElementById("category-options").classList.add("display-none");
+    document.getElementById("category-arrow").classList.remove("upside");
+}
 
 function selectCategory(category) {
     document.getElementById("category-input").value = category;

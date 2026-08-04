@@ -46,7 +46,6 @@ async function fetchData() {
     tasks = Object.entries(data).map(([id, task]) => {
         return { id: id, ...task };
     });
-    console.log(tasks)
 
     toDoLength();
 }
@@ -75,9 +74,10 @@ function toDoLength() {
             day: "numeric"
         });
 
-        document.getElementById("next-deadline").innerHTML = formattedDate;
+        document.getElementById("next-deadline").innerHTML = `<strong>${formattedDate}</strong>
+              Upcoming Deadline`
     } else {
-        document.getElementById("next-deadline").innerHTML = "";
+        document.getElementById("next-deadline").innerHTML = "No Upcoming Deadline";
     }
 
     document.getElementById("tasks-count").innerHTML = `${tasks.length}`

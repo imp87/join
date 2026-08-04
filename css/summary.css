@@ -68,14 +68,12 @@ section article a {
     height: 170px;
     align-items: center;
     justify-content: center;
-    -moz-box-shadow: 0 0 5px 1px #9d9d9d;
-    -webkit-box-shadow: 0 0 5px 1px #9d9d9d;
-    box-shadow: 0 0 5px 1px #9d9d9d;
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.4);
     border: none;
     border-radius: 30px;
     width: 100%;
     gap: 20px;
-    transition: all 0.1s;
+    transition: all 100ms;
     text-decoration: none;
 }
 
@@ -84,6 +82,10 @@ section article a:hover {
     cursor: pointer;
     color: white !important;
     scale: calc(1.1);
+}
+
+section article a:active {
+    box-shadow: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 section article a:hover h4 {
