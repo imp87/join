@@ -179,11 +179,11 @@ function getEditTaskTemplate(id, task) {
 
             <div class="form-area-fields">
                 <label for="edit-date">Due date</label>
-                <input 
-                    type="date" 
-                    id="edit-date" 
-                    value="${task.date}" 
-                    required>
+                    <div id="edit-date-input" class="date-input" onclick="document.getElementById('edit-date').showPicker()">
+                      <input type="date" id="edit-date" name="edit-date" value="${task.date}"  required />
+                      <img src="./assets/img/event.svg" alt="calender">
+                    </div>
+                
                     <div class="edit-validation-message" id="edit-date-error"></div>
             </div>
 

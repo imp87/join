@@ -79,7 +79,10 @@
 
                 <div class="form-area-fields">
                   <label for="due-date">Due date<span style="color: rgba(255, 129, 144, 1)">*</span></label>
-                  <input type="date" id="due-date" name="due-date" min="" required />
+                  <div id="date-input" class="date-input" onclick="document.getElementById('due-date').showPicker()">
+                    <input type="date" id="due-date" name="due-date" required />
+                    <img src="./assets/img/event.svg" alt="calender">
+                  </div>
                   <div class="validation-message" id="validation-message"></div>
                 </div>
               </div>

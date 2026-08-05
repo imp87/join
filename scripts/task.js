@@ -149,7 +149,7 @@ async function addToTasks(event) {
             element.innerHTML = "This field is required"
         });
         title.classList.add("input-error");
-        date.classList.add("input-error");
+        document.getElementById("date-input").classList.add("input-error");
         return;
     }
     document.getElementById("custom-category-input").classList.remove("input-error");
