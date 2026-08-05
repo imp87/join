@@ -158,8 +158,12 @@
 
                   <div class="form-area-fields">
                     <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="4" cols="20"
-                      placeholder="Enter a Description"></textarea>
+                    <div class="custom-textarea">
+                      <textarea oninput="limitTextarea(this);" id="description" name="description"
+                        placeholder="Enter a Description"></textarea>
+                      <img src="./assets/img/Recurso.svg" alt="Recurso" class="resize-handle"
+                        onmousedown="startResize(event, 'description')" draggable="false">
+                    </div>
                   </div>
 
                   <div class="form-area-fields">

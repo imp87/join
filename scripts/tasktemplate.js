@@ -167,11 +167,13 @@ function getEditTaskTemplate(id, task) {
 
             <div class="form-area-fields">
                 <label for="edit-description">Description</label>
-                <textarea 
-                    id="edit-description" 
-                    rows="4" 
-                    cols="20"
-                    placeholder="Enter a Description">${task.description}</textarea>
+                
+                <div class="custom-textarea">
+                    <textarea oninput="limitTextarea(this);" id="edit-description" name="edit-description"
+                      placeholder="Enter a Description">${task.description}</textarea>
+                    <img src="./assets/img/Recurso.svg" alt="Recurso" class="resize-handle"
+                      onmousedown="startResize(event, 'edit-description')" draggable="false">
+                  </div>
             </div>
 
 

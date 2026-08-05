@@ -25,11 +25,11 @@ let textarea;
 let startY;
 let startHeight;
 
-function startResize(event) {
+function startResize(event, id) {
     event.preventDefault();
 
     resizing = true;
-    textarea = document.getElementById("description");
+    textarea = document.getElementById(id);
 
     startY = event.clientY;
     startHeight = textarea.offsetHeight;
