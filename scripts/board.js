@@ -488,7 +488,7 @@ async function EditTaskChanged(event, id) {
     titleError.innerHTML = "";
     dateError.innerHTML = "";
     titleInput.classList.remove("input-error");
-    dateInput.classList.remove("input-error");
+    document.getElementById("edit-date-input").classList.remove("input-error");
 
     let hasError = false;
 
@@ -502,7 +502,7 @@ async function EditTaskChanged(event, id) {
 
     if (date === "") {
         dateError.innerHTML = "*This field is required";
-        dateInput.classList.add("input-error");
+        document.getElementById("edit-date-input").classList.add("input-error");
         hasError = true;
     }
 

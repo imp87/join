@@ -132,10 +132,41 @@ textarea:focus-visible {
     border-color: rgba(18, 70, 88, 1);
 }
 
+.date-input {
+    position: relative;
+    display: flex;
+    border: solid;
+    border-color: rgba(209, 209, 209, 1);
+    border-width: 1px;
+    border-radius: 10px;
+    justify-content: space-between;
+    cursor: pointer;
+    background-color: white;
+    width: 100%;
+}
+
+.date-input:focus-within {
+    border-color: rgba(18, 70, 88, 1);
+}
+
+.date-input img {
+    width: 19px;
+    margin-right: 15px;
+}
+
 .form-area-fields input[type="date"] {
     font-family: inherit;
     color: rgba(209, 209, 209, 1);
     cursor: pointer;
+    border: none;
+    padding: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+.form-area-fields input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
 }
 
 .form-area-fields input[type="date"]:valid {
