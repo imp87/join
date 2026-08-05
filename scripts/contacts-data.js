@@ -1,3 +1,6 @@
+const CONTACTS_URL =
+    "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/contacts";
+
 let contactColors = [
     "#ff7a00",
     "#9327ff",
@@ -9,7 +12,9 @@ let contactColors = [
     "#ffc700",
 ];
 
-let contacts = [
+let contacts = [];
+
+let defaultContacts = [
     {
         name: "Anton Mayer",
         email: "antonm@gmail.com",
@@ -54,14 +59,56 @@ let contacts = [
     },
 ];
 
-function loadContacts() {
-    let savedContacts = localStorage.getItem("joinContacts");
+async function loadContacts() {
+    let response = await fetch(`${CONTACTS_URL}.json`);
+    let data = await response.json();
 
-    if (savedContacts) {
-        contacts = JSON.parse(savedContacts);
+    if (!data) {
+        await uploadDefaultContacts();
+        return;
+    }
+
+    contacts = Object.entries(data).map(([id, contact]) => {
+        return { id: id, ...contact };
+    });
+}
+
+async function uploadDefaultContacts() {
+    contacts = [];
+
+    for (let i = 0; i < defaultContacts.length; i++) {
+        await postContactToDatabase(defaultContacts[i]);
     }
 }
 
-function saveContacts() {
-    localStorage.setItem("joinContacts", JSON.stringify(contacts));
+async function postContactToDatabase(contact) {
+    let response = await fetch(`${CONTACTS_URL}.json`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+    });
+
+    let result = await response.json();
+
+    contacts.push({ id: result.name, ...contact });
+
+    return result.name;
+}
+
+async function patchContactInDatabase(id, contact) {
+    await fetch(`${CONTACTS_URL}/${id}.json`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+    });
+}
+
+async function deleteContactFromDatabase(id) {
+    await fetch(`${CONTACTS_URL}/${id}.json`, {
+        method: "DELETE",
+    });
 }
