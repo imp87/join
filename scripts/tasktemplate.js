@@ -167,21 +167,23 @@ function getEditTaskTemplate(id, task) {
 
             <div class="form-area-fields">
                 <label for="edit-description">Description</label>
-                <textarea 
-                    id="edit-description" 
-                    rows="4" 
-                    cols="20"
-                    placeholder="Enter a Description">${task.description}</textarea>
+                
+                <div class="custom-textarea">
+                    <textarea oninput="limitTextarea(this);" id="edit-description" name="edit-description"
+                      placeholder="Enter a Description">${task.description}</textarea>
+                    <img src="./assets/img/Recurso.svg" alt="Recurso" class="resize-handle"
+                      onmousedown="startResize(event, 'edit-description')" draggable="false">
+                  </div>
             </div>
 
 
             <div class="form-area-fields">
                 <label for="edit-date">Due date</label>
-                <input 
-                    type="date" 
-                    id="edit-date" 
-                    value="${task.date}" 
-                    required>
+                    <div id="edit-date-input" class="date-input" onclick="document.getElementById('edit-date').showPicker()">
+                      <input type="date" id="edit-date" name="edit-date" value="${task.date}"  required />
+                      <img src="./assets/img/event.svg" alt="calender">
+                    </div>
+                
                     <div class="edit-validation-message" id="edit-date-error"></div>
             </div>
 
