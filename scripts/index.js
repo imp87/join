@@ -19,17 +19,46 @@ function startAnimation() {
 	}, 1300);
 }
 
-function goToSummary(event) {
-	event.preventDefault();
+function goToSummary() {
 	window.location.href = "./summary.html";
+}
+
+async function handleLogin(event) {
+	event.preventDefault();
+	hideLoginError();
+
+	let email = document.getElementById("loginEmail").value.trim();
+	let password = document.getElementById("loginPassword").value;
+	let user = await loginUser(email, password);
+
+	if (!user) {
+		showLoginError();
+		return;
+	}
+
+	saveSession(user);
+	goToSummary();
+}
+
+function handleGuestLogin() {
+	saveSession(createGuestSession());
+	goToSummary();
+}
+
+function showLoginError() {
+	document.getElementById("loginError").style.display = "block";
+}
+
+function hideLoginError() {
+	document.getElementById("loginError").style.display = "none";
 }
 
 function activateLoginButtons() {
 	let loginForm = document.getElementById("loginForm");
 	let guestLoginButton = document.getElementById("guestLogin");
 
-	loginForm.addEventListener("submit", goToSummary);
-	guestLoginButton.addEventListener("click", goToSummary);
+	loginForm.addEventListener("submit", handleLogin);
+	guestLoginButton.addEventListener("click", handleGuestLogin);
 }
 
 document.addEventListener("DOMContentLoaded", startAnimation);
