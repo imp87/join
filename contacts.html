@@ -57,7 +57,7 @@
       </nav>
     </div>
 
-    <section class="contacts-page">
+    <section id="contactsPage" class="contacts-page">
       <aside class="contacts-list-panel">
         <button class="add-contact-button" type="button" onclick="
               openAddContactOverlay();
@@ -72,6 +72,10 @@
 
       <section class="contacts-detail-panel">
         <div class="contacts-title">
+          <button class="mobile-page-back" type="button" onclick="showContactsListMobile()"
+            aria-label="Back to contacts">
+            <img src="./assets/icons/arrow_left.svg" alt="" />
+          </button>
           <h1>Contacts</h1>
           <div></div>
           <h2>Better with a team</h2>
@@ -84,7 +88,10 @@
     <dialog id="contactOverlay" class="contact-overlay" onclick="logDownWBubblingProtection(event)">
       <form id="contactForm" class="contact-modal" onsubmit="saveContact(event)">
         <aside class="contact-modal-sidebar">
-          <img src="./assets/img/Join logo vector.svg" alt="Join logo" />
+          <button class="mobile-contact-modal-close" type="button" onclick="closeContactOverlay()">
+            <img src="./assets/icons/close_light.svg" alt="" />
+          </button>
+          <img class="contact-modal-logo" src="./assets/img/Join logo vector.svg" alt="Join logo" />
           <h2 id="contactOverlayTitle">Add contact</h2>
           <p id="contactOverlaySubtitle">Tasks are better with a team!</p>
           <div></div>

@@ -1,182 +1,338 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
 header {
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
-    width: 100%;
-    position: fixed;
-    z-index: 10;
-    display: flex;
-    height: 96px;
-    background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+	width: 100%;
+	position: fixed;
+	z-index: 10;
+	display: flex;
+	height: 96px;
+	background-color: rgba(255, 255, 255, 1);
 }
 
 header nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 header nav h2 {
-    font-size: 20px;
-    font-weight: 400;
-    margin-left: 348px;
+	font-size: 20px;
+	font-weight: 400;
+	margin-left: 348px;
 }
 
 header nav div {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-right: 40px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-right: 40px;
 }
 
 header nav img {
-    width: 20px;
-    height: 20px;
-    transition: all 0.3s;
+	width: 20px;
+	height: 20px;
+	transition: all 0.3s;
 }
 
 header nav img:hover {
-    cursor: pointer;
-    scale: calc(1.2);
+	cursor: pointer;
+	scale: calc(1.2);
 }
 
 header nav button {
-    background-color: unset;
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    border-width: 3px;
-    border-color: rgba(42, 54, 71, 1);
-    border-style: solid;
-    font-size: 24px;
-    color: rgba(41, 171, 226, 1);
-    font-weight: bolder;
+	background-color: unset;
+	border-radius: 50%;
+	width: 56px;
+	height: 56px;
+	padding: 0;
+	border-width: 3px;
+	border-color: rgba(42, 54, 71, 1);
+	border-style: solid;
+	font-size: 24px;
+	color: rgba(41, 171, 226, 1);
+	font-weight: bolder;
 }
 
 header nav button:hover {
-    cursor: pointer;
-    background-color: rgba(12, 46, 98, 0.12);
+	cursor: pointer;
+	background-color: rgba(12, 46, 98, 0.12);
 }
 
 .submenu[open] {
-    background-color: rgba(42, 54, 71, 1);
-    display: flex;
-    position: fixed;
-    justify-self: flex-end;
-    border: none;
-    top: 96px;
-    right: 20px;
-    flex-direction: column;
-    padding: 10px;
-    border-radius: 20px;
-    border-top-right-radius: 0;
-    margin: 0;
+	background-color: rgba(42, 54, 71, 1);
+	display: flex;
+	position: fixed;
+	justify-self: flex-end;
+	border: none;
+	top: 96px;
+	right: 20px;
+	flex-direction: column;
+	padding: 10px;
+	border-radius: 20px;
+	border-top-right-radius: 0;
+	margin: 0;
 }
 
 .submenu a {
-    color: rgba(205, 205, 205, 1);
-    text-decoration: none;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 16px;
-    padding-right: 16px;
+	color: rgba(205, 205, 205, 1);
+	text-decoration: none;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 .submenu a:hover {
-    background-color: rgba(42, 61, 89, 1);
+	background-color: rgba(42, 61, 89, 1);
 }
 
 .submenu::backdrop {
-    background-color: unset;
+	background-color: unset;
 }
 
 main {
-    max-width: 1920px;
-    width: 100%;
-    display: flex;
+	max-width: 1920px;
+	width: 100%;
+	display: flex;
 }
 
 .menu {
-    background-color: rgba(42, 54, 71, 1);
-    width: 232px;
-    height: 100vh;
-    position: fixed;
-    z-index: 20;
-    gap: 100px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+	background-color: rgba(42, 54, 71, 1);
+	width: 232px;
+	height: 100vh;
+	position: fixed;
+	z-index: 20;
+	gap: 100px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .menu img {
-    width: 100px;
-    margin-top: 64px;
+	width: 100px;
+	margin-top: 64px;
 }
 
 .menu nav {
-    display: flex;
-    flex-direction: column;
-    color: rgba(205, 205, 205, 1);
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 64px;
-    justify-content: space-between;
-    height: 100%;
+	display: flex;
+	flex-direction: column;
+	color: rgba(205, 205, 205, 1);
+	gap: 15px;
+	width: 100%;
+	margin-bottom: 64px;
+	justify-content: space-between;
+	height: 100%;
 }
 
 .menu nav ul {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 15px;
-    flex-direction: column;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	gap: 15px;
+	flex-direction: column;
 }
 
 .menu nav a {
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	align-items: center;
 }
 
 .menu-top {
-    height: 45px;
+	height: 45px;
 }
 
 .menu-top:hover {
-    background-color: rgba(42, 61, 89, 1);
+	background-color: rgba(42, 61, 89, 1);
 }
 
 .current-page {
-    color: white !important;
-    height: 45px;
-    background-color: rgba(9, 25, 49, 1);
+	color: white !important;
+	height: 45px;
+	background-color: rgba(9, 25, 49, 1);
 }
 
 .current-page:hover {
-    cursor: default;
+	cursor: default;
 }
 
 .menu nav a img {
-    width: 25px;
-    margin-right: 20px;
-    margin-top: 0;
-    margin-left: 56px;
+	width: 25px;
+	margin-right: 20px;
+	margin-top: 0;
+	margin-left: 56px;
 }
 
 .menu-bottom {
-    padding-left: 56px;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+	padding-left: 56px;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
 }
 
 .menu-bottom:hover {
-    color: rgba(41, 171, 226, 1);
-    font-weight: bold;
+	color: rgba(41, 171, 226, 1);
+	font-weight: bold;
 }
 
 button {
-    cursor: pointer;
-    border: unset;
+	cursor: pointer;
+	border: unset;
+}
+
+.mobile-page-back {
+	display: none;
+}
+
+@media (min-width: 1921px) {
+	main {
+		margin-right: auto;
+	}
+}
+
+@media (max-width: 800px) {
+	header {
+		height: 80px;
+		z-index: 30;
+	}
+
+	header nav {
+		padding: 0 16px;
+	}
+
+	header nav::before {
+		content: "";
+		width: 32px;
+		height: 40px;
+		background-image: url("../assets/icons/logo.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: contain;
+		flex-shrink: 0;
+	}
+
+	header nav h2,
+	header nav a {
+		display: none;
+	}
+
+	header nav div {
+		margin-right: 0;
+	}
+
+	header nav button {
+		width: 40px;
+		height: 40px;
+		border-width: 2px;
+		font-size: 12px;
+	}
+
+	.submenu[open] {
+		top: 80px;
+		right: 8px;
+		z-index: 60;
+		border-radius: 16px 0 16px 16px;
+	}
+
+	main {
+		max-width: none;
+		min-height: 100dvh;
+	}
+
+	.menu {
+		top: auto;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		min-width: 320px;
+		height: 76px;
+		flex-direction: row;
+		align-items: stretch;
+		gap: 0;
+	}
+
+	.menu > img,
+	.menu nav ul:last-child {
+		display: none;
+	}
+
+	.menu nav {
+		height: 100%;
+		margin: 0;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.menu nav ul:first-child {
+		height: 100%;
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0;
+	}
+
+	.menu-top,
+	.current-page {
+		height: 76px;
+		justify-content: center;
+		flex-direction: column;
+		gap: 6px;
+		font-size: 12px;
+		line-height: 1.2;
+		text-align: center;
+		padding: 0 2px;
+		border-radius: 0;
+		min-width: 0;
+	}
+
+	.menu nav a img {
+		width: 24px;
+		height: 24px;
+		margin: 0;
+	}
+
+	.mobile-page-back {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.mobile-page-back img {
+		width: 22px;
+		height: 22px;
+	}
+}
+
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+	body::before {
+		content: "Bitte drehe dein Gerät ins Hochformat.";
+		position: fixed;
+		inset: 0;
+		z-index: 10000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+		background-color: #2a3647;
+		color: white;
+		font-size: 20px;
+		font-weight: 700;
+		text-align: center;
+	}
 }
