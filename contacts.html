@@ -9,6 +9,7 @@
   <script src="./scripts/summary.js"></script>
   <script src="./scripts/contacts-data.js"></script>
   <script src="./scripts/contacts.js"></script>
+  <script src="./scripts/auth.js"></script>
   <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon" />
   <title>Join - Contacts</title>
 </head>
@@ -21,7 +22,7 @@
         <a href="./pages/help.html">
           <img src="./assets/img/help.svg" alt="help" />
         </a>
-        <button onclick="
+        <button id="userInitials" onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
             ">
@@ -32,7 +33,7 @@
     <dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
       <a href="./pages/legals.html">Legal Notice</a>
       <a href="./pages/privacy.html">Privacy Policy</a>
-      <a href="./index.html">Log out</a>
+      <a href="./index.html" onclick="logoutUser()">Log out</a>
     </dialog>
   </header>
 

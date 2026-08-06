@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/legals.css" />
     <link rel="stylesheet" href="../css/help.css" />
     <script src="../scripts/summary.js"></script>
+    <script src="../scripts/auth.js"></script>
     <link
       rel="shortcut icon"
       href="../assets/img/Capa 1.svg"
@@ -24,6 +25,7 @@
             <img src="../assets/img/help.svg" alt="Help" />
           </a>
           <button
+            id="userInitials"
             onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
@@ -40,7 +42,7 @@
       >
         <a href="./legals.html">Legal Notice</a>
         <a href="./privacy.html">Privacy Policy</a>
-        <a href="../index.html">Log out</a>
+        <a href="../index.html" onclick="logoutUser()">Log out</a>
       </dialog>
     </header>
 
