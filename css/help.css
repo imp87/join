@@ -22,7 +22,6 @@ p {
 	margin-bottom: 24px;
 }
 
-
 .guideWrapper {
 	display: flex;
 	flex-direction: column;
@@ -46,4 +45,14 @@ p {
 
 .brandName {
 	color: #29abe2;
+}
+
+@media (max-width: 800px) {
+	.guideStep {
+		gap: 20px;
+	}
+
+	.guideStepNumber {
+		font-size: 24px;
+	}
 }
