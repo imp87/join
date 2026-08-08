@@ -42,6 +42,7 @@ h3 {
 section article {
     display: flex;
     gap: 100px;
+    width: 100%;
 }
 
 section article div {
@@ -149,4 +150,198 @@ h5 {
 
 .hidden {
     overflow: hidden;
+}
+
+
+.greeting {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.greeting.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.greeting.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+
+.title span {
+    display: none;
+}
+
+
+@media (max-width: 1440px) {
+    main {
+        max-width: 100% !important;
+    }
+
+    .title {
+        gap: 20px;
+    }
+
+    section {
+        margin-left: 320px;
+    }
+
+    section article {
+        align-items: center;
+    }
+
+    section article a {
+        font-size: 18px;
+    }
+
+    h1 {
+        font-size: 55px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+
+    h4 {
+        font-size: 55px;
+    }
+
+    section article div {
+        width: 500px;
+        max-width: 500px;
+    }
+
+    .greeting {
+        height: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 900px) {
+    section {
+        margin-left: 290px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    h4 {
+        font-size: 50px;
+    }
+
+    section article a {
+        font-size: 16px;
+        height: 150px;
+    }
+
+    section article div {
+        width: 480px;
+        max-width: 480px;
+    }
+}
+
+
+@media (max-width: 800px) {
+    main {
+        justify-content: center;
+    }
+
+    .title {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        gap: 16px;
+    }
+
+    .title div {
+        display: none;
+    }
+
+    section article img {
+        block-size: 40px;
+    }
+
+    section {
+        margin: 0;
+        max-width: 620px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 47px;
+        margin: 0;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    h4 {
+        font-size: 47px;
+    }
+
+    section article a {
+        font-size: 16px;
+        height: 120px;
+    }
+
+    section article a div {
+        height: 68px;
+    }
+
+    .title span {
+        display: unset;
+        width: 90px;
+        height: 3px;
+        background-color: rgba(41, 171, 226, 1);
+        border-radius: 3px;
+    }
+
+    section article div {
+        gap: 20px;
+    }
+
+    section article figure {
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 520px) {
+    section article div {
+        width: 290px;
+        max-width: 290px;
+    }
+
+    section article a div {
+        margin: 0;
+    }
+
+    section article div {
+        gap: 16px;
+    }
+
+    section article figure {
+        gap: 16px;
+    }
+
+    section article a {
+        gap: 16px;
+        font-size: 16px;
+        border-radius: 20px;
+        height: 110px;
+    }
+
+    h5 {
+        font-size: 36px;
+    }
 }

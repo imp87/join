@@ -165,7 +165,7 @@ function getEditTaskTemplate(id, task) {
             </div>
 
 
-            <div class="form-area-fields">
+            <div class="form-area-fields edit-fields">
                 <label for="edit-description">Description</label>
                 
                 <div class="custom-textarea">
@@ -177,7 +177,7 @@ function getEditTaskTemplate(id, task) {
             </div>
 
 
-            <div class="form-area-fields">
+            <div class="form-area-fields edit-fields">
                 <label for="edit-date">Due date</label>
                     <div id="edit-date-input" class="date-input" onclick="document.getElementById('edit-date').showPicker()">
                       <input type="date" id="edit-date" name="edit-date" value="${task.date}"  required />
@@ -188,7 +188,7 @@ function getEditTaskTemplate(id, task) {
             </div>
 
 
-            <div class="form-area-fields">
+            <div class="form-area-fields edit-fields">
                 <legend>Priority</legend>
 
                 <div class="priority">
@@ -240,7 +240,7 @@ function getEditTaskTemplate(id, task) {
             </div>
 
 
-            <div class="form-area-fields">
+            <div class="form-area-fields edit-fields">
                 <label for="edit-contacts">Assigned to</label>
 
                 <div class="assigned-to">
@@ -267,7 +267,7 @@ function getEditTaskTemplate(id, task) {
             </div>
 
 
-            <div class="form-area-fields">
+            <div class="form-area-fields edit-fields">
                 <label for="edit-subtask">Subtasks</label>
                   <div class="subtask-input-container">
                     <input id="edit-subtask" type="text" placeholder="Add new subtask" />

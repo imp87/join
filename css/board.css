@@ -315,9 +315,7 @@ h4 {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    min-width: 440px;
-    width: 440px;
-    max-width: min-content;
+    width: 510px;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 48px;
@@ -326,10 +324,16 @@ h4 {
     font-size: 18px;
 }
 
+
 .task-content form {
     gap: 16px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.edit-fields {
+    width: 400px;
 }
 
 .edit-task {
@@ -340,6 +344,10 @@ h4 {
     overflow-y: auto;
     width: fit-content;
     position: relative;
+}
+
+.subtask-checkbox img {
+    width: 16px;
 }
 
 .Ok {
@@ -475,8 +483,8 @@ h4 {
 
 .task-subtasks div span {
     display: inline-block;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border: 2px solid rgba(42, 54, 71, 1);
     border-radius: 4px;
     cursor: pointer;
@@ -546,6 +554,7 @@ h4 {
 
 .edit-contact-list {
     max-height: 160px;
+    width: 100%;
     position: absolute;
 }
 
