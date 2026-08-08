@@ -1,11 +1,19 @@
+function getLogoTarget() {
+	if (window.matchMedia("(max-width: 800px)").matches) {
+		return { left: "16px", top: "16px", width: "64px" };
+	}
+	return { left: "40px", top: "40px", width: "100px" };
+}
+
 function startAnimation() {
 	const logo = document.querySelector(".startLogo");
 	const overlay = document.querySelector("#startScreen");
+	const target = getLogoTarget();
 
 	setTimeout(() => {
-		logo.style.left = "40px";
-		logo.style.top = "40px";
-		logo.style.width = "100px";
+		logo.style.left = target.left;
+		logo.style.top = target.top;
+		logo.style.width = target.width;
 		logo.style.transform = "translate(0, 0)";
 	}, 100);
 
