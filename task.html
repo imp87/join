@@ -31,6 +31,7 @@
       </div>
     </nav>
     <dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
+      <a class="help-submenu" href="./index.html">Help</a>
       <a href="./index.html">Legal Notice</a>
       <a href="">Privacy Policy</a>
       <a href="./index.html" onclick="logoutUser()">Log out</a>
@@ -56,10 +57,10 @@
     </div>
     <section>
       <form onsubmit="addToTasks(event)" id="task-form" novalidate>
-        <div class="add-task-content">
+        <div class="add-task-content no-padding">
           <h1>Add Task</h1>
 
-          <div>
+          <div class="form-width">
             <div class="formular">
               <div class="form-area">
                 <div class="form-area-fields">
@@ -166,11 +167,11 @@
             </div>
 
             <div class="form-footer">
-              <div>
+              <div class="required-info">
                 <span style="color: rgba(255, 129, 144, 1); font-size: 20px">*</span>This field is required
               </div>
 
-              <div>
+              <div class="clear-create">
                 <button onclick="clearTaskForm();" class="cancel" type="button">
                   Clear<img class="button-icon" src="./assets/img/cancel.svg" alt="cancel" /><img
                     class="button-icon-hover" src="./assets/img/cancelhover.svg" alt="cancelhover" />

@@ -175,7 +175,7 @@ h5 {
 }
 
 
-@media (max-width: 1440px) {
+@media (max-width: 1439px) {
     main {
         max-width: 100% !important;
     }
@@ -314,9 +314,6 @@ h5 {
         gap: 20px;
     }
 
-    header nav img {
-        display: none;
-    }
 }
 
 
