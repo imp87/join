@@ -313,6 +313,10 @@ h5 {
     section article figure {
         gap: 20px;
     }
+
+    header nav img {
+        display: none;
+    }
 }
 
 
