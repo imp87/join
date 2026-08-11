@@ -63,7 +63,8 @@
 
     <section>
       <div class="title">
-        <h1>Board</h1>
+        <h1>Board <a href="./task.html" class="add-task-mobile"><img src="./assets/img/plus add task mobile.svg"
+              alt="add-task.button"></a></h1>
 
         <span>
           <div class="searchbar">
@@ -92,6 +93,9 @@
                 ">
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
+            <a href="./task.html" class="plus-button-mobile">
+              <img src="./assets/img/plus button mobile.svg" alt="plus-button">
+            </a>
           </div>
           <div id="to-do" class="task-cards" ondrop="moveTo('To do'); removeHighlight('to-do');"
             ondragleave="removeHighlight('to-do')" ondragover="allowDrop(event); highlight('to-do')">
@@ -111,6 +115,9 @@
                 ">
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
+            <a href="./task.html" class="plus-button-mobile">
+              <img src="./assets/img/plus button mobile.svg" alt="plus-button">
+            </a>
           </div>
           <div id="in-progress" class="task-cards" ondrop="moveTo('In progress'); removeHighlight('in-progress');"
             ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress');">
@@ -126,6 +133,9 @@
                 ">
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
+            <a href="./task.html" class="plus-button-mobile">
+              <img src="./assets/img/plus button mobile.svg" alt="plus-button">
+            </a>
           </div>
           <div id="await-feedback" class="task-cards"
             ondrop="moveTo('Await feedback'); removeHighlight('await-feedback');"

@@ -202,6 +202,11 @@ h5 {
     }
 }
 
+@media (max-width: 1670px) {
+    section {
+        margin-left: 300px;
+    }
+}
 
 @media (max-width: 1439px) {
     main {
@@ -215,9 +220,6 @@ h5 {
         opacity: 0;
     }
 
-    section {
-        margin-left: 320px;
-    }
 
     section article {
         align-items: center;
