@@ -273,6 +273,14 @@ function toggleMobileContactActions(event) {
 	}
 }
 
+function closeMobileContactActions() {
+	let menu = document.getElementById("mobileContactActionMenu");
+
+	if (menu) {
+		menu.classList.remove("open");
+	}
+}
+
 function closeContactOverlayIfOpen() {
 	let overlay = document.getElementById("contactOverlay");
 
