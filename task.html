@@ -22,7 +22,7 @@
     <nav>
       <h2>Kanban Project Management Tool</h2>
       <div>
-        <img src="./assets/img/help.svg" alt="help" /><button id="userInitials" onclick="
+        <a href="./pages/help.html"><img src="./assets/img/help.svg" alt="help" /></a><button id="userInitials" onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
             ">
@@ -50,8 +50,8 @@
         </ul>
 
         <ul>
-          <a class="menu-bottom" href="">Privacy Policy</a>
-          <a class="menu-bottom" href="">Legal notice</a>
+          <a class="menu-bottom" href="./pages/privacy.html">Privacy Policy</a>
+          <a class="menu-bottom" href="./pages/legals.html">Legal notice</a>
         </ul>
       </nav>
     </div>
@@ -112,7 +112,8 @@
                   <label for="contacts">Assigned to</label>
                   <div class="assigned-to">
                     <div class="custom-selectbox" onclick="toggleContactList(); logDownWBubblingProtection(event);">
-                      <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign" oninput="searchContacts();"/>
+                      <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign"
+                        oninput="searchContacts();" />
                       <div id="contacts-arrow" class="arrow">
                         <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down" />
                       </div>

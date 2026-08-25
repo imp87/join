@@ -16,8 +16,6 @@ function greeting() {
     } else {
         greetingRef.innerHTML = "<h5>Good evening!</h5>";
     }
-
-
 }
 
 
@@ -62,26 +60,33 @@ function toDoLength() {
     let urgentCount = tasks.filter(task => task.priority === "urgent").length;
     document.getElementById("urgent-count").innerHTML = `${urgentCount}`;
 
+    nextUrgentDate();
+    categoryCount();
+}
+
+function nextUrgentDate() {
     let urgentTasks = tasks.filter(task => task.priority === "urgent");
-    urgentTasks.sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-    });
+    urgentTasks.sort((a, b) => { return new Date(a.date) - new Date(b.date); });
 
     let nextUrgentDate = urgentTasks[0]?.date;
 
     if (nextUrgentDate) {
-        let formattedDate = new Date(nextUrgentDate).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        });
-
-        document.getElementById("next-deadline").innerHTML = `<strong>${formattedDate}</strong>
-              Upcoming Deadline`
+        let formattedDate = getFormattedDate(nextUrgentDate);
+        document.getElementById("next-deadline").innerHTML = `<strong>${formattedDate}</strong>Upcoming Deadline`
     } else {
         document.getElementById("next-deadline").innerHTML = "No Upcoming Deadline";
     }
+}
 
+function getFormattedDate(nextUrgentDate) {
+    return new Date(nextUrgentDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+}
+
+function categoryCount() {
     document.getElementById("tasks-count").innerHTML = `${tasks.length}`
 
     let progressCount = tasks.filter(task => task.status === "In progress").length;
@@ -90,6 +95,4 @@ function toDoLength() {
     let feedbackCount = tasks.filter(task => task.status === "Await feedback").length;
     document.getElementById("feedback-count").innerHTML = `${feedbackCount}`
 }
-
-
 

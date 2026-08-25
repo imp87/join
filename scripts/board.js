@@ -25,12 +25,8 @@ function addTaskClose() {
     dialogRef.close();
 }
 
-
 async function updateHTML() {
-    let response = await fetch(
-        "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json"
-    );
-
+    let response = await fetch("https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json");
     data = await response.json();
 
     if (!data) {
@@ -40,11 +36,7 @@ async function updateHTML() {
         return;
     }
 
-    tasks = Object.entries(data).map(([id, task]) => ({
-        id,
-        ...task
-    }));
-
+    tasks = Object.entries(data).map(([id, task]) => ({ id, ...task }));
     renderAllTasksByStatus();
 }
 
@@ -58,7 +50,6 @@ function renderAllTasksByStatus() {
 function renderTasksByStatus(status, containerId, taskList = tasks) {
     let filteredTasks = taskList.filter(task => task.status === status);
     let container = document.getElementById(containerId);
-
     container.innerHTML = "";
 
     if (filteredTasks.length === 0) {
@@ -66,9 +57,12 @@ function renderTasksByStatus(status, containerId, taskList = tasks) {
         return;
     }
 
+    getFilteredTasks(filteredTasks, container);
+}
+
+function getFilteredTasks(filteredTasks, container) {
     for (let index = 0; index < filteredTasks.length; index++) {
         let description = filteredTasks[index].description;
-
         description = description.length > 45
             ? description.slice(0, 45) + "..."
             : description;
@@ -86,20 +80,15 @@ function getTaskElements(filteredTasks, index) {
     taskCardDescription(filteredTasks, index);
 }
 
-
 function taskClose() {
     let dialogRef = document.getElementById("task");
     dialogRef.close();
     updateHTML();
 }
 
-
-
-
 function startDragging(id) {
     currentDraggedElement = id;
 }
-
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -113,7 +102,6 @@ async function moveTo(status) {
         })
     });
 
-
     updateHTML();
 }
 
@@ -122,7 +110,6 @@ function taskCardDescription(filteredTasks, index) {
         document.getElementById(`description-${filteredTasks[index].id}`).classList.add("display-none");
     }
 }
-
 
 function taskCardUserPrio(filteredTasks, index) {
     if (
@@ -151,33 +138,27 @@ function taskCardPriority(filteredTasks, index) {
 function subtasksProgressBar(filteredTasks, index) {
     let task = filteredTasks[index];
     let progressBar = document.getElementById(`progress-bar-${task.id}`);
-
     if (!progressBar) return;
-
     let subtasks = task.subtasks;
-
     if (!subtasks || subtasks.length === 0) {
-        progressBar.innerHTML = "";
-        progressBar.classList.add("display-none");
-        return;
+        return progressBarNone(progressBar);
     }
 
     let completed = subtasks.filter(subtask => subtask.done).length;
     let total = subtasks.length;
-
-    progressBar.innerHTML = `
-        <progress value="${completed}" max="${total}"></progress>
-        <label>${completed}/${total} Subtasks</label>
-    `;
-
+    progressBar.innerHTML = `<progress value="${completed}" max="${total}"></progress> <label>${completed}/${total} Subtasks</label>`;
     progressBar.classList.remove("display-none");
 }
 
+function progressBarNone(progressBar) {
+    progressBar.innerHTML = "";
+    progressBar.classList.add("display-none");
+    return;
+}
 
 function taskCardContacts(filteredTasks, index) {
     let contacts = filteredTasks[index].contacts;
     let taskCardContactsRef = document.getElementById(`task-card-contacts-${filteredTasks[index].id}`);
-
     if (!contacts || contacts.length === 0) {
         taskCardContactsRef.classList.add("display-none");
         return;
@@ -185,15 +166,10 @@ function taskCardContacts(filteredTasks, index) {
 
     taskCardContactsRef.classList.remove("display-none");
     taskCardContactsRef.innerHTML = "";
-
-    for (let contactIndex = 0; contactIndex < contacts.length; contactIndex++) {
-        taskCardContactsRef.innerHTML += `
-            <div style="background-color: ${contacts[contactIndex].color};">
-                ${contacts[contactIndex].initials}
-            </div>`;
+    for (let contactIndex = 0; contactIndex < contacts.length && contactIndex < 3; contactIndex++) {
+        taskCardContactsRef.innerHTML += `<div style="background-color: ${contacts[contactIndex].color};">${contacts[contactIndex].initials}</div>`;
     }
 }
-
 
 function highlight(id) {
     document.getElementById(id).classList.add('drag-area-highlight')
@@ -202,8 +178,6 @@ function highlight(id) {
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('drag-area-highlight')
 }
-
-
 
 function taskOpen(id) {
     let dialogRef = document.getElementById("task");
@@ -218,7 +192,6 @@ function taskOpen(id) {
     taskOpenPriority(id, priority, priorityFirstLetter);
     taskOpenAssignedTo(id);
     taskOpenSubtasksDisplay(id);
-
 }
 
 function taskOpenPriority(id, priority, priorityFirstLetter) {
@@ -258,23 +231,14 @@ async function deleteTask(id) {
 function taskOpenContactList(id) {
     let taskOpenContactListRef = document.getElementById("task-card-open-contact-list");
     taskOpenContactListRef.innerHTML = "";
-
     let contacts = data[id].contacts;
-
-    if (!contacts || contacts.length === 0) {
-        return;
-    }
-
+    if (!contacts || contacts.length === 0) { return; }
     for (let index = 0; index < contacts.length; index++) {
         let contact = contacts[index];
         taskOpenContactListRef.innerHTML += `
             <div class="person">
-                <div style="background-color: ${contact.color};">
-                    ${contact.initials}
-                </div>
-                <span>
-                    ${contact.name}
-                </span>
+                <div style="background-color: ${contact.color};">${contact.initials}</div>
+                <span>${contact.name}</span>
             </div>`;
     }
 }
@@ -282,7 +246,6 @@ function taskOpenContactList(id) {
 function taskOpenSubtasks(id) {
     let taskOpenSubtasksRef = document.getElementById("task-open-subtasks");
     taskOpenSubtasksRef.innerHTML = "";
-
     let subtasks = data[id].subtasks;
 
     if (!subtasks || subtasks.length === 0) {
@@ -296,9 +259,7 @@ function taskOpenSubtasks(id) {
 
 async function updateSubtaskProgress(taskId, subtaskIndex) {
     let checkbox = document.getElementById(`subtask${subtaskIndex}`);
-
     data[taskId].subtasks[subtaskIndex].done = checkbox.checked;
-
     await fetch(
         `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${taskId}.json`,
         {
@@ -308,11 +269,8 @@ async function updateSubtaskProgress(taskId, subtaskIndex) {
             })
         }
     );
-
     updateHTML();
 }
-
-
 
 let currentTaskIndex;
 let currentEditTaskId;
@@ -328,7 +286,6 @@ function editTask(id) {
 function renderEditTask(task, id) {
     let taskRef = document.getElementById("task-content");
     taskRef.innerHTML = "";
-
     taskRef.innerHTML = getEditTaskTemplate(id, task);
     generateEditContacts(task);
     generateEditSubtasks(task);
@@ -341,28 +298,15 @@ function editClearSubtask() {
 function editAddSubtask() {
     let input = document.getElementById("edit-subtask");
     let value = input.value.trim();
-
-    if (value === "") {
-        return;
-    }
-
+    if (value === "") { return; }
     let task = tasks.find(task => task.id === currentEditTaskId);
-
-    if (!task) {
-        return;
-    }
-
-    if (!task.subtasks) {
-        task.subtasks = [];
-    }
-
+    if (!task) { return; }
+    if (!task.subtasks) { task.subtasks = []; }
     task.subtasks.push({
         text: value,
         done: false
     });
-
     input.value = "";
-
     generateEditSubtasks(task);
 }
 
@@ -375,28 +319,21 @@ function generateEditSubtasks(task) {
     }
 
     for (let iSubtask = 0; iSubtask < task.subtasks.length; iSubtask++) {
-
         subtaskRef.innerHTML += getEditTaskSubtaskTemplate(iSubtask, task);
     }
 }
 
 function editEditSubtasks(iSubtask) {
     let task = tasks.find(task => task.id === currentEditTaskId);
-
     let subtaskRef = document.getElementById(`subtask-${iSubtask}`);
-
     subtaskRef.innerHTML = getEditTaskEditSubtaskTemplate(iSubtask, task);;
 }
 
 function saveEditedSubtask(iSubtask) {
     let task = tasks.find(task => task.id === currentEditTaskId);
-
     let input = document.getElementById(`edit-edit-subtask-${iSubtask}`);
-
     let newValue = input.value.trim();
-
     if (newValue === "") return;
-
     task.subtasks[iSubtask].text = newValue;
 
     generateEditSubtasks(task);
@@ -404,7 +341,6 @@ function saveEditedSubtask(iSubtask) {
 
 function editDeleteSubtask(iSubtask) {
     let task = tasks.find(task => task.id === currentEditTaskId);
-
     task.subtasks.splice(iSubtask, 1);
 
     generateEditSubtasks(task);
@@ -416,57 +352,33 @@ function toggleEditContactList() {
 
 function generateEditContacts(task) {
     let contactsHTML = document.getElementById("edit-contact-list");
-    let contactLine = document.getElementById("edit-contact-line");
-    contactsHTML.innerHTML = "";
-    contactLine.innerHTML = "";
-
-
-
-
     let renderedContacts = 0;
+    let contactLine = document.getElementById("edit-contact-line");
+    contactLine.innerHTML = "";
 
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
-
-        let isChecked = task.contacts?.some(taskContact =>
-            taskContact.name === contact.name &&
-            taskContact.initials === contact.initials &&
-            taskContact.color === contact.color
-        );
-
-
+        let isChecked = task.contacts?.some(taskContact => taskContact.name === contact.name && taskContact.initials === contact.initials && taskContact.color === contact.color);
         contactsHTML.innerHTML += getEditTaskContactTemplate(i, isChecked, contact);
-
-
-        if (isChecked && renderedContacts < 3) {
-            contactLine.innerHTML += `
-                <div class="initials" style="background-color: ${contact.color}">
-                    ${contact.initials}
-                </div>
-            `;
-
-            renderedContacts++;
-        }
+        if (isChecked && renderedContacts < 3) { editContactLine(contactLine, contact, renderedContacts); }
     }
+}
+
+function editContactLine(contactLine, contact, renderedContacts) {
+    contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
+    renderedContacts++;
 }
 
 function updateEditContactLine() {
     let contactLine = document.getElementById("edit-contact-line");
     contactLine.innerHTML = "";
-
     let renderedContacts = 0;
 
     for (let i = 0; i < contacts.length; i++) {
         let checkbox = document.getElementById(`edit-contact${i}`);
-
         if (checkbox && checkbox.checked && renderedContacts < 3) {
             let contact = contacts[i];
-            contactLine.innerHTML += `
-                <div class="initials" style="background-color: ${contact.color}">
-                    ${contact.initials}
-                </div>
-            `;
-
+            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
             renderedContacts++;
         }
     }
@@ -474,7 +386,6 @@ function updateEditContactLine() {
 
 async function EditTaskChanged(event, id) {
     event.preventDefault();
-
     let titleInput = document.getElementById("edit-title");
     let dateInput = document.getElementById("edit-date");
 
@@ -491,30 +402,11 @@ async function EditTaskChanged(event, id) {
     document.getElementById("edit-date-input").classList.remove("input-error");
 
     let hasError = false;
-
-
-    if (title === "") {
-        titleError.innerHTML = "*This field is required";
-        titleInput.classList.add("input-error");
-        hasError = true;
-    }
-
-
-    if (date === "") {
-        dateError.innerHTML = "*This field is required";
-        document.getElementById("edit-date-input").classList.add("input-error");
-        hasError = true;
-    }
-
-
-    if (hasError) {
-        return;
-    }
-
+    if (title === "") { return getTitleError(titleError, titleInput, hasError); }
+    if (date === "") { return getDateTerror(dateError, hasError); }
+    if (hasError) { return; }
 
     let priority = document.querySelector('input[name="edit-priority"]:checked')?.value || "";
-
-
     let selectedContacts = [];
 
     for (let i = 0; i < contacts.length; i++) {
@@ -569,10 +461,20 @@ async function EditTaskChanged(event, id) {
     taskOpen(id)
 }
 
+function getTitleError(titleError, titleInput, hasError) {
+    titleError.innerHTML = "*This field is required";
+    titleInput.classList.add("input-error");
+    hasError = true;
+}
+
+function getDateTerror(dateError, hasError) {
+    dateError.innerHTML = "*This field is required";
+    document.getElementById("edit-date-input").classList.add("input-error");
+    hasError = true;
+}
 
 function searchTasks() {
     let searchValue = document.getElementById("search-bar").value.toLowerCase();
-
     let filteredTasks = tasks.filter(task =>
         task.title.toLowerCase().includes(searchValue) ||
         task.description.toLowerCase().includes(searchValue) ||
@@ -581,7 +483,6 @@ function searchTasks() {
 
     renderSearchResults(filteredTasks);
 }
-
 
 function renderSearchResults(filteredTasks) {
     renderTasksByStatus("To do", "to-do", filteredTasks);
