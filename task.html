@@ -112,7 +112,7 @@
                   <label for="contacts">Assigned to</label>
                   <div class="assigned-to">
                     <div class="custom-selectbox" onclick="toggleContactList(); logDownWBubblingProtection(event);">
-                      <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign" />
+                      <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign" oninput="searchContacts();"/>
                       <div id="contacts-arrow" class="arrow">
                         <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down" />
                       </div>

@@ -6,6 +6,7 @@ body {
     font-family: "Inter", sans-serif;
     min-height: 100vh;
     background-color: rgba(246, 247, 248, 1);
+    overflow: hidden;
 }
 
 @font-face {
@@ -197,6 +198,15 @@ h3 {
     border-radius: 24px;
     padding: 20px;
     gap: 20px;
+}
+
+.task-card-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-card-title img {
+    display: none;
 }
 
 h4 {

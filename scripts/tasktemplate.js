@@ -1,16 +1,47 @@
 function getTaskContactTemplate(iContact) {
+    let contact = contacts[iContact];
+
+    let isChecked = selectedContacts.some(
+        selected => selected.id === contact.id
+    );
+
     return `<input class="checkbox-input" 
             type="checkbox" 
             id="assign-contact${iContact}"
             name="assign-contact" 
             value="${contacts[iContact].name}" 
-            onchange="updateSelectedContacts()">
+            onchange="getSelectedContacts('${contacts[iContact].id}');"
+            ${isChecked ? "checked" : ""}>
             <label class="custom-checkbox" for="assign-contact${iContact}">
                 <span></span>
                 <img src="./assets/img/checked.svg" alt="checked">
                 <div class="contact-name">
                     <div class="initials" style="background-color: ${contacts[iContact].color};">${contacts[iContact].initials}</div>
                     ${contacts[iContact].name}
+                </div>
+            </label>`
+}
+
+function getFilteredTaskContactTemplate(filteredContacts, iContact) {
+    let contact = filteredContacts[iContact];
+
+    let isChecked = selectedContacts.some(
+        selected => selected.id === contact.id
+    );
+
+    return `<input class="checkbox-input" 
+            type="checkbox" 
+            id="assign-contact${iContact}"
+            name="assign-contact" 
+            value="${filteredContacts[iContact].name}" 
+            onchange="getSelectedContacts('${filteredContacts[iContact].id}');"
+            ${isChecked ? "checked" : ""}>
+            <label class="custom-checkbox" for="assign-contact${iContact}">
+                <span></span>
+                <img src="./assets/img/checked.svg" alt="checked">
+                <div class="contact-name">
+                    <div class="initials" style="background-color: ${filteredContacts[iContact].color};">${filteredContacts[iContact].initials}</div>
+                    ${filteredContacts[iContact].name}
                 </div>
             </label>`
 }
@@ -57,10 +88,12 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
         <button class="task-card" draggable="true" 
             ondragstart="startDragging('${filteredTasks[index].id}')"
             onclick="taskOpen('${filteredTasks[index].id}'); logDownWBubblingProtection(event);">
-
+<div class=task-card-title>
             <h4 class="${filteredTasks[index].category}">
                 ${filteredTasks[index].category}
             </h4>
+                <img src="./assets/img/move.svg" alt="move">
+                </div>
 
             <p>
                 <strong>${filteredTasks[index].title}</strong>

@@ -463,7 +463,7 @@ function updateEditContactLine() {
             let contact = contacts[i];
             contactLine.innerHTML += `
                 <div class="initials" style="background-color: ${contact.color}">
-                    ${contact.name}
+                    ${contact.initials}
                 </div>
             `;
 

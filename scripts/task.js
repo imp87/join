@@ -1,5 +1,5 @@
 
-
+let selectedContacts = [];
 let subtasks = []
 let tasks = []
 
@@ -81,21 +81,50 @@ function sortTaskContactsByName() {
 }
 
 
-function updateSelectedContacts() {
-    let contactLine = document.getElementById("contact-line");
-    contactLine.innerHTML = "";
-    const checkedBoxes = document.querySelectorAll('input[name="assign-contact"]:checked');
 
-    checkedBoxes.forEach((box, index) => {
-        if (index < 3) {
-            let contactIndex = box.id.replace("assign-contact", "");
-            let contact = contacts[contactIndex];
-            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
-        }
-    });
+function getSelectedContacts(id) {
+    let index = contacts.findIndex(item => item.id === id);
+
+    if (index === -1) return;
+
+    let contact = contacts[index];
+
+    let selectedIndex = selectedContacts.findIndex(
+        item => item.id === id
+    );
+
+    if (selectedIndex === -1) {
+        selectedContacts.push({
+            name: contact.name,
+            initials: contact.initials,
+            color: contact.color,
+            id: contact.id
+        });
+    } else {
+        selectedContacts.splice(selectedIndex, 1);
+    }
+
+    console.log(selectedContacts);
+    updateSelectedContacts()
 }
 
 
+function updateSelectedContacts() {
+    let contactLine = document.getElementById("contact-line");
+    contactLine.innerHTML = "";
+
+    for (
+        let contactIndex = 0;
+        contactIndex < selectedContacts.length && contactIndex < 3;
+        contactIndex++
+    ) {
+        contactLine.innerHTML += `
+            <div class="initials" style="background-color: ${selectedContacts[contactIndex].color}">
+                ${selectedContacts[contactIndex].initials}
+            </div>
+        `;
+    }
+}
 
 
 function toggleCategoryOptions() {
@@ -126,20 +155,6 @@ async function addToTasks(event) {
     let category = document.getElementById("category-input");
 
 
-    let assignedContacts = [];
-
-    let checkedBoxes = document.querySelectorAll('input[name="assign-contact"]:checked');
-
-    checkedBoxes.forEach(box => {
-        let contactIndex = box.id.replace("assign-contact", "");
-
-        assignedContacts.push({
-            name: contacts[contactIndex].name,
-            initials: contacts[contactIndex].initials,
-            color: contacts[contactIndex].color,
-        });
-    });
-
 
     let validationMessage = document.querySelectorAll(".validation-message")
 
@@ -160,18 +175,18 @@ async function addToTasks(event) {
     date.classList.remove("input-error");
 
 
-    getTaskValue(title, description, date, priority, assignedContacts, category, subtasks);
+    getTaskValue(title, description, date, priority, category, subtasks);
     showSuccessDialog();
 }
 
 
-async function getTaskValue(title, description, date, priority, assignedContacts, category, subtasks) {
+async function getTaskValue(title, description, date, priority, category, subtasks) {
     let task = {
         "title": title.value,
         "description": description.value,
         "date": date.value,
         "priority": priority,
-        "contacts": assignedContacts.length > 0 ? assignedContacts : "",
+        "contacts": selectedContacts.length > 0 ? selectedContacts : "",
         "category": category.value,
         "subtasks": subtasks.length > 0 ? subtasks : "",
         "status": "To do"
@@ -287,4 +302,26 @@ function setMinDate() {
     let day = String(today.getDate()).padStart(2, "0");
 
     dateInput.min = `${year}-${month}-${day}`;
+}
+
+
+function searchContacts() {
+    let searchValue = document.getElementById("contacts").value.toLowerCase();
+    let contactListRef = document.getElementById("contact-list");
+    contactListRef.classList.remove("display-none");
+
+
+
+    let filteredContacts = contacts.filter(contact =>
+        contact.name.toLowerCase().includes(searchValue)
+    );
+
+
+    contactListRef.innerHTML = "";
+
+    for (let iContact = 0; iContact < filteredContacts.length; iContact++) {
+        contactListRef.innerHTML += getFilteredTaskContactTemplate(filteredContacts, iContact);
+    }
+
+    console.log(selectedContacts)
 }
