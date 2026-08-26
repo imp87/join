@@ -185,7 +185,7 @@ function getEditTaskTemplate(id, task) {
             </button>
         </div>
 
-        <form onsubmit="EditTaskChanged(event, '${id}')">
+        <form onsubmit="editTaskChanged(event, '${id}')">
         <div class="edit-task">
             <div class="form-area-fields">
                 <label for="edit-title">Title</label>

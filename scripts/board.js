@@ -384,7 +384,7 @@ function updateEditContactLine() {
     }
 }
 
-async function EditTaskChanged(event, id) {
+async function editTaskChanged(event, id) {
     event.preventDefault();
     let titleInput = document.getElementById("edit-title");
     let dateInput = document.getElementById("edit-date");
@@ -396,69 +396,25 @@ async function EditTaskChanged(event, id) {
     let titleError = document.getElementById("edit-title-error");
     let dateError = document.getElementById("edit-date-error");
 
-    titleError.innerHTML = "";
-    dateError.innerHTML = "";
-    titleInput.classList.remove("input-error");
-    document.getElementById("edit-date-input").classList.remove("input-error");
+    await allEditTaskChangedFunctions(titleInput, title, description, date, titleError, dateError, id);
+}
 
+async function allEditTaskChangedFunctions(titleInput, title, description, date, titleError, dateError, id) {
+    editTaskChangedErrorsRemove(titleError, titleInput, dateError);
     let hasError = false;
     if (title === "") { return getTitleError(titleError, titleInput, hasError); }
     if (date === "") { return getDateTerror(dateError, hasError); }
     if (hasError) { return; }
-
-    let priority = document.querySelector('input[name="edit-priority"]:checked')?.value || "";
-    let selectedContacts = [];
-
-    for (let i = 0; i < contacts.length; i++) {
-        let checkbox = document.getElementById(`edit-contact${i}`);
-
-        if (checkbox && checkbox.checked) {
-            selectedContacts.push({
-                name: contacts[i].name,
-                initials: contacts[i].initials,
-                color: contacts[i].color
-            });
-        }
-    }
-
-
-    let task = tasks.find(task => task.id === currentEditTaskId);
-
-    if (!task) return;
-
-
-    await fetch(
-        `https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${currentEditTaskId}.json`,
-        {
-            method: "PATCH",
-            body: JSON.stringify({
-                title: title,
-                description: description,
-                date: date,
-                priority: priority,
-                contacts: selectedContacts,
-                subtasks: task.subtasks || []
-            })
-        }
-    );
-
-
-    task.title = title;
-    task.description = description;
-    task.date = date;
-    task.priority = priority;
-    task.contacts = selectedContacts;
-
-    data[id].title = title;
-    data[id].description = description;
-    data[id].date = date;
-    data[id].priority = priority;
-    data[id].contacts = selectedContacts;
-    data[id].subtasks = task.subtasks || [];
-
-
-    updateHTML();
+    await changedTask(title, description, date, id)
+    await updateHTML();
     taskOpen(id)
+}
+
+function editTaskChangedErrorsRemove(titleError, titleInput, dateError) {
+    titleError.innerHTML = "";
+    dateError.innerHTML = "";
+    titleInput.classList.remove("input-error");
+    document.getElementById("edit-date-input").classList.remove("input-error");
 }
 
 function getTitleError(titleError, titleInput, hasError) {
@@ -471,6 +427,65 @@ function getDateTerror(dateError, hasError) {
     dateError.innerHTML = "*This field is required";
     document.getElementById("edit-date-input").classList.add("input-error");
     hasError = true;
+}
+
+async function changedTask(title, description, date, id) {
+    let priority = document.querySelector('input[name="edit-priority"]:checked')?.value || "";
+    let selectedEditContacts = [];
+    for (let i = 0; i < contacts.length; i++) {
+        let checkbox = document.getElementById(`edit-contact${i}`);
+        if (checkbox && checkbox.checked) {
+            selectedEditContacts.push(changedTaskSelectedContacts(i));
+        }
+    }
+    await fetchChangedTask(title, description, date, priority, id, selectedEditContacts);
+}
+
+function changedTaskSelectedContacts(i) {
+    return {
+        name: contacts[i].name,
+        initials: contacts[i].initials,
+        color: contacts[i].color
+    }
+}
+
+async function fetchChangedTask(title, description, date, priority, id, selectedEditContacts) {
+    let task = tasks.find(task => task.id === currentEditTaskId);
+    if (!task) return;
+    let changedTask = changedTaskData(title, description, date, priority, task, selectedEditContacts);
+
+    await fetch(`https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${currentEditTaskId}.json`, {
+        method: "PATCH",
+        body: JSON.stringify(changedTask)
+    });
+
+    updateTask(task, title, description, date, priority, id, selectedEditContacts);
+}
+
+function changedTaskData(title, description, date, priority, task, selectedEditContacts) {
+    return {
+        "title": title,
+        "description": description,
+        "date": date,
+        "priority": priority,
+        "contacts": selectedEditContacts,
+        "subtasks": task.subtasks || []
+    }
+}
+
+function updateTask(task, title, description, date, priority, id, selectedEditContacts) {
+    task.title = title;
+    task.description = description;
+    task.date = date;
+    task.priority = priority;
+    task.contacts = selectedEditContacts;
+
+    data[id].title = title;
+    data[id].description = description;
+    data[id].date = date;
+    data[id].priority = priority;
+    data[id].contacts = selectedEditContacts;
+    data[id].subtasks = task.subtasks || [];
 }
 
 function searchTasks() {
