@@ -205,3 +205,140 @@ footer {
 	font-size: 21px;
 	font-weight: 500;
 }
+
+@media (max-width: 1000px) {
+	.loginBody {
+		height: auto;
+		min-height: 100dvh;
+	}
+
+
+	footer {
+		background-color: #f6f7f8;
+	}
+
+	#mainContent {
+		height: auto;
+		min-height: 100dvh;
+		padding: 140px 24px 100px;
+	}
+
+	.loginFormWrapper {
+		width: min(100%, 560px);
+		height: auto;
+		padding: 40px 24px;
+	}
+
+	.loginFormWrapper h2 {
+		font-size: 47px;
+	}
+
+	#loginForm {
+		width: 100%;
+	}
+}
+
+@media (max-width: 800px) {
+	.loginBody {
+		height: auto;
+		min-height: 100dvh;
+	}
+
+	.startLogo {
+		width: 180px;
+	}
+
+	.loginHeader {
+		height: auto;
+		padding: 16px;
+		align-items: flex-start;
+	}
+
+	.loginHeader img {
+		width: 64px;
+		height: auto;
+	}
+
+	.loginHeader p {
+		position: fixed;
+		left: 0;
+		bottom: 64px;
+		width: 100%;
+		margin: 0;
+		padding: 8px 0;
+		background-color: #f6f7f8;
+		gap: 16px;
+		font-size: 16px;
+	}
+
+	.loginHeader button {
+		width: 80px;
+		height: 44px;
+	}
+
+	#mainContent {
+		height: auto;
+		min-height: 100dvh;
+		padding: 112px 16px 128px;
+	}
+
+	.loginFormWrapper {
+		width: 100%;
+		max-width: 420px;
+		padding: 32px 16px;
+		box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+	}
+
+	.loginFormWrapper h2 {
+		font-size: 40px;
+		margin-bottom: 0;
+	}
+
+	.loginFormWrapper h2::after {
+		content: "";
+		display: block;
+		width: 80px;
+		height: 3px;
+		margin: 12px auto 0;
+		background-color: #29abe2;
+	}
+
+	#loginForm {
+		gap: 24px;
+	}
+
+	.loginInputWrapper {
+		gap: 24px;
+	}
+
+	.inputWithIcon input {
+		font-size: 16px;
+	}
+
+	.loginButtons {
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+	}
+
+	#userLogin,
+	#guestLogin {
+		width: 152px;
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 400px) {
+	.loginHeader p {
+		font-size: 14px;
+		gap: 12px;
+	}
+
+	.loginFormWrapper h2 {
+		font-size: 34px;
+	}
+
+	.footerLinks {
+		font-size: 14px;
+	}
+}
