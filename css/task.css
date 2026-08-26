@@ -494,6 +494,7 @@ input[type="checkbox" i] {
     margin: 0;
     height: 60px;
     overflow-y: auto;
+    padding-bottom: 6px;
 }
 
 .subtask {

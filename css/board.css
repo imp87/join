@@ -340,6 +340,8 @@ h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    height: unset;
 }
 
 .edit-fields {
@@ -719,6 +721,65 @@ h4 {
     }
 }
 
+@media (max-width: 570px) {
+    .task-content {
+        width: 400px;
+        font-size: 16px;
+    }
+
+    .task-content h4 {
+        font-size: 16px;
+        padding-right: 16px;
+        padding-left: 16px;
+        padding-bottom: 0;
+        padding-top: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .task-content h1 {
+        font-size: 36px;
+    }
+
+    .task-content p {
+        font-size: 16px;
+    }
+
+    .person {
+        font-size: 16px;
+    }
+
+    .person div {
+        font-size: 16px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .edit-fields {
+        width: 320px;
+    }
+
+    .form-area-fields label {
+        font-size: 16px;
+    }
+
+    .form-area-fields input {
+        font-size: 16px;
+    }
+
+    .form-area-fields textarea {
+        font-size: 16px;
+    }
+
+    .priority label {
+        height: 40px;
+    }
+
+    .form-area-fields legend {
+        font-size: 16px;
+    }
+}
+
 @media (max-width: 520px) {
     section {
         padding-left: 15px;
@@ -727,5 +788,109 @@ h4 {
 
     h1 {
         margin-top: 0px;
+    }
+}
+
+@media (max-width: 460px) {
+    .task-content {
+        width: 360px;
+        font-size: 16px;
+        padding-right: 25px;
+        padding-left: 25px;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        gap: 20px;
+    }
+
+    .edit-fields {
+        width: 295px;
+    }
+
+}
+
+@media (max-width: 415px) {
+    .task-content {
+        width: 320px;
+    }
+
+    .edit-fields {
+        width: 255px;
+    }
+
+    .task-content label img {
+        width: 15px;
+    }
+
+    .task-content .priority label {
+        width: 35%;
+    }
+
+}
+
+@media (max-width: 380px) {
+    .task-content {
+        width: 305px;
+        padding-right: 15px;
+        padding-left: 15px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+        gap: 15px;
+    }
+
+    .task[open] {
+        margin-left: 10px;
+        max-width: none;
+        margin-right: 10px;
+        justify-self: center;
+    }
+
+    .edit-fields {
+        width: 240px;
+    }
+}
+
+@media (max-width: 380px) {
+    .task-content {
+        width: 285px;
+    }
+
+    .task-content .edit-task {
+        width: 100%;
+    }
+
+    .edit-fields {
+        width: 100%;
+    }
+
+    .task-content label img {
+        width: 14px;
+    }
+
+    .task-content input[type="search"] {
+        padding-right: 0;
+        width: inherit;
+    }
+
+    .form-area-fields input {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .form-area-fields textarea {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .form-area-fields input[type="date"] {
+        padding-left: 5px;
+    }
+
+    .custom-selectbox {
+        padding-right: 5px;
+    }
+
+    .arrow {
+        width: 14px;
+        height: 14px;
     }
 }
