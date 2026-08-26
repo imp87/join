@@ -153,40 +153,73 @@ h5 {
 }
 
 
-.greeting {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.greeting.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.greeting.fade-out {
-    opacity: 0;
-    transform: translateY(-20px);
-}
 
 
 .title span {
     display: none;
 }
 
+.greeting {
+    animation: fadeIn 0.5s ease forwards;
+}
 
-@media (max-width: 1440px) {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+@keyframes showAndHide {
+    0% {
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@media (max-width: 1670px) {
+    section {
+        margin-left: 300px;
+    }
+}
+
+@media (max-width: 1439px) {
     main {
         max-width: 100% !important;
     }
 
     .title {
         gap: 20px;
+        animation: fadeIn 0.6s ease forwards;
+        animation-delay: 3s;
+        opacity: 0;
     }
 
-    section {
-        margin-left: 320px;
-    }
 
     section article {
         align-items: center;
@@ -211,11 +244,17 @@ h5 {
     section article div {
         width: 500px;
         max-width: 500px;
+        opacity: 0;
+        animation: fadeIn 0.6s ease forwards;
+        animation-delay: 3s;
+        z-index: 100;
     }
 
     .greeting {
-        height: 100%;
-        text-align: center;
+        animation: showAndHide 3s ease forwards;
+        position: absolute;
+        top: 200px;
+        z-index: 1;
     }
 }
 
@@ -313,13 +352,28 @@ h5 {
     section article figure {
         gap: 20px;
     }
+
+    .greeting {
+        top: unset;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h5 {
+        text-align: center;
+    }
+
 }
 
 
 @media (max-width: 520px) {
     section article div {
-        width: 290px;
-        max-width: 290px;
+        width: 350px;
+        max-width: 350px;
     }
 
     section article a div {
@@ -343,5 +397,12 @@ h5 {
 
     h5 {
         font-size: 36px;
+    }
+}
+
+@media (max-width: 390px) {
+    section article div {
+        width: 290px;
+        max-width: 290px;
     }
 }

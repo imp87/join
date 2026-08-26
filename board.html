@@ -27,7 +27,7 @@
     <nav>
       <h2>Kanban Project Management Tool</h2>
       <div>
-        <img src="./assets/img/help.svg" alt="help" /><button id="userInitials" onclick="
+        <a href="./pages/help.html"><img src="./assets/img/help.svg" alt="help" /></a><button id="userInitials" onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
             ">
@@ -36,8 +36,9 @@
       </div>
     </nav>
     <dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
-      <a href="./index.html">Legal Notice</a>
-      <a href="">Privacy Policy</a>
+      <a class="help-submenu" href="./assets/img/help.svg">Help</a>
+      <a href="./pages/legals.html">Legal Notice</a>
+      <a href="./pages/privacy.html">Privacy Policy</a>
       <a href="./index.html" onclick="logoutUser()">Log out</a>
     </dialog>
   </header>
@@ -55,15 +56,16 @@
         </ul>
 
         <ul>
-          <a class="menu-bottom" href="">Privacy Policy</a>
-          <a class="menu-bottom" href="">Legal notice</a>
+          <a class="menu-bottom" href="./pages/privacy.html">Privacy Policy</a>
+          <a class="menu-bottom" href="./pages/legals.html">Legal notice</a>
         </ul>
       </nav>
     </div>
 
     <section>
       <div class="title">
-        <h1>Board</h1>
+        <h1>Board <a href="./task.html" class="add-task-mobile"><img src="./assets/img/plus add task mobile.svg"
+              alt="add-task.button"></a></h1>
 
         <span>
           <div class="searchbar">
@@ -92,6 +94,9 @@
                 ">
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
+            <a href="./task.html" class="plus-button-mobile">
+              <img src="./assets/img/plus button mobile.svg" alt="plus-button">
+            </a>
           </div>
           <div id="to-do" class="task-cards" ondrop="moveTo('To do'); removeHighlight('to-do');"
             ondragleave="removeHighlight('to-do')" ondragover="allowDrop(event); highlight('to-do')">
@@ -111,6 +116,9 @@
                 ">
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
+            <a href="./task.html" class="plus-button-mobile">
+              <img src="./assets/img/plus button mobile.svg" alt="plus-button">
+            </a>
           </div>
           <div id="in-progress" class="task-cards" ondrop="moveTo('In progress'); removeHighlight('in-progress');"
             ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress');">
@@ -126,6 +134,9 @@
                 ">
               <img src="./assets/img/plus button.svg" alt="add svg" />
             </button>
+            <a href="./task.html" class="plus-button-mobile">
+              <img src="./assets/img/plus button mobile.svg" alt="plus-button">
+            </a>
           </div>
           <div id="await-feedback" class="task-cards"
             ondrop="moveTo('Await feedback'); removeHighlight('await-feedback');"
@@ -201,7 +212,8 @@
                     <label for="contacts">Assigned to</label>
                     <div class="assigned-to">
                       <div class="custom-selectbox" onclick="toggleContactList()">
-                        <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign" />
+                        <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign"
+                          oninput="searchContacts();" />
                         <div id="contacts-arrow" class="arrow">
                           <img src="./assets/img/arrow_drop_down.svg" alt="arrow_drop_down" />
                         </div>

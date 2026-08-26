@@ -1,16 +1,71 @@
 function getTaskContactTemplate(iContact) {
+    let contact = contacts[iContact];
+
+    let isChecked = selectedContacts.some(
+        selected => selected.id === contact.id
+    );
+
     return `<input class="checkbox-input" 
             type="checkbox" 
             id="assign-contact${iContact}"
             name="assign-contact" 
             value="${contacts[iContact].name}" 
-            onchange="updateSelectedContacts()">
+            onchange="getSelectedContacts('${contacts[iContact].id}');"
+            ${isChecked ? "checked" : ""}>
             <label class="custom-checkbox" for="assign-contact${iContact}">
                 <span></span>
                 <img src="./assets/img/checked.svg" alt="checked">
                 <div class="contact-name">
                     <div class="initials" style="background-color: ${contacts[iContact].color};">${contacts[iContact].initials}</div>
                     ${contacts[iContact].name}
+                </div>
+            </label>`
+}
+
+function getFilteredTaskContactTemplate(filteredContacts, iContact) {
+    let contact = filteredContacts[iContact];
+
+    let isChecked = selectedContacts.some(
+        selected => selected.id === contact.id
+    );
+
+    return `<input class="checkbox-input" 
+            type="checkbox" 
+            id="assign-contact${iContact}"
+            name="assign-contact" 
+            value="${filteredContacts[iContact].name}" 
+            onchange="getSelectedContacts('${filteredContacts[iContact].id}');"
+            ${isChecked ? "checked" : ""}>
+            <label class="custom-checkbox" for="assign-contact${iContact}">
+                <span></span>
+                <img src="./assets/img/checked.svg" alt="checked">
+                <div class="contact-name">
+                    <div class="initials" style="background-color: ${filteredContacts[iContact].color};">${filteredContacts[iContact].initials}</div>
+                    ${filteredContacts[iContact].name}
+                </div>
+            </label>`
+}
+
+function getFilteredEditTaskContactTemplate(filteredContacts, iContact) {
+    let contact = filteredContacts[iContact];
+
+    let isChecked = selectedEditContacts.some(
+        selected => selected.id === contact.id
+    );
+
+    return `<input class="checkbox-input" 
+            type="checkbox" 
+            id="assign-contact${iContact}"
+            name="assign-contact" 
+            value="${filteredContacts[iContact].name}" 
+            onchange="getSelectedEditContacts('${filteredContacts[iContact].id}');"
+            ${isChecked ? "checked" : ""}>
+            <label class="custom-checkbox" for="assign-contact${iContact}">
+                <span></span>
+                <img src="./assets/img/checked.svg" alt="checked">
+                <div class="contact-name">
+                    <div class="initials" style="background-color: ${filteredContacts[iContact].color};">${filteredContacts[iContact].initials}</div>
+                    ${filteredContacts[iContact].name}
                 </div>
             </label>`
 }
@@ -32,7 +87,6 @@ function getSubtaskTemplate(iSubtask) {
             </li>`
 }
 
-
 function getEditSubtaskTemplate(iSubtask) {
     return `<div class="edit-subtask">
                 <input 
@@ -51,16 +105,17 @@ function getEditSubtaskTemplate(iSubtask) {
             </div>`
 }
 
-
 function getFilteredTasksTemplate(filteredTasks, index, description) {
     return `
         <button class="task-card" draggable="true" 
             ondragstart="startDragging('${filteredTasks[index].id}')"
             onclick="taskOpen('${filteredTasks[index].id}'); logDownWBubblingProtection(event);">
-
+<div class=task-card-title>
             <h4 class="${filteredTasks[index].category}">
                 ${filteredTasks[index].category}
             </h4>
+                <img src="./assets/img/move.svg" alt="move">
+                </div>
 
             <p>
                 <strong>${filteredTasks[index].title}</strong>
@@ -80,7 +135,6 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
         </button>
     `;
 }
-
 
 function getOpenTaskTemplate(id) {
     return `<div class="task-content" onclick="logDownWBubblingProtection(event)" id="task-content">
@@ -125,7 +179,6 @@ function getOpenTaskTemplate(id) {
             </div>`
 }
 
-
 function getOpenTaskSubtaskTemplate(id, index, subtasks) {
     return `<div>
                 <input 
@@ -144,7 +197,6 @@ function getOpenTaskSubtaskTemplate(id, index, subtasks) {
             </div>`
 }
 
-
 function getEditTaskTemplate(id, task) {
     return `<div class="task-content-top" style="justify-content: flex-end;">
             <button onclick="taskClose()">
@@ -152,7 +204,7 @@ function getEditTaskTemplate(id, task) {
             </button>
         </div>
 
-        <form onsubmit="EditTaskChanged(event, '${id}')">
+        <form onsubmit="editTaskChanged(event, '${id}')">
         <div class="edit-task">
             <div class="form-area-fields">
                 <label for="edit-title">Title</label>
@@ -249,7 +301,8 @@ function getEditTaskTemplate(id, task) {
                         <input 
                             type="search" 
                             id="edit-contacts"
-                            placeholder="Select contacts to assign">
+                            placeholder="Select contacts to assign"
+                            oninput="searchEditContacts();">
 
                         <div id="contacts-arrow" class="arrow">
                             <img src="./assets/img/arrow_drop_down.svg" alt="arrow">
@@ -291,7 +344,6 @@ function getEditTaskTemplate(id, task) {
         </form>`
 }
 
-
 function getEditTaskSubtaskTemplate(iSubtask, task) {
     return `
             <li class="subtask" id="subtask-${iSubtask}">
@@ -315,7 +367,6 @@ function getEditTaskSubtaskTemplate(iSubtask, task) {
         `
 }
 
-
 function getEditTaskEditSubtaskTemplate(iSubtask, task) {
     return `<div class="edit-subtask">
             <input 
@@ -337,13 +388,12 @@ function getEditTaskEditSubtaskTemplate(iSubtask, task) {
         </div>`
 }
 
-
 function getEditTaskContactTemplate(i, isChecked, contact) {
     return `<input 
                 class="checkbox-input" 
                 type="checkbox"
                 id="edit-contact${i}"
-                onchange="updateEditContactLine()"
+                onchange="updateEditContactLine(); getSelectedEditContacts('${contact.id}');"
                 ${isChecked ? "checked" : ""}>
 
             <label class="custom-checkbox" for="edit-contact${i}">

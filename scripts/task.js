@@ -1,5 +1,4 @@
-
-
+let selectedContacts = [];
 let subtasks = []
 let tasks = []
 
@@ -38,7 +37,6 @@ function startResize(event, id) {
     document.addEventListener("mouseup", stopResize);
 }
 
-
 function resizeTextarea(event) {
     if (!resizing) return;
 
@@ -49,7 +47,6 @@ function resizeTextarea(event) {
 
     textarea.style.height = `${newHeight}px`;
 }
-
 
 function stopResize() {
     resizing = false;
@@ -73,30 +70,49 @@ function limitTextarea(textarea) {
     textarea.style.height = `${textarea.scrollHeight}px`;
 }
 
-
 function sortTaskContactsByName() {
     contacts.sort(function (contactA, contactB) {
         return contactA.name.localeCompare(contactB.name);
     });
 }
 
+function getSelectedContacts(id) {
+    let index = contacts.findIndex(item => item.id === id);
+    if (index === -1) return;
+
+    selectedContactsPush(id, index)
+    updateSelectedContacts()
+}
+
+function selectedContactsPush(id, index) {
+    let contact = contacts[index];
+    let selectedIndex = selectedContacts.findIndex(item => item.id === id);
+    if (selectedIndex === -1) {
+        selectedContacts.push({
+            name: contact.name,
+            initials: contact.initials,
+            color: contact.color,
+            id: contact.id
+        });
+    } else {
+        selectedContacts.splice(selectedIndex, 1);
+    }
+}
 
 function updateSelectedContacts() {
     let contactLine = document.getElementById("contact-line");
     contactLine.innerHTML = "";
-    const checkedBoxes = document.querySelectorAll('input[name="assign-contact"]:checked');
 
-    checkedBoxes.forEach((box, index) => {
-        if (index < 3) {
-            let contactIndex = box.id.replace("assign-contact", "");
-            let contact = contacts[contactIndex];
-            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
-        }
-    });
+    for (
+        let contactIndex = 0;
+        contactIndex < selectedContacts.length && contactIndex < 3;
+        contactIndex++
+    ) {
+        contactLine.innerHTML += `
+        <div class="initials" style="background-color: ${selectedContacts[contactIndex].color}">${selectedContacts[contactIndex].initials}</div>
+        `;
+    }
 }
-
-
-
 
 function toggleCategoryOptions() {
     document.getElementById("category-options").classList.toggle("display-none");
@@ -114,71 +130,55 @@ function selectCategory(category) {
     toggleCategoryOptions();
 }
 
-
 async function addToTasks(event) {
     event.preventDefault();
-
-
     let title = document.getElementById("title");
     let description = document.getElementById("description");
     let date = document.getElementById("due-date");
-    const priority = document.querySelector('input[name="priority"]:checked')?.value || "";
+    let priority = document.querySelector('input[name="priority"]:checked')?.value || "";
     let category = document.getElementById("category-input");
-
-
-    let assignedContacts = [];
-
-    let checkedBoxes = document.querySelectorAll('input[name="assign-contact"]:checked');
-
-    checkedBoxes.forEach(box => {
-        let contactIndex = box.id.replace("assign-contact", "");
-
-        assignedContacts.push({
-            name: contacts[contactIndex].name,
-            initials: contacts[contactIndex].initials,
-            color: contacts[contactIndex].color,
-        });
-    });
-
-
-    let validationMessage = document.querySelectorAll(".validation-message")
+    let validationMessage = document.querySelectorAll(".validation-message");
 
     if (category.value === "" || title.value === "" || date.value === "") {
-        document.getElementById("custom-category-input").classList.add("input-error");
-        validationMessage.forEach(element => {
-            element.innerHTML = "This field is required"
-        });
-        title.classList.add("input-error");
-        document.getElementById("date-input").classList.add("input-error");
-        return;
+        return errorMessage(validationMessage, title);
     }
-    document.getElementById("custom-category-input").classList.remove("input-error");
-    validationMessage.forEach(element => {
-        element.innerHTML = ""
-    });
-    title.classList.remove("input-error");
-    date.classList.remove("input-error");
+    messageTaskSuccess(validationMessage, title, description, date, priority, category, subtasks);
+}
 
-
-    getTaskValue(title, description, date, priority, assignedContacts, category, subtasks);
+function messageTaskSuccess(validationMessage, title, description, date, priority, category, subtasks) {
+    removeErrorMessage(validationMessage, title, date);
+    getTaskValue(title, description, date, priority, category, subtasks);
     showSuccessDialog();
 }
 
+function errorMessage(validationMessage, title) {
+    document.getElementById("custom-category-input").classList.add("input-error");
+    validationMessage.forEach(element => { element.innerHTML = "This field is required" });
+    title.classList.add("input-error");
+    document.getElementById("date-input").classList.add("input-error");
+    return;
+}
 
-async function getTaskValue(title, description, date, priority, assignedContacts, category, subtasks) {
+function removeErrorMessage(validationMessage, title, date) {
+    document.getElementById("custom-category-input").classList.remove("input-error");
+    validationMessage.forEach(element => { element.innerHTML = "" });
+    title.classList.remove("input-error");
+    document.getElementById("date-input").classList.remove("input-error");
+}
+
+async function getTaskValue(title, description, date, priority, category, subtasks) {
     let task = {
         "title": title.value,
         "description": description.value,
         "date": date.value,
         "priority": priority,
-        "contacts": assignedContacts.length > 0 ? assignedContacts : "",
+        "contacts": selectedContacts.length > 0 ? selectedContacts : "",
         "category": category.value,
         "subtasks": subtasks.length > 0 ? subtasks : "",
         "status": "To do"
     };
     postToDatabase(task)
 }
-
 
 async function postToDatabase(task) {
     let response = await fetch(
@@ -194,12 +194,10 @@ async function postToDatabase(task) {
     let result = await response.json();
 }
 
-
 function clearSubtask() {
     let subtaskInput = document.getElementById("subtask");
     subtaskInput.value = "";
 }
-
 
 function addSubtask() {
     let subtaskInput = document.getElementById("subtask");
@@ -215,14 +213,12 @@ function addSubtask() {
     console.log(subtasks);
 }
 
-
 function deleteSubtask(iSubtask) {
     subtasks.splice(iSubtask, 1);
 
     renderSubtasks()
     console.log(subtasks);
 }
-
 
 function renderSubtasks() {
     let subtaskInteraction = document.getElementById("subtask-interaction");
@@ -233,13 +229,11 @@ function renderSubtasks() {
     }
 }
 
-
 function editSubtasks(iSubtask) {
     let subtaskRef = document.getElementById(`subtask-${iSubtask}`)
 
     subtaskRef.innerHTML = getEditSubtaskTemplate(iSubtask);
 }
-
 
 function subtaskEdited(iSubtask) {
     let editSubtaskInput = document.getElementById(`edit-subtask-${iSubtask}`)
@@ -248,20 +242,13 @@ function subtaskEdited(iSubtask) {
     renderSubtasks()
 }
 
-
 function clearTaskForm() {
     let form = document.getElementById("task-form");
     form.reset();
 
     document.getElementById("category-input").value = "";
-
-    document.querySelectorAll('input[name="assign-contact"]:checked')
-        .forEach(checkbox => {
-            checkbox.checked = false;
-        });
-
+    document.querySelectorAll('input[name="assign-contact"]:checked').forEach(checkbox => { checkbox.checked = false; });
     document.getElementById("contact-line").innerHTML = "";
-
     document.getElementById("subtask-interaction").innerHTML = "";
     subtasks = [];
 }
@@ -277,7 +264,6 @@ function showSuccessDialog() {
     }, 2000);
 }
 
-
 function setMinDate() {
     let dateInput = document.getElementById("due-date");
 
@@ -287,4 +273,67 @@ function setMinDate() {
     let day = String(today.getDate()).padStart(2, "0");
 
     dateInput.min = `${year}-${month}-${day}`;
+}
+
+function searchContacts() {
+    let searchValue = document.getElementById("contacts").value.toLowerCase();
+    let contactListRef = document.getElementById("contact-list");
+    contactListRef.classList.remove("display-none");
+
+    let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
+    contactListRef.innerHTML = "";
+
+    for (let iContact = 0; iContact < filteredContacts.length; iContact++) {
+        contactListRef.innerHTML += getFilteredTaskContactTemplate(filteredContacts, iContact);
+    }
+}
+
+function searchEditContacts() {
+    let searchValue = document.getElementById("edit-contacts").value.toLowerCase();
+    let contactListRef = document.getElementById("edit-contact-list");
+    contactListRef.classList.remove("display-none");
+    let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
+    contactListRef.innerHTML = "";
+
+    for (let iContact = 0; iContact < filteredContacts.length; iContact++) {
+        contactListRef.innerHTML += getFilteredEditTaskContactTemplate(filteredContacts, iContact);
+    }
+}
+
+function getSelectedEditContacts(id) {
+    let index = contacts.findIndex(item => item.id === id);
+    if (index === -1) return;
+
+    selectedEditContactsPush(id, index)
+    updateSelectedEditContacts()
+}
+
+function selectedEditContactsPush(id, index) {
+    let contact = contacts[index];
+    let selectedIndex = selectedEditContacts.findIndex(item => item.id === id);
+    if (selectedIndex === -1) {
+        selectedEditContacts.push({
+            name: contact.name,
+            initials: contact.initials,
+            color: contact.color,
+            id: contact.id
+        });
+    } else {
+        selectedEditContacts.splice(selectedIndex, 1);
+    }
+}
+
+function updateSelectedEditContacts() {
+    let contactLine = document.getElementById("edit-contact-line");
+    contactLine.innerHTML = "";
+
+    for (
+        let contactIndex = 0;
+        contactIndex < selectedEditContacts.length && contactIndex < 3;
+        contactIndex++
+    ) {
+        contactLine.innerHTML += `
+        <div class="initials" style="background-color: ${selectedEditContacts[contactIndex].color}">${selectedEditContacts[contactIndex].initials}</div>
+        `;
+    }
 }

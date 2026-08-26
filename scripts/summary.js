@@ -16,8 +16,6 @@ function greeting() {
     } else {
         greetingRef.innerHTML = "<h5>Good evening!</h5>";
     }
-
-
 }
 
 
@@ -62,26 +60,33 @@ function toDoLength() {
     let urgentCount = tasks.filter(task => task.priority === "urgent").length;
     document.getElementById("urgent-count").innerHTML = `${urgentCount}`;
 
+    nextUrgentDate();
+    categoryCount();
+}
+
+function nextUrgentDate() {
     let urgentTasks = tasks.filter(task => task.priority === "urgent");
-    urgentTasks.sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-    });
+    urgentTasks.sort((a, b) => { return new Date(a.date) - new Date(b.date); });
 
     let nextUrgentDate = urgentTasks[0]?.date;
 
     if (nextUrgentDate) {
-        let formattedDate = new Date(nextUrgentDate).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        });
-
-        document.getElementById("next-deadline").innerHTML = `<strong>${formattedDate}</strong>
-              Upcoming Deadline`
+        let formattedDate = getFormattedDate(nextUrgentDate);
+        document.getElementById("next-deadline").innerHTML = `<strong>${formattedDate}</strong>Upcoming Deadline`
     } else {
         document.getElementById("next-deadline").innerHTML = "No Upcoming Deadline";
     }
+}
 
+function getFormattedDate(nextUrgentDate) {
+    return new Date(nextUrgentDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+}
+
+function categoryCount() {
     document.getElementById("tasks-count").innerHTML = `${tasks.length}`
 
     let progressCount = tasks.filter(task => task.status === "In progress").length;
@@ -91,69 +96,3 @@ function toDoLength() {
     document.getElementById("feedback-count").innerHTML = `${feedbackCount}`
 }
 
-
-
-
-let greetingShown = false;
-let wasDesktop = window.innerWidth >= 1440;
-
-let fadeTimeout;
-let hideTimeout;
-
-function handleGreeting() {
-    let greeting = document.getElementById("greeting");
-    let summary = document.getElementById("summary");
-    let title = document.getElementById("summary-title");
-
-    clearTimeout(fadeTimeout);
-    clearTimeout(hideTimeout);
-
-    if (window.innerWidth >= 1440) {
-        greeting.style.display = "";
-        greeting.classList.remove("fade-out");
-        greeting.classList.add("show");
-
-        summary.style.display = "";
-        title.style.display = "";
-        greetingShown = false;
-        return;
-    }
-
-    if (greetingShown) return;
-
-    greetingShown = true;
-
-    summary.style.display = "none";
-    title.style.display = "none";
-
-    greeting.style.display = "";
-    greeting.classList.remove("fade-out");
-    greeting.classList.add("show");
-
-    fadeTimeout = setTimeout(() => {
-        greeting.classList.add("fade-out");
-    }, 2000);
-
-    hideTimeout = setTimeout(() => {
-        greeting.style.display = "none";
-        summary.style.display = "";
-        title.style.display = "";
-    }, 2600);
-}
-
-window.addEventListener("load", handleGreeting);
-
-window.addEventListener("resize", () => {
-    let isDesktop = window.innerWidth >= 1440;
-
-    if (wasDesktop && !isDesktop) {
-        greetingShown = false;
-        handleGreeting();
-    }
-
-    if (!wasDesktop && isDesktop) {
-        handleGreeting();
-    }
-
-    wasDesktop = isDesktop;
-});

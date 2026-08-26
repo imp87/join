@@ -14,6 +14,11 @@
     justify-content: space-between;
 }
 
+.no-padding {
+    padding: 0 !important;
+    padding-top: 40px !important;
+}
+
 .add-task-content h1 button {
     background: none;
     padding: 0;
@@ -52,6 +57,10 @@
     justify-content: space-between;
     gap: 40px;
     height: 550px;
+}
+
+.form-width {
+    max-width: 1000px;
 }
 
 .form-area {
@@ -190,7 +199,7 @@ textarea:focus-visible {
 }
 
 .priority label {
-    width: 140px;
+    width: 31%;
     display: flex;
     gap: 8px;
     align-items: center;
@@ -485,6 +494,7 @@ input[type="checkbox" i] {
     margin: 0;
     height: 60px;
     overflow-y: auto;
+    padding-bottom: 6px;
 }
 
 .subtask {
@@ -735,8 +745,8 @@ input[type="search"]::-webkit-search-cancel-button {
     border-radius: 24px;
     color: white;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
-    width: 280px;
-    height: 30px;
+    width: 300px;
+    height: 80px;
     animation: slideUp 0.3s ease-out;
 }
 
@@ -753,5 +763,202 @@ input[type="search"]::-webkit-search-cancel-button {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 1670px) {
+    section {
+        margin-left: 300px;
+    }
+}
+
+
+@media (max-width: 1439px) {
+
+    h1 {
+        font-size: 55px;
+    }
+
+    .formular {
+        gap: 30px;
+    }
+
+
+    .form-width {
+        margin-right: 80px;
+    }
+
+    .form-area {
+        width: 400px;
+    }
+
+    .form-area-fields label {
+        font-size: 18px;
+    }
+
+    .form-area-fields input {
+        font-size: 18px;
+    }
+
+    .form-area-fields textarea {
+        font-size: 18px;
+    }
+
+    .priority label {
+        height: 55px;
+    }
+
+    .contact-list {
+        width: 400px;
+    }
+
+    .category-options {
+        width: 400px;
+        font-size: 18px;
+    }
+
+
+}
+
+@media (max-width: 1350px) {
+
+    .formular {
+        flex-direction: column;
+        height: unset;
+    }
+
+    .form-width {
+        width: 400px;
+    }
+
+    .form-line {
+        display: none;
+    }
+
+    .clear-create {
+        position: fixed;
+        bottom: 20px;
+        width: 400px;
+        display: flex;
+        justify-content: flex-end;
+        background-color: rgba(246, 247, 248, 1);
+        z-index: 100;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .required-info {
+        padding-bottom: 25px;
+    }
+}
+
+@media (max-width: 900px) {
+    h1 {
+        font-size: 47px;
+        width: 400px;
+    }
+}
+
+@media (max-width: 800px) {
+    form {
+        height: 1080px;
+    }
+
+    section {
+        margin-left: 0;
+    }
+
+    .clear-create {
+        bottom: 76px;
+    }
+
+    main {
+        justify-content: center;
+    }
+
+    .no-padding {
+        padding-top: 0 !important;
+    }
+
+    .form-width {
+        margin-right: 0;
+    }
+
+    .add-task-content {
+        align-items: center;
+    }
+}
+
+@media (max-width: 450px) {
+
+
+    .form-width {
+        width: 100%;
+    }
+
+
+    .form-area {
+        width: 100%;
+    }
+
+    .form-area-fields label {
+        font-size: 16px;
+    }
+
+    .form-area-fields input {
+        font-size: 16px;
+    }
+
+    .form-area-fields textarea {
+        font-size: 16px;
+    }
+
+    .contact-list {
+        width: 320px;
+    }
+
+    .category-options {
+        width: 320px;
+        font-size: 16px;
+    }
+
+    .priority label {
+        height: 42px;
+    }
+
+
+    .clear-create {
+        width: 320px;
+    }
+}
+
+@media (max-width: 450px) {
+    h1 {
+        width: 100%;
+    }
+
+    .contact-list {
+        width: 290px;
+    }
+
+    .category-options {
+        width: 290px;
+    }
+
+    .clear-create {
+        width: 290px;
+    }
+
+    .priority {
+        gap: 4px;
+    }
+
+    .priority label {
+        gap: 4px;
+    }
+
+    .success-dialog[open] {
+        font-size: 16px;
     }
 }

@@ -94,6 +94,10 @@ header nav button:hover {
 	padding-right: 16px;
 }
 
+.help-submenu {
+	display: none;
+}
+
 .submenu a:hover {
 	background-color: rgba(42, 61, 89, 1);
 }
@@ -237,7 +241,7 @@ button {
 		width: 40px;
 		height: 40px;
 		border-width: 2px;
-		font-size: 12px;
+		font-size: 16px;
 	}
 
 	.submenu[open] {
@@ -245,6 +249,10 @@ button {
 		right: 8px;
 		z-index: 60;
 		border-radius: 16px 0 16px 16px;
+	}
+
+	.help-submenu {
+		display: unset;
 	}
 
 	main {
@@ -264,7 +272,7 @@ button {
 		gap: 0;
 	}
 
-	.menu > img,
+	.menu>img,
 	.menu nav ul:last-child {
 		display: none;
 	}
@@ -316,6 +324,10 @@ button {
 	.mobile-page-back img {
 		width: 22px;
 		height: 22px;
+	}
+
+	header nav img {
+		display: none;
 	}
 }
 
