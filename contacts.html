@@ -2,144 +2,155 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./css/style.css" />
-  <link rel="stylesheet" href="./css/contacts.css" />
-  <script src="./scripts/summary.js"></script>
-  <script src="./scripts/contacts-data.js"></script>
-  <script src="./scripts/contacts.js"></script>
-  <script src="./scripts/auth.js"></script>
-  <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon" />
-  <title>Join - Contacts</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/contacts.css" />
+	<script src="./scripts/summary.js"></script>
+
+	<script src="./scripts/contacts-data.js"></script>
+	<script src="./scripts/contacts-templates.js"></script>
+	<script src="./scripts/contacts.js"></script>
+	<script src="./scripts/auth.js"></script>
+	<link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon" />
+	<title>Join - Contacts</title>
 </head>
 
-<body onload="initContacts()" onclick="submenuClose()">
-  <header>
-    <nav>
-      <h2>Kanban Project Management Tool</h2>
-      <div>
-        <a href="./pages/help.html">
-          <img src="./assets/img/help.svg" alt="help" />
-        </a>
-        <button id="userInitials" onclick="
-              submenuOpen();
-              logDownWBubblingProtection(event);
-            ">
-          SM
-        </button>
-      </div>
-    </nav>
-    <dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
-      <a href="./pages/legals.html">Legal Notice</a>
-      <a href="./pages/privacy.html">Privacy Policy</a>
-      <a href="./index.html" onclick="logoutUser()">Log out</a>
-    </dialog>
-  </header>
+<body onload="initContacts()" onclick="
+			submenuClose();
+			closeMobileContactActions();
+		">
+	<header>
+		<nav>
+			<h2>Kanban Project Management Tool</h2>
+			<div>
+				<a href="./pages/help.html">
+					<img src="./assets/img/help.svg" alt="help" />
+				</a>
+				<button id="userInitials" onclick="
+							submenuOpen();
+							logDownWBubblingProtection(event);
+						">
+					SM
+				</button>
+			</div>
+		</nav>
+		<dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
+			<a href="./pages/legals.html">Legal Notice</a>
+			<a href="./pages/privacy.html">Privacy Policy</a>
+			<a href="./index.html" onclick="logoutUser()">Log out</a>
+		</dialog>
+	</header>
 
-  <main>
-    <div class="menu">
-      <img src="./assets/img/Join logo vector.svg" alt="join logo" />
-      <nav>
-        <ul>
-          <a class="menu-top" href="./summary.html"><img src="./assets/img/Vector.svg" alt="summary icon" />Summary</a>
-          <a class="menu-top" href="./task.html"><img src="./assets/img/edit_square.svg" alt="add task icon" />Add
-            Task</a>
-          <a class="menu-top" href="./board.html"><img src="./assets/img/Icons.svg" alt="board icon" />Board</a>
-          <a class="current-page" href="./contacts.html"><img src="./assets/img/perm_contact_calendar.svg"
-              alt="contacts icon" />Contacts</a>
-        </ul>
+	<main>
+		<div class="menu">
+			<img src="./assets/img/Join logo vector.svg" alt="join logo" />
+			<nav>
+				<ul>
+					<a class="menu-top" href="./summary.html"><img src="./assets/img/Vector.svg"
+							alt="summary icon" />Summary</a>
+					<a class="menu-top" href="./task.html"><img src="./assets/img/edit_square.svg"
+							alt="add task icon" />Add Task</a>
+					<a class="menu-top" href="./board.html"><img src="./assets/img/Icons.svg"
+							alt="board icon" />Board</a>
+					<a class="current-page" href="./contacts.html"><img src="./assets/img/perm_contact_calendar.svg"
+							alt="contacts icon" />Contacts</a>
+				</ul>
 
-        <ul>
-          <a class="menu-bottom" href="./pages/privacy.html">Privacy Policy</a>
-          <a class="menu-bottom" href="./pages/legals.html">Legal notice</a>
-        </ul>
-      </nav>
-    </div>
+				<ul>
+					<a class="menu-bottom" href="./pages/privacy.html">Privacy Policy</a>
+					<a class="menu-bottom" href="./pages/legals.html">Legal notice</a>
+				</ul>
+			</nav>
+		</div>
 
-    <section id="contactsPage" class="contacts-page">
-      <aside class="contacts-list-panel">
-        <button class="add-contact-button" type="button" onclick="
-              openAddContactOverlay();
-              logDownWBubblingProtection(event);
-            ">
-          Add new contact
-          <img src="./assets/icons/person_add.svg" alt="" />
-        </button>
+		<section id="contactsPage" class="contacts-page">
+			<aside class="contacts-list-panel">
+				<button class="add-contact-button" type="button" onclick="
+							openAddContactOverlay();
+							logDownWBubblingProtection(event);
+						">
+					Add new contact
+					<img src="./assets/icons/person_add.svg" alt="" />
+				</button>
 
-        <div id="contactsList" class="contacts-list"></div>
-      </aside>
+				<div id="contactsList" class="contacts-list"></div>
+			</aside>
 
-      <section class="contacts-detail-panel">
-        <div class="contacts-title">
-          <button class="mobile-page-back" type="button" onclick="showContactsListMobile()"
-            aria-label="Back to contacts">
-            <img src="./assets/icons/arrow_left.svg" alt="" />
-          </button>
-          <h1>Contacts</h1>
-          <div></div>
-          <h2>Better with a team</h2>
-        </div>
+			<section class="contacts-detail-panel">
+				<div class="contacts-title">
+					<button class="mobile-page-back" type="button" onclick="showContactsListMobile()"
+						aria-label="Back to contacts">
+						<img src="./assets/icons/arrow_left.svg" alt="" />
+					</button>
+					<h1>Contacts</h1>
+					<div></div>
+					<h2>Better with a team</h2>
+				</div>
 
-        <article id="contactDetail" class="contact-detail"></article>
-      </section>
-    </section>
+				<article id="contactDetail" class="contact-detail"></article>
+			</section>
+		</section>
 
-    <dialog id="contactOverlay" class="contact-overlay" onclick="logDownWBubblingProtection(event)">
-      <form id="contactForm" class="contact-modal" onsubmit="saveContact(event)">
-        <aside class="contact-modal-sidebar">
-          <button class="mobile-contact-modal-close" type="button" onclick="closeContactOverlay()">
-            <img src="./assets/icons/close_light.svg" alt="" />
-          </button>
-          <img class="contact-modal-logo" src="./assets/img/Join logo vector.svg" alt="Join logo" />
-          <h2 id="contactOverlayTitle">Add contact</h2>
-          <p id="contactOverlaySubtitle">Tasks are better with a team!</p>
-          <div></div>
-        </aside>
+		<dialog id="contactOverlay" class="contact-overlay" onclick="logDownWBubblingProtection(event)">
+			<form id="contactForm" class="contact-modal" onsubmit="saveContact(event)">
+				<aside class="contact-modal-sidebar">
+					<button class="mobile-contact-modal-close" type="button" onclick="closeContactOverlay()">
+						<img src="./assets/icons/close_light.svg" alt="" />
+					</button>
+					<img class="contact-modal-logo" src="./assets/img/Join logo vector.svg" alt="Join logo" />
+					<h2 id="contactOverlayTitle">Add contact</h2>
+					<p id="contactOverlaySubtitle">
+						Tasks are better with a team!
+					</p>
+					<div></div>
+				</aside>
 
-        <div class="contact-modal-content">
-          <button class="contact-modal-close" type="button" onclick="closeContactOverlay()">
-            <img src="./assets/icons/close_dark.svg" alt="" />
-          </button>
+				<div class="contact-modal-content">
+					<button class="contact-modal-close" type="button" onclick="closeContactOverlay()">
+						<img src="./assets/icons/close_dark.svg" alt="" />
+					</button>
 
-          <div id="contactOverlayAvatar" class="contact-modal-avatar empty-avatar">
-            <img src="./assets/icons/person.svg" alt="" />
-          </div>
+					<div id="contactOverlayAvatar" class="contact-modal-avatar empty-avatar">
+						<img src="./assets/icons/person.svg" alt="" />
+					</div>
 
-          <div class="contact-modal-fields">
-            <label class="contact-input">
-              <input id="contactNameInput" type="text" placeholder="Name" required />
-              <img src="./assets/icons/person.svg" alt="" />
-            </label>
+					<div class="contact-modal-fields">
+						<label class="contact-input">
+							<input id="contactNameInput" type="text" placeholder="Name" required />
+							<img src="./assets/icons/person.svg" alt="" />
+						</label>
 
-            <label class="contact-input">
-              <input id="contactEmailInput" type="email" placeholder="Email" required />
-              <img src="./assets/icons/mail.svg" alt="" />
-            </label>
+						<label class="contact-input">
+							<input id="contactEmailInput" type="email" placeholder="Email" required />
+							<img src="./assets/icons/mail.svg" alt="" />
+						</label>
 
-            <label class="contact-input">
-              <input id="contactPhoneInput" type="tel" placeholder="Phone" required />
-              <img src="./assets/icons/call.svg" alt="" />
-            </label>
+						<label class="contact-input">
+							<input id="contactPhoneInput" type="tel" placeholder="Phone" required />
+							<img src="./assets/icons/call.svg" alt="" />
+						</label>
 
-            <div class="contact-modal-actions">
-              <button id="contactCancelButton" class="secondary-contact-button" type="button"
-                onclick="closeContactOverlay()">
-                <span id="contactCancelButtonText">Cancel</span>
-                <img id="contactCancelButtonIcon" src="./assets/icons/close_dark.svg" alt="" />
-              </button>
-              <button id="contactSubmitButton" class="primary-contact-button" type="submit">
-                <span id="contactSubmitButtonText">Create contact</span>
-                <img src="./assets/icons/check_light.svg" alt="" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </dialog>
+						<div class="contact-modal-actions">
+							<button id="contactCancelButton" class="secondary-contact-button" type="button"
+								onclick="closeContactOverlay()">
+								<span id="contactCancelButtonText">Cancel</span>
+								<img id="contactCancelButtonIcon" src="./assets/icons/close_dark.svg" alt="" />
+							</button>
+							<button id="contactSubmitButton" class="primary-contact-button" type="submit">
+								<span id="contactSubmitButtonText">Create contact</span>
+								<img src="./assets/icons/check_light.svg" alt="" />
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</dialog>
 
-    <div id="contactToast" class="contact-toast">Contact successfully created</div>
-  </main>
+		<div id="contactToast" class="contact-toast">
+			Contact successfully created
+		</div>
+	</main>
 </body>
 
 </html>
