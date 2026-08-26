@@ -180,3 +180,135 @@ input:checked + .checkboxIcon {
 	font-weight: 500;
 	margin-top: 24px;
 }
+
+@media (max-width: 1000px) {
+	.signupBody {
+		height: auto;
+		min-height: 100dvh;
+	}
+
+
+	footer {
+		background-color: #f6f7f8;
+	}
+
+	#mainContent {
+		height: auto;
+		min-height: 100dvh;
+		padding: 140px 24px 100px;
+	}
+
+	.signupFormWrapper {
+		width: min(100%, 560px);
+		height: auto;
+		padding: 40px 32px;
+	}
+
+	.signupFormWrapper h2 {
+		font-size: 47px;
+	}
+
+	.signupInputWrapper {
+		width: 100%;
+	}
+
+	.inputWithIcon {
+		width: 100%;
+	}
+
+	.backLink {
+		top: 56px;
+		left: 32px;
+	}
+}
+
+@media (max-width: 800px) {
+	.signupBody {
+		height: auto;
+		min-height: 100dvh;
+	}
+
+	.signupHeader {
+		height: auto;
+		padding: 16px;
+		align-items: flex-start;
+	}
+
+	.signupHeader img {
+		width: 64px;
+		height: auto;
+		object-fit: contain;
+	}
+
+	#mainContent {
+		height: auto;
+		min-height: 100dvh;
+		padding: 112px 16px 80px;
+	}
+
+	.signupFormWrapper {
+		width: 100%;
+		max-width: 420px;
+		padding: 28px 16px;
+		box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
+	}
+
+	.signupFormWrapper h2 {
+		font-size: 40px;
+		margin-bottom: 0;
+	}
+
+	.signupFormWrapper h2::after {
+		content: "";
+		display: block;
+		width: 80px;
+		height: 3px;
+		margin: 12px auto 0;
+		background-color: #29abe2;
+	}
+
+	.backLink {
+		top: 36px;
+		left: 16px;
+	}
+
+	.backLink img {
+		width: 24px;
+		height: 24px;
+	}
+
+	.signupInputWrapper {
+		gap: 16px;
+		margin-top: 16px;
+	}
+
+	.inputWithIcon input {
+		font-size: 16px;
+	}
+
+	#signupForm label {
+		margin-top: 16px;
+		align-items: center;
+		font-size: 14px;
+	}
+
+	#signupButton {
+		width: 126px;
+		font-size: 18px;
+		margin-top: 16px;
+	}
+}
+
+@media (max-width: 400px) {
+	.signupFormWrapper h2 {
+		font-size: 34px;
+	}
+
+	.backLink {
+		top: 37px;
+	}
+
+	.footerLinks {
+		font-size: 14px;
+	}
+}
