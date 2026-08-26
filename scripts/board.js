@@ -1,5 +1,6 @@
 let currentDraggedElement;
 let data = [];
+let selectedEditContacts = [];
 
 function submenuOpen() {
     let dialogRef = document.getElementById("submenu");
@@ -83,6 +84,7 @@ function getTaskElements(filteredTasks, index) {
 function taskClose() {
     let dialogRef = document.getElementById("task");
     dialogRef.close();
+    selectedEditContacts = [];
     updateHTML();
 }
 
@@ -351,16 +353,19 @@ function toggleEditContactList() {
 }
 
 function generateEditContacts(task) {
-    let contactsHTML = document.getElementById("edit-contact-list");
     let renderedContacts = 0;
     let contactLine = document.getElementById("edit-contact-line");
     contactLine.innerHTML = "";
-
     for (let i = 0; i < contacts.length; i++) {
         let contact = contacts[i];
         let isChecked = task.contacts?.some(taskContact => taskContact.name === contact.name && taskContact.initials === contact.initials && taskContact.color === contact.color);
-        contactsHTML.innerHTML += getEditTaskContactTemplate(i, isChecked, contact);
-        if (isChecked && renderedContacts < 3) { editContactLine(contactLine, contact, renderedContacts); }
+        document.getElementById("edit-contact-list").innerHTML += getEditTaskContactTemplate(i, isChecked, contact);
+        if (isChecked && renderedContacts < 3) {
+            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
+            renderedContacts++;
+        } if (isChecked) {
+            selectedEditContacts.push(contact);
+        }
     }
 }
 
@@ -373,7 +378,6 @@ function updateEditContactLine() {
     let contactLine = document.getElementById("edit-contact-line");
     contactLine.innerHTML = "";
     let renderedContacts = 0;
-
     for (let i = 0; i < contacts.length; i++) {
         let checkbox = document.getElementById(`edit-contact${i}`);
         if (checkbox && checkbox.checked && renderedContacts < 3) {
@@ -388,15 +392,14 @@ async function editTaskChanged(event, id) {
     event.preventDefault();
     let titleInput = document.getElementById("edit-title");
     let dateInput = document.getElementById("edit-date");
-
     let title = titleInput.value.trim();
     let description = document.getElementById("edit-description").value.trim();
     let date = dateInput.value;
-
     let titleError = document.getElementById("edit-title-error");
     let dateError = document.getElementById("edit-date-error");
 
     await allEditTaskChangedFunctions(titleInput, title, description, date, titleError, dateError, id);
+    selectedEditContacts = [];
 }
 
 async function allEditTaskChangedFunctions(titleInput, title, description, date, titleError, dateError, id) {
@@ -431,14 +434,13 @@ function getDateTerror(dateError, hasError) {
 
 async function changedTask(title, description, date, id) {
     let priority = document.querySelector('input[name="edit-priority"]:checked')?.value || "";
-    let selectedEditContacts = [];
     for (let i = 0; i < contacts.length; i++) {
         let checkbox = document.getElementById(`edit-contact${i}`);
         if (checkbox && checkbox.checked) {
             selectedEditContacts.push(changedTaskSelectedContacts(i));
         }
     }
-    await fetchChangedTask(title, description, date, priority, id, selectedEditContacts);
+    await fetchChangedTask(title, description, date, priority, id);
 }
 
 function changedTaskSelectedContacts(i) {
@@ -449,20 +451,20 @@ function changedTaskSelectedContacts(i) {
     }
 }
 
-async function fetchChangedTask(title, description, date, priority, id, selectedEditContacts) {
+async function fetchChangedTask(title, description, date, priority, id) {
     let task = tasks.find(task => task.id === currentEditTaskId);
     if (!task) return;
-    let changedTask = changedTaskData(title, description, date, priority, task, selectedEditContacts);
+    let changedTask = changedTaskData(title, description, date, priority, task);
 
     await fetch(`https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks/${currentEditTaskId}.json`, {
         method: "PATCH",
         body: JSON.stringify(changedTask)
     });
 
-    updateTask(task, title, description, date, priority, id, selectedEditContacts);
+    updateTask(task, title, description, date, priority, id);
 }
 
-function changedTaskData(title, description, date, priority, task, selectedEditContacts) {
+function changedTaskData(title, description, date, priority, task) {
     return {
         "title": title,
         "description": description,
@@ -473,7 +475,7 @@ function changedTaskData(title, description, date, priority, task, selectedEditC
     }
 }
 
-function updateTask(task, title, description, date, priority, id, selectedEditContacts) {
+function updateTask(task, title, description, date, priority, id) {
     task.title = title;
     task.description = description;
     task.date = date;

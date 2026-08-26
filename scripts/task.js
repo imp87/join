@@ -289,13 +289,51 @@ function searchContacts() {
 }
 
 function searchEditContacts() {
-    let searchValue = document.getElementById("editcontacts").value.toLowerCase();
+    let searchValue = document.getElementById("edit-contacts").value.toLowerCase();
     let contactListRef = document.getElementById("edit-contact-list");
     contactListRef.classList.remove("display-none");
     let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
     contactListRef.innerHTML = "";
 
     for (let iContact = 0; iContact < filteredContacts.length; iContact++) {
-        contactListRef.innerHTML += getFilteredTaskContactTemplate(filteredContacts, iContact);
+        contactListRef.innerHTML += getFilteredEditTaskContactTemplate(filteredContacts, iContact);
+    }
+}
+
+function getSelectedEditContacts(id) {
+    let index = contacts.findIndex(item => item.id === id);
+    if (index === -1) return;
+
+    selectedEditContactsPush(id, index)
+    updateSelectedEditContacts()
+}
+
+function selectedEditContactsPush(id, index) {
+    let contact = contacts[index];
+    let selectedIndex = selectedEditContacts.findIndex(item => item.id === id);
+    if (selectedIndex === -1) {
+        selectedEditContacts.push({
+            name: contact.name,
+            initials: contact.initials,
+            color: contact.color,
+            id: contact.id
+        });
+    } else {
+        selectedEditContacts.splice(selectedIndex, 1);
+    }
+}
+
+function updateSelectedEditContacts() {
+    let contactLine = document.getElementById("edit-contact-line");
+    contactLine.innerHTML = "";
+
+    for (
+        let contactIndex = 0;
+        contactIndex < selectedEditContacts.length && contactIndex < 3;
+        contactIndex++
+    ) {
+        contactLine.innerHTML += `
+        <div class="initials" style="background-color: ${selectedEditContacts[contactIndex].color}">${selectedEditContacts[contactIndex].initials}</div>
+        `;
     }
 }
