@@ -188,11 +188,19 @@ main {
 	padding-left: 56px;
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
+	height: unset !important;
 }
 
 .menu-bottom:hover {
 	color: rgba(41, 171, 226, 1);
 	font-weight: bold;
+}
+
+.menu-bottom-current-page {
+	background-color: rgba(9, 25, 49, 1);
+	padding-left: 56px;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
 }
 
 button {
