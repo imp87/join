@@ -5,11 +5,15 @@ let selectedEditContacts = [];
 function submenuOpen() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.showModal();
+    let bodyRef = document.getElementById("body");
+    bodyRef.classList.add("hidden");
 }
 
 function submenuClose() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.close();
+    let bodyRef = document.getElementById("body");
+    bodyRef.classList.remove("hidden");
 }
 
 function logDownWBubblingProtection(event) {
@@ -19,11 +23,15 @@ function logDownWBubblingProtection(event) {
 function addtaskOpen() {
     let dialogRef = document.getElementById("add-task");
     dialogRef.showModal();
+    let bodyRef = document.getElementById("body");
+    bodyRef.classList.add("hidden");
 }
 
 function addTaskClose() {
     let dialogRef = document.getElementById("add-task");
     dialogRef.close();
+    let bodyRef = document.getElementById("body");
+    bodyRef.classList.remove("hidden");
 }
 
 async function updateHTML() {
@@ -86,6 +94,7 @@ function taskClose() {
     dialogRef.close();
     selectedEditContacts = [];
     updateHTML();
+    document.getElementById("body").classList.remove("hidden");
 }
 
 function startDragging(id) {
@@ -187,13 +196,13 @@ function taskOpen(id) {
     dialogRef.innerHTML = "";
     let priority = data[id].priority;
     let priorityFirstLetter = priority.charAt(0).toUpperCase() + priority.slice(1);
-
     dialogRef.innerHTML = getOpenTaskTemplate(id);
     taskOpenContactList(id);
     taskOpenSubtasks(id);
     taskOpenPriority(id, priority, priorityFirstLetter);
     taskOpenAssignedTo(id);
     taskOpenSubtasksDisplay(id);
+    document.getElementById("body").classList.add("hidden");
 }
 
 function taskOpenPriority(id, priority, priorityFirstLetter) {

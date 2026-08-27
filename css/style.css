@@ -7,7 +7,10 @@
 html,
 body {
 	max-width: 100%;
-	overflow-x: hidden;
+}
+
+body {
+	overflow-y: scroll;
 }
 
 header {
@@ -199,6 +202,10 @@ button {
 
 .mobile-page-back {
 	display: none;
+}
+
+.hidden {
+	overflow: hidden;
 }
 
 @media (min-width: 1921px) {
