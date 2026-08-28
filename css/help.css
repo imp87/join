@@ -7,6 +7,12 @@ h1 {
 	font-size: 61px;
 	font-weight: 700;
 	margin-bottom: 21px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.page-back {
+	background-color: unset;
 }
 
 h2 {
@@ -38,6 +44,7 @@ p {
 .guideStepDescription {
 	margin-top: 0;
 }
+
 .guideStepNumber {
 	font-size: 27px;
 	font-weight: 400;
@@ -47,6 +54,7 @@ p {
 	color: #29abe2;
 }
 
+
 @media (max-width: 800px) {
 	.guideStep {
 		gap: 20px;
@@ -54,5 +62,9 @@ p {
 
 	.guideStepNumber {
 		font-size: 24px;
+	}
+
+	.page-back {
+		display: none;
 	}
 }
