@@ -163,6 +163,10 @@ h5 {
     animation: fadeIn 0.5s ease forwards;
 }
 
+.greeting span {
+    color: rgba(18, 70, 88, 1);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
