@@ -12,6 +12,7 @@
   <script src="./scripts/contacts-templates.js"></script>
   <script src="./scripts/contacts.js"></script>
   <script src="./scripts/auth.js"></script>
+  <script src="./scripts/edit-task.js"></script>
   <link rel="stylesheet" href="./css/task.css" />
   <link rel="stylesheet" href="./css/board.css" />
   <link rel="stylesheet" href="./css/style.css" />
@@ -22,7 +23,7 @@
       submenuClose();
       addTaskClose();
       taskClose();
-    " onload="setMinDate(); updateHTML(); loadContacts();">
+    " onload="setMinDate(); updateHTML(); loadContacts();" id="body">
   <header>
     <nav>
       <h2>Kanban Project Management Tool</h2>
@@ -36,7 +37,7 @@
       </div>
     </nav>
     <dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
-      <a class="help-submenu" href="./assets/img/help.svg">Help</a>
+      <a class="help-submenu" href="./pages/help.html">Help</a>
       <a href="./pages/legals.html">Legal Notice</a>
       <a href="./pages/privacy.html">Privacy Policy</a>
       <a href="./index.html" onclick="logoutUser()">Log out</a>
@@ -153,7 +154,7 @@
           </div>
         </figure>
       </article>
-      <dialog onload="logDownWBubblingProtection(event)" id="add-task" class="add-task">
+      <dialog onload="logDownWBubblingProtection(event);" id="add-task" class="add-task">
         <form onsubmit="addToTasks(event)" onclick="logDownWBubblingProtection(event)" id="task-form" novalidate>
           <div class="add-task-content">
             <h1>Add Task <button onclick="addTaskClose()" type="button">
@@ -290,7 +291,7 @@
 
 
 
-      <dialog class="task" onload="logDownWBubblingProtection(event)" id="task">
+      <dialog class="task" onload="logDownWBubblingProtection(event);" id="task">
 
       </dialog>
     </section>

@@ -1,180 +1,164 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/legals.css" />
-    <script src="../scripts/summary.js"></script>
-    <script src="../scripts/auth.js"></script>
-    <link
-      rel="shortcut icon"
-      href="../assets/img/Capa 1.svg"
-      type="image/x-icon"
-    />
-    <title>Join - Privacy Policy</title>
-  </head>
 
-  <body onclick="submenuClose()">
-    <header>
-      <nav>
-        <h2>Kanban Project Management Tool</h2>
-        <div>
-          <a href="./help.html">
-            <img src="../assets/img/help.svg" alt="Help" />
-          </a>
-          <button
-            id="userInitials"
-            onclick="
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/legals.css" />
+  <script src="../scripts/summary.js"></script>
+  <script src="../scripts/auth.js"></script>
+  <link rel="shortcut icon" href="../assets/img/Capa 1.svg" type="image/x-icon" />
+  <title>Join - Privacy Policy</title>
+</head>
+
+<body onclick="submenuClose()" id="body">
+  <header>
+    <nav>
+      <h2>Kanban Project Management Tool</h2>
+      <div>
+        <a href="./help.html">
+          <img src="../assets/img/help.svg" alt="Help" />
+        </a>
+        <button id="userInitials" onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
-            "
-          >
-            G
-          </button>
-        </div>
-      </nav>
-      <dialog
-        onload="logDownWBubblingProtection(event)"
-        id="submenu"
-        class="submenu"
-      >
-        <a href="./legals.html">Legal Notice</a>
-        <a href="./privacy.html">Privacy Policy</a>
-        <a href="../index.html" onclick="logoutUser()">Log out</a>
-      </dialog>
-    </header>
-
-    <main>
-      <div class="menu">
-        <img src="../assets/img/Join logo vector.svg" alt="join logo" />
-        <nav>
-          <ul>
-            <a class="menu-top" href="../summary.html"
-              ><img src="../assets/img/Vector.svg" alt="summary icon" />Summary</a
-            >
-            <a class="menu-top" href="../task.html"
-              ><img src="../assets/img/edit_square.svg" alt="add task icon" />Add Task</a
-            >
-            <a class="menu-top" href="../board.html"
-              ><img src="../assets/img/Icons.svg" alt="board icon" />Board</a
-            >
-            <a class="menu-top" href="../contacts.html"
-              ><img
-                src="../assets/img/perm_contact_calendar.svg"
-                alt="contacts icon"
-              />Contacts</a
-            >
-          </ul>
-
-          <ul>
-            <a class="menu-bottom" href="./privacy.html">Privacy Policy</a>
-            <a class="menu-bottom" href="./legals.html">Legal notice</a>
-          </ul>
-        </nav>
+            ">
+          G
+        </button>
       </div>
+    </nav>
+    <dialog onload="logDownWBubblingProtection(event)" id="submenu" class="submenu">
+      <a class="help-submenu" href="./pages/help.html">Help</a>
+      <a href="./legals.html">Legal Notice</a>
+      <a href="./privacy.html">Privacy Policy</a>
+      <a href="../index.html" onclick="logoutUser()">Log out</a>
+    </dialog>
+  </header>
 
-      <section class="legal-content">
-        <div class="textWrapper">
-          <button class="mobile-page-back" type="button" onclick="history.back()" aria-label="Go back">
-            <img src="../assets/icons/arrow_left.svg" alt="" />
-          </button>
-          <h1>Privacy Policy</h1>
+  <main>
+    <div class="menu">
+      <img src="../assets/img/Join logo vector.svg" alt="join logo" />
+      <nav>
+        <ul>
+          <a class="menu-top" href="../summary.html"><img src="../assets/img/Vector.svg"
+              alt="summary icon" />Summary</a>
+          <a class="menu-top" href="../task.html"><img src="../assets/img/edit_square.svg" alt="add task icon" />Add
+            Task</a>
+          <a class="menu-top" href="../board.html"><img src="../assets/img/Icons.svg" alt="board icon" />Board</a>
+          <a class="menu-top" href="../contacts.html"><img src="../assets/img/perm_contact_calendar.svg"
+              alt="contacts icon" />Contacts</a>
+        </ul>
 
-          <section>
-            <h2>1. Introduction</h2>
-            <p>
-              Welcome to Join. Protecting your personal data is important to us.
-              This Privacy Policy explains which data is collected, how it is
-              used, and how it is protected when using this application.
-            </p>
-          </section>
+        <ul>
+          <a class="menu-bottom-current-page" href="./privacy.html">Privacy Policy</a>
+          <a class="menu-bottom" href="./legals.html">Legal notice</a>
+        </ul>
+      </nav>
+    </div>
 
-          <section>
-            <h2>2. Data We Collect</h2>
-            <p>When using Join, the following data may be collected and stored:</p>
-            <ul>
-              <li>User name</li>
-              <li>Email address</li>
-              <li>Password authentication data</li>
-              <li>Contacts created within the application</li>
-              <li>Tasks, subtasks and project-related information</li>
-            </ul>
-          </section>
+    <section class="legal-content">
+      <div class="textWrapper">
+        <button class="mobile-page-back" type="button" onclick="history.back()" aria-label="Go back">
+          <img src="../assets/icons/arrow_left.svg" alt="" />
+        </button>
+        <h1>Privacy Policy</h1>
 
-          <section>
-            <h2>3. Use of Firebase</h2>
-            <p>
-              Join uses Firebase services provided by Google to enable core
-              application functionality. Firebase Authentication is used for user
-              login and registration. Firebase Realtime Database may be used to
-              store user-related data such as contacts, tasks and project
-              information.
-            </p>
-          </section>
+        <section>
+          <h2>1. Introduction</h2>
+          <p>
+            Welcome to Join. Protecting your personal data is important to us.
+            This Privacy Policy explains which data is collected, how it is
+            used, and how it is protected when using this application.
+          </p>
+        </section>
 
-          <section>
-            <h2>4. How We Use Your Data</h2>
-            <p>
-              The collected data is used only to provide the functionality of
-              Join. This includes creating and managing user accounts, logging
-              users in, displaying contacts, and creating, editing or organizing
-              tasks.
-            </p>
-          </section>
+        <section>
+          <h2>2. Data We Collect</h2>
+          <p>When using Join, the following data may be collected and stored:</p>
+          <ul>
+            <li>User name</li>
+            <li>Email address</li>
+            <li>Password authentication data</li>
+            <li>Contacts created within the application</li>
+            <li>Tasks, subtasks and project-related information</li>
+          </ul>
+        </section>
 
-          <section>
-            <h2>5. Data Sharing</h2>
-            <p>
-              We do not sell, trade or share personal data for marketing
-              purposes. Data may be processed by Firebase as a technical service
-              provider in order to operate the application.
-            </p>
-          </section>
+        <section>
+          <h2>3. Use of Firebase</h2>
+          <p>
+            Join uses Firebase services provided by Google to enable core
+            application functionality. Firebase Authentication is used for user
+            login and registration. Firebase Realtime Database may be used to
+            store user-related data such as contacts, tasks and project
+            information.
+          </p>
+        </section>
 
-          <section>
-            <h2>6. Data Security</h2>
-            <p>
-              We use reasonable technical measures to protect stored data from
-              unauthorized access, loss or misuse. Passwords are handled through
-              Firebase Authentication and are not stored in plain text by Join.
-            </p>
-          </section>
+        <section>
+          <h2>4. How We Use Your Data</h2>
+          <p>
+            The collected data is used only to provide the functionality of
+            Join. This includes creating and managing user accounts, logging
+            users in, displaying contacts, and creating, editing or organizing
+            tasks.
+          </p>
+        </section>
 
-          <section>
-            <h2>7. Data Retention</h2>
-            <p>
-              Personal data is stored only as long as it is needed for the use
-              of the application. Users may request deletion of their account and
-              related data.
-            </p>
-          </section>
+        <section>
+          <h2>5. Data Sharing</h2>
+          <p>
+            We do not sell, trade or share personal data for marketing
+            purposes. Data may be processed by Firebase as a technical service
+            provider in order to operate the application.
+          </p>
+        </section>
 
-          <section>
-            <h2>8. User Rights</h2>
-            <p>
-              Users may request access to their personal data, correction of
-              incorrect data, or deletion of their stored data.
-            </p>
-          </section>
+        <section>
+          <h2>6. Data Security</h2>
+          <p>
+            We use reasonable technical measures to protect stored data from
+            unauthorized access, loss or misuse. Passwords are handled through
+            Firebase Authentication and are not stored in plain text by Join.
+          </p>
+        </section>
 
-          <section>
-            <h2>9. Changes to This Privacy Policy</h2>
-            <p>
-              This Privacy Policy may be updated from time to time. Any changes
-              will be published on this page.
-            </p>
-          </section>
+        <section>
+          <h2>7. Data Retention</h2>
+          <p>
+            Personal data is stored only as long as it is needed for the use
+            of the application. Users may request deletion of their account and
+            related data.
+          </p>
+        </section>
 
-          <section>
-            <h2>10. Contact</h2>
-            <p>
-              If you have questions about this Privacy Policy, please contact
-              the application administrator.
-            </p>
-          </section>
-        </div>
-      </section>
-    </main>
-  </body>
+        <section>
+          <h2>8. User Rights</h2>
+          <p>
+            Users may request access to their personal data, correction of
+            incorrect data, or deletion of their stored data.
+          </p>
+        </section>
+
+        <section>
+          <h2>9. Changes to This Privacy Policy</h2>
+          <p>
+            This Privacy Policy may be updated from time to time. Any changes
+            will be published on this page.
+          </p>
+        </section>
+
+        <section>
+          <h2>10. Contact</h2>
+          <p>
+            If you have questions about this Privacy Policy, please contact
+            the application administrator.
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+
 </html>

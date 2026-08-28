@@ -231,7 +231,7 @@ function getEditTaskTemplate(id, task) {
 
             <div class="form-area-fields edit-fields">
                 <label for="edit-date">Due date</label>
-                    <div id="edit-date-input" class="date-input" onclick="document.getElementById('edit-date').showPicker()">
+                    <div id="edit-date-input" class="date-input" onclick="setMinEditDate(); document.getElementById('edit-date').showPicker();">
                       <input type="date" id="edit-date" name="edit-date" value="${task.date}"  required />
                       <img src="./assets/img/event.svg" alt="calender">
                     </div>

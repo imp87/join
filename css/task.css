@@ -839,13 +839,14 @@ input[type="search"]::-webkit-search-cancel-button {
     .clear-create {
         position: fixed;
         bottom: 20px;
-        width: 400px;
+        width: 410px;
         display: flex;
         justify-content: flex-end;
         background-color: rgba(246, 247, 248, 1);
         z-index: 100;
         padding-top: 10px;
         padding-bottom: 10px;
+        margin-left: -10px;
     }
 
     .required-info {
@@ -915,7 +916,7 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 
     .contact-list {
-        width: 320px;
+        width: 290px;
     }
 
     .category-options {
@@ -925,36 +926,23 @@ input[type="search"]::-webkit-search-cancel-button {
 
     .priority label {
         height: 42px;
+        gap: 4px;
     }
-
 
     .clear-create {
-        width: 320px;
+        width: 100%;
+        padding-right: 20px;
     }
-}
 
-@media (max-width: 450px) {
     h1 {
         width: 100%;
-    }
-
-    .contact-list {
-        width: 290px;
     }
 
     .category-options {
         width: 290px;
     }
 
-    .clear-create {
-        width: 290px;
-    }
-
     .priority {
-        gap: 4px;
-    }
-
-    .priority label {
         gap: 4px;
     }
 

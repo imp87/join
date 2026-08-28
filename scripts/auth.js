@@ -105,6 +105,24 @@ function renderUserInitials() {
     }
 
     initialsRef.innerHTML = getInitialsFromName(user.name);
+    currentUser = user.name
+}
+
+let currentUser = "";
+
+function greeting() {
+    document.getElementById("greeting").innerHTML = "";
+    let userName = `, <br><span>${currentUser}</span>`;
+    if (currentUser === "Guest") { userName = "!" }
+    let date = new Date();
+    let hour = date.getHours();
+    if (hour <= 12) {
+        document.getElementById("greeting").innerHTML = `<h5>Good morning${userName}</h5>`;
+    } else if (hour <= 16) {
+        document.getElementById("greeting").innerHTML = `<h5>Good afternoon${userName}</h5>`;
+    } else {
+        document.getElementById("greeting").innerHTML = `<h5>Good evening${userName}</h5>`;
+    }
 }
 
 document.addEventListener("DOMContentLoaded", renderUserInitials);
