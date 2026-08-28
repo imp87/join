@@ -210,14 +210,12 @@ function addSubtask() {
         subtaskInput.value = "";
         renderSubtasks()
     }
-    console.log(subtasks);
 }
 
 function deleteSubtask(iSubtask) {
     subtasks.splice(iSubtask, 1);
 
     renderSubtasks()
-    console.log(subtasks);
 }
 
 function renderSubtasks() {
@@ -284,7 +282,6 @@ function setMinEditDate() {
     let day = String(today.getDate()).padStart(2, "0");
 
     dateInput.min = `${year}-${month}-${day}`;
-    console.log(dateInput.min)
 }
 
 function searchContacts() {
