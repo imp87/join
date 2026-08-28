@@ -275,6 +275,18 @@ function setMinDate() {
     dateInput.min = `${year}-${month}-${day}`;
 }
 
+function setMinEditDate() {
+    let dateInput = document.getElementById("edit-date");
+
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, "0");
+    let day = String(today.getDate()).padStart(2, "0");
+
+    dateInput.min = `${year}-${month}-${day}`;
+    console.log(dateInput.min)
+}
+
 function searchContacts() {
     let searchValue = document.getElementById("contacts").value.toLowerCase();
     let contactListRef = document.getElementById("contact-list");
