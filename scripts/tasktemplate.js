@@ -110,7 +110,7 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
         <button class="task-card" draggable="true" 
             ondragstart="startDragging('${filteredTasks[index].id}')"
             onclick="taskOpen('${filteredTasks[index].id}'); logDownWBubblingProtection(event);">
-<div class=task-card-title>
+            <div class=task-card-title>
             <h4 class="${filteredTasks[index].category}">
                 ${filteredTasks[index].category}
             </h4>
