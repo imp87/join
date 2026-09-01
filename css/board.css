@@ -702,6 +702,7 @@ h4 {
     .task-card {
         min-width: 250px;
         max-width: 250px;
+        margin: 4px;
     }
 
     .no-task {
