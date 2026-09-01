@@ -2,6 +2,11 @@ let selectedContacts = [];
 let subtasks = []
 let tasks = []
 
+/**
+ * Toggles the contact list.
+ *
+ * @returns {void}
+ */
 function toggleContactList() {
     let contactListRef = document.getElementById("contact-list");
     contactListRef.classList.toggle("display-none");
@@ -13,6 +18,11 @@ function toggleContactList() {
     }
 }
 
+/**
+ * Closes the contact list.
+ *
+ * @returns {void}
+ */
 function closeContactList() {
     let contactListRef = document.getElementById("contact-list");
     contactListRef.classList.add("display-none");
@@ -24,6 +34,14 @@ let textarea;
 let startY;
 let startHeight;
 
+/**
+ * Starts resizing a text area.
+ *
+ * @param {Event} event - The browser event.
+ * @param {string} id - The item ID.
+ *
+ * @returns {void}
+ */
 function startResize(event, id) {
     event.preventDefault();
 
@@ -37,6 +55,13 @@ function startResize(event, id) {
     document.addEventListener("mouseup", stopResize);
 }
 
+/**
+ * Resizes the active text area while the pointer moves.
+ *
+ * @param {Event} event - The browser event.
+ *
+ * @returns {void}
+ */
 function resizeTextarea(event) {
     if (!resizing) return;
 
@@ -48,6 +73,11 @@ function resizeTextarea(event) {
     textarea.style.height = `${newHeight}px`;
 }
 
+/**
+ * Stops resizing the text area.
+ *
+ * @returns {void}
+ */
 function stopResize() {
     resizing = false;
 
@@ -55,6 +85,13 @@ function stopResize() {
     document.removeEventListener("mouseup", stopResize);
 }
 
+/**
+ * Keeps a text area between its minimum and maximum height.
+ *
+ * @param {HTMLElement} textarea - The text area element.
+ *
+ * @returns {void}
+ */
 function limitTextarea(textarea) {
     const maxHeight = 180;
     const minHeight = 120;
@@ -70,12 +107,24 @@ function limitTextarea(textarea) {
     textarea.style.height = `${textarea.scrollHeight}px`;
 }
 
+/**
+ * Sorts the task contacts by name.
+ *
+ * @returns {void}
+ */
 function sortTaskContactsByName() {
     contacts.sort(function (contactA, contactB) {
         return contactA.name.localeCompare(contactB.name);
     });
 }
 
+/**
+ * Adds or removes a contact from the task selection.
+ *
+ * @param {string} id - The item ID.
+ *
+ * @returns {void}
+ */
 function getSelectedContacts(id) {
     let index = contacts.findIndex(item => item.id === id);
     if (index === -1) return;
@@ -84,6 +133,14 @@ function getSelectedContacts(id) {
     updateSelectedContacts()
 }
 
+/**
+ * Updates the selected contacts list.
+ *
+ * @param {string} id - The item ID.
+ * @param {number} index - The item index.
+ *
+ * @returns {void}
+ */
 function selectedContactsPush(id, index) {
     let contact = contacts[index];
     let selectedIndex = selectedContacts.findIndex(item => item.id === id);
@@ -99,6 +156,11 @@ function selectedContactsPush(id, index) {
     }
 }
 
+/**
+ * Displays the selected contacts.
+ *
+ * @returns {void}
+ */
 function updateSelectedContacts() {
     let contactLine = document.getElementById("contact-line");
     contactLine.innerHTML = "";
@@ -114,22 +176,46 @@ function updateSelectedContacts() {
     }
 }
 
+/**
+ * Toggles the category options.
+ *
+ * @returns {void}
+ */
 function toggleCategoryOptions() {
     document.getElementById("category-options").classList.toggle("display-none");
     document.getElementById("category-arrow").classList.toggle("upside");
 }
 
+/**
+ * Closes the category options.
+ *
+ * @returns {void}
+ */
 function closeCategoryOptions() {
     document.getElementById("category-options").classList.add("display-none");
     document.getElementById("category-arrow").classList.remove("upside");
 }
 
+/**
+ * Selects the category.
+ *
+ * @param {string} category - The category.
+ *
+ * @returns {void}
+ */
 function selectCategory(category) {
     document.getElementById("category-input").value = category;
 
     toggleCategoryOptions();
 }
 
+/**
+ * Validates and saves the task form.
+ *
+ * @param {Event} event - The browser event.
+ *
+ * @returns {Promise<void>}
+ */
 async function addToTasks(event) {
     event.preventDefault();
     let title = document.getElementById("title");
@@ -145,12 +231,33 @@ async function addToTasks(event) {
     messageTaskSuccess(validationMessage, title, description, date, priority, category, subtasks);
 }
 
+/**
+ * Continues after the task form was validated successfully.
+ *
+ * @param {NodeListOf<HTMLElement>} validationMessage - The validation message elements.
+ * @param {HTMLInputElement} title - The title.
+ * @param {HTMLInputElement} description - The description.
+ * @param {HTMLInputElement} date - The date.
+ * @param {string} priority - The priority.
+ * @param {HTMLInputElement} category - The category.
+ * @param {Array<Object>} subtasks - The subtasks.
+ *
+ * @returns {void}
+ */
 function messageTaskSuccess(validationMessage, title, description, date, priority, category, subtasks) {
     removeErrorMessage(validationMessage, title, date);
     getTaskValue(title, description, date, priority, category, subtasks);
     showSuccessDialog();
 }
 
+/**
+ * Shows the required-field errors in the task form.
+ *
+ * @param {NodeListOf<HTMLElement>} validationMessage - The validation message elements.
+ * @param {HTMLInputElement} title - The title.
+ *
+ * @returns {void}
+ */
 function errorMessage(validationMessage, title) {
     document.getElementById("custom-category-input").classList.add("input-error");
     validationMessage.forEach(element => { element.innerHTML = "This field is required" });
@@ -159,6 +266,15 @@ function errorMessage(validationMessage, title) {
     return;
 }
 
+/**
+ * Removes the required-field errors from the task form.
+ *
+ * @param {NodeListOf<HTMLElement>} validationMessage - The validation message elements.
+ * @param {HTMLInputElement} title - The title.
+ * @param {HTMLInputElement} date - The date.
+ *
+ * @returns {void}
+ */
 function removeErrorMessage(validationMessage, title, date) {
     document.getElementById("custom-category-input").classList.remove("input-error");
     validationMessage.forEach(element => { element.innerHTML = "" });
@@ -166,6 +282,18 @@ function removeErrorMessage(validationMessage, title, date) {
     document.getElementById("date-input").classList.remove("input-error");
 }
 
+/**
+ * Builds a task from the form values and saves it.
+ *
+ * @param {HTMLInputElement} title - The title.
+ * @param {HTMLInputElement} description - The description.
+ * @param {HTMLInputElement} date - The date.
+ * @param {string} priority - The priority.
+ * @param {HTMLInputElement} category - The category.
+ * @param {Array<Object>} subtasks - The subtasks.
+ *
+ * @returns {Promise<void>}
+ */
 async function getTaskValue(title, description, date, priority, category, subtasks) {
     let task = {
         "title": title.value,
@@ -180,6 +308,13 @@ async function getTaskValue(title, description, date, priority, category, subtas
     postToDatabase(task)
 }
 
+/**
+ * Saves a task in the database.
+ *
+ * @param {Object} task - The task data.
+ *
+ * @returns {Promise<void>}
+ */
 async function postToDatabase(task) {
     let response = await fetch(
         "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/tasks.json",
@@ -194,11 +329,21 @@ async function postToDatabase(task) {
     let result = await response.json();
 }
 
+/**
+ * Clears the subtask.
+ *
+ * @returns {void}
+ */
 function clearSubtask() {
     let subtaskInput = document.getElementById("subtask");
     subtaskInput.value = "";
 }
 
+/**
+ * Adds the subtask.
+ *
+ * @returns {void}
+ */
 function addSubtask() {
     let subtaskInput = document.getElementById("subtask");
 
@@ -212,12 +357,24 @@ function addSubtask() {
     }
 }
 
+/**
+ * Deletes the subtask.
+ *
+ * @param {number} iSubtask - The subtask index.
+ *
+ * @returns {void}
+ */
 function deleteSubtask(iSubtask) {
     subtasks.splice(iSubtask, 1);
 
     renderSubtasks()
 }
 
+/**
+ * Renders the subtasks.
+ *
+ * @returns {void}
+ */
 function renderSubtasks() {
     let subtaskInteraction = document.getElementById("subtask-interaction");
     subtaskInteraction.innerHTML = "";
@@ -227,12 +384,26 @@ function renderSubtasks() {
     }
 }
 
+/**
+ * Opens a subtask for editing.
+ *
+ * @param {number} iSubtask - The subtask index.
+ *
+ * @returns {void}
+ */
 function editSubtasks(iSubtask) {
     let subtaskRef = document.getElementById(`subtask-${iSubtask}`)
 
     subtaskRef.innerHTML = getEditSubtaskTemplate(iSubtask);
 }
 
+/**
+ * Saves the edited subtask text.
+ *
+ * @param {number} iSubtask - The subtask index.
+ *
+ * @returns {void}
+ */
 function subtaskEdited(iSubtask) {
     let editSubtaskInput = document.getElementById(`edit-subtask-${iSubtask}`)
     subtasks[iSubtask].text = editSubtaskInput.value;
@@ -240,6 +411,11 @@ function subtaskEdited(iSubtask) {
     renderSubtasks()
 }
 
+/**
+ * Clears the task form.
+ *
+ * @returns {void}
+ */
 function clearTaskForm() {
     let form = document.getElementById("task-form");
     form.reset();
@@ -251,6 +427,11 @@ function clearTaskForm() {
     subtasks = [];
 }
 
+/**
+ * Shows the success dialog.
+ *
+ * @returns {void}
+ */
 function showSuccessDialog() {
     let dialog = document.getElementById("success-dialog");
 
@@ -262,6 +443,11 @@ function showSuccessDialog() {
     }, 2000);
 }
 
+/**
+ * Sets today's date as the earliest due date.
+ *
+ * @returns {void}
+ */
 function setMinDate() {
     let dateInput = document.getElementById("due-date");
 
@@ -273,6 +459,11 @@ function setMinDate() {
     dateInput.min = `${year}-${month}-${day}`;
 }
 
+/**
+ * Sets today's date as the earliest date in the edit form.
+ *
+ * @returns {void}
+ */
 function setMinEditDate() {
     let dateInput = document.getElementById("edit-date");
 
@@ -284,6 +475,11 @@ function setMinEditDate() {
     dateInput.min = `${year}-${month}-${day}`;
 }
 
+/**
+ * Searches for the contacts.
+ *
+ * @returns {void}
+ */
 function searchContacts() {
     let searchValue = document.getElementById("contacts").value.toLowerCase();
     let contactListRef = document.getElementById("contact-list");
@@ -297,6 +493,11 @@ function searchContacts() {
     }
 }
 
+/**
+ * Searches contacts in the edit form.
+ *
+ * @returns {void}
+ */
 function searchEditContacts() {
     let searchValue = document.getElementById("edit-contacts").value.toLowerCase();
     let contactListRef = document.getElementById("edit-contact-list");
@@ -309,6 +510,13 @@ function searchEditContacts() {
     }
 }
 
+/**
+ * Adds or removes a contact from the edited task.
+ *
+ * @param {string} id - The item ID.
+ *
+ * @returns {void}
+ */
 function getSelectedEditContacts(id) {
     let index = contacts.findIndex(item => item.id === id);
     if (index === -1) return;
@@ -317,6 +525,14 @@ function getSelectedEditContacts(id) {
     updateSelectedEditContacts()
 }
 
+/**
+ * Updates the selected contacts of the edited task.
+ *
+ * @param {string} id - The item ID.
+ * @param {number} index - The item index.
+ *
+ * @returns {void}
+ */
 function selectedEditContactsPush(id, index) {
     let contact = contacts[index];
     let selectedIndex = selectedEditContacts.findIndex(item => item.id === id);
@@ -332,6 +548,11 @@ function selectedEditContactsPush(id, index) {
     }
 }
 
+/**
+ * Displays the selected contacts in the edit form.
+ *
+ * @returns {void}
+ */
 function updateSelectedEditContacts() {
     let contactLine = document.getElementById("edit-contact-line");
     contactLine.innerHTML = "";

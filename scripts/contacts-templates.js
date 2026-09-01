@@ -1,3 +1,10 @@
+/**
+ * Returns the letter template.
+ *
+ * @param {string} letter - The letter.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getLetterTemplate(letter) {
 	return `
 		<div class="contact-group-letter">${letter}</div>
@@ -5,6 +12,15 @@ function getLetterTemplate(letter) {
 	`;
 }
 
+/**
+ * Returns the contact list item template.
+ *
+ * @param {Object} contact - The contact data.
+ * @param {number} index - The item index.
+ * @param {boolean} isActive - Whether the item is active.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getContactListItemTemplate(contact, index, isActive) {
 	let activeClass = isActive ? " active" : "";
 
@@ -29,6 +45,14 @@ function getContactListItemTemplate(contact, index, isActive) {
 	`;
 }
 
+/**
+ * Returns the contact detail template.
+ *
+ * @param {Object} contact - The contact data.
+ * @param {number} index - The item index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getContactDetailTemplate(contact, index) {
 	return `
 		<div class="contact-profile">
@@ -50,6 +74,13 @@ function getContactDetailTemplate(contact, index) {
 	`;
 }
 
+/**
+ * Returns the contact actions template.
+ *
+ * @param {number} index - The item index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getContactActionsTemplate(index) {
 	return `
 		<div class="contact-actions">
@@ -74,6 +105,13 @@ function getContactActionsTemplate(index) {
 	`;
 }
 
+/**
+ * Returns the contact info template.
+ *
+ * @param {Object} contact - The contact data.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getContactInfoTemplate(contact) {
 	return `
 		<div class="contact-info">
@@ -92,6 +130,13 @@ function getContactInfoTemplate(contact) {
 	`;
 }
 
+/**
+ * Returns the mobile contact actions template.
+ *
+ * @param {number} index - The item index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getMobileContactActionsTemplate(index) {
 	return `
 		<div class="mobile-contact-actions">
@@ -128,6 +173,11 @@ function getMobileContactActionsTemplate(index) {
 	`;
 }
 
+/**
+ * Returns the empty avatar template.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getEmptyAvatarTemplate() {
 	return `
 		<img

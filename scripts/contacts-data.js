@@ -59,6 +59,11 @@ let defaultContacts = [
     },
 ];
 
+/**
+ * Loads the contacts.
+ *
+ * @returns {Promise<void>}
+ */
 async function loadContacts() {
     let response = await fetch(`${CONTACTS_URL}.json`);
     let data = await response.json();
@@ -73,6 +78,11 @@ async function loadContacts() {
     });
 }
 
+/**
+ * Uploads the default contacts.
+ *
+ * @returns {Promise<void>}
+ */
 async function uploadDefaultContacts() {
     contacts = [];
 
@@ -81,6 +91,13 @@ async function uploadDefaultContacts() {
     }
 }
 
+/**
+ * Saves the contact to database.
+ *
+ * @param {Object} contact - The contact data.
+ *
+ * @returns {Promise<string>} The new contact ID.
+ */
 async function postContactToDatabase(contact) {
     let response = await fetch(`${CONTACTS_URL}.json`, {
         method: "POST",
@@ -97,6 +114,14 @@ async function postContactToDatabase(contact) {
     return result.name;
 }
 
+/**
+ * Updates the contact in database.
+ *
+ * @param {string} id - The item ID.
+ * @param {Object} contact - The contact data.
+ *
+ * @returns {Promise<void>}
+ */
 async function patchContactInDatabase(id, contact) {
     await fetch(`${CONTACTS_URL}/${id}.json`, {
         method: "PATCH",
@@ -107,6 +132,13 @@ async function patchContactInDatabase(id, contact) {
     });
 }
 
+/**
+ * Deletes the contact from database.
+ *
+ * @param {string} id - The item ID.
+ *
+ * @returns {Promise<void>}
+ */
 async function deleteContactFromDatabase(id) {
     await fetch(`${CONTACTS_URL}/${id}.json`, {
         method: "DELETE",

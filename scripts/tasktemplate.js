@@ -1,3 +1,10 @@
+/**
+ * Returns the task contact template.
+ *
+ * @param {number} iContact - The contact index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getTaskContactTemplate(iContact) {
     let contact = contacts[iContact];
 
@@ -22,6 +29,14 @@ function getTaskContactTemplate(iContact) {
             </label>`
 }
 
+/**
+ * Returns the filtered task contact template.
+ *
+ * @param {Array<Object>} filteredContacts - The filtered contacts.
+ * @param {number} iContact - The contact index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getFilteredTaskContactTemplate(filteredContacts, iContact) {
     let contact = filteredContacts[iContact];
 
@@ -46,6 +61,14 @@ function getFilteredTaskContactTemplate(filteredContacts, iContact) {
             </label>`
 }
 
+/**
+ * Returns the filtered edit task contact template.
+ *
+ * @param {Array<Object>} filteredContacts - The filtered contacts.
+ * @param {number} iContact - The contact index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getFilteredEditTaskContactTemplate(filteredContacts, iContact) {
     let contact = filteredContacts[iContact];
 
@@ -70,6 +93,13 @@ function getFilteredEditTaskContactTemplate(filteredContacts, iContact) {
             </label>`
 }
 
+/**
+ * Returns the subtask template.
+ *
+ * @param {number} iSubtask - The subtask index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getSubtaskTemplate(iSubtask) {
     return `<li class="subtask" id="subtask-${iSubtask}">
                 <div class="subtask-value">
@@ -87,6 +117,13 @@ function getSubtaskTemplate(iSubtask) {
             </li>`
 }
 
+/**
+ * Returns the edit subtask template.
+ *
+ * @param {number} iSubtask - The subtask index.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getEditSubtaskTemplate(iSubtask) {
     return `<div class="edit-subtask">
                 <input 
@@ -105,6 +142,15 @@ function getEditSubtaskTemplate(iSubtask) {
             </div>`
 }
 
+/**
+ * Returns the filtered tasks template.
+ *
+ * @param {Array<Object>} filteredTasks - The filtered tasks.
+ * @param {number} index - The item index.
+ * @param {string} description - The description.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getFilteredTasksTemplate(filteredTasks, index, description) {
     return `
         <button class="task-card" draggable="true" 
@@ -136,6 +182,13 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
     `;
 }
 
+/**
+ * Returns the open task template.
+ *
+ * @param {string} id - The item ID.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getOpenTaskTemplate(id) {
     return `<div class="task-content" onclick="logDownWBubblingProtection(event)" id="task-content">
                 <div class="task-content-top">
@@ -179,6 +232,15 @@ function getOpenTaskTemplate(id) {
             </div>`
 }
 
+/**
+ * Returns the open task subtask template.
+ *
+ * @param {string} id - The item ID.
+ * @param {number} index - The item index.
+ * @param {Array<Object>} subtasks - The subtasks.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getOpenTaskSubtaskTemplate(id, index, subtasks) {
     return `<div>
                 <input 
@@ -197,6 +259,14 @@ function getOpenTaskSubtaskTemplate(id, index, subtasks) {
             </div>`
 }
 
+/**
+ * Returns the edit task template.
+ *
+ * @param {string} id - The item ID.
+ * @param {Object} task - The task data.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getEditTaskTemplate(id, task) {
     return `<div class="task-content-top" style="justify-content: flex-end;">
             <button onclick="taskClose()">
@@ -344,6 +414,14 @@ function getEditTaskTemplate(id, task) {
         </form>`
 }
 
+/**
+ * Returns the edit task subtask template.
+ *
+ * @param {number} iSubtask - The subtask index.
+ * @param {Object} task - The task data.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getEditTaskSubtaskTemplate(iSubtask, task) {
     return `
             <li class="subtask" id="subtask-${iSubtask}">
@@ -367,6 +445,14 @@ function getEditTaskSubtaskTemplate(iSubtask, task) {
         `
 }
 
+/**
+ * Returns the edit task edit subtask template.
+ *
+ * @param {number} iSubtask - The subtask index.
+ * @param {Object} task - The task data.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getEditTaskEditSubtaskTemplate(iSubtask, task) {
     return `<div class="edit-subtask">
             <input 
@@ -388,6 +474,15 @@ function getEditTaskEditSubtaskTemplate(iSubtask, task) {
         </div>`
 }
 
+/**
+ * Returns the edit task contact template.
+ *
+ * @param {number} i - The item index.
+ * @param {boolean} isChecked - Whether the contact is selected.
+ * @param {Object} contact - The contact data.
+ *
+ * @returns {string} The generated HTML.
+ */
 function getEditTaskContactTemplate(i, isChecked, contact) {
     return `<input 
                 class="checkbox-input" 

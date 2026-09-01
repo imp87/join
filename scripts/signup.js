@@ -1,3 +1,10 @@
+/**
+ * Handles the signup.
+ *
+ * @param {Event} event - The browser event.
+ *
+ * @returns {Promise<void>}
+ */
 async function handleSignup(event) {
     event.preventDefault();
     hideSignupError();
@@ -13,6 +20,13 @@ async function handleSignup(event) {
     await createAccount(form);
 }
 
+/**
+ * Creates the account.
+ *
+ * @param {Object} form - The form data.
+ *
+ * @returns {Promise<void>}
+ */
 async function createAccount(form) {
     let user = await registerUser(form.name, form.email, form.password);
 
@@ -26,6 +40,14 @@ async function createAccount(form) {
     window.location.href = "../summary.html";
 }
 
+/**
+ * Creates the user contact.
+ *
+ * @param {string} name - The name.
+ * @param {string} email - The email.
+ *
+ * @returns {Promise<void>}
+ */
 async function createUserContact(name, email) {
     let contact = {
         name: name,
@@ -38,12 +60,22 @@ async function createUserContact(name, email) {
     await postContactToDatabase(contact);
 }
 
+/**
+ * Returns the random contact color.
+ *
+ * @returns {string} A random contact color.
+ */
 function getRandomContactColor() {
     let index = Math.floor(Math.random() * contactColors.length);
 
     return contactColors[index];
 }
 
+/**
+ * Reads the signup form.
+ *
+ * @returns {Object} The entered signup data.
+ */
 function readSignupForm() {
     return {
         name: document.getElementById("name").value.trim(),
@@ -54,6 +86,13 @@ function readSignupForm() {
     };
 }
 
+/**
+ * Validates the signup.
+ *
+ * @param {Object} form - The form data.
+ *
+ * @returns {string} An error message or an empty string.
+ */
 function validateSignup(form) {
     if (!form.name || !form.email || !form.password) {
         return "Please fill in all fields.";
@@ -70,6 +109,13 @@ function validateSignup(form) {
     return "";
 }
 
+/**
+ * Shows the signup error.
+ *
+ * @param {string} message - The message.
+ *
+ * @returns {void}
+ */
 function showSignupError(message) {
     let errorRef = document.querySelector(".passwordDismatchInfo");
 
@@ -77,10 +123,20 @@ function showSignupError(message) {
     errorRef.style.display = "block";
 }
 
+/**
+ * Hides the signup error.
+ *
+ * @returns {void}
+ */
 function hideSignupError() {
     document.querySelector(".passwordDismatchInfo").style.display = "none";
 }
 
+/**
+ * Activates the signup form.
+ *
+ * @returns {void}
+ */
 function activateSignupForm() {
     let signupForm = document.getElementById("signupForm");
 
