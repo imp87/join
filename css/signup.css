@@ -181,6 +181,13 @@ input:checked + .checkboxIcon {
 	margin-top: 24px;
 }
 
+/* Keep the desktop sign-up screen aligned with the login design frame. */
+@media (min-width: 1440px) {
+	.signupHeader {
+		padding-inline: calc((100vw - 1440px) / 2 + 40px);
+	}
+}
+
 @media (max-width: 1000px) {
 	.signupBody {
 		height: auto;

@@ -587,6 +587,26 @@ h4 {
     display: none;
 }
 
+/* Preserve the 1440px board layout while header and sidebar fill the viewport. */
+@media (min-width: 1440px) {
+    section {
+        margin-left: 300px;
+        width: 1080px;
+    }
+
+    .category {
+        width: 250px;
+    }
+
+    figure {
+        max-width: 250px;
+    }
+
+    .progress-bar progress {
+        width: 50%;
+    }
+}
+
 
 @media (max-width: 1670px) {
     .category {

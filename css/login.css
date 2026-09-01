@@ -206,6 +206,13 @@ footer {
 	font-weight: 500;
 }
 
+/* Keep the desktop login inside a centered 1440px design frame. */
+@media (min-width: 1440px) {
+	.loginHeader {
+		padding-inline: calc((100vw - 1440px) / 2 + 40px);
+	}
+}
+
 @media (max-width: 1000px) {
 	.loginBody {
 		height: auto;

@@ -206,6 +206,13 @@ h5 {
     }
 }
 
+/* On wide screens, keep the app content at its 1440px position. */
+@media (min-width: 1440px) {
+    section {
+        margin-left: 300px;
+    }
+}
+
 @media (max-width: 1670px) {
     section {
         margin-left: 300px;

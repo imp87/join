@@ -766,6 +766,12 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 }
 
+/* On wide screens, keep the form at its 1440px position. */
+@media (min-width: 1440px) {
+    section {
+        margin-left: 300px;
+    }
+}
 
 @media (max-width: 1670px) {
     section {

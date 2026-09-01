@@ -1,10 +1,24 @@
+/**
+ * Returns the logo target.
+ *
+ * @returns {Object} The target logo position and size.
+ */
 function getLogoTarget() {
-	if (window.matchMedia("(max-width: 800px)").matches) {
-		return { left: "16px", top: "16px", width: "64px" };
-	}
-	return { left: "40px", top: "40px", width: "100px" };
+	const headerLogo = document.querySelector(".loginHeader img");
+	const position = headerLogo.getBoundingClientRect();
+
+	return {
+		left: `${position.left}px`,
+		top: `${position.top}px`,
+		width: `${position.width}px`,
+	};
 }
 
+/**
+ * Starts the animation.
+ *
+ * @returns {void}
+ */
 function startAnimation() {
 	const logo = document.querySelector(".startLogo");
 	const overlay = document.querySelector("#startScreen");
@@ -27,10 +41,22 @@ function startAnimation() {
 	}, 1300);
 }
 
+/**
+ * Navigates to the summary page.
+ *
+ * @returns {void}
+ */
 function goToSummary() {
 	window.location.href = "./summary.html";
 }
 
+/**
+ * Handles a login form submission.
+ *
+ * @param {Event} event - The browser event.
+ *
+ * @returns {Promise<void>}
+ */
 async function handleLogin(event) {
 	event.preventDefault();
 	hideLoginError();
@@ -48,19 +74,39 @@ async function handleLogin(event) {
 	goToSummary();
 }
 
+/**
+ * Starts a guest session.
+ *
+ * @returns {void}
+ */
 function handleGuestLogin() {
 	saveSession(createGuestSession());
 	goToSummary();
 }
 
+/**
+ * Shows the login error.
+ *
+ * @returns {void}
+ */
 function showLoginError() {
 	document.getElementById("loginError").style.display = "block";
 }
 
+/**
+ * Hides the login error.
+ *
+ * @returns {void}
+ */
 function hideLoginError() {
 	document.getElementById("loginError").style.display = "none";
 }
 
+/**
+ * Activates the login buttons.
+ *
+ * @returns {void}
+ */
 function activateLoginButtons() {
 	let loginForm = document.getElementById("loginForm");
 	let guestLoginButton = document.getElementById("guestLogin");
