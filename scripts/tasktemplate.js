@@ -503,3 +503,10 @@ function getEditTaskContactTemplate(i, isChecked, contact) {
                 </div>
             </label>`
 }
+
+function getMenuTemplate() {
+   return`<a class="menu-top" href="../summary.html"><img src="../assets/img/Vector.svg" alt="summary icon" />Summary</a>
+          <a class="menu-top" href="../task.html"><img src="../assets/img/edit_square.svg" alt="add task icon" />Add Task</a>
+          <a class="menu-top" href="../board.html"><img src="../assets/img/Icons.svg" alt="board icon" />Board</a>
+          <a class="menu-top" href="../contacts.html"><img src="../assets/img/perm_contact_calendar.svg" alt="contacts icon" />Contacts</a>`
+}

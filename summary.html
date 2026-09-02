@@ -10,6 +10,7 @@
   <script src="./scripts/task.js"></script>
   <script src="./scripts/board.js"></script>
   <script src="./scripts/auth.js"></script>
+  <script src="./scripts/tasktemplate.js"></script>
   <link rel="shortcut icon" href="./assets/img/Capa 1.svg" type="image/x-icon" />
   <title>Join - Summary</title>
   <link rel="icon" type="image/svg+xml" href="./assets/icons/logo.svg" />
@@ -22,7 +23,7 @@
   <header>
     <nav>
       <h2>Kanban Project Management Tool</h2>
-      <div>
+      <div class="no-display" id="initals-help">
         <a href="./pages/help.html"><img src="./assets/img/help.svg" alt="help" /></a><button id="userInitials" onclick="
               submenuOpen();
               logDownWBubblingProtection(event);
@@ -43,7 +44,7 @@
     <div class="menu">
       <img src="./assets/img/Join logo vector.svg" alt="join logo" />
       <nav>
-        <ul>
+        <ul id="menu">
           <a class="current-page" href=""><img src="./assets/img/vectorhover.svg" alt="vectorhover.svg" />Summary</a>
           <a class="menu-top" href="./task.html"><img src="./assets/img/edit_square.svg" alt="edit square svg" />Add
             Task</a>

@@ -216,6 +216,10 @@ button {
 	overflow: hidden;
 }
 
+.no-display {
+	display: none;
+}
+
 @media (min-width: 1921px) {
 	main {
 		margin-right: auto;

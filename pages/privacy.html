@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../css/legals.css" />
   <script src="../scripts/summary.js"></script>
   <script src="../scripts/auth.js"></script>
+  <script src="../scripts/tasktemplate.js"></script>
   <link rel="shortcut icon" href="../assets/img/Capa 1.svg" type="image/x-icon" />
   <title>Join - Privacy Policy</title>
   <link rel="icon" type="image/svg+xml" href="../assets/icons/logo.svg" />
@@ -17,7 +18,7 @@
   <header>
     <nav>
       <h2>Kanban Project Management Tool</h2>
-      <div>
+      <div class="no-display" id="initals-help">
         <a href="./help.html">
           <img src="../assets/img/help.svg" alt="Help" />
         </a>
@@ -25,7 +26,7 @@
               submenuOpen();
               logDownWBubblingProtection(event);
             ">
-          G
+
         </button>
       </div>
     </nav>
@@ -41,14 +42,8 @@
     <div class="menu">
       <img src="../assets/img/Join logo vector.svg" alt="join logo" />
       <nav>
-        <ul>
-          <a class="menu-top" href="../summary.html"><img src="../assets/img/Vector.svg"
-              alt="summary icon" />Summary</a>
-          <a class="menu-top" href="../task.html"><img src="../assets/img/edit_square.svg" alt="add task icon" />Add
-            Task</a>
-          <a class="menu-top" href="../board.html"><img src="../assets/img/Icons.svg" alt="board icon" />Board</a>
-          <a class="menu-top" href="../contacts.html"><img src="../assets/img/perm_contact_calendar.svg"
-              alt="contacts icon" />Contacts</a>
+        <ul id="menu">
+          <a class="menu-top" href="../index.html"><img src="../assets/img/login.svg" alt="login icon" />Log in</a>
         </ul>
 
         <ul>

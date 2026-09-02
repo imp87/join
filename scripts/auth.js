@@ -183,6 +183,8 @@ function renderUserInitials() {
         return;
     }
 
+    document.getElementById("initals-help").classList.remove("no-display");
+    document.getElementById("menu").innerHTML = getMenuTemplate();
     initialsRef.innerHTML = getInitialsFromName(user.name);
     currentUser = user.name
 }
