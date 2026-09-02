@@ -98,6 +98,12 @@ function validateSignup(form) {
         return "Please fill in all fields.";
     }
 
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(form.email)) {
+        return "Please enter a valid email address.";
+    }
+
     if (form.password !== form.confirmPassword) {
         return "Your passwords don't match. Please try again.";
     }
