@@ -504,6 +504,7 @@ function getEditTaskContactTemplate(i, isChecked, contact) {
             </label>`
 }
 
+/**menu Template */
 function getMenuTemplate() {
    return`<a class="menu-top" href="../summary.html"><img src="../assets/img/Vector.svg" alt="summary icon" />Summary</a>
           <a class="menu-top" href="../task.html"><img src="../assets/img/edit_square.svg" alt="add task icon" />Add Task</a>
