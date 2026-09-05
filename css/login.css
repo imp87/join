@@ -62,7 +62,7 @@
 	background-color: #2a3647;
 	color: white;
 	border: none;
-	border-radius: 8px;
+	border-radius: 12px;
 	cursor: pointer;
 	font-size: 16px;
 	font-weight: 700;
@@ -150,7 +150,7 @@ footer {
 	width: 100%;
 	padding: 12px 48px 12px 20px;
 	border: 1px solid #ccc;
-	border-radius: 4px;
+	border-radius: 12px;
 	font-family: "Inter", sans-serif;
 	font-size: 20px;
 	color: #000000;
@@ -188,7 +188,7 @@ footer {
 	background-color: #2a3647;
 	color: white;
 	border: none;
-	border-radius: 8px;
+	border-radius: 12px;
 	cursor: pointer;
 	font-size: 21px;
 	font-weight: 500;
@@ -200,7 +200,7 @@ footer {
 	background-color: #ffffff;
 	color: #2a3647;
 	border: solid 1px #2a3647;
-	border-radius: 8px;
+	border-radius: 12px;
 	cursor: pointer;
 	font-size: 21px;
 	font-weight: 500;
@@ -337,7 +337,7 @@ footer {
 
 @media (max-width: 400px) {
 	.loginHeader p {
-		font-size: 14px;
+		font-size: 16px;
 		gap: 12px;
 	}
 
@@ -346,6 +346,6 @@ footer {
 	}
 
 	.footerLinks {
-		font-size: 14px;
+		font-size: 16px;
 	}
 }

@@ -10,7 +10,7 @@ body {
 }
 
 body {
-	overflow-y: scroll;
+	
 }
 
 header {
@@ -106,7 +106,7 @@ header nav button:hover {
 }
 
 .submenu::backdrop {
-	background-color: unset;
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
 main {
@@ -264,7 +264,7 @@ button {
 
 	.submenu[open] {
 		top: 80px;
-		right: 8px;
+		right: 12px;
 		z-index: 60;
 		border-radius: 16px 0 16px 16px;
 	}
@@ -316,7 +316,7 @@ button {
 		justify-content: center;
 		flex-direction: column;
 		gap: 6px;
-		font-size: 12px;
+		font-size: 16px;
 		line-height: 1.2;
 		text-align: center;
 		padding: 0 2px;
@@ -350,7 +350,7 @@ button {
 	}
 }
 
-@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+@media (max-width: 940px) and (orientation: landscape) and (max-height: 500px) {
 	body::before {
 		content: "Bitte drehe dein Gerät ins Hochformat.";
 		position: fixed;
