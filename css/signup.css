@@ -63,7 +63,6 @@ h2 {
 
 .signupFormWrapper {
 	position: relative;
-
 	height: 600px;
 	display: flex;
 	align-items: center;
@@ -71,6 +70,7 @@ h2 {
 	background-color: #ffffff;
 	border-radius: 30px;
 	padding: 48px 88px;
+	box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.14);
 }
 
 .backLink {
