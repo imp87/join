@@ -37,7 +37,7 @@ async function createAccount(form) {
 
 	await createUserContact(form.name, form.email);
 	saveSession(user);
-	window.location.href = "../summary.html";
+	window.location.href = "../index.html";
 }
 
 /**
