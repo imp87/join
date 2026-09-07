@@ -14,7 +14,6 @@ body {
 section {
     margin-top: 130px;
     margin-left: 348px;
-    padding-bottom: 120px;
 }
 
 .title {
@@ -320,11 +319,12 @@ h5 {
 
     section {
         margin: 0;
-        margin-top: 100px;
+        margin-top: 120px;
         max-width: 620px;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-self: flex-start;
     }
 
     h1 {

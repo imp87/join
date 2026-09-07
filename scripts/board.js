@@ -10,8 +10,6 @@ let selectedEditContacts = [];
 function submenuOpen() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.showModal();
-    let bodyRef = document.getElementById("body");
-    bodyRef.classList.add("hidden");
 }
 
 /**
@@ -22,8 +20,6 @@ function submenuOpen() {
 function submenuClose() {
     let dialogRef = document.getElementById("submenu");
     dialogRef.close();
-    let bodyRef = document.getElementById("body");
-    bodyRef.classList.remove("hidden");
 }
 
 /**
