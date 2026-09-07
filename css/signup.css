@@ -309,8 +309,8 @@ input:checked+.checkboxIcon {
 	}
 
 	.line {
-	display: none;
-}
+		display: none;
+	}
 }
 
 
@@ -326,4 +326,10 @@ input:checked+.checkboxIcon {
 	.footerLinks {
 		font-size: 16px;
 	}
+
+	.backLink img {
+		width: 20px;
+		height: 20px;
+	}
+
 }
