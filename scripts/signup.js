@@ -27,6 +27,29 @@ async function handleSignup(event) {
  *
  * @returns {Promise<void>}
  */
+
+function createSignupSuccessMessage() {
+	const message = document.createElement("div");
+
+	message.textContent = "You Signed Up successfully";
+	message.classList.add("signupSuccessMessage");
+
+	return message;
+}
+
+function playSignupSuccessAnimation() {
+	return new Promise((resolve) => {
+		const successMessage = createSignupSuccessMessage();
+
+		document.body.appendChild(successMessage);
+
+		setTimeout(() => {
+			successMessage.remove();
+			resolve();
+		}, 1400);
+	});
+}
+
 async function createAccount(form) {
 	let user = await registerUser(form.name, form.email, form.password);
 
@@ -37,8 +60,12 @@ async function createAccount(form) {
 
 	await createUserContact(form.name, form.email);
 	saveSession(user);
+
+	await playSignupSuccessAnimation();
+
 	window.location.href = "../index.html";
 }
+
 
 /**
  * Creates the user contact.

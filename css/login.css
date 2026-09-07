@@ -142,7 +142,6 @@ footer {
 .loginInputWrapper {
 	width: 100%;
 	max-width: 420px;
-	height: 168px;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
@@ -184,6 +183,7 @@ footer {
 	flex-direction: row;
 	justify-content: space-between;
 	gap: 35px;
+	padding-top: 16px;
 }
 
 

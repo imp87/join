@@ -20,7 +20,7 @@
 .signupHeader img {
 	width: 100px;
 	height: 120px;
-	object-fit: cover;
+	object-fit: contain;
 }
 
 footer {
@@ -63,6 +63,7 @@ h2 {
 
 .signupFormWrapper {
 	position: relative;
+	object-fit: contain;
 	height: 630px;
 	display: flex;
 	align-items: center;
@@ -84,7 +85,6 @@ h2 {
 	font-weight: 700;
 	margin: 0 0 16px 0;
 }
-
 
 #signupForm {
 	width: 100%;
@@ -117,7 +117,7 @@ h2 {
 }
 
 .inputWithIcon input:focus {
-	border: 1px solid #29ABE2;
+	border: 1px solid #29abe2;
 	outline: none;
 }
 
@@ -135,7 +135,7 @@ h2 {
 
 .passwordDismatchInfo {
 	display: none;
-	color: #E60026;
+	color: #e60026;
 	font-size: 16px;
 	font-weight: 400;
 	height: 0;
@@ -155,7 +155,7 @@ input[type="checkbox"] {
 	margin-right: 10px;
 }
 
-input:checked+.checkboxIcon {
+input:checked + .checkboxIcon {
 	background-image: url("../assets/icons/checkbox_checked.svg");
 }
 
@@ -183,6 +183,50 @@ input:checked+.checkboxIcon {
 	margin-top: 24px;
 }
 
+.signupSuccessMessage {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+
+    width: 312px;
+    height: 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #2a3647;
+    color: white;
+    border-radius: 20px;
+
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+
+    pointer-events: none;
+    animation: signupSuccessFloat 1.4s ease-out forwards;
+}
+
+@keyframes signupSuccessFloat {
+    0% {
+        transform: translate(-50%, 100px);
+        opacity: 0;
+    }
+
+    15% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    65% {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -160px);
+        opacity: 0;
+    }
+}
+
 .line {
 	width: 150px;
 	height: 3px;
@@ -202,7 +246,6 @@ input:checked+.checkboxIcon {
 		height: auto;
 		min-height: 100dvh;
 	}
-
 
 	footer {
 		background-color: #f6f7f8;
@@ -312,7 +355,6 @@ input:checked+.checkboxIcon {
 	}
 }
 
-
 @media (max-width: 400px) {
 	.signupFormWrapper h2 {
 		font-size: 34px;
@@ -330,5 +372,4 @@ input:checked+.checkboxIcon {
 		width: 20px;
 		height: 20px;
 	}
-
 }
