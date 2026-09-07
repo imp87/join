@@ -115,7 +115,8 @@ footer {
 .loginFormWrapper h2 {
 	font-size: 61px;
 	font-weight: 700;
-	margin: 0 0 16px 0;
+	margin: 0;
+	margin-bottom: -20px;
 }
 
 #loginForm {
@@ -131,12 +132,15 @@ footer {
 	display: none;
 	color: #E60026;
 	font-size: 16px;
+	height: 0;
 	font-weight: 400;
+	margin-top: -10px;
 	}
 
 .loginInputWrapper {
 	width: 100%;
 	max-width: 420px;
+	height: 168px;
 	display: flex;
 	flex-direction: column;
 	gap: 32px;
@@ -205,6 +209,13 @@ footer {
 	cursor: pointer;
 	font-size: 21px;
 	font-weight: 500;
+}
+
+.line {
+	width: 150px;
+	height: 3px;
+	background-color: rgba(41, 171, 226, 1);
+	border-radius: 3px;
 }
 
 /* Keep the desktop login inside a centered 1440px design frame. */
@@ -294,7 +305,6 @@ footer {
 		width: 100%;
 		max-width: 420px;
 		padding: 32px 16px;
-		box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
 	}
 
 	.loginFormWrapper h2 {
@@ -334,6 +344,10 @@ footer {
 		width: 152px;
 		font-size: 18px;
 	}
+
+	.line {
+	display: none;
+}
 }
 
 @media (max-width: 400px) {

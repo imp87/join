@@ -63,7 +63,7 @@ h2 {
 
 .signupFormWrapper {
 	position: relative;
-	height: 600px;
+	height: 630px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -74,9 +74,9 @@ h2 {
 }
 
 .backLink {
-    position: absolute;
-    top: 70px;
-    left: 60px;
+	position: absolute;
+	top: 70px;
+	left: 60px;
 }
 
 .signupFormWrapper h2 {
@@ -94,42 +94,43 @@ h2 {
 }
 
 .signupInputWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+	display: flex;
+	flex-direction: column;
+	height: 350px;
 }
 
 .inputWithIcon {
-    position: relative;
-    width: 450px;
+	position: relative;
+	width: 450px;
+	margin-bottom: 24px;
 }
 
 .inputWithIcon input {
-    width: 100%;
-    padding: 12px 48px 12px 20px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    font-family: "Inter", sans-serif;
-    font-size: 20px;
-    color: #000000;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 12px 48px 12px 20px;
+	border: 1px solid #ccc;
+	border-radius: 12px;
+	font-family: "Inter", sans-serif;
+	font-size: 20px;
+	color: #000000;
+	box-sizing: border-box;
 }
 
 .inputWithIcon input:focus {
-    border: 1px solid #29ABE2;
-    outline: none;
+	border: 1px solid #29ABE2;
+	outline: none;
 }
 
 .inputIcon {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	transform: translateY(-50%);
 
-    width: 24px;
-    height: 24px;
+	width: 24px;
+	height: 24px;
 
-    pointer-events: none;
+	pointer-events: none;
 }
 
 .passwordDismatchInfo {
@@ -137,6 +138,7 @@ h2 {
 	color: #E60026;
 	font-size: 16px;
 	font-weight: 400;
+	height: 0;
 }
 
 input[type="checkbox"] {
@@ -153,7 +155,7 @@ input[type="checkbox"] {
 	margin-right: 10px;
 }
 
-input:checked + .checkboxIcon {
+input:checked+.checkboxIcon {
 	background-image: url("../assets/icons/checkbox_checked.svg");
 }
 
@@ -165,7 +167,7 @@ input:checked + .checkboxIcon {
 #signupForm label {
 	display: flex;
 	justify-content: center;
-	margin-top: 24px;
+	margin-top: 30px;
 }
 
 #signupButton {
@@ -179,6 +181,14 @@ input:checked + .checkboxIcon {
 	font-size: 21px;
 	font-weight: 500;
 	margin-top: 24px;
+}
+
+.line {
+	width: 150px;
+	height: 3px;
+	border-radius: 3px;
+	background-color: rgba(41, 171, 226, 1);
+	margin-bottom: 24px;
 }
 
 /* Keep the desktop sign-up screen aligned with the login design frame. */
@@ -257,12 +267,11 @@ input:checked + .checkboxIcon {
 		width: 100%;
 		max-width: 420px;
 		padding: 28px 16px;
-		box-shadow: 0 0 14px 3px rgba(0, 0, 0, 0.04);
 	}
 
 	.signupFormWrapper h2 {
 		font-size: 40px;
-		margin-bottom: 0;
+		margin-bottom: 24px;
 	}
 
 	.signupFormWrapper h2::after {
@@ -284,17 +293,11 @@ input:checked + .checkboxIcon {
 		height: 24px;
 	}
 
-	.signupInputWrapper {
-		gap: 16px;
-		margin-top: 16px;
-	}
-
 	.inputWithIcon input {
 		font-size: 16px;
 	}
 
 	#signupForm label {
-		margin-top: 16px;
 		align-items: center;
 		font-size: 16px;
 	}
@@ -304,7 +307,12 @@ input:checked + .checkboxIcon {
 		font-size: 18px;
 		margin-top: 16px;
 	}
+
+	.line {
+	display: none;
 }
+}
+
 
 @media (max-width: 400px) {
 	.signupFormWrapper h2 {
