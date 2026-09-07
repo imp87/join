@@ -1,3 +1,7 @@
+html {
+    scrollbar-gutter: stable;
+}
+
 .add-task {
     padding: 0;
     border: none;
@@ -922,11 +926,11 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 
     .contact-list {
-        width: 290px;
+        width: calc(100% - 30px);
     }
 
     .category-options {
-        width: 320px;
+        width: calc(100% - 30px);
         font-size: 16px;
     }
 
@@ -942,10 +946,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
     h1 {
         width: 100%;
-    }
-
-    .category-options {
-        width: 290px;
     }
 
     .priority {
