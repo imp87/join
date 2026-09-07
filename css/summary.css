@@ -161,7 +161,7 @@ h5 {
 
 .greeting {
     animation: fadeIn 0.5s ease forwards;
-    width: 500px;
+    width: 400px;
 }
 
 .greeting span {
