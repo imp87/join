@@ -516,3 +516,14 @@ function renderSearchResults(filteredTasks) {
     renderTasksByStatus("Await feedback", "await-feedback", filteredTasks);
     renderTasksByStatus("Done", "done", filteredTasks);
 }
+
+
+function openMoveTo(status, id) {
+    let moveToRef = document.getElementById("move-to");
+    moveToRef.classList.toggle("no-display");
+
+    moveToRef.innerHTML = `<h5>Move to</h5>`
+    if (status === "To do") {
+        moveToRef.innerHTML += `<button>Review</button>`
+    }
+}

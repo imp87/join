@@ -167,7 +167,7 @@ function updateSelectedContacts() {
 
     for (
         let contactIndex = 0;
-        contactIndex < selectedContacts.length && contactIndex < 3;
+        contactIndex < selectedContacts.length;
         contactIndex++
     ) {
         contactLine.innerHTML += `
@@ -559,7 +559,7 @@ function updateSelectedEditContacts() {
 
     for (
         let contactIndex = 0;
-        contactIndex < selectedEditContacts.length && contactIndex < 3;
+        contactIndex < selectedEditContacts.length;
         contactIndex++
     ) {
         contactLine.innerHTML += `

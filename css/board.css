@@ -321,7 +321,7 @@ h4 {
 
 .task-content {
     display: flex;
-    justify-content: center;
+    overflow: auto;
     flex-direction: column;
     width: 510px;
     padding-left: 40px;
@@ -575,8 +575,6 @@ h4 {
     margin-top: 1px;
 }
 
-
-
 .plus-button-mobile {
     display: none;
 }
@@ -584,6 +582,7 @@ h4 {
 .add-task-mobile {
     display: none;
 }
+
 
 /* Preserve the 1440px board layout while header and sidebar fill the viewport. */
 @media (min-width: 1440px) {
@@ -710,6 +709,41 @@ h4 {
     .add-task-mobile {
         display: unset;
     }
+
+    .task-card-title img {
+        display: unset;
+        width: unset;
+    }
+
+    .move-to {
+        margin: 0;
+        align-self: flex-end;
+        position: absolute;
+        background-color: rgba(42, 54, 71, 1);
+        color: white;
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        padding: 10px;
+    }
+
+    h5 {
+        font-size: 16px;
+        margin: 0;
+        padding: 10px;
+    }
+
+    .move-to button {
+        width: 90px;
+        font-size: 16px;
+        border-radius: 8px;
+        padding-left: 2px;
+        padding-right: 5px;
+        padding-bottom: 4px;
+        padding-top: 4px;
+        background: none;
+        color: white;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -717,8 +751,6 @@ h4 {
     section {
         width: 60%;
     }
-
-
 }
 
 
@@ -738,6 +770,7 @@ h4 {
             padding-bottom: 120px;
         }
     }
+
 }
 
 @media (max-width: 570px) {

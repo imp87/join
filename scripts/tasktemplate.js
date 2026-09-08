@@ -160,7 +160,7 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
             <h4 class="${filteredTasks[index].category}">
                 ${filteredTasks[index].category}
             </h4>
-                <img src="./assets/img/move.svg" alt="move">
+                <img src="./assets/img/move.svg" alt="move" onclick="logDownWBubblingProtection(event); openMoveTo('${filteredTasks[index].status}', '${filteredTasks[index].id}');">
                 </div>
 
             <p>
@@ -177,7 +177,7 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
                 <span id="task-card-contacts-${filteredTasks[index].id}"></span>
                 <div id="task-card-priority-${filteredTasks[index].id}"></div>
             </div>
-
+                <div id="move-to" class="move-to no-display"><h5>Move to</h5></div>
         </button>
     `;
 }
