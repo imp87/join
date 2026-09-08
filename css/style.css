@@ -348,7 +348,7 @@ button {
 	}
 }
 
-@media (max-width: 940px) and (orientation: landscape) and (max-height: 500px) {
+@media (max-width: 940px) and (orientation: landscape) and (max-height: 460px) {
 	body::before {
 		content: "Bitte drehe dein Gerät ins Hochformat.";
 		position: fixed;

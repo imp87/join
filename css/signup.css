@@ -307,6 +307,24 @@ input:checked + .checkboxIcon {
 	}
 }
 
+@media (max-width: 940px) and (orientation: landscape) and (max-height: 460px) {
+	body::before {
+		content: "Bitte drehe dein Gerät ins Hochformat.";
+		position: fixed;
+		inset: 0;
+		z-index: 10000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px;
+		background-color: #2a3647;
+		color: white;
+		font-size: 20px;
+		font-weight: 700;
+		text-align: center;
+	}
+}
+
 @media (max-width: 800px) {
 	.signupBody {
 		height: auto;
