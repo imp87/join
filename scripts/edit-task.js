@@ -135,6 +135,15 @@ function toggleEditContactList() {
 }
 
 /**
+ * Closes the edit contact list.
+ *
+ * @returns {void}
+ */
+function closeEditContactList() {
+   document.getElementById("edit-contact-list")?.classList.add("display-none"); 
+}
+
+/**
  * Renders the contacts in the edit form.
  *
  * @param {Object} task - The task data.

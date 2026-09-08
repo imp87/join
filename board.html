@@ -24,6 +24,8 @@
       submenuClose();
       addTaskClose();
       taskClose();
+      closeContactList(); 
+      closeCategoryOptions();
     " onload="setMinDate(); updateHTML(); loadContacts();" id="body">
   <header>
     <nav>
@@ -155,8 +157,8 @@
           </div>
         </figure>
       </article>
-      <dialog onload="logDownWBubblingProtection(event);" id="add-task" class="add-task">
-        <form onsubmit="addToTasks(event)" onclick="logDownWBubblingProtection(event)" id="task-form" novalidate>
+      <dialog onload="logDownWBubblingProtection(event);" id="add-task" class="add-task" onclick="closeContactList(); closeCategoryOptions();">
+        <form onsubmit="addToTasks(event)" onclick="logDownWBubblingProtection(event); closeContactList(); closeCategoryOptions();" id="task-form" novalidate>
           <div class="add-task-content">
             <h1>Add Task <button onclick="addTaskClose()" type="button">
                 <img src="./assets/img/cancel.svg" alt="cancel" />
@@ -213,7 +215,7 @@
                   <div class="form-area-fields">
                     <label for="contacts">Assigned to</label>
                     <div class="assigned-to">
-                      <div class="custom-selectbox" onclick="toggleContactList()">
+                      <div class="custom-selectbox" onclick="logDownWBubblingProtection(event); toggleContactList();">
                         <input type="search" id="contacts" name="contacts" placeholder="Select contacts to assign"
                           oninput="searchContacts();" />
                         <div id="contacts-arrow" class="arrow">
@@ -221,7 +223,7 @@
                         </div>
                       </div>
 
-                      <div class="contact-list display-none" id="contact-list"></div>
+                      <div class="contact-list display-none" id="contact-list" onclick="logDownWBubblingProtection(event);""></div>
                     </div>
                     <div id="contact-line" class="contact-line"></div>
                   </div>
@@ -230,7 +232,7 @@
                     <label>Category<span style="color: rgba(255, 129, 144, 1)">*</span></label>
 
                     <div class="custom-select">
-                      <div class="custom-selectbox" style="padding-left: 15px" onclick="toggleCategoryOptions()"
+                      <div class="custom-selectbox" style="padding-left: 15px" onclick="logDownWBubblingProtection(event); toggleCategoryOptions()"
                         id="custom-category-input">
                         <input type="text" name="category" id="category-input" placeholder="Select task category"
                           class="category-input">

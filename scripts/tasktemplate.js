@@ -190,7 +190,7 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
  * @returns {string} The generated HTML.
  */
 function getOpenTaskTemplate(id) {
-    return `<div class="task-content" onclick="logDownWBubblingProtection(event)" id="task-content">
+    return `<div class="task-content" onclick="logDownWBubblingProtection(event); closeEditContactList();" id="task-content">
                 <div class="task-content-top">
                     <h4 class="${data[id].category}">${data[id].category}</h4>
                     <button onclick="taskClose()">
@@ -367,7 +367,7 @@ function getEditTaskTemplate(id, task) {
 
                 <div class="assigned-to">
 
-                    <div class="custom-selectbox" onclick="toggleEditContactList()">
+                    <div class="custom-selectbox" onclick="logDownWBubblingProtection(event); toggleEditContactList();">
                         <input 
                             type="search" 
                             id="edit-contacts"
@@ -380,7 +380,7 @@ function getEditTaskTemplate(id, task) {
                     </div>
 
 
-                    <div class="contact-list display-none edit-contact-list" id="edit-contact-list">
+                    <div class="contact-list display-none edit-contact-list" id="edit-contact-list" onclick="logDownWBubblingProtection(event);">
 
                        
 
