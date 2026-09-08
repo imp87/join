@@ -404,7 +404,7 @@ input[type="checkbox" i] {
 
 .initials {
     font-size: 16px;
-    width: 36px;
+    min-width: 36px;
     height: 36px;
     display: flex;
     justify-content: center;
@@ -421,6 +421,7 @@ input[type="checkbox" i] {
     display: flex;
     margin-top: 10px;
     gap: 5px;
+    overflow: auto;
 }
 
 
