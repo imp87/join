@@ -106,29 +106,29 @@ h2 {
 }
 
 .passwordVisibilityButton {
-    display: none;
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 4px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+	display: none;
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 4px;
+	border: none;
+	background: transparent;
+	cursor: pointer;
 }
 
 .passwordVisibilityButton img {
-    display: block;
-    width: 24px;
-    height: 24px;
+	display: block;
+	width: 24px;
+	height: 24px;
 }
 
 .passwordInput:focus-within .passwordLockIcon {
-    display: none;
+	display: none;
 }
 
 .passwordInput:focus-within .passwordVisibilityButton {
-    display: block;
+	display: block;
 }
 
 .inputWithIcon input {
@@ -210,47 +210,47 @@ input:checked + .checkboxIcon {
 }
 
 .signupSuccessMessage {
-    position: fixed;
-    left: 50%;
-    bottom: 40px;
+	position: fixed;
+	left: 50%;
+	bottom: 40px;
 
-    width: 312px;
-    height: 74px;
+	width: 312px;
+	height: 74px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    background-color: #2a3647;
-    color: white;
-    border-radius: 20px;
+	background-color: #2a3647;
+	color: white;
+	border-radius: 20px;
 
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
 
-    pointer-events: none;
-    animation: signupSuccessFloat 1.4s ease-out forwards;
+	pointer-events: none;
+	animation: signupSuccessFloat 1.4s ease-out forwards;
 }
 
 @keyframes signupSuccessFloat {
-    0% {
-        transform: translate(-50%, 100px);
-        opacity: 0;
-    }
+	0% {
+		transform: translate(-50%, 100px);
+		opacity: 0;
+	}
 
-    15% {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
+	15% {
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
 
-    65% {
-        transform: translate(-50%, 0);
-        opacity: 1;
-    }
+	65% {
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
 
-    100% {
-        transform: translate(-50%, -160px);
-        opacity: 0;
-    }
+	100% {
+		transform: translate(-50%, -160px);
+		opacity: 0;
+	}
 }
 
 .line {
@@ -311,9 +311,13 @@ input:checked + .checkboxIcon {
 	.signupBody {
 		height: auto;
 		min-height: 100dvh;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.signupHeader {
+		position: static;
 		height: auto;
 		padding: 16px;
 		align-items: flex-start;
@@ -326,9 +330,17 @@ input:checked + .checkboxIcon {
 	}
 
 	#mainContent {
+		position: relative;
+		width: 100%;
 		height: auto;
-		min-height: 100dvh;
-		padding: 112px 16px 80px;
+		min-height: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		padding: 32px 16px;
+		box-sizing: border-box;
+		flex: 1;
 	}
 
 	.signupFormWrapper {
@@ -374,6 +386,14 @@ input:checked + .checkboxIcon {
 		width: 126px;
 		font-size: 18px;
 		margin-top: 16px;
+	}
+
+	footer {
+		position: static;
+		width: 100%;
+		padding: 20px;
+		box-sizing: border-box;
+		background-color: #f6f7f8;
 	}
 
 	.line {
