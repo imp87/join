@@ -158,7 +158,7 @@ function generateEditContacts(task) {
         let contact = contacts[i];
         let isChecked = task.contacts?.some(taskContact => taskContact.name === contact.name && taskContact.initials === contact.initials && taskContact.color === contact.color);
         document.getElementById("edit-contact-list").innerHTML += getEditTaskContactTemplate(i, isChecked, contact);
-        if (isChecked && renderedContacts < 3) {
+        if (isChecked) {
             contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
             renderedContacts++;
         } if (isChecked) {
@@ -192,7 +192,7 @@ function updateEditContactLine() {
     let renderedContacts = 0;
     for (let i = 0; i < contacts.length; i++) {
         let checkbox = document.getElementById(`edit-contact${i}`);
-        if (checkbox && checkbox.checked && renderedContacts < 3) {
+        if (checkbox && checkbox.checked) {
             let contact = contacts[i];
             contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
             renderedContacts++;

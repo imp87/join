@@ -305,12 +305,12 @@ function taskCardContacts(filteredTasks, index) {
         taskCardContactsRef.classList.add("display-none");
         return;
     }
-
     taskCardContactsRef.classList.remove("display-none");
     taskCardContactsRef.innerHTML = "";
     for (let contactIndex = 0; contactIndex < contacts.length && contactIndex < 3; contactIndex++) {
         taskCardContactsRef.innerHTML += `<div style="background-color: ${contacts[contactIndex].color};">${contacts[contactIndex].initials}</div>`;
     }
+    if (contacts.length > 3) { taskCardContactsRef.innerHTML += `<div style="background-color: grey;">+${contacts.length - 3}</div>`; }
 }
 
 /**
