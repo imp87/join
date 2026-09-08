@@ -177,7 +177,7 @@ function getFilteredTasksTemplate(filteredTasks, index, description) {
                 <span id="task-card-contacts-${filteredTasks[index].id}"></span>
                 <div id="task-card-priority-${filteredTasks[index].id}"></div>
             </div>
-                <div id="move-to" class="move-to no-display"><h5>Move to</h5></div>
+                <div id="move-to${filteredTasks[index].id}" class="move-to no-display" onclick="logDownWBubblingProtection(event);"><h5>Move to</h5></div>
         </button>
     `;
 }

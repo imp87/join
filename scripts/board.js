@@ -517,13 +517,23 @@ function renderSearchResults(filteredTasks) {
     renderTasksByStatus("Done", "done", filteredTasks);
 }
 
-
+/**
+ * Move Task
+ * 
+ * @param {*string} status 
+ * @param {*string} id 
+ */
 function openMoveTo(status, id) {
-    let moveToRef = document.getElementById("move-to");
-    moveToRef.classList.toggle("no-display");
-
+    let moveToRef = document.getElementById(`move-to${id}`);
+    moveToRef.classList.remove("no-display");
     moveToRef.innerHTML = `<h5>Move to</h5>`
     if (status === "To do") {
-        moveToRef.innerHTML += `<button>Review</button>`
-    }
+        moveToRef.innerHTML += `<button onclick="startDragging('${id}'); moveTo('In progress');"><img src="./assets/img/arrow_downward.svg" alt="arrow downward">Progress</button>`
+    } else if (status === "In progress") {
+        moveToRef.innerHTML += `<button onclick="startDragging('${id}'); moveTo('To do');"><img src="./assets/img/arrow_upward.svg" alt="arrow upward">To-do</button>
+                                <button onclick="startDragging('${id}'); moveTo('Await feedback');"><img src="./assets/img/arrow_downward.svg" alt="arrow downward">Review</button>`
+    } else if (status === "Await feedback") {
+        moveToRef.innerHTML += `<button onclick="startDragging('${id}'); moveTo('In progress');"><img src="./assets/img/arrow_upward.svg" alt="arrow upward">Progress</button>
+                                <button onclick="startDragging('${id}'); moveTo('Done');"><img src="./assets/img/arrow_downward.svg" alt="arrow downward">Done</button>`
+    } else if (status === "Done") { moveToRef.innerHTML += `<button onclick="startDragging('${id}'); moveTo('Await feedback');"><img src="./assets/img/arrow_upward.svg" alt="arrow downward">Review</button>` }
 }
