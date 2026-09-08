@@ -307,7 +307,7 @@ input:checked + .checkboxIcon {
 	}
 }
 
-@media (max-width: 940px) and (orientation: landscape) and (max-height: 460px) {
+@media (max-width: 940px) and (orientation: landscape) {
 	body::before {
 		content: "Bitte drehe dein Gerät ins Hochformat.";
 		position: fixed;
@@ -322,6 +322,55 @@ input:checked + .checkboxIcon {
 		font-size: 20px;
 		font-weight: 700;
 		text-align: center;
+	}
+}
+
+@media (max-height: 750px) {
+	#mainContent {
+		position: relative;
+		width: 100%;
+		height: auto;
+		min-height: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		padding: 32px 16px;
+		box-sizing: border-box;
+		flex: 1;
+	}
+
+	.signupBody {
+		width: 100%;
+		min-height: 100dvh;
+		height: auto;
+		margin: 0;
+		background-color: #f6f7f8;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.startLogo {
+		width: 180px;
+	}
+
+	.signupHeader {
+		position: static;
+		width: 100%;
+		height: auto;
+		padding: 16px;
+		box-sizing: border-box;
+		background-color: #f6f7f8;
+		align-items: flex-start;
+	}
+
+	footer {
+		position: static;
+		width: 100%;
+		padding: 20px;
+		box-sizing: border-box;
+		background-color: #f6f7f8;
 	}
 }
 
