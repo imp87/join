@@ -20,8 +20,11 @@
 
   <div class="loginHeader">
     <img src="./assets/icons/logo.svg" alt="Logo">
-    <p>Not a Join user?
-      <a href="./pages/signup.html"><button type="button">Sign up</button></a>
+    <p class="signupPrompt signupPromptDesktop">
+      Not a Join user?
+      <a href="./pages/signup.html">
+        <button type="button">Sign up</button>
+      </a>
     </p>
   </div>
 
@@ -37,12 +40,12 @@
             <input type="email" id="loginEmail" placeholder="E-Mail" required />
             <img src="./assets/icons/mail.svg" alt="" class="inputIcon" />
           </div>
-          
+
           <div class="inputWithIcon passwordInput">
             <input type="password" id="loginPassword" placeholder="Password" required />
-          
+
             <img src="./assets/icons/pw_lock.svg" alt="" class="inputIcon passwordLockIcon" />
-          
+
             <button type="button" class="passwordVisibilityButton" aria-label="Show password"
               onclick="togglePasswordVisibility('loginPassword', this)">
               <img src="./assets/icons/pw_visibility_on.svg" alt="" />
@@ -59,8 +62,12 @@
         </div>
       </form>
     </div>
-    </div>
-
+    <p class="signupPrompt signupPromptMobile">
+      Not a Join user?
+      <a href="./pages/signup.html">
+        <button type="button">Sign up</button>
+      </a>
+    </p>
   </main>
 
   <footer>
