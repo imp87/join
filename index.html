@@ -32,13 +32,21 @@
         <h2>Log in</h2>
         <div class="line"></div>
         <div class="loginInputWrapper">
+
           <div class="inputWithIcon">
             <input type="email" id="loginEmail" placeholder="E-Mail" required />
             <img src="./assets/icons/mail.svg" alt="" class="inputIcon" />
           </div>
-          <div class="inputWithIcon">
+          
+          <div class="inputWithIcon passwordInput">
             <input type="password" id="loginPassword" placeholder="Password" required />
-            <img src="./assets/icons/pw_lock.svg" alt="" class="inputIcon" />
+          
+            <img src="./assets/icons/pw_lock.svg" alt="" class="inputIcon passwordLockIcon" />
+          
+            <button type="button" class="passwordVisibilityButton" aria-label="Show password"
+              onclick="togglePasswordVisibility('loginPassword', this)">
+              <img src="./assets/icons/pw_visibility_on.svg" alt="" />
+            </button>
           </div>
           <span class="loginDismatchInfo" id="loginError">
             Check your email and password. Please try again.

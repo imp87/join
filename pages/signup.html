@@ -36,14 +36,26 @@
                         <img src="../assets/icons/mail.svg" alt="E-Mail Icon" class="inputIcon">
                     </div>
 
-                    <div class="inputWithIcon">
+                    <div class="inputWithIcon passwordInput">
                         <input type="password" id="password" placeholder="Password" required>
-                        <img src="../assets/icons/pw_lock.svg" alt="Password Icon" class="inputIcon">
+                    
+                        <img src="../assets/icons/pw_lock.svg" alt="" class="inputIcon passwordLockIcon">
+                    
+                        <button type="button" class="passwordVisibilityButton" aria-label="Show password"
+                            onclick="togglePasswordVisibility('password', this)">
+                            <img src="../assets/icons/pw_visibility_off.svg" alt="">
+                        </button>
                     </div>
-
-                    <div class="inputWithIcon">
+                    
+                    <div class="inputWithIcon passwordInput">
                         <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-                        <img src="../assets/icons/pw_lock.svg" alt="Password Icon" class="inputIcon">
+                    
+                        <img src="../assets/icons/pw_lock.svg" alt="" class="inputIcon passwordLockIcon">
+                    
+                        <button type="button" class="passwordVisibilityButton" aria-label="Show password"
+                            onclick="togglePasswordVisibility('confirmPassword', this)">
+                            <img src="../assets/icons/pw_visibility_off.svg" alt="">
+                        </button>
                     </div>
                     <span class="passwordDismatchInfo">
                         Your passwords don't match. Please try again.

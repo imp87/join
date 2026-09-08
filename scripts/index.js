@@ -110,9 +110,11 @@ function hideLoginError() {
 function activateLoginButtons() {
 	let loginForm = document.getElementById("loginForm");
 	let guestLoginButton = document.getElementById("guestLogin");
+	let passwordWrapper = document.querySelector(".passwordInput");
 
 	loginForm.addEventListener("submit", handleLogin);
 	guestLoginButton.addEventListener("click", handleGuestLogin);
+	passwordWrapper.addEventListener("focusout", hidePasswordOnFocusOut);
 }
 
 document.addEventListener("DOMContentLoaded", startAnimation);

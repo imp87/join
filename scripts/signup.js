@@ -66,6 +66,20 @@ async function createAccount(form) {
 	window.location.href = "../index.html";
 }
 
+function togglePasswordVisibility(inputId, button) {
+	const passwordInput = document.getElementById(inputId);
+	const icon = button.querySelector("img");
+
+	if (passwordInput.type === "password") {
+		passwordInput.type = "text";
+		icon.src = "../assets/icons/pw_visibility_on.svg";
+		button.setAttribute("aria-label", "Hide password");
+	} else {
+		passwordInput.type = "password";
+		icon.src = "../assets/icons/pw_visibility_off.svg";
+		button.setAttribute("aria-label", "Show password");
+	}
+}
 
 /**
  * Creates the user contact.
@@ -173,8 +187,29 @@ function hideSignupError() {
  */
 function activateSignupForm() {
 	const signupForm = document.getElementById("signupForm");
+	const passwordWrappers = document.querySelectorAll(".passwordInput");
 
 	signupForm.addEventListener("submit", handleSignup);
+
+	passwordWrappers.forEach((wrapper) => {
+		wrapper.addEventListener("focusout", hidePasswordOnFocusOut);
+	});
+}
+
+function hidePasswordOnFocusOut(event) {
+	const passwordWrapper = event.currentTarget;
+
+	if (passwordWrapper.contains(event.relatedTarget)) {
+		return;
+	}
+
+	const passwordInput = passwordWrapper.querySelector("input");
+	const button = passwordWrapper.querySelector(".passwordVisibilityButton");
+	const icon = button.querySelector("img");
+
+	passwordInput.type = "password";
+	icon.src = "../assets/icons/pw_visibility_on.svg";
+	button.setAttribute("aria-label", "Show password");
 }
 
 document.addEventListener("DOMContentLoaded", activateSignupForm);

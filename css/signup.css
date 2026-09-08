@@ -105,6 +105,32 @@ h2 {
 	margin-top: 24px;
 }
 
+.passwordVisibilityButton {
+    display: none;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.passwordVisibilityButton img {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.passwordInput:focus-within .passwordLockIcon {
+    display: none;
+}
+
+.passwordInput:focus-within .passwordVisibilityButton {
+    display: block;
+}
+
 .inputWithIcon input {
 	width: 100%;
 	padding: 12px 48px 12px 20px;

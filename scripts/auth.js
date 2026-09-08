@@ -1,7 +1,10 @@
 const USERS_URL =
-    "https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/users";
+	"https://join-4ac70-default-rtdb.europe-west1.firebasedatabase.app/users";
 
 const SESSION_KEY = "joinUser";
+
+const AUTH_ICON_PATH = new URL("../assets/icons/", document.currentScript.src)
+	.href;
 
 /**
  * Loads all users from the database.
@@ -9,16 +12,16 @@ const SESSION_KEY = "joinUser";
  * @returns {Promise<Array<Object>>} The loaded users.
  */
 async function loadUsers() {
-    let response = await fetch(`${USERS_URL}.json`);
-    let data = await response.json();
+	let response = await fetch(`${USERS_URL}.json`);
+	let data = await response.json();
 
-    if (!data) {
-        return [];
-    }
+	if (!data) {
+		return [];
+	}
 
-    return Object.entries(data).map(([id, user]) => {
-        return { id: id, ...user };
-    });
+	return Object.entries(data).map(([id, user]) => {
+		return { id: id, ...user };
+	});
 }
 
 /**
@@ -29,17 +32,63 @@ async function loadUsers() {
  * @returns {Promise<string>} The new user ID.
  */
 async function postUserToDatabase(user) {
-    let response = await fetch(`${USERS_URL}.json`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-    });
+	let response = await fetch(`${USERS_URL}.json`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(user),
+	});
 
-    let result = await response.json();
+	let result = await response.json();
 
-    return result.name;
+	return result.name;
+}
+
+/**
+ * Toggles the visibility of a password input.
+ *
+ * @param {string} inputId - The ID of the password input.
+ * @param {HTMLButtonElement} button - The visibility toggle button.
+ *
+ * @returns {void}
+ */
+function togglePasswordVisibility(inputId, button) {
+	const passwordInput = document.getElementById(inputId);
+	const icon = button.querySelector("img");
+
+	if (passwordInput.type === "password") {
+		passwordInput.type = "text";
+		icon.src = `${AUTH_ICON_PATH}pw_visibility_off.svg`;
+		button.setAttribute("aria-label", "Hide password");
+	} else {
+		passwordInput.type = "password";
+		icon.src = `${AUTH_ICON_PATH}pw_visibility_on.svg`;
+		button.setAttribute("aria-label", "Show password");
+	}
+}
+
+/**
+ * Hides a revealed password when focus leaves the password field.
+ *
+ * @param {FocusEvent} event - The focusout event.
+ *
+ * @returns {void}
+ */
+function hidePasswordOnFocusOut(event) {
+	const passwordWrapper = event.currentTarget;
+
+	if (passwordWrapper.contains(event.relatedTarget)) {
+		return;
+	}
+
+	const passwordInput = passwordWrapper.querySelector("input");
+	const button = passwordWrapper.querySelector(".passwordVisibilityButton");
+	const icon = button.querySelector("img");
+
+	passwordInput.type = "password";
+	icon.src = `${AUTH_ICON_PATH}pw_visibility_on.svg`;
+	button.setAttribute("aria-label", "Show password");
 }
 
 /**
@@ -52,16 +101,21 @@ async function postUserToDatabase(user) {
  * @returns {Promise<Object|null>} The new session or null when the email exists.
  */
 async function registerUser(name, email, password) {
-    let users = await loadUsers();
+	let users = await loadUsers();
 
-    if (findUserByEmail(users, email)) {
-        return null;
-    }
+	if (findUserByEmail(users, email)) {
+		return null;
+	}
 
-    let user = { name: name, email: email, password: password };
-    let id = await postUserToDatabase(user);
+	let user = {
+		name: name,
+		email: email,
+		password: password,
+	};
 
-    return createSession(id, user);
+	let id = await postUserToDatabase(user);
+
+	return createSession(id, user);
 }
 
 /**
@@ -73,14 +127,14 @@ async function registerUser(name, email, password) {
  * @returns {Promise<Object|null>} The session or null when login fails.
  */
 async function loginUser(email, password) {
-    let users = await loadUsers();
-    let user = findUserByEmail(users, email);
+	let users = await loadUsers();
+	let user = findUserByEmail(users, email);
 
-    if (!user || user.password !== password) {
-        return null;
-    }
+	if (!user || user.password !== password) {
+		return null;
+	}
 
-    return createSession(user.id, user);
+	return createSession(user.id, user);
 }
 
 /**
@@ -92,7 +146,9 @@ async function loginUser(email, password) {
  * @returns {Object|undefined} The matching user.
  */
 function findUserByEmail(users, email) {
-    return users.find(user => user.email.toLowerCase() === email.toLowerCase());
+	return users.find(
+		(user) => user.email.toLowerCase() === email.toLowerCase(),
+	);
 }
 
 /**
@@ -104,7 +160,11 @@ function findUserByEmail(users, email) {
  * @returns {Object} The session data.
  */
 function createSession(id, user) {
-    return { id: id, name: user.name, email: user.email };
+	return {
+		id: id,
+		name: user.name,
+		email: user.email,
+	};
 }
 
 /**
@@ -113,7 +173,11 @@ function createSession(id, user) {
  * @returns {Object} The guest session data.
  */
 function createGuestSession() {
-    return { id: "guest", name: "Guest", email: "" };
+	return {
+		id: "guest",
+		name: "Guest",
+		email: "",
+	};
 }
 
 /**
@@ -124,7 +188,7 @@ function createGuestSession() {
  * @returns {void}
  */
 function saveSession(user) {
-    localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+	localStorage.setItem(SESSION_KEY, JSON.stringify(user));
 }
 
 /**
@@ -133,13 +197,13 @@ function saveSession(user) {
  * @returns {Object|null} The saved user or null.
  */
 function getCurrentUser() {
-    let user = localStorage.getItem(SESSION_KEY);
+	let user = localStorage.getItem(SESSION_KEY);
 
-    if (!user) {
-        return null;
-    }
+	if (!user) {
+		return null;
+	}
 
-    return JSON.parse(user);
+	return JSON.parse(user);
 }
 
 /**
@@ -148,7 +212,7 @@ function getCurrentUser() {
  * @returns {void}
  */
 function logoutUser() {
-    localStorage.removeItem(SESSION_KEY);
+	localStorage.removeItem(SESSION_KEY);
 }
 
 /**
@@ -159,15 +223,15 @@ function logoutUser() {
  * @returns {string} The initials.
  */
 function getInitialsFromName(name) {
-    let nameParts = name.trim().split(" ");
-    let firstInitial = nameParts[0].charAt(0);
-    let secondInitial = "";
+	let nameParts = name.trim().split(" ");
+	let firstInitial = nameParts[0].charAt(0);
+	let secondInitial = "";
 
-    if (nameParts.length > 1) {
-        secondInitial = nameParts[1].charAt(0);
-    }
+	if (nameParts.length > 1) {
+		secondInitial = nameParts[1].charAt(0);
+	}
 
-    return (firstInitial + secondInitial).toUpperCase();
+	return (firstInitial + secondInitial).toUpperCase();
 }
 
 /**
@@ -176,18 +240,21 @@ function getInitialsFromName(name) {
  * @returns {void}
  */
 function renderUserInitials() {
-    let initialsRef = document.getElementById("userInitials");
-    let user = getCurrentUser();
+	let initialsRef = document.getElementById("userInitials");
+	let user = getCurrentUser();
 
-    if (!initialsRef || !user) {
-        return;
-    }
+	if (!initialsRef || !user) {
+		return;
+	}
 
-    document.getElementById("initals-help").classList.remove("no-display");
-    document.getElementById("menu2")?.classList.toggle("no-display");
-    document.getElementById("menu").classList.toggle("no-display");
-    initialsRef.innerHTML = getInitialsFromName(user.name);
-    currentUser = user.name
+	document.getElementById("initals-help").classList.remove("no-display");
+
+	document.getElementById("menu2")?.classList.toggle("no-display");
+
+	document.getElementById("menu").classList.toggle("no-display");
+
+	initialsRef.innerHTML = getInitialsFromName(user.name);
+	currentUser = user.name;
 }
 
 let currentUser = "";
@@ -198,18 +265,27 @@ let currentUser = "";
  * @returns {void}
  */
 function greeting() {
-    document.getElementById("greeting").innerHTML = "";
-    let userName = `, <br><span>${currentUser}</span>`;
-    if (currentUser === "Guest") { userName = "!" }
-    let date = new Date();
-    let hour = date.getHours();
-    if (hour <= 12) {
-        document.getElementById("greeting").innerHTML = `<h5>Good morning${userName}</h5>`;
-    } else if (hour <= 16) {
-        document.getElementById("greeting").innerHTML = `<h5>Good afternoon${userName}</h5>`;
-    } else {
-        document.getElementById("greeting").innerHTML = `<h5>Good evening${userName}</h5>`;
-    }
+	document.getElementById("greeting").innerHTML = "";
+
+	let userName = `, <br><span>${currentUser}</span>`;
+
+	if (currentUser === "Guest") {
+		userName = "!";
+	}
+
+	let date = new Date();
+	let hour = date.getHours();
+
+	if (hour <= 12) {
+		document.getElementById("greeting").innerHTML =
+			`<h5>Good morning${userName}</h5>`;
+	} else if (hour <= 16) {
+		document.getElementById("greeting").innerHTML =
+			`<h5>Good afternoon${userName}</h5>`;
+	} else {
+		document.getElementById("greeting").innerHTML =
+			`<h5>Good evening${userName}</h5>`;
+	}
 }
 
 document.addEventListener("DOMContentLoaded", renderUserInitials);
