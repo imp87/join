@@ -165,6 +165,10 @@ function closeContactOverlay() {
 async function saveContact(event) {
 	event.preventDefault();
 
+	if (!validateContactForm()) {
+		return;
+	}
+
 	let formData = getContactFormData();
 
 	if (isEditMode) {
@@ -173,6 +177,44 @@ async function saveContact(event) {
 		await createContact(formData);
 	}
 }
+
+/**
+ * Validates the contact email and phone number.
+ *
+ * @returns {boolean} Whether the contact data is valid.
+ */
+function validateContactForm() {
+	const emailInput = document.getElementById("contactEmailInput");
+	const phoneInput = document.getElementById("contactPhoneInput");
+
+	const emailRegex =
+		/^(?!.*\.\.)(?!\.)(?!.*\.@)[^\s@]+@(?!\.)[^\s@]+\.[^\s@]+$/;
+
+	const phoneRegex = /^\d+$/;
+
+	emailInput.setCustomValidity(
+		emailRegex.test(emailInput.value.trim())
+			? ""
+			: "Please enter a valid email address."
+	);
+
+	phoneInput.setCustomValidity(
+		phoneRegex.test(phoneInput.value.trim())
+			? ""
+			: "Please enter numbers only."
+	);
+
+	if (!emailInput.reportValidity()) {
+		return false;
+	}
+
+	if (!phoneInput.reportValidity()) {
+		return false;
+	}
+
+	return true;
+}
+
 
 /**
  * Returns the contact form data.
@@ -512,6 +554,7 @@ function selectContactByEmail(email) {
  *
  * @returns {void}
  */
+
 function showContactToast(message) {
 	let toast = document.getElementById("contactToast");
 
