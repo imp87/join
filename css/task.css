@@ -62,7 +62,7 @@
     display: flex;
     justify-content: space-between;
     gap: 40px;
-    height: 550px;
+    height: 565px;
 }
 
 .form-width {
@@ -103,6 +103,7 @@
     border: solid;
     border-color: rgba(209, 209, 209, 1);
     border-width: 1px;
+    flex: 1;
 }
 
 .custom-textarea {
