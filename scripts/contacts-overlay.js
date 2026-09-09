@@ -4,15 +4,15 @@
  * @returns {void}
  */
 function openAddContactOverlay() {
-	setContactOverlayMode(false);
+    setContactOverlayMode(false);
 
-	setContactOverlayText("Add contact", "Tasks are better with a team!");
+    setContactOverlayText("Add contact", "Tasks are better with a team!");
 
-	setContactFormValues("", "", "");
-	showEmptyAvatar();
-	setOverlayButtons("Cancel", "Create contact", true);
+    setContactFormValues("", "", "");
+    showEmptyAvatar();
+    setOverlayButtons("Cancel", "Create contact", true);
 
-	showContactOverlay();
+    showContactOverlay();
 }
 
 /**
@@ -23,19 +23,19 @@ function openAddContactOverlay() {
  * @returns {void}
  */
 function openEditContactOverlay(index) {
-	let contact = contacts[index];
+    let contact = contacts[index];
 
-	setContactOverlayMode(true, index);
+    setContactOverlayMode(true, index);
 
-	setContactOverlayText("Edit contact", "");
+    setContactOverlayText("Edit contact", "");
 
-	setContactFormValues(contact.name, contact.email, contact.phone);
+    setContactFormValues(contact.name, contact.email, contact.phone);
 
-	showContactAvatar(contact);
+    showContactAvatar(contact);
 
-	setOverlayButtons("Delete", "Save", false);
+    setOverlayButtons("Delete", "Save", false);
 
-	showContactOverlay();
+    showContactOverlay();
 }
 
 /**
@@ -47,8 +47,8 @@ function openEditContactOverlay(index) {
  * @returns {void}
  */
 function setContactOverlayMode(editMode, index = -1) {
-	isEditMode = editMode;
-	editingContactIndex = index;
+    isEditMode = editMode;
+    editingContactIndex = index;
 }
 
 /**
@@ -57,7 +57,7 @@ function setContactOverlayMode(editMode, index = -1) {
  * @returns {void}
  */
 function showContactOverlay() {
-	document.getElementById("contactOverlay").showModal();
+    document.getElementById("contactOverlay").showModal();
 }
 
 /**
@@ -66,7 +66,7 @@ function showContactOverlay() {
  * @returns {void}
  */
 function closeContactOverlay() {
-	document.getElementById("contactOverlay").close();
+    document.getElementById("contactOverlay").close();
 }
 
 /**
@@ -75,11 +75,11 @@ function closeContactOverlay() {
  * @returns {void}
  */
 function closeContactOverlayIfOpen() {
-	let overlay = document.getElementById("contactOverlay");
+    let overlay = document.getElementById("contactOverlay");
 
-	if (overlay.open) {
-		overlay.close();
-	}
+    if (overlay.open) {
+        overlay.close();
+    }
 }
 
 /**
@@ -91,9 +91,9 @@ function closeContactOverlayIfOpen() {
  * @returns {void}
  */
 function setContactOverlayText(title, subtitle) {
-	document.getElementById("contactOverlayTitle").textContent = title;
+    document.getElementById("contactOverlayTitle").textContent = title;
 
-	document.getElementById("contactOverlaySubtitle").textContent = subtitle;
+    document.getElementById("contactOverlaySubtitle").textContent = subtitle;
 }
 
 /**
@@ -106,11 +106,11 @@ function setContactOverlayText(title, subtitle) {
  * @returns {void}
  */
 function setContactFormValues(name, email, phone) {
-	document.getElementById("contactNameInput").value = name;
+    document.getElementById("contactNameInput").value = name;
 
-	document.getElementById("contactEmailInput").value = email;
+    document.getElementById("contactEmailInput").value = email;
 
-	document.getElementById("contactPhoneInput").value = phone;
+    document.getElementById("contactPhoneInput").value = phone;
 }
 
 /**
@@ -123,9 +123,9 @@ function setContactFormValues(name, email, phone) {
  * @returns {void}
  */
 function setOverlayButtons(cancelText, submitText, showCloseIcon) {
-	setOverlayButtonText(cancelText, submitText);
+    setOverlayButtonText(cancelText, submitText);
 
-	setCancelButtonAction(showCloseIcon);
+    setCancelButtonAction(showCloseIcon);
 }
 
 /**
@@ -137,9 +137,9 @@ function setOverlayButtons(cancelText, submitText, showCloseIcon) {
  * @returns {void}
  */
 function setOverlayButtonText(cancelText, submitText) {
-	document.getElementById("contactCancelButtonText").textContent = cancelText;
+    document.getElementById("contactCancelButtonText").textContent = cancelText;
 
-	document.getElementById("contactSubmitButtonText").textContent = submitText;
+    document.getElementById("contactSubmitButtonText").textContent = submitText;
 }
 
 /**
@@ -148,33 +148,60 @@ function setOverlayButtonText(cancelText, submitText) {
  * @returns {boolean} Whether the contact data is valid.
  */
 function validateContactForm() {
-	const emailInput = document.getElementById("contactEmailInput");
-	const phoneInput = document.getElementById("contactPhoneInput");
+    let nameInput = document.getElementById("contactNameInput");
+    let emailInput = document.getElementById("contactEmailInput");
+    let phoneInput = document.getElementById("contactPhoneInput");
+    let nameRegex = /^[a-zA-ZäöüÄÖÜß]+(?:[ '-][a-zA-ZäöüÄÖÜß]+)*$/;
+    let emailRegex = /^(?!.*\.\.)(?!\.)(?!.*\.@)[^\s@]+@(?!\.)[^\s@]+\.[^\s@]+$/;
+    let phoneRegex = /^\d+$/;
 
-	const emailRegex =
-		/^(?!.*\.\.)(?!\.)(?!.*\.@)[^\s@]+@(?!\.)[^\s@]+\.[^\s@]+$/;
+    return customValidity(nameInput, emailInput, phoneInput, nameRegex, emailRegex, phoneRegex);
+}
 
-	const phoneRegex = /^\d+$/;
+/**
+ * Sets custom validation messages for the contact form inputs
+ * and reports their validity.
+ *
+ * @param {HTMLInputElement} nameInput - The name input element.
+ * @param {HTMLInputElement} emailInput - The email input element.
+ * @param {HTMLInputElement} phoneInput - The phone input element.
+ * @param {RegExp} nameRegex - Regular expression for validating the name.
+ * @param {RegExp} emailRegex - Regular expression for validating the email address.
+ * @param {RegExp} phoneRegex - Regular expression for validating the phone number.
+ * @returns {boolean} Whether all inputs are valid.
+ */
+function customValidity(nameInput, emailInput, phoneInput, nameRegex, emailRegex, phoneRegex) {
+    nameInput.setCustomValidity(
+        nameRegex.test(nameInput.value.trim()) ? "" : "Please enter a valid name."
+    );
+    emailInput.setCustomValidity(
+        emailRegex.test(emailInput.value.trim()) ? "" : "Please enter a valid email address."
+    );
+    phoneInput.setCustomValidity(
+        phoneRegex.test(phoneInput.value.trim()) ? "" : "Please enter numbers only."
+    );
 
-	emailInput.setCustomValidity(
-		emailRegex.test(emailInput.value.trim())
-			? ""
-			: "Please enter a valid email address."
-	);
+    return reportValidation(nameInput, emailInput, phoneInput);
+}
 
-	phoneInput.setCustomValidity(
-		phoneRegex.test(phoneInput.value.trim())
-			? ""
-			: "Please enter numbers only."
-	);
+/**
+ * Reports the validity of the contact form inputs.
+ *
+ * @param {HTMLInputElement} nameInput - The name input element.
+ * @param {HTMLInputElement} emailInput - The email input element.
+ * @param {HTMLInputElement} phoneInput - The phone input element.
+ * @returns {boolean} Whether all inputs are valid.
+ */
+function reportValidation(nameInput, emailInput, phoneInput) {
+    if (!nameInput.reportValidity()) {
+        return false;
+    }
+    if (!emailInput.reportValidity()) {
+        return false;
+    }
+    if (!phoneInput.reportValidity()) {
+        return false;
+    }
 
-	if (!emailInput.reportValidity()) {
-		return false;
-	}
-
-	if (!phoneInput.reportValidity()) {
-		return false;
-	}
-
-	return true;
+    return true;
 }
