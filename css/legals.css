@@ -30,7 +30,6 @@ ul {
 }
 
 .textWrapper {
-	padding: 26px 32px 26px 32px;
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
@@ -41,7 +40,9 @@ ul {
 }
 
 .legal-content {
-	margin: 96px 32px 64px 348px;
+	margin-top: 130px;
+    margin-left: 300px;
+    padding-bottom: 30px;
 	max-width: 1200px;
 	width: calc(100% - 380px);
 }
@@ -71,6 +72,12 @@ ul {
 	.legal-content {
 		margin-right: auto;
 	}
+}
+
+@media(max-width: 1439px) {
+    h1 {
+        font-size: 55px;
+    }
 }
 
 @media (max-width: 800px) {
@@ -111,7 +118,6 @@ ul {
 	.textWrapper {
 		position: relative;
 		width: 100%;
-		max-width: 428px;
 		min-height: 100%;
 		padding: 36px 16px 40px;
 		gap: 10px;
@@ -164,7 +170,7 @@ ul {
 	}
 }
 
-@media (max-width: 360px) {
+@media (max-width: 366px) {
 	h1 {
 		font-size: 40px;
 	}
