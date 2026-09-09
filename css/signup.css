@@ -271,16 +271,26 @@ input:checked + .checkboxIcon {
 	.signupBody {
 		height: auto;
 		min-height: 100dvh;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		background-color: #f6f7f8;
 	}
 
 	footer {
 		background-color: #f6f7f8;
 	}
 
+	.signupHeader {
+		position: static;
+		height: auto;
+	}
+
 	#mainContent {
 		height: auto;
-		min-height: 100dvh;
-		padding: 140px 24px 100px;
+		min-height: auto;
+		display: flex;
+		box-sizing: border-box;
 	}
 
 	.signupFormWrapper {
@@ -304,6 +314,15 @@ input:checked + .checkboxIcon {
 	.backLink {
 		top: 56px;
 		left: 32px;
+	}
+
+		footer {
+		position: static;
+		width: 100%;
+		padding: 20px;
+		padding-top: 30px;
+		box-sizing: border-box;
+		background-color: #f6f7f8;
 	}
 }
 
@@ -438,13 +457,6 @@ input:checked + .checkboxIcon {
 		margin-top: 16px;
 	}
 
-	footer {
-		position: static;
-		width: 100%;
-		padding: 20px;
-		box-sizing: border-box;
-		background-color: #f6f7f8;
-	}
 
 	.line {
 		display: none;
