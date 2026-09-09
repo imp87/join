@@ -395,5 +395,3 @@ function searchContacts() {
         contactListRef.innerHTML += getFilteredTaskContactTemplate(filteredContacts, iContact);
     }
 }
-
-
