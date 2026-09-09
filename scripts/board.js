@@ -148,19 +148,6 @@ function getTaskElements(filteredTasks, index) {
 }
 
 /**
- * Closes the task dialog and reloads the board.
- *
- * @returns {void}
- */
-function taskClose() {
-    let dialogRef = document.getElementById("task");
-    dialogRef.close();
-    selectedEditContacts = [];
-    updateHTML();
-    document.getElementById("body").classList.remove("hidden");
-}
-
-/**
  * Stores the task that is being dragged.
  *
  * @param {string} id - The item ID.
@@ -355,6 +342,19 @@ function taskOpen(id) {
     taskOpenAssignedTo(id);
     taskOpenSubtasksDisplay(id);
     document.getElementById("body").classList.add("hidden");
+}
+
+/**
+ * Closes the task dialog and reloads the board.
+ *
+ * @returns {void}
+ */
+function taskClose() {
+    let dialogRef = document.getElementById("task");
+    dialogRef.close();
+    selectedEditContacts = [];
+    updateHTML();
+    document.getElementById("body").classList.remove("hidden");
 }
 
 /**

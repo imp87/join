@@ -126,81 +126,6 @@ function editDeleteSubtask(iSubtask) {
 }
 
 /**
- * Toggles the edit contact list.
- *
- * @returns {void}
- */
-function toggleEditContactList() {
-    document.getElementById("edit-contact-list").classList.toggle("display-none");
-}
-
-/**
- * Closes the edit contact list.
- *
- * @returns {void}
- */
-function closeEditContactList() {
-   document.getElementById("edit-contact-list")?.classList.add("display-none"); 
-}
-
-/**
- * Renders the contacts in the edit form.
- *
- * @param {Object} task - The task data.
- *
- * @returns {void}
- */
-function generateEditContacts(task) {
-    let renderedContacts = 0;
-    let contactLine = document.getElementById("edit-contact-line");
-    contactLine.innerHTML = "";
-    for (let i = 0; i < contacts.length; i++) {
-        let contact = contacts[i];
-        let isChecked = task.contacts?.some(taskContact => taskContact.name === contact.name && taskContact.initials === contact.initials && taskContact.color === contact.color);
-        document.getElementById("edit-contact-list").innerHTML += getEditTaskContactTemplate(i, isChecked, contact);
-        if (isChecked) {
-            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
-            renderedContacts++;
-        } if (isChecked) {
-            selectedEditContacts.push(contact);
-        }
-    }
-}
-
-/**
- * Adds a contact avatar to the edit view.
- *
- * @param {HTMLElement} contactLine - The contact line element.
- * @param {Object} contact - The contact data.
- * @param {number} renderedContacts - The number of rendered contacts.
- *
- * @returns {void}
- */
-function editContactLine(contactLine, contact, renderedContacts) {
-    contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
-    renderedContacts++;
-}
-
-/**
- * Updates the edit contact line.
- *
- * @returns {void}
- */
-function updateEditContactLine() {
-    let contactLine = document.getElementById("edit-contact-line");
-    contactLine.innerHTML = "";
-    let renderedContacts = 0;
-    for (let i = 0; i < contacts.length; i++) {
-        let checkbox = document.getElementById(`edit-contact${i}`);
-        if (checkbox && checkbox.checked) {
-            let contact = contacts[i];
-            contactLine.innerHTML += `<div class="initials" style="background-color: ${contact.color}">${contact.initials}</div>`;
-            renderedContacts++;
-        }
-    }
-}
-
-/**
  * Reads and validates the edited task form.
  *
  * @param {Event} event - The browser event.
@@ -392,4 +317,79 @@ function updateTask(task, title, description, date, priority, id) {
     data[id].priority = priority;
     data[id].contacts = selectedEditContacts;
     data[id].subtasks = task.subtasks || [];
+}
+
+/**
+ * Searches contacts in the edit form.
+ *
+ * @returns {void}
+ */
+function searchEditContacts() {
+    let searchValue = document.getElementById("edit-contacts").value.toLowerCase();
+    let contactListRef = document.getElementById("edit-contact-list");
+    contactListRef.classList.remove("display-none");
+    let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
+    contactListRef.innerHTML = "";
+
+    for (let iContact = 0; iContact < filteredContacts.length; iContact++) {
+        contactListRef.innerHTML += getFilteredEditTaskContactTemplate(filteredContacts, iContact);
+    }
+}
+
+/**
+ * Adds or removes a contact from the edited task.
+ *
+ * @param {string} id - The item ID.
+ *
+ * @returns {void}
+ */
+function getSelectedEditContacts(id) {
+    let index = contacts.findIndex(item => item.id === id);
+    if (index === -1) return;
+
+    selectedEditContactsPush(id, index)
+    updateSelectedEditContacts()
+}
+
+/**
+ * Updates the selected contacts of the edited task.
+ *
+ * @param {string} id - The item ID.
+ * @param {number} index - The item index.
+ *
+ * @returns {void}
+ */
+function selectedEditContactsPush(id, index) {
+    let contact = contacts[index];
+    let selectedIndex = selectedEditContacts.findIndex(item => item.id === id);
+    if (selectedIndex === -1) {
+        selectedEditContacts.push({
+            name: contact.name,
+            initials: contact.initials,
+            color: contact.color,
+            id: contact.id
+        });
+    } else {
+        selectedEditContacts.splice(selectedIndex, 1);
+    }
+}
+
+/**
+ * Displays the selected contacts in the edit form.
+ *
+ * @returns {void}
+ */
+function updateSelectedEditContacts() {
+    let contactLine = document.getElementById("edit-contact-line");
+    contactLine.innerHTML = "";
+
+    for (
+        let contactIndex = 0;
+        contactIndex < selectedEditContacts.length;
+        contactIndex++
+    ) {
+        contactLine.innerHTML += `
+        <div class="initials" style="background-color: ${selectedEditContacts[contactIndex].color}">${selectedEditContacts[contactIndex].initials}</div>
+        `;
+    }
 }
