@@ -14,35 +14,42 @@ async function initContacts() {
 }
 
 /**
- * Renders the contacts.
+ * Renders the contacts list.
  *
- * @returns {void}
+ * @returns {void} 
  */
 function renderContacts() {
 	sortContactsByName();
-
 	let contactsList = document.getElementById("contactsList");
 	let currentLetter = "";
-
 	contactsList.innerHTML = contacts
 		.map(function (contact, index) {
-			let firstLetter = contact.name.charAt(0).toUpperCase();
-			let html = "";
-
-			if (firstLetter !== currentLetter) {
-				currentLetter = firstLetter;
-				html += getLetterTemplate(currentLetter);
-			}
-
-			html += getContactListItemTemplate(
-				contact,
-				index,
-				selectedContactIndex === index,
-			);
-
-			return html;
+			return getContacts(currentLetter, contact, index)
 		})
 		.join("");
+}
+
+/**
+ * Generates the HTML for a contact including its first-letter section.
+ *
+ * @param {string} currentLetter - The currently displayed first letter.
+ * @param {Object} contact - The contact to render.
+ * @param {number} index - The index of the contact in the contacts array.
+ * @returns {string} The generated HTML for the contact.
+ */
+function getContacts(currentLetter, contact, index) {
+	let firstLetter = contact.name.charAt(0).toUpperCase();
+	let html = "";
+	if (firstLetter !== currentLetter) {
+		currentLetter = firstLetter;
+		html += getLetterTemplate(currentLetter);
+	}
+	html += getContactListItemTemplate(
+		contact,
+		index,
+		selectedContactIndex === index,
+	);
+	return html;
 }
 
 /**

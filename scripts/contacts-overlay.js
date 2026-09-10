@@ -26,15 +26,10 @@ function openEditContactOverlay(index) {
     let contact = contacts[index];
 
     setContactOverlayMode(true, index);
-
     setContactOverlayText("Edit contact", "");
-
     setContactFormValues(contact.name, contact.email, contact.phone);
-
     showContactAvatar(contact);
-
     setOverlayButtons("Delete", "Save", false);
-
     showContactOverlay();
 }
 
@@ -153,7 +148,7 @@ function validateContactForm() {
     let phoneInput = document.getElementById("contactPhoneInput");
     let nameRegex = /^[a-zA-ZäöüÄÖÜß]+(?:[ '-][a-zA-ZäöüÄÖÜß]+)*$/;
     let emailRegex = /^(?!.*\.\.)(?!\.)(?!.*\.@)[^\s@]+@(?!\.)[^\s@]+\.[^\s@]+$/;
-    let phoneRegex = /^\d+$/;
+    let phoneRegex = /^\+?\d+$/;
 
     return customValidity(nameInput, emailInput, phoneInput, nameRegex, emailRegex, phoneRegex);
 }
